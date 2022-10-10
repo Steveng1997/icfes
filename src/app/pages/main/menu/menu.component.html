@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+    <style href='menu.component.scss'> </style>
+</head>
+
+<body>
+    <div class="">
+        <div style="text-align: right;" >
+            <button *ngIf="estudiante" class="btn btn-success">Salir</button>
+        </div>
+
+        <!-- <div class="card" style="width: 18rem;"> -->
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-8 mx-auto">
+                <div class="card border-0 rounded-3 my-5">
+                    <!-- <div class="card border-0 shadow rounded-3 my-5"> -->
+                    <div class="card-body p-4 p-sm-5">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card-title text-center mb-4 fw-bolder display-3">
+                                    <label class="">Bienvenido a Reto</label>
+                                    <!-- <span *ngIf="!estaLogueado()" class="btn-light col-md-4 fs-4" type="submit" (click)="logout()">Entrar</span>
+                                <span *ngIf="estaLogueado()" class="btn-light col-md-4 fs-4" type="submit" (click)="logout()">Salir</span> -->
+                                    <label class="text-danger">ICFES</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="card-title text-center mb-4 fw-bolder fs-2"> -->
+                        <div class="card-title text-center mb-4 fw-bolder display-5">
+                            <label style="color: #6f42c1;">¿Qué deseas hacer?</label>
+                        </div>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button class="btn btn-amigo btn-lg btn-login text-uppercase fw-bold" type="submit"
+                            (click)="retoAmigo()">RETA A UN AMIGO</button>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button class="btn btn-personal btn-lg btn-login text-uppercase fw-bold" type="submit"
+                            (click)="retoPersonal()">RETOS PERSONALES</button>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button class="btn btn-mirAvance btn-lg btn-login text-uppercase fw-bold" type="submit"
+                            (click)="mirarAvance()">MIRA TU AVANCE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
