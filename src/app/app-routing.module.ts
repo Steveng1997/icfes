@@ -13,6 +13,10 @@ import { UsuariosComponent } from './pages/pre-auth/admin/usuarios/usuarios.comp
 import { EditarUserComponent } from './pages/pre-auth/admin/usuarios/editar-user/editar-user.component'
 import { RetosComponent } from './pages/main/retos/retos.component'
 import { MenuPersonalesComponent } from './pages/main/menu-personales/menu-personales.component'
+import { AreasComponent } from './pages/pre-auth/admin/areas/areas.component'
+import { InsertarAreasComponent } from './pages/pre-auth/admin/areas/insertar-areas/insertar-areas.component'
+import { EstudiantesComponent } from './pages/pre-auth/admin/estudiantes/estudiantes.component'
+import { InsertarEstudiantesComponent } from './pages/pre-auth/admin/estudiantes/insertar-estudiantes/insertar-estudiantes.component'
 
 const routes: Routes = [
   { path: 'menu', component: MenuComponent, canActivate: [LoginGuardian] },
@@ -33,10 +37,14 @@ const routes: Routes = [
       { path: 'usuarios', component: UsuariosComponent, canActivate: [LoginGuardian] },
       { path: 'insertar-usuario', component: InsertarUsuario, canActivate: [LoginGuardian] },
       { path: 'editar-usuario/:id', component: EditarUserComponent, canActivate: [LoginGuardian] },
+      { path: 'areas', component: AreasComponent, canActivate: [LoginGuardian] },
+      { path: 'insertar-areas', component: InsertarAreasComponent, canActivate: [LoginGuardian] },
+      { path: 'estudiantes', component: EstudiantesComponent, canActivate: [LoginGuardian] },
+      { path: 'insertar-estudiantes', component: InsertarEstudiantesComponent, canActivate: [LoginGuardian] },
     ],
   },
 
-  { path: 'retos/area', component: RetosComponent, pathMatch: 'full' },
+  { path: 'retos:/categoria', component: RetosComponent, pathMatch: 'full' },
   { path: 'menuPersonal', component: MenuPersonalesComponent, pathMatch: 'full' },
   { path: 'mirarAvance', component: MirarAvanceComponent, pathMatch: 'full' },
 ]

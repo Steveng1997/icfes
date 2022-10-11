@@ -37,7 +37,7 @@
                             <mat-form-field appearance="fill">
                                 <select matNativeControl [(ngModel)]="opcionSeleccionado">
                                     <option value="0">Seleccione...</option>
-                                    <option *ngFor="let item of lista" [value]="item">{{item}}</option>
+                                    <option *ngFor="let item of estudiantes" [value]="item">{{item.nombre}}</option>
                                 </select>
                             </mat-form-field>                            
                         </div>

@@ -17,8 +17,8 @@ export class MenuareaComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
-  retos(){
-    this.router.navigate(['retos/area']);
+  retoMatematicas(){
+    this.router.navigate(['retos/categoria/lenguaje']);
   }
 
 }

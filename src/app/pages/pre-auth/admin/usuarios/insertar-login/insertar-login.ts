@@ -9,19 +9,13 @@ import { LoginService } from 'src/app/core/services/login.service';
 })
 export class InsertarUsuario implements OnInit {
 
-  // lista:string[]=["Estudiante","Docente"];
-  // seleccionado:string[]=[];
-
   public email: string = '';
   public password: string = '';
 
   opcionSeleccionado: string  = '0';
   verSeleccion: string        = '';
 
-  // user = {} as Usuario;
-
   constructor(
-    // private db: AngularFireDatabase, 
     public router: Router,
     public serviceLogin: LoginService
   ) { }

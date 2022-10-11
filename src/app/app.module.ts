@@ -22,6 +22,8 @@ import firebase from 'firebase/compat/app'
 
 // Services
 import { LoginService } from './core/services/login.service'
+import { AreaService } from './core/services/area.service'
+import { EstudianteService } from './core/services/estudiantes.service'
 
 // Pages-Auth
 import { AdminComponent } from './pages/pre-auth/admin/admin.component'
@@ -29,6 +31,9 @@ import { LoginComponent } from './pages/pre-auth/login/login.component'
 import { UsuariosComponent } from './pages/pre-auth/admin/usuarios/usuarios.component'
 import { InsertarUsuario } from './pages/pre-auth/admin/usuarios/insertar-login/insertar-login'
 import { EditarUserComponent } from './pages/pre-auth/admin/usuarios/editar-user/editar-user.component'
+import { AreasComponent } from './pages/pre-auth/admin/areas/areas.component';
+import { InsertarAreasComponent } from './pages/pre-auth/admin/areas/insertar-areas/insertar-areas.component'
+import { EstudiantesComponent } from './pages/pre-auth/admin/estudiantes/estudiantes.component'
 
 // Pages-Main
 import { MenuComponent } from './pages/main/menu/menu.component'
@@ -37,6 +42,7 @@ import { RetoAmigoComponent } from './pages/main/reto-amigo/reto-amigo.component
 import { RetoPersonalComponent } from './pages/main/reto-personal/reto-personal.component'
 import { MenuPersonalesComponent } from './pages/main/menu-personales/menu-personales.component'
 import { MirarAvanceComponent } from './pages/main/mirar-avance/mirar-avance.component'
+import { RetosComponent } from './pages/main/retos/retos.component';
 
 // Cookies
 import { CookieService } from 'ngx-cookie-service'
@@ -44,7 +50,7 @@ import { LoginGuardian } from './pages/pre-auth/login/login-guardian'
 import { MatDividerModule } from '@angular/material/divider'
 import { SidebarComponent } from './core/sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { RetosComponent } from './pages/main/retos/retos.component';
+import { InsertarEstudiantesComponent } from './pages/pre-auth/admin/estudiantes/insertar-estudiantes/insertar-estudiantes.component'
 
 firebase.initializeApp({
   apiKey: 'AIzaSyAWFfFTC8gSoctKKst4X1uxVwaFbEB1pXM',
@@ -75,6 +81,10 @@ firebase.initializeApp({
     RetosComponent,
     MenuPersonalesComponent,
     MirarAvanceComponent,
+    AreasComponent,
+    InsertarAreasComponent,
+    EstudiantesComponent,
+    InsertarEstudiantesComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +102,7 @@ firebase.initializeApp({
     AngularFireModule.initializeApp(environment),
   ],
 
-  providers: [AngularFireAuth, LoginService, CookieService, LoginGuardian],
+  providers: [AngularFireAuth, LoginService, EstudianteService, AreaService,CookieService, LoginGuardian],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

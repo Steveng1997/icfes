@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EstudianteService } from 'src/app/core/services/estudiantes.service';
 
 @Component({
   selector: 'app-reto-amigo',
@@ -8,23 +9,38 @@ import { Router } from '@angular/router';
 })
 export class RetoAmigoComponent implements OnInit {
 
-  lista: string[] = ["Camilo","Rafael","Steven"];
+  estudiantes: any[] = [];
 
-  opcionSeleccionado: string  = '0';
-  verSeleccion: string        = '';
+  lista: string[] = ["Camilo", "Rafael", "Steven"];
 
-  constructor(private router: Router) { }
+  opcionSeleccionado: string = '0';
+  verSeleccion: string = '';
+
+  constructor(public router: Router,
+    public serviceEstudiante: EstudianteService
+  ) { }
 
   ngOnInit(): void {
+    this.getEstudiante();
   }
 
   Retar() {
-    if(this.opcionSeleccionado != '0')
-    {
+    if (this.opcionSeleccionado != '0') {
       this.router.navigate(['areas']);
     } else {
       alert("Selecciona a quien quieres retar");
     }
-    
+  }
+
+  getEstudiante() {
+    this.serviceEstudiante.getEstudiantes().subscribe(data => {
+      this.estudiantes = [];
+      data.forEach((element: any) => {
+        this.estudiantes.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      });
+    });
   }
 }
