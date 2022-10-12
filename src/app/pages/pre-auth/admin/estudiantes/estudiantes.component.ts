@@ -46,7 +46,4 @@ export class EstudiantesComponent implements OnInit {
   editUser(id:string){
     this.router.navigate(['admin/editar-usuario/' + id])
   }
-
-  // https://www.youtube.com/watch?v=6imqWpexo1g
-
 }

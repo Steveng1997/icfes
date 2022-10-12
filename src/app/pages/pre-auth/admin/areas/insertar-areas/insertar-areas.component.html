@@ -25,7 +25,7 @@
 
                             <div class="btn-group">
                                 <mat-form-field appearance="fill">
-                                    <select matNativeControl [(ngModel)]="opcionSeleccionado" (change)="capturar()">
+                                    <select matNativeControl [(ngModel)]="opcionSeleccionado">
                                         <option value="0" selected>Seleccione...</option>
                                         <option value="Lenguaje">Lenguaje</option>
                                         <option value="Matematicas">Matematicas</option>
@@ -35,18 +35,26 @@
                                 </mat-form-field>
                             </div>
 
-
+                            <hr>
                             <div class="form-floating mb-3" style="margin-top: 15%">
-                                <input class="form-control" type="text" name="texto" [(ngModel)]="texto" placeholder="Texto">
+                                <input class="form-control" type="text" name="texto" [(ngModel)]="texto"
+                                    placeholder="Texto">
                                 <label for="texto">Texto</label>
                             </div>
 
-                            <!-- <div class="form-floating mb-3">
-                                <input class="form-control" type="file" name="imagen" [(ngModel)]="imagen" minlength="4"
-                                    placeholder="Nombre">
-                                <label for="usuario">Nombre</label>
-                            </div> -->
-                            
+                            <div class="form-floating mb-3">
+                                <input class="form-control" type="file" accept=".png, .jpeg, .jpg"
+                                    (change)="uploadImage($event)">
+                            </div>
+
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                                    [style.width]="(uploadPercent | async) +'%'">
+
+                                </div>
+                            </div>
+                            <input #imageUser type="hidden" [value]="urlImage | async">
+
 
                             <div class="d-grid">
                                 <button class="btn btn-primary btn-lg btn-login text-uppercase fw-bold"

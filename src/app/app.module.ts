@@ -34,6 +34,7 @@ import { EditarUserComponent } from './pages/pre-auth/admin/usuarios/editar-user
 import { AreasComponent } from './pages/pre-auth/admin/areas/areas.component';
 import { InsertarAreasComponent } from './pages/pre-auth/admin/areas/insertar-areas/insertar-areas.component'
 import { EstudiantesComponent } from './pages/pre-auth/admin/estudiantes/estudiantes.component'
+import { InsertarEstudiantesComponent } from './pages/pre-auth/admin/estudiantes/insertar-estudiantes/insertar-estudiantes.component'
 
 // Pages-Main
 import { MenuComponent } from './pages/main/menu/menu.component'
@@ -50,7 +51,7 @@ import { LoginGuardian } from './pages/pre-auth/login/login-guardian'
 import { MatDividerModule } from '@angular/material/divider'
 import { SidebarComponent } from './core/sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { InsertarEstudiantesComponent } from './pages/pre-auth/admin/estudiantes/insertar-estudiantes/insertar-estudiantes.component'
+
 
 firebase.initializeApp({
   apiKey: 'AIzaSyAWFfFTC8gSoctKKst4X1uxVwaFbEB1pXM',
