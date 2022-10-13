@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Retos } from 'src/app/core/models/retos';
+import { RetoService } from 'src/app/core/services/retos.service';
 
 @Component({
   selector: 'app-menuarea',
@@ -8,17 +10,14 @@ import { Router } from '@angular/router';
 })
 export class MenuareaComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private retoService: RetoService) { }
 
   ngOnInit(): void {
   }
 
   salir() {
     this.router.navigate(['login']);
-  }
-
-  retoMatematicas(){
-    this.router.navigate(['retos/categoria/lenguaje']);
   }
 
 }

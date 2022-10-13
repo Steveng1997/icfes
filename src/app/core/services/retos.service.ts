@@ -1,30 +1,26 @@
-import { Injectable } from '@angular/core'
-import 'firebase/compat/app'
-import { Areas } from '../models/areas';
+import { Injectable } from '@angular/core'; import 'firebase/compat/app'
+import { Retos } from '../models/retos';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { AngularFireAuth } from '@angular/fire/compat/auth'
-import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class AreaService {
+export class RetoService {
 
-  myArray: any[] = []
+  myArray: Retos[] = []
 
   constructor(
     public router: Router,
     private db: AngularFirestore,
-    private authFire: AngularFireAuth,
   ) { }
 
-  areas: Areas[] = [];
+  retos: Retos[] = [];
 
-  registerAreas(categoria: string, texto: string) {
-    let area = { id: `uid${btoa(categoria)}`, categoria: categoria, texto: texto }
+  registerAreas(categoria: string, pregunta: string) {
+    let area = { id: `uid${btoa(categoria)}`, categoria: categoria, pregunta: pregunta }
     return new Promise<any>((resolve, reject) => {
       this.db
-        .collection('areas')
+        .collection('retos')
         .add(area)
         .then(
           (response) => resolve(response),
@@ -35,15 +31,15 @@ export class AreaService {
   }
 
   getByIdUser(id: string): Observable<any> {
-    return this.db.collection('areas').doc(id).snapshotChanges();
+    return this.db.collection('retos').doc(id).snapshotChanges();
   }
 
-  getAreas(): Observable<any> {
-    return this.db.collection('areas', ref => ref.orderBy('id', 'asc')).snapshotChanges();
+  getRetos(): Observable<any> {
+    return this.db.collection('retos', ref => ref.orderBy('id', 'asc')).snapshotChanges();
   }
 
   async deleteUsuario(id: string): Promise<any> {
-    this.db.collection('areas', (ref) =>
+    this.db.collection('retos', (ref) =>
       ref.where('id', '==', id)
     ).get().forEach(querySnapshot => {
       querySnapshot.forEach((doc) => {
@@ -57,5 +53,21 @@ export class AreaService {
       .catch(function () {
         console.log("Error al eliminar el usuario");
       });
+  }
+
+  getByCategoria(categoria: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db.collection('retos', (ref) =>
+        ref.where('categoria', '==', categoria)
+      )
+        .valueChanges({ idField: 'id' })
+        .subscribe((rp) => {
+          if (rp[0]?.id) {
+            resolve(rp);
+          } else {
+            resolve(rp);
+          }
+        });
+    });
   }
 }

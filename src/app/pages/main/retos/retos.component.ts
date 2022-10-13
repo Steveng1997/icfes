@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Retos } from 'src/app/core/models/retos';
+import { RetoService } from 'src/app/core/services/retos.service';
 
 @Component({
   selector: 'app-retos',
@@ -6,10 +9,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./retos.component.scss']
 })
 export class RetosComponent implements OnInit {
+  
+  categoria: string;
+  datosReto: Retos[];
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private rutaActiva: ActivatedRoute,
+    private router: Router,
+    private retoService: RetoService) {
   }
 
+  retos: Retos[];
+
+  ngOnInit() {
+    this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
+    this.getByCategoria(this.categoria);
+  }
+
+  getByCategoria(categoria: string): void {
+    this.retoService.getByCategoria(categoria)
+      .then((dataCategoria) => {
+        this.datosReto = dataCategoria ;
+      }).catch(err => console.log('err', err.message));
+  }
 }

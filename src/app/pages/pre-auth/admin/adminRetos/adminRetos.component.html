@@ -15,7 +15,7 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <style href='areas.component.scss       '> </style>
+    <style href='adminRetos.component.scss'> </style>
 </head>
 
 <body>
@@ -25,7 +25,7 @@
                     <h3>Listado de Areas</h3>
 
                     <button (click)="Agregar()">Agregar <span class="las la-arrow-right"></span></button>
-                    <h5 style="margin-top: 30px;" *ngIf="areas.length == 0">No hay datos para mostrar
+                    <h5 style="margin-top: 30px;" *ngIf="retos.length == 0">No hay datos para mostrar
                     </h5>
                 </div>
 
@@ -39,11 +39,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let area of areas">
-                                    <td data-titulo="categoria">{{ area.categoria }}</td>
-                                    <td data-titulo="texto">{{ area.texto }}</td>
-                                    <i class="fas fa-edit" (click)="editUser(area.id)"></i>
-                                    <i (click)="DeleteUser(area.id)" class="fas fa-trash-alt fa-lg text-danger"></i>
+                                <tr *ngFor="let ret of retos">
+                                    <td data-titulo="categoria">{{ ret.categoria }}</td>
+                                    <td data-titulo="texto">{{ ret.pregunta }}</td>
+                                    <i class="fas fa-edit" (click)="editUser(ret.id)"></i>
+                                    <i (click)="DeleteUser(ret.id)" class="fas fa-trash-alt fa-lg text-danger"></i>
                                     <td>
                                 </tr>
                             </tbody>

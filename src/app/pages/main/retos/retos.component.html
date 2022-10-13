@@ -16,19 +16,21 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-sm-9 col-md-7 col-lg-8 mx-auto">
+            <div class="">
                 <div class="card border-0 rounded-3 my-5">
                     <div class="card-body p-4 p-sm-5">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-title text-center mb-4 fw-bolder display-3">
-                                    <label style="color: rgb(6, 20, 202)">Reto Matematicas</label>
+                                    <label style="color: rgb(6, 20, 202)">Reto {{categoria}}</label>
                                 </div>
                             </div>
                         </div>
                         <!-- <div class="card-title text-center mb-4 fw-bolder fs-2"> -->
-                        <div class="card-title text-center mb-4 fw-bolder display-6">
-                            <label >¿Qué deseas hacer?</label>
+                        <div class="card-title mb-4 fw-bolder" style="font-size: 2rem" *ngIf="datosReto" >
+                            <ul *ngFor="let cat of datosReto">
+                                <label>{{cat.pregunta}}</label>
+                              </ul>
                         </div>
                     </div>
                 </div>

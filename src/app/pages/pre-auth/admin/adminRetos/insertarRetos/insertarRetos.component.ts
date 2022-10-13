@@ -1,22 +1,20 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AreaService } from 'src/app/core/services/area.service';
+import { RetoService } from 'src/app/core/services/retos.service';
 
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize, Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-insertar-areas',
-  templateUrl: './insertar-areas.component.html',
-  styleUrls: ['./insertar-areas.component.scss']
+  selector: 'app-insertarRetos',
+  templateUrl: './insertarRetos.component.html',
+  styleUrls: ['./insertarRetos.component.scss']
 })
-export class InsertarAreasComponent implements OnInit {
+export class InsertarRetosComponent implements OnInit {
 
   public nombre: string = '';
   public password: string = '';
-  public texto: string = '';
-
-  public contado = 0
+  public pregunta: string = '';
 
   opcionSeleccionado: string = '0';
 
@@ -26,7 +24,7 @@ export class InsertarAreasComponent implements OnInit {
 
   constructor(
     public router: Router,
-    public serviceAreas: AreaService,
+    public serviceRetos: RetoService,
     public storage: AngularFireStorage,
   ) { }
 
@@ -44,8 +42,9 @@ export class InsertarAreasComponent implements OnInit {
   }
 
   addArea() {
-    this.serviceAreas.registerAreas(this.opcionSeleccionado, this.texto).then((res) => {
+    this.serviceRetos.registerAreas(this.opcionSeleccionado, this.pregunta).then((res) => {
       alert("Reto insertado para" + " " + this.opcionSeleccionado)
+      this.router.navigate(['admin/adminRetos'])
     }).catch(err => console.log('err', err.message));
   }
 }

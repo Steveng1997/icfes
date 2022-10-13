@@ -22,7 +22,7 @@ import firebase from 'firebase/compat/app'
 
 // Services
 import { LoginService } from './core/services/login.service'
-import { AreaService } from './core/services/area.service'
+import { RetoService } from './core/services/retos.service'
 import { EstudianteService } from './core/services/estudiantes.service'
 
 // Pages-Auth
@@ -31,8 +31,8 @@ import { LoginComponent } from './pages/pre-auth/login/login.component'
 import { UsuariosComponent } from './pages/pre-auth/admin/usuarios/usuarios.component'
 import { InsertarUsuario } from './pages/pre-auth/admin/usuarios/insertar-login/insertar-login'
 import { EditarUserComponent } from './pages/pre-auth/admin/usuarios/editar-user/editar-user.component'
-import { AreasComponent } from './pages/pre-auth/admin/areas/areas.component';
-import { InsertarAreasComponent } from './pages/pre-auth/admin/areas/insertar-areas/insertar-areas.component'
+import { AdminRetosComponent } from './pages/pre-auth/admin/adminRetos/adminRetos.component'
+import { InsertarRetosComponent } from './pages/pre-auth/admin/adminRetos/insertarRetos/insertarRetos.component'
 import { EstudiantesComponent } from './pages/pre-auth/admin/estudiantes/estudiantes.component'
 import { InsertarEstudiantesComponent } from './pages/pre-auth/admin/estudiantes/insertar-estudiantes/insertar-estudiantes.component'
 
@@ -82,8 +82,8 @@ firebase.initializeApp({
     RetosComponent,
     MenuPersonalesComponent,
     MirarAvanceComponent,
-    AreasComponent,
-    InsertarAreasComponent,
+    AdminRetosComponent,
+    InsertarRetosComponent,
     EstudiantesComponent,
     InsertarEstudiantesComponent
   ],
@@ -103,7 +103,7 @@ firebase.initializeApp({
     AngularFireModule.initializeApp(environment),
   ],
 
-  providers: [AngularFireAuth, LoginService, EstudianteService, AreaService,CookieService, LoginGuardian],
+  providers: [AngularFireAuth, LoginService, EstudianteService, RetoService,CookieService, LoginGuardian],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

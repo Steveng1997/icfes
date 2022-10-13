@@ -31,7 +31,7 @@
             <div class="row row-cols-1 row-cols-md-2 g-4 my-5">
 
               <div class="card mb-3" style="border: 7px solid rgb(255, 176, 4); max-width: 350px;">
-                <div class="row g-0" (click)="retoMatematicas()">
+                <div class="row g-0" [routerLink]="['/retos/Matematicas']">
                   <div class="col-md-8">
                     <div class="card-body">
                       <h5 class="card-title fw-bolder fs-4 text-inherit" style="color: #ff9100;">Matematicas</h5>
@@ -45,7 +45,7 @@
 
 
               <div class="card mb-3 mx-5" style="border: 7px solid rgb(255, 176, 4); max-width: 350px;">
-                <div class="row g-0" (click)="retoMatematicas()">
+                <div class="row g-0" [routerLink]="['/retos/Lenguaje']">
                   <div class="col-md-8">
                     <div class="card-body">
                       <h5 class="card-title fw-bolder fs-4 text-inherit" style="color: #ff9100;">Lenguaje</h5>
@@ -58,10 +58,10 @@
               </div>
 
               <div class="card mb-3" style="border: 7px solid rgb(255, 176, 4); max-width: 350px;">
-                <div class="row g-0" (click)="retoMatematicas()">
+                <div class="row g-0" [routerLink]="['/retos/CienciaSociales']">
                   <div class="col-md-8">
                     <div class="card-body">
-                      <h5 class="card-title fw-bolder fs-4 text-inherit" style="color: #ff9100;">Lenguaje</h5>
+                      <h5 class="card-title fw-bolder fs-4 text-inherit" style="color: #ff9100;">Ciencia Sociales</h5>
                     </div>
                   </div>
                   <div class="col-md-4 align-items-center">
@@ -71,10 +71,10 @@
               </div>
 
               <div class="card mb-3 mx-5" style="border: 7px solid rgb(255, 176, 4); max-width: 350px;">
-                <div class="row g-0" (click)="retoMatematicas()">
+                <div class="row g-0" [routerLink]="['/retos/CienciaNaturales']">
                   <div class="col-md-8">
                     <div class="card-body">
-                      <h5 class="card-title fw-bolder fs-4 text-inherit" style="color: #ff9100;">Lenguaje</h5>
+                      <h5 class="card-title fw-bolder fs-4 text-inherit" style="color: #ff9100;">Ciencia Naturales</h5>
                     </div>
                   </div>
                   <div class="col-md-4 align-items-center">

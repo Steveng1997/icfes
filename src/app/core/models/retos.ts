@@ -1,7 +1,7 @@
-export class Areas {
+export class Retos {
     id: string;
     categoria: string;
-    texto: string;
+    pregunta: string;
     // respuesta: string;
     // imagen: string;
 }
