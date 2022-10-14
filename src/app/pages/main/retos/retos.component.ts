@@ -30,5 +30,14 @@ export class RetosComponent implements OnInit {
       .then((dataCategoria) => {
         this.datosReto = dataCategoria ;
       }).catch(err => console.log('err', err.message));
+
+      this.retoService.getByOpciones();
+  }
+
+  convertToHtml(str) {
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(str, 'text/html');
+    var allText = doc.body.outerHTML;
+    document.getElementById('pregunta').innerHTML = allText;
   }
 }

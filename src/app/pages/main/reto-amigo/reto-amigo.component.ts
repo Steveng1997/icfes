@@ -11,10 +11,7 @@ export class RetoAmigoComponent implements OnInit {
 
   estudiantes: any[] = [];
 
-  lista: string[] = ["Camilo", "Rafael", "Steven"];
-
   opcionSeleccionado: string = '0';
-  verSeleccion: string = '';
 
   constructor(public router: Router,
     public serviceEstudiante: EstudianteService

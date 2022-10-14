@@ -25,7 +25,7 @@ export class AdminRetosComponent implements OnInit {
   }
 
   getRetos() {
-    this.serviceRetos.getRetos().subscribe(data => {
+    this.serviceRetos.getRetosByCategoria().subscribe(data => {
       this.retos = [];
       data.forEach((element: any) => {
         this.retos.push({

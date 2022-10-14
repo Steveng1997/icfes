@@ -7,6 +7,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { MatInputModule } from '@angular/material/input'
 import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatRadioModule } from '@angular/material/radio'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
@@ -100,10 +101,11 @@ firebase.initializeApp({
     BrowserAnimationsModule,
     MatDividerModule,
     AngularFirestoreModule,
+    MatRadioModule,
     AngularFireModule.initializeApp(environment),
   ],
 
-  providers: [AngularFireAuth, LoginService, EstudianteService, RetoService,CookieService, LoginGuardian],
+  providers: [AngularFireAuth, LoginService, EstudianteService, RetoService, CookieService, LoginGuardian],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

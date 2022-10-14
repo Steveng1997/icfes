@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -68,6 +68,102 @@
         </div>
     </div>
 
+</body>
+
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
+  <style href="insertarRetos.component.scss"></style>
+</head>
+
+<body>
+  <div class="container mt-5" style="margin-left: 20%; width: 50%">
+    <div class="row">
+      <div class="">
+        <div class="card border-0 rounded-3 my-5">
+          <div class="card-body p-4 p-sm-5">
+            <form [formGroup]="formTemplate" (ngSubmit)="addReto(formTemplate.value)">
+              <div class="btn-group">
+                <mat-form-field>
+                  <select matNativeControl formControlName="categoria">
+                    <option value="" selected>Seleccione...</option>
+                    <option value="Lenguaje">Lenguaje</option>
+                    <option value="Matematicas">Matematicas</option>
+                    <option value="CienciaSociales">Ciencia Sociales</option>
+                    <option value="CienciaNaturales"> Ciencia Naturales </option>
+                  </select>
+                </mat-form-field>
+              </div>
+
+              <hr />
+              <div class="mb-3" style="margin-top: 15%">
+                <textarea rows="5" cols="70" class="form-control" name="pregunta" formControlName="pregunta"
+                  placeholder="Pregunta"></textarea>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input class="form-control" type="file" accept=".png, .jpeg, .jpg" formControlName="imageUrl"
+                  (change)="uploadImage($event)" />
+              </div>
+
+
+              <div class="form-floating mb-3">
+                <input class="form-control" type="text" name="opcion1" formControlName="opcion1" placeholder="Opcion 1">
+                <label for="opcion1">Opcion 1</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input class="form-control" type="text" name="opcion2" formControlName="opcion2" placeholder="Opcion 2">
+                <label for="opcion2">Opcion 2</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input class="form-control" type="text" name="opcion3" formControlName="opcion3" placeholder="Opcion 3">
+                <label for="opcion3">Opcion 3</label>
+              </div>
+
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-lg btn-login text-uppercase fw-bold"
+                  style="margin-top: 5%">
+                  Guardar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

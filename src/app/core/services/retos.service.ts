@@ -16,26 +16,37 @@ export class RetoService {
 
   retos: Retos[] = [];
 
-  registerAreas(categoria: string, pregunta: string) {
-    let area = { id: `uid${btoa(categoria)}`, categoria: categoria, pregunta: pregunta }
+  registerRetos(formularioall) {
+    formularioall = {
+      id: `uid${btoa(formularioall.categoria)}`, categoria: formularioall.categoria,
+      pregunta: formularioall.pregunta, imageUrl: formularioall.imageUrl, opciones: {
+        opcion1: formularioall.opcion1, opcion2: formularioall.opcion2,
+        opcion3: formularioall.opcion3
+      }
+
+    }
     return new Promise<any>((resolve, reject) => {
       this.db
         .collection('retos')
-        .add(area)
+        .add(formularioall)
         .then(
           (response) => resolve(response),
           (error) => reject(error)
         );
-      // this.authFire.createUserWithEmailAndPassword(email, password)
     });
   }
 
-  getByIdUser(id: string): Observable<any> {
-    return this.db.collection('retos').doc(id).snapshotChanges();
+  getByOpciones(): Observable<any> {
+    // return this.db.collection('retos'+'/opciones').snapshotChanges();
+    return this.db.collection("retos").doc("opciones").snapshotChanges();
   }
 
   getRetos(): Observable<any> {
     return this.db.collection('retos', ref => ref.orderBy('id', 'asc')).snapshotChanges();
+  }
+
+  getRetosByCategoria(): Observable<any> {
+    return this.db.collection('retos', ref => ref.orderBy('categoria', 'asc')).snapshotChanges();
   }
 
   async deleteUsuario(id: string): Promise<any> {
