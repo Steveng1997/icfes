@@ -82,10 +82,10 @@
 
               <img src="{{ cat.imageUrl }}" width="60%" />
 
-              <div class="card-title mt-5" style="font-size: 1.5rem">
-                <p style="text-align: start">A. {{cat.opcion1}}</p>
-                <p style="text-align: start">B. {{cat.opcion2}}</p>
-                <p style="text-align: start">C. {{cat.opcion3}}</p>
+              <div class="card-title mt-5" style="font-size: 1.5rem" *ngFor="let opc of datosOpciones">
+                <p style="text-align: start">A. {{opc.opcion1}}</p>
+                <p style="text-align: start">B. {{opc.opcion2}}</p>
+                <p style="text-align: start">C. {{opc.opcion3}}</p>
               </div>
             </div>
 <!-- 
