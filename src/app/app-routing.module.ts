@@ -44,9 +44,9 @@ const routes: Routes = [
     ],
   },
 
-  { path: 'retos/:categoria', component: RetosComponent, pathMatch: 'full' },
-  { path: 'menuPersonal', component: MenuPersonalesComponent, pathMatch: 'full' },
-  { path: 'mirarAvance', component: MirarAvanceComponent, pathMatch: 'full' },
+  { path: 'retos/:categoria', component: RetosComponent, canActivate: [LoginGuardian]},
+  { path: 'menuPersonal', component: MenuPersonalesComponent, canActivate: [LoginGuardian] },
+  { path: 'mirarAvance', component: MirarAvanceComponent, canActivate: [LoginGuardian] },
 ]
 
 @NgModule({

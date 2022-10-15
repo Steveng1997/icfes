@@ -35,31 +35,11 @@ export class RetoService {
         );
     });
   }
+  getByOpciones(): Observable<any> {
+    return this.db.collection('retos').doc('opciones').valueChanges();
 
-  getByOpciones(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      // this.db.doc('retos' + '/opciones/idOpcion')
-      //   .valueChanges()
-      //   .subscribe((rp) => {
-      //     if (rp[0]?.id) {
-      //       resolve(rp);
-      //     } else {
-      //       resolve(rp);
-      //     }
-      //   });
-      return this.db.collection('retos/opciones', ref => ref.where('idOpcion', 'array-contains', 'holasoy')).snapshotChanges();
-
-    });
-
-
-    // return new Promise((resolve, reject) => {
-    //   this.db.collection("retos")
-    //     .doc('VB3fXQaYtgVuKiaDnynR')
-    //     .collection("opciones")
-    //     .doc('holasoy')
-    //     .get()
-    // });
   }
+
 
   getRetos(): Observable<any> {
     return this.db.collection('retos', ref => ref.orderBy('id', 'asc')).snapshotChanges();

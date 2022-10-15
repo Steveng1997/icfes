@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Opciones } from 'src/app/core/models/opciones';
 import { Retos } from 'src/app/core/models/retos';
 import { RetoService } from 'src/app/core/services/retos.service';
 
@@ -12,7 +13,7 @@ export class RetosComponent implements OnInit {
 
   categoria: string;
   datosReto: Retos[];
-  datosOpciones: Retos[];
+  datosOpciones: Opciones[];
 
   constructor(private rutaActiva: ActivatedRoute,
     private router: Router,
@@ -37,11 +38,16 @@ export class RetosComponent implements OnInit {
       .then((existCategoria) => {
         if (existCategoria) {
           // alert("existe categoria llamada" + " " + categoria)
-          this.retoService.getByOpciones()
-            .then((opciones) => {
-              console.log(opciones);        
-              this.datosOpciones = opciones;
-            }).catch(err => console.log('holaaa', err.message));
+          this.retoService.getByOpciones().subscribe(data => {
+            this.datosOpciones = [];
+            console.log(data)
+            data.forEach((element: any) => {
+              this.datosOpciones.push({
+                idOpcion: element.payload.doc.idOpcion,
+                ...element.payload.doc.data()
+              })
+            });
+          });
         } else {
           alert("No existe categoria")
         }

@@ -91,7 +91,7 @@ export class LoginService {
   rolAdministrador(): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.db.collection('usuarios', (ref) =>
-        ref.where('rol', '==', 'estudiantes')
+        ref.where('rol', '==', 'estudiante')
       )
         .valueChanges({ idField: 'id' })
         .subscribe((rp) => {
