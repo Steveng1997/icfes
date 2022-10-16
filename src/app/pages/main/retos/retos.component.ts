@@ -38,16 +38,7 @@ export class RetosComponent implements OnInit {
       .then((existCategoria) => {
         if (existCategoria) {
           // alert("existe categoria llamada" + " " + categoria)
-          this.retoService.getByOpciones().subscribe(data => {
-            this.datosOpciones = [];
-            console.log(data)
-            data.forEach((element: any) => {
-              this.datosOpciones.push({
-                idOpcion: element.payload.doc.idOpcion,
-                ...element.payload.doc.data()
-              })
-            });
-          });
+          this.retoService.getByOpciones();
         } else {
           alert("No existe categoria")
         }

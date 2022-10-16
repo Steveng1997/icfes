@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core'; import 'firebase/compat/app'
 import { Retos } from '../models/retos';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+
+
+import { doc, getDoc } from "firebase/firestore";
+
 
 @Injectable()
 export class RetoService {
@@ -35,9 +39,24 @@ export class RetoService {
         );
     });
   }
-  getByOpciones(): Observable<any> {
-    return this.db.collection('retos').doc('opciones').valueChanges();
 
+  getByOpciones() {
+    this.db.collection(`retos`)
+      .snapshotChanges()
+      .pipe(
+        map(docData => {
+          return docData.map(doc => {
+            let data = doc.payload.doc.data() as Retos; //here solutions
+            return {
+              id: doc.payload.doc.id,
+              ...data
+            };
+          });
+        })
+      )
+      .subscribe(docData => {
+        console.log(docData);
+      });
   }
 
 
