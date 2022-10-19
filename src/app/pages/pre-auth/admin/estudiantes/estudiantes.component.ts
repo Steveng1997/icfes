@@ -5,32 +5,29 @@ import { EstudianteService } from 'src/app/core/services/estudiantes.service';
 @Component({
   selector: 'app-estudiantes',
   templateUrl: './estudiantes.component.html',
-  styleUrls: ['./estudiantes.component.scss']
+  styleUrls: ['./estudiantes.component.scss'],
 })
 export class EstudiantesComponent implements OnInit {
-
   estudiantes: any[] = [];
 
-  constructor(public router: Router,
-    public serviceAreas: EstudianteService
-  ) { }
+  constructor(public router: Router, public serviceAreas: EstudianteService) {}
 
   ngOnInit(): void {
-    this.getEmpleados()
+    this.getEmpleados();
   }
 
   Agregar() {
-    this.router.navigate(['admin/insertar-estudiantes'])
+    this.router.navigate(['admin/insertar-estudiantes']);
   }
 
   getEmpleados() {
-    this.serviceAreas.getEstudiantes().subscribe(data => {
+    this.serviceAreas.getEstudiantes().subscribe((data) => {
       this.estudiantes = [];
       data.forEach((element: any) => {
         this.estudiantes.push({
           id: element.payload.doc.id,
-          ...element.payload.doc.data()
-        })
+          ...element.payload.doc.data(),
+        });
       });
     });
   }
@@ -38,12 +35,11 @@ export class EstudiantesComponent implements OnInit {
   DeleteUser(id: string) {
     const confirmation = confirm('Deseas eliminar el registro');
     if (confirmation) {
-      this.serviceAreas.deleteUsuario(id)
+      this.serviceAreas.deleteUsuario(id);
     }
   }
 
-
-  editUser(id:string){
-    this.router.navigate(['admin/editar-usuario/' + id])
+  editUser(id: string) {
+    this.router.navigate(['admin/editar-usuario/' + id]);
   }
 }

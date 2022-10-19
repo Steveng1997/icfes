@@ -7,18 +7,18 @@ import { RetoService } from 'src/app/core/services/retos.service';
 @Component({
   selector: 'app-retos',
   templateUrl: './retos.component.html',
-  styleUrls: ['./retos.component.scss']
+  styleUrls: ['./retos.component.scss'],
 })
 export class RetosComponent implements OnInit {
-
   categoria: string;
   datosReto: Retos[];
   datosOpciones: Opciones[];
 
-  constructor(private rutaActiva: ActivatedRoute,
+  constructor(
+    private rutaActiva: ActivatedRoute,
     private router: Router,
-    private retoService: RetoService) {
-  }
+    private retoService: RetoService
+  ) {}
 
   ngOnInit() {
     this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
@@ -27,22 +27,19 @@ export class RetosComponent implements OnInit {
   }
 
   getByCategoria(categoria: string): void {
-    this.retoService.getByCategoria(categoria)
+    this.retoService
+      .getByCategoria(categoria)
       .then((dataCategoria) => {
         this.datosReto = dataCategoria;
-      }).catch(err => console.log('err', err.message));
+      })
+      .catch((err) => console.log('err', err.message));
   }
 
   getByOpciones(categoria: string): void {
-    this.retoService.getByCategoria(categoria)
-      .then((existCategoria) => {
-        if (existCategoria) {
-          // alert("existe categoria llamada" + " " + categoria)
-          this.retoService.getByOpciones();
-        } else {
-          alert("No existe categoria")
-        }
-      })
+    this.retoService.getByOpciones(categoria).subscribe((data) => {
+      console.log(data);
+      this.datosOpciones = [data];
+    });
   }
   // convertToHtml(str) {
   //   var parser = new DOMParser();

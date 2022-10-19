@@ -49,10 +49,6 @@
 //   }
 // }
 
-
-
-
-
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -90,9 +86,9 @@ export class InsertarRetosComponent implements OnInit {
     public router: Router,
     public serviceRetos: RetoService,
     public storage: AngularFireStorage
-  ) { }
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   uploadImage(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -129,7 +125,7 @@ export class InsertarRetosComponent implements OnInit {
               formValue['imageUrl'] = url;
               this.serviceRetos.registerRetos(formValue);
               this.router.navigate(['admin/adminRetos']);
-              alert("Reto insertado");
+              alert('Reto insertado');
             });
           })
         )
@@ -137,16 +133,7 @@ export class InsertarRetosComponent implements OnInit {
     } else {
       this.serviceRetos.registerRetos(formValue);
       this.router.navigate(['admin/adminRetos']);
-      alert("Reto insertado");
+      alert('Reto insertado');
     }
   }
 }
-
-
-
-
-
-
-
-
-

@@ -1,34 +1,29 @@
-import { Injectable } from '@angular/core'; import 'firebase/compat/app'
+import { Injectable } from '@angular/core';
+import 'firebase/compat/app';
 import { Retos } from '../models/retos';
 import { map, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-
-
-import { doc, getDoc } from "firebase/firestore";
-
+import { Opciones } from '../models/opciones';
 
 @Injectable()
 export class RetoService {
-
-  // myArray: Retos[] = []
-
-  constructor(
-    public router: Router,
-    private db: AngularFirestore
-  ) { }
+  constructor(public router: Router, private db: AngularFirestore) {}
 
   retos: Retos[] = [];
 
   registerRetos(formularioall) {
     formularioall = {
-      id: `uid${btoa(formularioall.categoria)}`, categoria: formularioall.categoria,
-      pregunta: formularioall.pregunta, imageUrl: formularioall.imageUrl, opciones: {
-        opcion1: formularioall.opcion1, opcion2: formularioall.opcion2,
-        opcion3: formularioall.opcion3
-      }
-
-    }
+      id: `uid${btoa(formularioall.categoria)}`,
+      categoria: formularioall.categoria,
+      pregunta: formularioall.pregunta,
+      imageUrl: formularioall.imageUrl,
+      opciones: {
+        opcion1: formularioall.opcion1,
+        opcion2: formularioall.opcion2,
+        opcion3: formularioall.opcion3,
+      },
+    };
     return new Promise<any>((resolve, reject) => {
       this.db
         .collection('retos')
@@ -40,56 +35,60 @@ export class RetoService {
     });
   }
 
-  getByOpciones() {
-    this.db.collection(`retos`)
+  getByOpciones(categoria: string): Observable<any> {
+    return this.db
+      .collection('retos', (ref) => ref.where('categoria', '==', categoria))
       .snapshotChanges()
       .pipe(
-        map(docData => {
-          return docData.map(doc => {
-            let data = doc.payload.doc.data() as Retos; //here solutions
+        map((opciones) => {
+          return opciones.map((opciones) => {
+            let data = opciones.payload.doc.data() as Opciones; //here solutions
             return {
-              id: doc.payload.doc.id,
-              ...data
+              // id: opciones.payload.doc.id,
+              ...data,
             };
           });
         })
-      )
-      .subscribe(docData => {
-        console.log(docData);
-      });
+      );
   }
 
-
   getRetos(): Observable<any> {
-    return this.db.collection('retos', ref => ref.orderBy('id', 'asc')).snapshotChanges();
+    return this.db
+      .collection('retos', (ref) => ref.orderBy('id', 'asc'))
+      .snapshotChanges();
   }
 
   getRetosByCategoria(): Observable<any> {
-    return this.db.collection('retos', ref => ref.orderBy('categoria', 'asc')).snapshotChanges();
+    return this.db
+      .collection('retos', (ref) => ref.orderBy('categoria', 'asc'))
+      .snapshotChanges();
   }
 
   async deleteUsuario(id: string): Promise<any> {
-    this.db.collection('retos', (ref) =>
-      ref.where('id', '==', id)
-    ).get().forEach(querySnapshot => {
-      querySnapshot.forEach((doc) => {
-        doc.ref.delete().then(() => {
-          console.log("Usuario eliminado con exito");
-        }).catch(function () {
-          console.error("Error al eliminar el usuario");
+    this.db
+      .collection('retos', (ref) => ref.where('id', '==', id))
+      .get()
+      .forEach((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref
+            .delete()
+            .then(() => {
+              console.log('Usuario eliminado con exito');
+            })
+            .catch(function () {
+              console.error('Error al eliminar el usuario');
+            });
         });
-      });
-    })
+      })
       .catch(function () {
-        console.log("Error al eliminar el usuario");
+        console.log('Error al eliminar el usuario');
       });
   }
 
   getByCategoria(categoria: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.db.collection('retos', (ref) =>
-        ref.where('categoria', '==', categoria)
-      )
+      this.db
+        .collection('retos', (ref) => ref.where('categoria', '==', categoria))
         .valueChanges({ idField: 'id' })
         .subscribe((rp) => {
           if (rp[0]?.id) {

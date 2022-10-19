@@ -1,58 +1,57 @@
-import { AppComponent } from './app.component'
-import { HttpClientModule } from '@angular/common/http'
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module'
-import { BrowserModule } from '@angular/platform-browser'
-import { ReactiveFormsModule, FormsModule } from '@angular/forms'
-import { MatInputModule } from '@angular/material/input'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatRadioModule } from '@angular/material/radio'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 // Firebase
-import { AngularFireModule } from '@angular/fire/compat'
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database'
-import { AngularFireStorageModule } from '@angular/fire/compat/storage'
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 // Conection a Firebase
-import { environment } from 'src/environments/environment'
-import firebase from 'firebase/compat/app'
+import { environment } from 'src/environments/environment';
+import firebase from 'firebase/compat/app';
 
 // Services
-import { LoginService } from './core/services/login.service'
-import { RetoService } from './core/services/retos.service'
-import { EstudianteService } from './core/services/estudiantes.service'
+import { LoginService } from './core/services/login.service';
+import { RetoService } from './core/services/retos.service';
+import { EstudianteService } from './core/services/estudiantes.service';
 
 // Pages-Auth
-import { AdminComponent } from './pages/pre-auth/admin/admin.component'
-import { LoginComponent } from './pages/pre-auth/login/login.component'
-import { UsuariosComponent } from './pages/pre-auth/admin/usuarios/usuarios.component'
-import { InsertarUsuario } from './pages/pre-auth/admin/usuarios/insertar-login/insertar-login'
-import { EditarUserComponent } from './pages/pre-auth/admin/usuarios/editar-user/editar-user.component'
-import { AdminRetosComponent } from './pages/pre-auth/admin/adminRetos/adminRetos.component'
-import { InsertarRetosComponent } from './pages/pre-auth/admin/adminRetos/insertarRetos/insertarRetos.component'
-import { EstudiantesComponent } from './pages/pre-auth/admin/estudiantes/estudiantes.component'
-import { InsertarEstudiantesComponent } from './pages/pre-auth/admin/estudiantes/insertar-estudiantes/insertar-estudiantes.component'
+import { AdminComponent } from './pages/pre-auth/admin/admin.component';
+import { LoginComponent } from './pages/pre-auth/login/login.component';
+import { UsuariosComponent } from './pages/pre-auth/admin/usuarios/usuarios.component';
+import { InsertarUsuario } from './pages/pre-auth/admin/usuarios/insertar-login/insertar-login';
+import { EditarUserComponent } from './pages/pre-auth/admin/usuarios/editar-user/editar-user.component';
+import { AdminRetosComponent } from './pages/pre-auth/admin/adminRetos/adminRetos.component';
+import { InsertarRetosComponent } from './pages/pre-auth/admin/adminRetos/insertarRetos/insertarRetos.component';
+import { EstudiantesComponent } from './pages/pre-auth/admin/estudiantes/estudiantes.component';
+import { InsertarEstudiantesComponent } from './pages/pre-auth/admin/estudiantes/insertar-estudiantes/insertar-estudiantes.component';
 
 // Pages-Main
-import { MenuComponent } from './pages/main/menu/menu.component'
-import { MenuareaComponent } from './pages/main/menuarea/menuarea.component'
-import { RetoAmigoComponent } from './pages/main/reto-amigo/reto-amigo.component'
-import { RetoPersonalComponent } from './pages/main/reto-personal/reto-personal.component'
-import { MenuPersonalesComponent } from './pages/main/menu-personales/menu-personales.component'
-import { MirarAvanceComponent } from './pages/main/mirar-avance/mirar-avance.component'
+import { MenuComponent } from './pages/main/menu/menu.component';
+import { MenuareaComponent } from './pages/main/menuarea/menuarea.component';
+import { RetoAmigoComponent } from './pages/main/reto-amigo/reto-amigo.component';
+import { RetoPersonalComponent } from './pages/main/reto-personal/reto-personal.component';
+import { MenuPersonalesComponent } from './pages/main/menu-personales/menu-personales.component';
+import { MirarAvanceComponent } from './pages/main/mirar-avance/mirar-avance.component';
 import { RetosComponent } from './pages/main/retos/retos.component';
 
 // Cookies
-import { CookieService } from 'ngx-cookie-service'
-import { LoginGuardian } from './pages/pre-auth/login/login-guardian'
-import { MatDividerModule } from '@angular/material/divider'
+import { CookieService } from 'ngx-cookie-service';
+import { LoginGuardian } from './pages/pre-auth/login/login-guardian';
+import { MatDividerModule } from '@angular/material/divider';
 import { SidebarComponent } from './core/sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
-
 
 firebase.initializeApp({
   apiKey: 'AIzaSyAWFfFTC8gSoctKKst4X1uxVwaFbEB1pXM',
@@ -62,8 +61,8 @@ firebase.initializeApp({
   storageBucket: 'icfes-54cbf.appspot.com',
   messagingSenderId: '274684180849',
   appId: '1:274684180849:web:da722162436f8ef1335ed0',
-  measurementId: 'G-NP78JG0PNE'
-})
+  measurementId: 'G-NP78JG0PNE',
+});
 
 @NgModule({
   declarations: [
@@ -86,7 +85,7 @@ firebase.initializeApp({
     AdminRetosComponent,
     InsertarRetosComponent,
     EstudiantesComponent,
-    InsertarEstudiantesComponent
+    InsertarEstudiantesComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,8 +104,15 @@ firebase.initializeApp({
     AngularFireModule.initializeApp(environment),
   ],
 
-  providers: [AngularFireAuth, LoginService, EstudianteService, RetoService, CookieService, LoginGuardian],
+  providers: [
+    AngularFireAuth,
+    LoginService,
+    EstudianteService,
+    RetoService,
+    CookieService,
+    LoginGuardian,
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}
