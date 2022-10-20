@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Opciones } from 'src/app/core/models/opciones';
 import { Retos } from 'src/app/core/models/retos';
 import { RetoService } from 'src/app/core/services/retos.service';
 
@@ -12,7 +11,10 @@ import { RetoService } from 'src/app/core/services/retos.service';
 export class RetosComponent implements OnInit {
   categoria: string;
   datosReto: Retos[];
-  datosOpciones: Opciones[];
+
+  @ViewChild('pregunta') pregunta: ElementRef;
+
+  public page!: number;
 
   constructor(
     private rutaActiva: ActivatedRoute,
@@ -23,7 +25,6 @@ export class RetosComponent implements OnInit {
   ngOnInit() {
     this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
     this.getByCategoria(this.categoria);
-    this.getByOpciones(this.categoria);
   }
 
   getByCategoria(categoria: string): void {
@@ -31,20 +32,37 @@ export class RetosComponent implements OnInit {
       .getByCategoria(categoria)
       .then((dataCategoria) => {
         this.datosReto = dataCategoria;
+        // this.convertToHtml();
+
+        this.datosReto = this.datosReto;
+        console.log(this.datosReto);
       })
       .catch((err) => console.log('err', err.message));
   }
 
-  getByOpciones(categoria: string): void {
-    this.retoService.getByOpciones(categoria).subscribe((data) => {
-      console.log(data);
-      this.datosOpciones = [data];
-    });
+  convertToHtml(str) {
+    return document.getElementById('pregunta').innerHTML + 'Holis';
+
+    for (let index = 0; index < this.datosReto.length; index++) {
+      let parser = new DOMParser();
+      let doc = parser.parseFromString(
+        this.datosReto[index]['pregunta'],
+        'text/html'
+      );
+      // document.getElementById('pregunta' + index).innerHTML =
+      //   doc.body.innerHTML;
+      // console.log(document.getElementById('pregunta' + index));
+      // console.log('pregunta' + index);
+    }
+
+    // let parser = new DOMParser();
+    // let doc = parser.parseFromString(str, 'text/html');
+    // console.log(doc.body.innerHTML);
+    // document.getElementById('pregunta').innerHTML = doc.body.innerHTML;
+    // return doc.body.innerHTML;
   }
-  // convertToHtml(str) {
-  //   var parser = new DOMParser();
-  //   var doc = parser.parseFromString(str, 'text/html');
-  //   var allText = doc.body.outerHTML;
-  //   document.getElementById('pregunta').innerHTML = allText;
-  // }
+
+  opcionA(event) {
+    this.router.navigate(['areas']);
+  }
 }

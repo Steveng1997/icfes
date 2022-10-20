@@ -4,7 +4,6 @@ import { Retos } from '../models/retos';
 import { map, Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { Opciones } from '../models/opciones';
 
 @Injectable()
 export class RetoService {
@@ -23,6 +22,7 @@ export class RetoService {
         opcion2: formularioall.opcion2,
         opcion3: formularioall.opcion3,
       },
+      respuesta: formularioall.respuesta,
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -33,23 +33,6 @@ export class RetoService {
           (error) => reject(error)
         );
     });
-  }
-
-  getByOpciones(categoria: string): Observable<any> {
-    return this.db
-      .collection('retos', (ref) => ref.where('categoria', '==', categoria))
-      .snapshotChanges()
-      .pipe(
-        map((opciones) => {
-          return opciones.map((opciones) => {
-            let data = opciones.payload.doc.data() as Opciones; //here solutions
-            return {
-              // id: opciones.payload.doc.id,
-              ...data,
-            };
-          });
-        })
-      );
   }
 
   getRetos(): Observable<any> {

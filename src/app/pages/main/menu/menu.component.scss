@@ -1,14 +1,44 @@
 .btn-amigo {
-    background-color: #176ae7 !important;;
-    color: white !important;
+  background-color: #176ae7 !important;
+  color: white !important;
 }
 
 .btn-personal {
-    background-color: #eea114 !important; 
-    color: white !important;
+  background-color: #eea114 !important;
+  color: white !important;
 }
 
 .btn-mirAvance {
-    background-color: #20c928 !important;
-    color: white !important;
+  background-color: #20c928 !important;
+  color: white !important;
+}
+
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// Query para celular
+
+@media only screen and (max-width: 480px) {
+  .btn-salir {
+    margin-right: 1%;
+    margin-top: 1%;
+  }
+
+  .btnSalir {
+    width: 23%;
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// Query para pantalla grande como laptop o monitor
+
+@media only screen and (min-device-width: 1200px) and (max-device-width: 1600px) {
+  .btn-salir {
+    margin-right: 3%;
+    margin-top: 1.9px;
+  }
+
+  .btnSalir {
+    width: 10%;
+  }
 }

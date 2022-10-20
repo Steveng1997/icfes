@@ -8,9 +8,11 @@ import { EstudianteService } from 'src/app/core/services/estudiantes.service';
   styleUrls: ['./estudiantes.component.scss'],
 })
 export class EstudiantesComponent implements OnInit {
-  estudiantes: any[] = [];
 
-  constructor(public router: Router, public serviceAreas: EstudianteService) {}
+  estudiantes: any[] = [];
+  public page!: number;
+
+  constructor(public router: Router, public serviceAreas: EstudianteService) { }
 
   ngOnInit(): void {
     this.getEmpleados();

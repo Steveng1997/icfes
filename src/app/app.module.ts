@@ -1,6 +1,7 @@
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -51,7 +52,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { LoginGuardian } from './pages/pre-auth/login/login-guardian';
 import { MatDividerModule } from '@angular/material/divider';
 import { SidebarComponent } from './core/sidebar/sidebar.component';
-import { NavbarComponent } from './navbar/navbar.component';
 
 firebase.initializeApp({
   apiKey: 'AIzaSyAWFfFTC8gSoctKKst4X1uxVwaFbEB1pXM',
@@ -77,7 +77,6 @@ firebase.initializeApp({
     AdminComponent,
     SidebarComponent,
     UsuariosComponent,
-    NavbarComponent,
     EditarUserComponent,
     RetosComponent,
     MenuPersonalesComponent,
@@ -101,6 +100,7 @@ firebase.initializeApp({
     MatDividerModule,
     AngularFirestoreModule,
     MatRadioModule,
+    NgxPaginationModule,
     AngularFireModule.initializeApp(environment),
   ],
 

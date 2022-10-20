@@ -11,6 +11,7 @@ import { LoginService } from 'src/app/core/services/login.service';
 export class UsuariosComponent implements OnInit {
 
   usuarios: any[] = [];
+  public page!: number;
 
   constructor(public router: Router,
     public serviceLogin: LoginService

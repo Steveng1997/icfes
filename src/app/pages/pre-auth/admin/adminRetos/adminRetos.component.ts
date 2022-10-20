@@ -11,6 +11,7 @@ import { RetoService } from 'src/app/core/services/retos.service';
 export class AdminRetosComponent implements OnInit {
 
   retos: any[] = [];
+  public page!: number;
 
   constructor(public router: Router,
     public serviceRetos: RetoService
