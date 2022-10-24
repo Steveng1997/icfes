@@ -20,7 +20,7 @@ export class RetoPersonalComponent implements OnInit {
     private rutaActiva: ActivatedRoute,
     private router: Router,
     private retoService: RetoService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
@@ -28,18 +28,13 @@ export class RetoPersonalComponent implements OnInit {
   }
 
   getByCategoria(categoria: string): void {
-    this.retoService.getByRespondido().then((respuestaRespondida) => {
-      if (respuestaRespondida) {
-        this.retoService
-          .getByCategoria(categoria)
-          .then((dataCategoria) => {
-            this.datosReto = dataCategoria;
-            // this.datosReto = this.datosReto;
-            console.log(this.datosReto);
-          })
-          .catch((err) => console.log('err', err.message));
-      }
-    });
+    this.retoService.getByCategoria(categoria)
+      .then((dataCategoria) => {
+        this.datosReto = dataCategoria;
+        // this.datosReto = this.datosReto;
+        console.log(this.datosReto);
+      })
+      .catch((err) => console.log('err', err.message));
   }
 
   convertToHtml(str) {

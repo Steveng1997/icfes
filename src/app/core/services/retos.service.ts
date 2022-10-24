@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class RetoService {
-  constructor(public router: Router, private db: AngularFirestore) {}
+  constructor(public router: Router, private db: AngularFirestore) { }
 
   retos: Retos[] = [];
 
@@ -70,22 +70,7 @@ export class RetoService {
   getByCategoria(categoria: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('retos', (ref) => ref.where('categoria', '==', categoria))
-        .valueChanges({ idField: 'id' })
-        .subscribe((rp) => {
-          if (rp[0]?.id) {
-            resolve(rp);
-          } else {
-            resolve(rp);
-          }
-        });
-    });
-  }
-
-  getByRespondido(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.db
-        .collection('retos', (ref) => ref.where('respondido', '==', false))
+        .collection('retos', (ref) => ref.where('categoria', '==', categoria).where('respondido', '==', false))
         .valueChanges({ idField: 'id' })
         .subscribe((rp) => {
           if (rp[0]?.id) {
@@ -124,6 +109,19 @@ export class RetoService {
 
             pregunta: retos.pregunta,
             respuesta: retos.respuesta,
+          });
+        });
+      });
+  }
+
+  updateOpciones() {
+    return this.db
+      .collection('retos')
+      .get()
+      .forEach((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({
+            respondido: true,
           });
         });
       });

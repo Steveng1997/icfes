@@ -20,7 +20,7 @@ export class RetosComponent implements OnInit {
     private rutaActiva: ActivatedRoute,
     private router: Router,
     private retoService: RetoService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
@@ -28,19 +28,14 @@ export class RetosComponent implements OnInit {
   }
 
   getByCategoria(categoria: string): void {
-    this.retoService.getByRespondido().then((respuestaRespondida) => {
-      if (respuestaRespondida) {
-        this.retoService
-          .getByCategoria(categoria)
-          .then((dataCategoria) => {
-            this.datosReto = dataCategoria;
-            // this.datosReto = this.datosReto;
-            console.log(this.datosReto);
-          })
-          .catch((err) => console.log('err', err.message));
-      }
-    });
-  }
+    this.retoService.getByCategoria(categoria)
+      .then((dataCategoria) => {
+        this.datosReto = dataCategoria;
+        // this.datosReto = this.datosReto;
+        console.log(this.datosReto);
+      })
+      .catch((err) => console.log('err', err.message));
+  };
 
   convertToHtml(str) {
     return document.getElementById('pregunta').innerHTML + 'Holis';
@@ -65,6 +60,7 @@ export class RetosComponent implements OnInit {
   }
 
   opcionA() {
+    this.retoService.updateOpciones();
     this.router.navigate(['correcto']);
   }
 }
