@@ -20,7 +20,7 @@ export class RetosComponent implements OnInit {
     private rutaActiva: ActivatedRoute,
     private router: Router,
     private retoService: RetoService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
@@ -28,39 +28,41 @@ export class RetosComponent implements OnInit {
   }
 
   getByCategoria(categoria: string): void {
-    this.retoService.getByCategoria(categoria)
+    this.retoService
+      .getByCategoria(categoria)
       .then((dataCategoria) => {
         this.datosReto = dataCategoria;
-        // this.datosReto = this.datosReto;
-        console.log(this.datosReto);
+        setTimeout(() => {
+          this.convertToHtml();
+        }, 1000);
       })
       .catch((err) => console.log('err', err.message));
-  };
-
-  convertToHtml(str) {
-    return document.getElementById('pregunta').innerHTML + 'Holis';
-
-    for (let index = 0; index < this.datosReto.length; index++) {
-      let parser = new DOMParser();
-      let doc = parser.parseFromString(
-        this.datosReto[index]['pregunta'],
-        'text/html'
-      );
-      // document.getElementById('pregunta' + index).innerHTML =
-      //   doc.body.innerHTML;
-      // console.log(document.getElementById('pregunta' + index));
-      // console.log('pregunta' + index);
-    }
-
-    // let parser = new DOMParser();
-    // let doc = parser.parseFromString(str, 'text/html');
-    // console.log(doc.body.innerHTML);
-    // document.getElementById('pregunta').innerHTML = doc.body.innerHTML;
-    // return doc.body.innerHTML;
   }
 
-  opcionA() {
-    this.retoService.updateOpciones();
-    this.router.navigate(['correcto']);
+  convertToHtml() {
+    var preguntas = document.querySelectorAll("[id='pregunta']");
+
+    for (let i = 0; i < this.datosReto.length; i++) {
+      this.datosReto[i]['pregunta'] = this.datosReto[i]['pregunta'].replace(
+        /\n/g,
+        '<br/>'
+      );
+      for (let j = 0; j < preguntas.length; j++) {
+        // preguntas[j]['innerHTML'] = 'Camilo' + preguntas[j]['innerHTML'];
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(
+          this.datosReto[i]['pregunta'],
+          'text/html'
+        );
+        preguntas[j]['innerHTML'] = doc.body.innerHTML;
+        // return doc.body.innerHTML;
+      }
+    }
+  }
+
+  opcionA(event) {
+    if (this.datosReto[0]['respuesta'] == event.target.innerHTML.trim()) {
+      this.router.navigate(['correcto']);
+    }
   }
 }

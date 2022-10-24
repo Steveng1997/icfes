@@ -20,7 +20,7 @@ export class RetoPersonalComponent implements OnInit {
     private rutaActiva: ActivatedRoute,
     private router: Router,
     private retoService: RetoService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
@@ -28,38 +28,43 @@ export class RetoPersonalComponent implements OnInit {
   }
 
   getByCategoria(categoria: string): void {
-    this.retoService.getByCategoria(categoria)
+    this.retoService
+      .getByCategoria(categoria)
       .then((dataCategoria) => {
         this.datosReto = dataCategoria;
-        // this.datosReto = this.datosReto;
-        console.log(this.datosReto);
+        setTimeout(() => {
+          this.convertToHtml();
+        }, 1000);
       })
       .catch((err) => console.log('err', err.message));
   }
 
-  convertToHtml(str) {
-    return document.getElementById('pregunta').innerHTML + 'Holis';
+  convertToHtml() {
+    var preguntas = document.querySelectorAll("[id='pregunta']");
 
-    for (let index = 0; index < this.datosReto.length; index++) {
-      let parser = new DOMParser();
-      let doc = parser.parseFromString(
-        this.datosReto[index]['pregunta'],
-        'text/html'
+    for (let i = 0; i < this.datosReto.length; i++) {
+      this.datosReto[i]['pregunta'] = this.datosReto[i]['pregunta'].replace(
+        /\n/g,
+        '<br/>'
       );
-      // document.getElementById('pregunta' + index).innerHTML =
-      //   doc.body.innerHTML;
-      // console.log(document.getElementById('pregunta' + index));
-      // console.log('pregunta' + index);
+      for (let j = 0; j < preguntas.length; j++) {
+        // preguntas[j]['innerHTML'] = 'Camilo' + preguntas[j]['innerHTML'];
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(
+          this.datosReto[i]['pregunta'],
+          'text/html'
+        );
+        preguntas[j]['innerHTML'] = doc.body.innerHTML;
+        // return doc.body.innerHTML;
+      }
     }
-
-    // let parser = new DOMParser();
-    // let doc = parser.parseFromString(str, 'text/html');
-    // console.log(doc.body.innerHTML);
-    // document.getElementById('pregunta').innerHTML = doc.body.innerHTML;
-    // return doc.body.innerHTML;
   }
 
-  opcionA() {
-    this.router.navigate(['incorrectoPersonal']);
+  opcionA(event) {
+    // console.log(this.datosReto[0]['respuesta']);
+    // console.log(event.target.innerHTML.trim());
+    if (this.datosReto[0]['respuesta'] == event.target.innerHTML.trim()) {
+      this.router.navigate(['incorrectoPersonal']);
+    }
   }
 }

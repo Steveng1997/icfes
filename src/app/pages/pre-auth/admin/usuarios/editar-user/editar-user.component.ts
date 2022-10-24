@@ -6,6 +6,7 @@ import { LoginService } from 'src/app/core/services/login.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 //importamos el enrutador
 import { Router, ActivatedRoute } from '@angular/router';
+import { Usuario } from 'src/app/core/models/login';
 
 @Component({
   selector: 'app-editar-user',
@@ -13,42 +14,27 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./editar-user.component.scss'],
 })
 export class EditarUserComponent implements OnInit {
-  public formEditar: FormGroup;
-  postRef: any;
+
+  usua: Usuario[];
 
   constructor(
     public postService: LoginService,
     public formBuilder: FormBuilder,
     private activeRoute: ActivatedRoute,
     private router: Router
-  ) {
-    this.formEditar = this.formBuilder.group({
-      email: [''],
-      nombre: [''],
-      password: [''],
-      rol: [''],
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
     const id = this.activeRoute.snapshot.paramMap.get('id');
 
     this.postService.getById(id).subscribe((res) => {
-      this.postRef = res;
-      this.formEditar = this.formBuilder.group({
-        email: [this.postRef.email],
-        nombre: [this.postRef.nombre],
-        password: [this.postRef.password],
-        rol: [this.postRef.rol],
-      });
+      this.usua = res;
     });
   }
 
-  editarReto() {
+  editarReto(usu: Usuario) {
     const id = this.activeRoute.snapshot.paramMap.get('id');
-
-    this.postService.updateRetos(this.formEditar.value, id);
-    this.router.navigate(['']);
-    //console.log(this.editForm.value) //podemos ver los valores capturados
+    this.postService.updateUsuarios(usu);
+    this.router.navigate(['admin/usuarios']);
   }
 }

@@ -38,6 +38,7 @@ import { InsertarRetosComponent } from './pages/pre-auth/admin/adminRetos/insert
 import { EditarRetosComponent } from './pages/pre-auth/admin/adminRetos/editar-retos/editar-retos.component';
 import { EstudiantesComponent } from './pages/pre-auth/admin/estudiantes/estudiantes.component';
 import { InsertarEstudiantesComponent } from './pages/pre-auth/admin/estudiantes/insertar-estudiantes/insertar-estudiantes.component';
+import { EditarEstudianteComponent } from './pages/pre-auth/admin/estudiantes/editar-estudiante/editar-estudiante.component';
 
 // Pages-Main
 import { MenuComponent } from './pages/main/menu/menu.component';
@@ -97,6 +98,7 @@ firebase.initializeApp({
     MenuAreaPersonalComponent,
     CorrectoPersonalComponent,
     IncorrectoPersonalComponent,
+    EditarEstudianteComponent,
   ],
   imports: [
     BrowserModule,

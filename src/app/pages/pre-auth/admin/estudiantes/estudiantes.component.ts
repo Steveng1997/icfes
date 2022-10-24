@@ -8,11 +8,10 @@ import { EstudianteService } from 'src/app/core/services/estudiantes.service';
   styleUrls: ['./estudiantes.component.scss'],
 })
 export class EstudiantesComponent implements OnInit {
-
   estudiantes: any[] = [];
   public page!: number;
 
-  constructor(public router: Router, public serviceAreas: EstudianteService) { }
+  constructor(public router: Router, public serviceAreas: EstudianteService) {}
 
   ngOnInit(): void {
     this.getEmpleados();
@@ -39,9 +38,5 @@ export class EstudiantesComponent implements OnInit {
     if (confirmation) {
       this.serviceAreas.deleteUsuario(id);
     }
-  }
-
-  editUser(id: string) {
-    this.router.navigate(['admin/editar-usuario/' + id]);
   }
 }

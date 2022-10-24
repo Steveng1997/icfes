@@ -1,4 +1,4 @@
 export class Estudiante {
-    id: string;
-    nombre: string;
+  id?: string;
+  nombre?: string;
 }

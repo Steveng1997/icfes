@@ -32,18 +32,23 @@
 
   <body>
     <div class="container">
-      <div class="row">
+      <div class="row" *ngFor="let ret of reto">
         <div class="card border-0 rounded-3 my-5">
           <div class="card-body p-4 p-sm-5">
             <div class="card-title text-center mb-4 fw-bolder fs-1">
               <label>Editar Retos</label>
             </div>
 
-            <form [formGroup]="formEditar" (ngSubmit)="editarReto()">
+            <form (ngSubmit)="editarReto(ret)">
               <div class="btn-group">
                 <mat-form-field>
-                  <select matNativeControl formControlName="categoria">
-                    <option value="" selected>Seleccione una area...</option>
+                  <select
+                    matNativeControl
+                    [(ngModel)]="ret.categoria"
+                    #categoria="ngModel"
+                    name="categoria"
+                  >
+                    <option value="0" selected>Seleccione una area...</option>
                     <option value="Lenguaje">Lenguaje</option>
                     <option value="Matematicas">Matematicas</option>
                     <option value="CienciaSociales">Ciencia Sociales</option>
@@ -59,7 +64,8 @@
                   cols="70"
                   class="form-control"
                   name="pregunta"
-                  formControlName="pregunta"
+                  [(ngModel)]="ret.pregunta"
+                  #pregunta="ngModel"
                   placeholder="Pregunta"
                 ></textarea>
               </div>
@@ -69,7 +75,8 @@
                   class="form-control"
                   type="file"
                   accept=".png, .jpeg, .jpg"
-                  formControlName="imageUrl"
+                  [(ngModel)]="ret.imageUrl"
+                  #imageUrl="ngModel"
                   (change)="uploadImage($event)"
                 />
               </div>
@@ -79,7 +86,8 @@
                   class="form-control"
                   type="text"
                   name="opcion1"
-                  formControlName="opcion1"
+                  [(ngModel)]="ret['opciones']['opcion1']"
+                  #opcion1="ngModel"
                   placeholder="Opcion 1"
                 />
                 <label for="opcion1">Opcion 1</label>
@@ -90,7 +98,8 @@
                   class="form-control"
                   type="text"
                   name="opcion2"
-                  formControlName="opcion2"
+                  [(ngModel)]="ret['opciones']['opcion2']"
+                  #opcion2="ngModel"
                   placeholder="Opcion 2"
                 />
                 <label for="opcion2">Opcion 2</label>
@@ -101,7 +110,8 @@
                   class="form-control"
                   type="text"
                   name="opcion3"
-                  formControlName="opcion3"
+                  [(ngModel)]="ret['opciones']['opcion3']"
+                  #opcion3="ngModel"
                   placeholder="Opcion 3"
                 />
                 <label for="opcion3">Opcion 3</label>
@@ -112,7 +122,7 @@
                   class="form-control"
                   type="text"
                   name="opcion4"
-                  formControlName="opcion4"
+                  [(ngModel)]="ret['opciones']['opcion4']"
                   placeholder="Opcion 4"
                 />
                 <label for="opcion4">Opcion 4</label>
@@ -123,7 +133,8 @@
                   class="form-control"
                   type="text"
                   name="respuesta"
-                  formControlName="respuesta"
+                  [(ngModel)]="ret.respuesta"
+                  #respuesta="ngModel"
                   placeholder="Respuesta"
                 />
                 <label for="respuesta">Respuesta</label>

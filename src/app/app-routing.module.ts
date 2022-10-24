@@ -23,6 +23,7 @@ import { CorrectoComponent } from './pages/main/correcto/correcto.component';
 import { MenuAreaPersonalComponent } from './pages/main/menu-area-personal/menu-area-personal.component';
 import { CorrectoPersonalComponent } from './pages/main/correcto-personal/correcto-personal.component';
 import { IncorrectoPersonalComponent } from './pages/main/incorrecto-personal/incorrecto-personal.component';
+import { EditarEstudianteComponent } from './pages/pre-auth/admin/estudiantes/editar-estudiante/editar-estudiante.component';
 
 const routes: Routes = [
   { path: 'menu', component: MenuComponent, canActivate: [LoginGuardian] },
@@ -92,6 +93,11 @@ const routes: Routes = [
       {
         path: 'insertar-estudiantes',
         component: InsertarEstudiantesComponent,
+        canActivate: [LoginGuardian],
+      },
+      {
+        path: 'editar-estudiante/:id',
+        component: EditarEstudianteComponent,
         canActivate: [LoginGuardian],
       },
     ],

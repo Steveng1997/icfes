@@ -55,14 +55,17 @@
               <tbody>
                 <tr
                   *ngFor="
-                    let area of estudiantes
+                    let estud of estudiantes
                       | paginate: { itemsPerPage: 5, currentPage: page }
                   "
                 >
-                  <td data-titulo="nombre">{{ area.nombre }}</td>
-                  <i class="fas fa-edit" (click)="editUser(area.id)"></i>
+                  <td data-titulo="nombre">{{ estud.nombre }}</td>
                   <i
-                    (click)="DeleteUser(area.id)"
+                    class="fas fa-edit"
+                    routerLink="/admin/editar-estudiante/{{ estud.id }}"
+                  ></i>
+                  <i
+                    (click)="DeleteUser(estud.id)"
                     class="fas fa-trash-alt fa-lg text-danger"
                   ></i>
                   <td></td>

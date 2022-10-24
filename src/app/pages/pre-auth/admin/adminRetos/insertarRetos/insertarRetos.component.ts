@@ -47,7 +47,7 @@ export class InsertarRetosComponent implements OnInit {
   }
 
   addReto(formValue) {
-    if (this.selectedImage != null && this.selectedImage != '') {
+    if (this.selectedImage != null) {
       var filePath = `${formValue.category}/${this.selectedImage.name
         .split('.')
         .slice(0, -1)
@@ -61,26 +61,20 @@ export class InsertarRetosComponent implements OnInit {
             fileRef.getDownloadURL().subscribe((url) => {
               formValue['imageUrl'] = url;
 
-              if (formValue.value != undefined) {
-                this.serviceRetos.registerRetos(formValue);
-                this.router.navigate(['admin/adminRetos']);
-                alert('Reto insertado');
-              } else {
-                alert('Inserte registro');
-                console.log('error');
-              }
+              this.serviceRetos.registerRetos(formValue);
+              this.router.navigate(['admin/adminRetos']);
+              alert('Reto insertado');
             });
           })
         )
         .subscribe();
     } else {
-      if (formValue.value != undefined || this.selectedImage == null) {
+      if (formValue.value != undefined && formValue != '') {
         this.serviceRetos.registerRetos(formValue);
         this.router.navigate(['admin/adminRetos']);
         alert('Reto insertado');
       } else {
         alert('Inserte registro');
-        console.log('error');
       }
     }
   }

@@ -133,18 +133,13 @@ export class LoginService {
   // Update
   // -----------------------------------------------------------------------------------
 
-  updateRetos(retos: Usuario, id) {
+  updateUsuarios(user: Usuario) {
     return this.db
-      .collection('usuarios', (ref) => ref.where('id', '==', id))
+      .collection('usuarios', (ref) => ref.where('id', '==', user.id))
       .get()
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            email: retos.email,
-            nombre: retos.nombre,
-            password: retos.password,
-            rol: retos.rol,
-          });
+          doc.ref.update(user);
         });
       });
   }

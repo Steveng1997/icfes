@@ -2,22 +2,35 @@ import { Injectable } from '@angular/core';
 import 'firebase/compat/app';
 import { Retos } from '../models/retos';
 import { Observable } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class RetoService {
-  constructor(public router: Router, private db: AngularFirestore) { }
+  constructor(public router: Router, private db: AngularFirestore) {}
 
   retos: Retos[] = [];
+  cursoDoc: AngularFirestoreDocument<Retos>;
 
   // -----------------------------------------------------------------------------------
   // Register
   // -----------------------------------------------------------------------------------
-
+  makeid(length) {
+    var result = '';
+    var characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
   registerRetos(formularioall) {
     formularioall = {
-      id: `uid${btoa(formularioall.pregunta)}`,
+      id: `uid${this.makeid(10)}`,
       categoria: formularioall.categoria,
       pregunta: formularioall.pregunta,
       imageUrl: formularioall.imageUrl,
@@ -70,7 +83,11 @@ export class RetoService {
   getByCategoria(categoria: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('retos', (ref) => ref.where('categoria', '==', categoria).where('respondido', '==', false))
+        .collection('retos', (ref) =>
+          ref
+            .where('categoria', '==', categoria)
+            .where('respondido', '==', false)
+        )
         .valueChanges({ idField: 'id' })
         .subscribe((rp) => {
           if (rp[0]?.id) {
@@ -83,33 +100,20 @@ export class RetoService {
   }
 
   // -----------------------------------------------------------------------------------
-  // End Get
+  // Get
   // -----------------------------------------------------------------------------------
 
   // -----------------------------------------------------------------------------------
   // Update
   // -----------------------------------------------------------------------------------
 
-  updateRetos(retos: Retos, id) {
+  updateRetos(reto: Retos) {
     return this.db
-      .collection('retos', (ref) => ref.where('id', '==', id))
+      .collection('retos', (ref) => ref.where('id', '==', reto.id))
       .get()
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            categoria: retos.categoria,
-            image: retos.imageUrl,
-
-            opciones: {
-              opcion1: retos.opcion1,
-              opcion2: retos.opcion2,
-              opcion3: retos.opcion3,
-              opcion4: retos.opcion4,
-            },
-
-            pregunta: retos.pregunta,
-            respuesta: retos.respuesta,
-          });
+          doc.ref.update(reto);
         });
       });
   }
