@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { RetoService } from 'src/app/core/services/retos.service';
 
 @Component({
-  selector: 'app-menuarea',
-  templateUrl: 'menuarea.component.html',
-  styleUrls: ['menuarea.component.scss'],
+  selector: 'app-menu-area-personal',
+  templateUrl: './menu-area-personal.component.html',
+  styleUrls: ['./menu-area-personal.component.scss'],
 })
-export class MenuareaComponent implements OnInit {
+export class MenuAreaPersonalComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {}

@@ -28,16 +28,18 @@ export class RetosComponent implements OnInit {
   }
 
   getByCategoria(categoria: string): void {
-    this.retoService
-      .getByCategoria(categoria)
-      .then((dataCategoria) => {
-        this.datosReto = dataCategoria;
-        // this.convertToHtml();
-
-        this.datosReto = this.datosReto;
-        console.log(this.datosReto);
-      })
-      .catch((err) => console.log('err', err.message));
+    this.retoService.getByRespondido().then((respuestaRespondida) => {
+      if (respuestaRespondida) {
+        this.retoService
+          .getByCategoria(categoria)
+          .then((dataCategoria) => {
+            this.datosReto = dataCategoria;
+            // this.datosReto = this.datosReto;
+            console.log(this.datosReto);
+          })
+          .catch((err) => console.log('err', err.message));
+      }
+    });
   }
 
   convertToHtml(str) {
@@ -62,7 +64,7 @@ export class RetosComponent implements OnInit {
     // return doc.body.innerHTML;
   }
 
-  opcionA(event) {
-    this.router.navigate(['areas']);
+  opcionA() {
+    this.router.navigate(['correcto']);
   }
 }

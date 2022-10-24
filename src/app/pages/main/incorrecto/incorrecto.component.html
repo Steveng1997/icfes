@@ -15,11 +15,11 @@
       integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
       crossorigin="anonymous"
     ></script>
-    <style href="menu.component.scss"></style>
+    <style href="incorrecto.component.scss"></style>
   </head>
 
   <body>
-    <div *ngIf="estudiante" class="btn-salir" style="text-align: right">
+    <div class="btn-salir" style="text-align: right">
       <button class="btn btn-success btnSalir">Salir</button>
     </div>
 
@@ -28,41 +28,31 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card-title text-center mb-4 fw-bolder display-3">
-              <label>Bienvenido a Reto</label>
-              <label class="text-danger">ICFES</label>
+              <label class="txtIncorrecto"
+                >Tu respuesta ha sido Correcta y el reto ha sido enviado a tu
+                amigo en tu bandeja de entrada, encontrarás su resultado cuando
+                éste lo haya realizado
+              </label>
             </div>
           </div>
         </div>
-        <!-- <div class="card-title text-center mb-4 fw-bolder fs-2"> -->
-        <div class="card-title text-center mb-4 fw-bolder display-5">
-          <label style="color: #976dd0">¿Qué deseas hacer?</label>
-        </div>
       </div>
       <div class="text-center mb-3">
         <button
-          class="btn btn-amigo btn-lg btn-login text-uppercase fw-bold"
+          class="btn btn-Volver btn-lg btn-login text-uppercase fw-bold"
           type="submit"
-          (click)="retoAmigo()"
+          (click)="volverAretar()"
         >
-          RETA A UN AMIGO
+          VOLVER A RETAR A UN AMIGO
         </button>
       </div>
       <div class="text-center mb-3">
         <button
-          class="btn btn-personal btn-lg btn-login text-uppercase fw-bold"
+          class="btn btn-Menu btn-lg btn-login text-uppercase fw-bold"
           type="submit"
-          (click)="retoPersonal()"
+          (click)="menuPrincipal()"
         >
-          RETOS PERSONALES
-        </button>
-      </div>
-      <div class="text-center mb-3">
-        <button
-          class="btn btn-mirAvance btn-lg btn-login text-uppercase fw-bold"
-          type="submit"
-          (click)="mirarAvance()"
-        >
-          MIRA TU AVANCE
+          MENU PRINCIPAL
         </button>
       </div>
     </div>

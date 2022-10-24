@@ -19,6 +19,10 @@ export class LoginService {
 
   usuarios: Usuario[] = [];
 
+  // -----------------------------------------------------------------------------------
+  // Register
+  // -----------------------------------------------------------------------------------
+
   registerUser(email: string, nombre: string, password: string, rol: string) {
     let user = {
       email: email,
@@ -39,6 +43,14 @@ export class LoginService {
     });
   }
 
+  // -----------------------------------------------------------------------------------
+  // End register
+  // -----------------------------------------------------------------------------------
+
+  // -----------------------------------------------------------------------------------
+  // Get
+  // -----------------------------------------------------------------------------------
+
   loginEmailUser(email: string, password: string) {
     return new Promise((resolve, reject) => {
       this.authFire
@@ -48,35 +60,10 @@ export class LoginService {
     });
   }
 
-
-  // --------------------------------------------------------------------------------
-
-
-  getUsuarioById(id: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.db
-        .collection('retos', (ref) => ref.where('id', '==', id))
-        .valueChanges({ idField: 'id' })
-        .subscribe((rp) => {
-          if (rp[0]?.id) {
-            resolve(rp);
-          } else {
-            resolve(rp);
-          }
-        });
-    });
-  }
-
-  // --------------------------------------------------------------------------------
-
-
-
-  isAuth() {
-    return this.authFire.authState.pipe(map((auth) => auth));
-  }
-
-  logoutUser() {
-    return this.authFire.signOut();
+  getById(id) {
+    return this.db
+      .collection('usuarios', (ref) => ref.where('id', '==', id))
+      .valueChanges();
   }
 
   emailExist(email: string): Promise<boolean> {
@@ -128,15 +115,47 @@ export class LoginService {
     });
   }
 
-  getByIdUser(id: string): Observable<any> {
-    return this.db.collection('usuarios').doc(id).snapshotChanges();
-  }
-
   getUsuarios(): Observable<any> {
     return this.db
       .collection('usuarios', (ref) => ref.orderBy('id', 'asc'))
       .snapshotChanges();
   }
+
+  getAll() {
+    return this.db.collection('usuarios').snapshotChanges();
+  }
+
+  // -----------------------------------------------------------------------------------
+  // End Get
+  // -----------------------------------------------------------------------------------
+
+  // -----------------------------------------------------------------------------------
+  // Update
+  // -----------------------------------------------------------------------------------
+
+  updateRetos(retos: Usuario, id) {
+    return this.db
+      .collection('usuarios', (ref) => ref.where('id', '==', id))
+      .get()
+      .forEach((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({
+            email: retos.email,
+            nombre: retos.nombre,
+            password: retos.password,
+            rol: retos.rol,
+          });
+        });
+      });
+  }
+
+  // -----------------------------------------------------------------------------------
+  // End Update
+  // -----------------------------------------------------------------------------------
+
+  // -----------------------------------------------------------------------------------
+  // Delete
+  // -----------------------------------------------------------------------------------
 
   async deleteUsuario(id: string): Promise<any> {
     this.db
@@ -159,7 +178,23 @@ export class LoginService {
       });
   }
 
-  updateUser(id: string, data: any): Promise<any> {
-    return this.db.collection('usuarios').doc(id).update(data);
+  // -----------------------------------------------------------------------------------
+  // End Delete
+  // -----------------------------------------------------------------------------------
+
+  // -----------------------------------------------------------------------------------
+  // Login
+  // -----------------------------------------------------------------------------------
+
+  isAuth() {
+    return this.authFire.authState.pipe(map((auth) => auth));
   }
+
+  logoutUser() {
+    return this.authFire.signOut();
+  }
+
+  // -----------------------------------------------------------------------------------
+  // End Login
+  // -----------------------------------------------------------------------------------
 }

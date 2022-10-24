@@ -43,8 +43,4 @@ export class AdminRetosComponent implements OnInit {
       this.serviceRetos.deleteUsuario(id)
     }
   }
-
-  editUser(id:string){
-    this.router.navigate(['admin/editar-usuario/' + id])
-  }
 }

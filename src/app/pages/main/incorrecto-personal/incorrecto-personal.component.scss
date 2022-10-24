@@ -1,18 +1,3 @@
-.btn-amigo {
-  background-color: #00a6ff !important;
-  color: white !important;
-}
-
-.btn-personal {
-  background-color: #ff9052 !important;
-  color: white !important;
-}
-
-.btn-mirAvance {
-  background-color: #77d353 !important;
-  color: white !important;
-}
-
 // ---------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------
 // Query para celular
@@ -40,5 +25,27 @@
 
   .btnSalir {
     width: 10%;
+  }
+
+  .txtOportunidad {
+    color: #77d353;
+    font-size: 90px;
+    text-align: center;
+  }
+
+  .cardOportunidad {
+    margin-bottom: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .txtSi {
+    font-size: 100px;
+    color: #00a6ff;
+  }
+
+  .txtNo {
+    font-size: 100px;
+    color: #f95f62;
   }
 }

@@ -27,7 +27,7 @@
       integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
       crossorigin="anonymous"
     />
-    <style href="insertarRetos.component.scss"></style>
+    <style href="editar-retos.component.scss"></style>
   </head>
 
   <body>
@@ -36,13 +36,10 @@
         <div class="card border-0 rounded-3 my-5">
           <div class="card-body p-4 p-sm-5">
             <div class="card-title text-center mb-4 fw-bolder fs-1">
-              <label>Insertar Retos</label>
+              <label>Editar Retos</label>
             </div>
 
-            <form
-              [formGroup]="formTemplate"
-              (ngSubmit)="addReto(formTemplate.value)"
-            >
+            <form [formGroup]="formEditar" (ngSubmit)="editarReto()">
               <div class="btn-group">
                 <mat-form-field>
                   <select matNativeControl formControlName="categoria">
@@ -64,7 +61,6 @@
                   name="pregunta"
                   formControlName="pregunta"
                   placeholder="Pregunta"
-                  required
                 ></textarea>
               </div>
 
@@ -85,7 +81,6 @@
                   name="opcion1"
                   formControlName="opcion1"
                   placeholder="Opcion 1"
-                  required
                 />
                 <label for="opcion1">Opcion 1</label>
               </div>
@@ -97,7 +92,6 @@
                   name="opcion2"
                   formControlName="opcion2"
                   placeholder="Opcion 2"
-                  required
                 />
                 <label for="opcion2">Opcion 2</label>
               </div>
@@ -109,7 +103,6 @@
                   name="opcion3"
                   formControlName="opcion3"
                   placeholder="Opcion 3"
-                  required
                 />
                 <label for="opcion3">Opcion 3</label>
               </div>
@@ -121,7 +114,6 @@
                   name="opcion4"
                   formControlName="opcion4"
                   placeholder="Opcion 4"
-                  required
                 />
                 <label for="opcion4">Opcion 4</label>
               </div>
@@ -133,7 +125,6 @@
                   name="respuesta"
                   formControlName="respuesta"
                   placeholder="Respuesta"
-                  required
                 />
                 <label for="respuesta">Respuesta</label>
               </div>
@@ -144,7 +135,7 @@
                   class="btn btn-primary btn-lg btn-login text-uppercase fw-bold"
                   style="margin-top: 5%"
                 >
-                  Guardar
+                  Editar
                 </button>
               </div>
             </form>

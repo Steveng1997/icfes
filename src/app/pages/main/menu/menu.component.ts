@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'
-import { Router } from '@angular/router'
-import { LoginService } from 'src/app/core/services/login.service'
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,30 +8,28 @@ import { LoginService } from 'src/app/core/services/login.service'
   styleUrls: ['menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-
   public estudiante = null;
 
-  constructor(private router: Router, public serviceLogin: LoginService) {
-  }
+  constructor(private router: Router, public serviceLogin: LoginService) {}
 
   ngOnInit(): void {
     this.getLoggedUser();
   }
 
   retoAmigo() {
-    this.router.navigate(['ret-amigo'])
+    this.router.navigate(['ret-amigo']);
   }
 
   retoPersonal() {
-    this.router.navigate(['menuPersonal'])
+    this.router.navigate(['menuArea-personal']);
   }
 
   mirarAvance() {
-    this.router.navigate(['mirarAvance'])
+    this.router.navigate(['mirarAvance']);
   }
 
   salir() {
-    this.router.navigate(['login'])
+    this.router.navigate(['login']);
   }
 
   // estaLogueado(){
@@ -42,9 +40,8 @@ export class MenuComponent implements OnInit {
   //   this.serviceLogin.logout();
   // }
 
-
   getLoggedUser() {
     this.estudiante = this.serviceLogin.rolAdministrador();
-    console.log(this.estudiante)
+    console.log(this.estudiante);
   }
 }

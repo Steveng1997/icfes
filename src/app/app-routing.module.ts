@@ -17,7 +17,12 @@ import { EstudiantesComponent } from './pages/pre-auth/admin/estudiantes/estudia
 import { InsertarEstudiantesComponent } from './pages/pre-auth/admin/estudiantes/insertar-estudiantes/insertar-estudiantes.component';
 import { AdminRetosComponent } from './pages/pre-auth/admin/adminRetos/adminRetos.component';
 import { InsertarRetosComponent } from './pages/pre-auth/admin/adminRetos/insertarRetos/insertarRetos.component';
-import { SidebarComponent } from './core/sidebar/sidebar.component';
+import { EditarRetosComponent } from './pages/pre-auth/admin/adminRetos/editar-retos/editar-retos.component';
+import { IncorrectoComponent } from './pages/main/incorrecto/incorrecto.component';
+import { CorrectoComponent } from './pages/main/correcto/correcto.component';
+import { MenuAreaPersonalComponent } from './pages/main/menu-area-personal/menu-area-personal.component';
+import { CorrectoPersonalComponent } from './pages/main/correcto-personal/correcto-personal.component';
+import { IncorrectoPersonalComponent } from './pages/main/incorrecto-personal/incorrecto-personal.component';
 
 const routes: Routes = [
   { path: 'menu', component: MenuComponent, canActivate: [LoginGuardian] },
@@ -75,6 +80,11 @@ const routes: Routes = [
         canActivate: [LoginGuardian],
       },
       {
+        path: 'editar-retos/:id',
+        component: EditarRetosComponent,
+        canActivate: [LoginGuardian],
+      },
+      {
         path: 'estudiantes',
         component: EstudiantesComponent,
         canActivate: [LoginGuardian],
@@ -100,6 +110,36 @@ const routes: Routes = [
   {
     path: 'mirarAvance',
     component: MirarAvanceComponent,
+    canActivate: [LoginGuardian],
+  },
+  {
+    path: 'incorrecto',
+    component: IncorrectoComponent,
+    canActivate: [LoginGuardian],
+  },
+  {
+    path: 'correcto',
+    component: CorrectoComponent,
+    canActivate: [LoginGuardian],
+  },
+  {
+    path: 'menuArea-personal',
+    component: MenuAreaPersonalComponent,
+    canActivate: [LoginGuardian],
+  },
+  {
+    path: 'reto-personal/:categoria',
+    component: RetoPersonalComponent,
+    canActivate: [LoginGuardian],
+  },
+  {
+    path: 'correctoPersonal',
+    component: CorrectoPersonalComponent,
+    canActivate: [LoginGuardian],
+  },
+  {
+    path: 'incorrectoPersonal',
+    component: IncorrectoPersonalComponent,
     canActivate: [LoginGuardian],
   },
 ];

@@ -20,39 +20,43 @@ export class InsertarUsuario implements OnInit {
   ngOnInit(): void {}
 
   onAddUser() {
-    this.serviceLogin.emailExist(this.email).then((emailexist) => {
-      if (emailexist == false) {
-        this.serviceLogin
-          .registerUser(
-            this.email,
-            this.nombre,
-            this.password,
-            this.opcionSeleccionado
-          )
-          .then((res) => {
-            this.serviceLogin.isAuth().subscribe((user) => {
-              if (user) {
-                user
-                  .updateProfile({
-                    displayName: '',
-                    // photoURL: this.inputImageUser.nativeElement.value
-                  })
-                  .then(() => {
-                    alert('Registro completo');
-                    this.router.navigate(['admin/usuarios']);
-                  })
-                  .catch((error) => alert('error' + error));
-              }
-            });
-          })
-          .catch((err) => console.log('err', err.message));
-      } else {
-        // console.log(emailexist)
-        alert('El correo ya existe');
-        console.log('existe correo');
-        // return
-      }
-    });
+    if (this.email != '' && this.password != '') {
+      this.serviceLogin.emailExist(this.email).then((emailexist) => {
+        if (emailexist == false) {
+          this.serviceLogin
+            .registerUser(
+              this.email,
+              this.nombre,
+              this.password,
+              this.opcionSeleccionado
+            )
+            .then((res) => {
+              this.serviceLogin.isAuth().subscribe((user) => {
+                if (user) {
+                  user
+                    .updateProfile({
+                      displayName: '',
+                      // photoURL: this.inputImageUser.nativeElement.value
+                    })
+                    .then(() => {
+                      alert('Registro completo');
+                      this.router.navigate(['admin/usuarios']);
+                    })
+                    .catch((error) => alert('error' + error));
+                }
+              });
+            })
+            .catch((err) => console.log('err', err.message));
+        } else {
+          // console.log(emailexist)
+          alert('El correo ya existe');
+          console.log('existe correo');
+          // return
+        }
+      });
+    } else {
+      alert('Campos vacios');
+    }
   }
 
   capturar() {

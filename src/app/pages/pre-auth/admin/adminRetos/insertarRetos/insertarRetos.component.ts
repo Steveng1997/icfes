@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RetoService } from 'src/app/core/services/retos.service';
@@ -12,10 +12,6 @@ import { finalize, Observable } from 'rxjs';
   styleUrls: ['./insertarRetos.component.scss'],
 })
 export class InsertarRetosComponent implements OnInit {
-  // public nombre: string = '';
-  // public password: string = '';
-  // public pregunta: string = '';
-
   urlImage: Observable<string>;
   selectedImage: any = null;
   imgSrc: string;
@@ -27,6 +23,7 @@ export class InsertarRetosComponent implements OnInit {
     opcion1: new FormControl('', Validators.required),
     opcion2: new FormControl('', Validators.required),
     opcion3: new FormControl('', Validators.required),
+    opcion4: new FormControl('', Validators.required),
     respuesta: new FormControl('', Validators.required),
   });
 
@@ -45,7 +42,6 @@ export class InsertarRetosComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImage = event.target.files[0];
     } else {
-      // this.imgSrc = '/assets/img/image_placeholder.jpg';
       this.selectedImage = null;
     }
   }
@@ -64,17 +60,28 @@ export class InsertarRetosComponent implements OnInit {
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
               formValue['imageUrl'] = url;
-              this.serviceRetos.registerRetos(formValue);
-              this.router.navigate(['admin/adminRetos']);
-              alert('Reto insertado');
+
+              if (formValue.value != undefined) {
+                this.serviceRetos.registerRetos(formValue);
+                this.router.navigate(['admin/adminRetos']);
+                alert('Reto insertado');
+              } else {
+                alert('Inserte registro');
+                console.log('error');
+              }
             });
           })
         )
         .subscribe();
     } else {
-      this.serviceRetos.registerRetos(formValue);
-      this.router.navigate(['admin/adminRetos']);
-      alert('Reto insertado');
+      if (formValue.value != undefined || this.selectedImage == null) {
+        this.serviceRetos.registerRetos(formValue);
+        this.router.navigate(['admin/adminRetos']);
+        alert('Reto insertado');
+      } else {
+        alert('Inserte registro');
+        console.log('error');
+      }
     }
   }
 }
