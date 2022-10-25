@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class RetoService {
-  constructor(public router: Router, private db: AngularFirestore) {}
+  constructor(public router: Router, private db: AngularFirestore) { }
 
   retos: Retos[] = [];
   cursoDoc: AngularFirestoreDocument<Retos>;
@@ -42,6 +42,8 @@ export class RetoService {
       },
       respuesta: formularioall.respuesta,
       respondido: false,
+      correcto: 0,
+      incorrecto: 0
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -118,16 +120,23 @@ export class RetoService {
       });
   }
 
-  updateOpciones() {
+  updateOpcionesCorrecto(id: string) {
     return this.db
-      .collection('retos')
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            respondido: true,
-          });
-        });
+      .doc(`retos/${id}`)
+      .update({
+        respondido: true,
+        correcto: 1,
+        incorrecto: 0
+      });
+  }
+
+  updateOpcionesIncorrecto(id: string) {
+    return this.db
+      .doc(`retos/${id}`)
+      .update({
+        respondido: true,
+        correcto: 0,
+        incorrecto: 1
       });
   }
 

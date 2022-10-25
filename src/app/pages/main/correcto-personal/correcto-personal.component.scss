@@ -1,0 +1,40 @@
+.btn-Volver {
+    background-color: #ff9052 !important;
+    color: white !important;
+}
+
+.btn-Menu {
+    background-color: #77d353 !important;
+    color: white !important;
+}
+
+
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// Query para celular
+
+@media only screen and (max-width: 480px) {
+    .btn-salir {
+        margin-right: 1%;
+        margin-top: 1%;
+    }
+
+    .btnSalir {
+        width: 23%;
+    }
+}
+
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// Query para pantalla grande como laptop o monitor
+
+@media only screen and (min-device-width: 1200px) and (max-device-width: 1600px) {
+    .btn-salir {
+        margin-right: 3%;
+        margin-top: 1.9px;
+    }
+
+    .btnSalir {
+        width: 10%;
+    }
+}

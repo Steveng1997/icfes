@@ -20,7 +20,7 @@ export class RetoPersonalComponent implements OnInit {
     private rutaActiva: ActivatedRoute,
     private router: Router,
     private retoService: RetoService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
@@ -48,22 +48,22 @@ export class RetoPersonalComponent implements OnInit {
         '<br/>'
       );
       for (let j = 0; j < preguntas.length; j++) {
-        // preguntas[j]['innerHTML'] = 'Camilo' + preguntas[j]['innerHTML'];
         let parser = new DOMParser();
         let doc = parser.parseFromString(
           this.datosReto[i]['pregunta'],
           'text/html'
         );
         preguntas[j]['innerHTML'] = doc.body.innerHTML;
-        // return doc.body.innerHTML;
       }
     }
   }
 
   opcionA(event) {
-    // console.log(this.datosReto[0]['respuesta']);
-    // console.log(event.target.innerHTML.trim());
     if (this.datosReto[0]['respuesta'] == event.target.innerHTML.trim()) {
+      this.retoService.updateOpcionesCorrecto(this.datosReto[0]['id']);
+      this.router.navigate(['correctoPersonal']);
+    } else {
+      this.retoService.updateOpcionesIncorrecto(this.datosReto[0]['id']);
       this.router.navigate(['incorrectoPersonal']);
     }
   }
