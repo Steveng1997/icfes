@@ -27,6 +27,7 @@
       integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
       crossorigin="anonymous"
     />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style href="editar-retos.component.scss"></style>
   </head>
 
@@ -64,9 +65,9 @@
                   cols="70"
                   class="form-control"
                   name="pregunta"
-                  [(ngModel)]="ret.pregunta"
+                  [(ngModel)]="ret.texto1"
                   #pregunta="ngModel"
-                  placeholder="Pregunta"
+                  placeholder="Texto 1"
                 ></textarea>
               </div>
 

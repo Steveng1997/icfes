@@ -13,28 +13,41 @@ import Swal from 'sweetalert2';
   styleUrls: ['./insertarRetos.component.scss'],
 })
 export class InsertarRetosComponent implements OnInit {
-  urlImage: Observable<string>;
+  // urlImage: Observable<string>;
   selectedImage: any = null;
   imgSrc: string;
 
+  imgSrcSubtitulo: string;
+  selectedImageSubtitulo: any = null;
+
+  selectcat: any;
+
   formTemplate = new FormGroup({
     categoria: new FormControl(''),
-    pregunta: new FormControl(''),
-    imageUrl: new FormControl('', Validators.required),
-    opcion1: new FormControl('', Validators.required),
-    opcion2: new FormControl('', Validators.required),
-    opcion3: new FormControl('', Validators.required),
-    opcion4: new FormControl('', Validators.required),
-    respuesta: new FormControl('', Validators.required),
+    texto1: new FormControl(''),
+    imageUrl: new FormControl(''),
+    texto2: new FormControl(''),
+    opcion1: new FormControl(''),
+    opcion2: new FormControl(''),
+    opcion3: new FormControl(''),
+    opcion4: new FormControl(''),
+    subtitulo: new FormControl(''),
+    imageUrlSubtitulo: new FormControl(''),
+    respuesta: new FormControl(''),
   });
+
+  selectCategoria(e) {
+    console.log(e.target.value);
+    this.selectcat = e.target.value;
+  }
 
   constructor(
     public router: Router,
     public serviceRetos: RetoService,
     public storage: AngularFireStorage
-  ) { }
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   uploadImage(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -47,90 +60,82 @@ export class InsertarRetosComponent implements OnInit {
     }
   }
 
+  uploadImageSubtitulo(eventSub: any) {
+    if (eventSub.target.files && eventSub.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (es: any) => (this.imgSrcSubtitulo = es.target.result);
+      reader.readAsDataURL(eventSub.target.files[0]);
+      this.selectedImageSubtitulo = eventSub.target.files[0];
+    } else {
+      this.selectedImageSubtitulo = null;
+    }
+  }
+
   addReto(formValue) {
-    if (this.formTemplate.value.categoria != '') {
-      if (this.formTemplate.value.pregunta != '') {
-        if (this.formTemplate.value.opcion1 != '') {
-          if (this.formTemplate.value.opcion2 != '') {
-            if (this.formTemplate.value.opcion3 != '') {
-              if (this.formTemplate.value.opcion4 != '') {
-                if (this.formTemplate.value.respuesta != '') {
-                  if (this.formTemplate.value.imageUrl != '') {
-                    var filePath = `${formValue.category}/${this.selectedImage.name
-                      .split('.')
-                      .slice(0, -1)
-                      .join('.')}_${new Date().getTime()}`;
-                    const fileRef = this.storage.ref(filePath);
-                    this.storage
-                      .upload(filePath, this.selectedImage)
-                      .snapshotChanges()
-                      .pipe(
-                        finalize(() => {
-                          fileRef.getDownloadURL().subscribe((url) => {
-                            formValue['imageUrl'] = url;
+    if (this.formTemplate.value.respuesta != '') {
+      if (this.formTemplate.value.imageUrl != '') {
+        // imagen 1
+        var filePath = `${'imagenes'}/${this.selectedImage.name
+          .split('.')
+          .slice(0, -1)
+          .join('.')}_${new Date().getTime()}`;
+        const fileRef = this.storage.ref(filePath);
+        this.storage
+          .upload(filePath, this.selectedImage)
+          .snapshotChanges()
+          .pipe(
+            finalize(() => {
+              fileRef.getDownloadURL().subscribe((url) => {
+                formValue['imageUrl'] = url;
 
-                            this.serviceRetos.registerRetos(formValue);
-                            this.router.navigate(['admin/adminRetos']);
-                            alert('Reto insertado');
-                          });
-                        })
-                      )
-                      .subscribe();
-                  } else {
-                    this.serviceRetos.registerRetos(formValue);
-                    this.router.navigate(['admin/adminRetos']);
-                    alert('Reto insertado');
-                  }
-                } else {
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Campo de la respuesta esta vacia'
-                  })
-                }
-              } else {
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: 'Campo de la opcion 4 esta vacia'
-                })
-              }
-            } else {
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Campo de la opcion 3 esta vacia'
-              })
-            }
-
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Campo de la opcion 2 esta vacia'
+                this.serviceRetos.registerRetos(formValue);
+                this.router.navigate(['admin/adminRetos']);
+                alert('Reto insertado');
+              });
             })
-          }
+          )
+          .subscribe();
+        // Fin imagen 1
+        if (this.formTemplate.value.imageUrlSubtitulo != '') {
+          // Imagen 2
+          var filePathSub = `${'imagenes'}/${this.selectedImageSubtitulo.name
+            .split('.')
+            .slice(0, -1)
+            .join('.')}_${new Date().getTime()}`;
+          const fileRefSub = this.storage.ref(filePathSub);
+          this.storage
+            .upload(filePathSub, this.selectedImageSubtitulo)
+            .snapshotChanges()
+            .pipe(
+              finalize(() => {
+                fileRefSub.getDownloadURL().subscribe((urlSub) => {
+                  formValue['imageUrlSubtitulo'] = urlSub;
 
+                  // Fin imagen 2
+
+                  this.serviceRetos.updateRetosForImagen(formValue);
+                  this.router.navigate(['admin/adminRetos']);
+                  alert('Reto insertado');
+                });
+              })
+            )
+            .subscribe();
         } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Campo de la opcion 1 esta vacia'
-          })
+          this.serviceRetos.registerRetos(formValue);
+          this.router.navigate(['admin/adminRetos']);
+          Swal.fire('Good job!', 'Reto insertado!', 'success');
         }
       } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Campo de pregunta esta vacia'
-        })
+        this.serviceRetos.registerRetos(formValue);
+        this.router.navigate(['admin/adminRetos']);
+        Swal.fire('Good job!', 'Reto insertado!', 'success');
       }
     } else {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Campo de categoria esta vacia'
-      })
+        text: 'Campo de la respuesta esta vacia',
+      });
     }
   }
 }

@@ -24,6 +24,9 @@ import { MenuAreaPersonalComponent } from './pages/main/menu-area-personal/menu-
 import { CorrectoPersonalComponent } from './pages/main/correcto-personal/correcto-personal.component';
 import { IncorrectoPersonalComponent } from './pages/main/incorrecto-personal/incorrecto-personal.component';
 import { EditarEstudianteComponent } from './pages/pre-auth/admin/estudiantes/editar-estudiante/editar-estudiante.component';
+import { PuntajeComponent } from './pages/pre-auth/admin/puntaje/puntaje.component';
+import { InsertarpuntajeComponent } from './pages/pre-auth/admin/puntaje/insertarpuntaje/insertarpuntaje.component';
+import { EditarPuntuacionComponent } from './pages/pre-auth/admin/puntaje/editar-puntuacion/editar-puntuacion.component';
 
 const routes: Routes = [
   { path: 'menu', component: MenuComponent, canActivate: [LoginGuardian] },
@@ -98,6 +101,21 @@ const routes: Routes = [
       {
         path: 'editar-estudiante/:id',
         component: EditarEstudianteComponent,
+        canActivate: [LoginGuardian],
+      },
+      {
+        path: 'puntaje',
+        component: PuntajeComponent,
+        canActivate: [LoginGuardian],
+      },
+      {
+        path: 'insertar-puntaje',
+        component: InsertarpuntajeComponent,
+        canActivate: [LoginGuardian],
+      },
+      {
+        path: 'editar-puntaje/:id',
+        component: EditarPuntuacionComponent,
         canActivate: [LoginGuardian],
       },
     ],

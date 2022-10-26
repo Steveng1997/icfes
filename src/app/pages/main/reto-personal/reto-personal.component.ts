@@ -20,7 +20,7 @@ export class RetoPersonalComponent implements OnInit {
     private rutaActiva: ActivatedRoute,
     private router: Router,
     private retoService: RetoService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
@@ -40,20 +40,20 @@ export class RetoPersonalComponent implements OnInit {
   }
 
   convertToHtml() {
-    var preguntas = document.querySelectorAll("[id='pregunta']");
+    var texto = document.querySelectorAll("[id='texto1']");
 
     for (let i = 0; i < this.datosReto.length; i++) {
-      this.datosReto[i]['pregunta'] = this.datosReto[i]['pregunta'].replace(
+      this.datosReto[i]['pregunta'] = this.datosReto[i]['texto1'].replace(
         /\n/g,
         '<br/>'
       );
-      for (let j = 0; j < preguntas.length; j++) {
+      for (let j = 0; j < texto.length; j++) {
         let parser = new DOMParser();
         let doc = parser.parseFromString(
           this.datosReto[i]['pregunta'],
           'text/html'
         );
-        preguntas[j]['innerHTML'] = doc.body.innerHTML;
+        texto[j]['innerHTML'] = doc.body.innerHTML;
       }
     }
   }

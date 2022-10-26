@@ -26,6 +26,7 @@ import firebase from 'firebase/compat/app';
 import { LoginService } from './core/services/login.service';
 import { RetoService } from './core/services/retos.service';
 import { EstudianteService } from './core/services/estudiantes.service';
+import { PuntuacionService } from './core/services/puntaje.service';
 
 // Pages-Auth
 import { AdminComponent } from './pages/pre-auth/admin/admin.component';
@@ -39,6 +40,9 @@ import { EditarRetosComponent } from './pages/pre-auth/admin/adminRetos/editar-r
 import { EstudiantesComponent } from './pages/pre-auth/admin/estudiantes/estudiantes.component';
 import { InsertarEstudiantesComponent } from './pages/pre-auth/admin/estudiantes/insertar-estudiantes/insertar-estudiantes.component';
 import { EditarEstudianteComponent } from './pages/pre-auth/admin/estudiantes/editar-estudiante/editar-estudiante.component';
+import { PuntajeComponent } from './pages/pre-auth/admin/puntaje/puntaje.component';
+import { InsertarpuntajeComponent } from './pages/pre-auth/admin/puntaje/insertarpuntaje/insertarpuntaje.component';
+import { EditarPuntuacionComponent } from './pages/pre-auth/admin/puntaje/editar-puntuacion/editar-puntuacion.component';
 
 // Pages-Main
 import { MenuComponent } from './pages/main/menu/menu.component';
@@ -99,6 +103,9 @@ firebase.initializeApp({
     CorrectoPersonalComponent,
     IncorrectoPersonalComponent,
     EditarEstudianteComponent,
+    PuntajeComponent,
+    InsertarpuntajeComponent,
+    EditarPuntuacionComponent,
   ],
   imports: [
     BrowserModule,
@@ -123,6 +130,7 @@ firebase.initializeApp({
     LoginService,
     EstudianteService,
     RetoService,
+    PuntuacionService,
     CookieService,
     LoginGuardian,
   ],

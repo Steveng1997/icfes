@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 //importamos el servicio
-import { RetoService } from 'src/app/core/services/retos.service';
+import { EstudianteService } from '../../../../../core/services/estudiantes.service';
 //importamos los modulos para formularios
 import { FormBuilder, FormGroup } from '@angular/forms';
 //importamos el enrutador
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+//importamos el modelo
 import { Estudiante } from 'src/app/core/models/estudiante';
-import { EstudianteService } from '../../../../../core/services/estudiantes.service';
 
 @Component({
   selector: 'app-editar-estudiante',

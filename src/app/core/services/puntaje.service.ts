@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import 'firebase/compat/app';
-import { Retos } from '../models/retos';
 import { Observable } from 'rxjs';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { Puntaje } from '../models/Puntaje';
 
 @Injectable()
-export class RetoService {
+export class PuntuacionService {
   constructor(public router: Router, private db: AngularFirestore) {}
 
-  retos: Retos[] = [];
-  cursoDoc: AngularFirestoreDocument<Retos>;
+  puntaje: Puntaje[] = [];
+  cursoDoc: AngularFirestoreDocument<Puntaje>;
 
   // -----------------------------------------------------------------------------------
   // Register
@@ -28,30 +28,17 @@ export class RetoService {
     }
     return result;
   }
-  registerRetos(formularioall) {
-    formularioall = {
+
+  registerPuntaje(puntuacion: number) {
+    let puntua = {
       id: `uid${this.makeid(10)}`,
-      categoria: formularioall.categoria,
-      texto1: formularioall.texto1,
-      imageUrl: formularioall.imageUrl,
-      texto2: formularioall.texto2,
-      opciones: {
-        opcion1: formularioall.opcion1,
-        opcion2: formularioall.opcion2,
-        opcion3: formularioall.opcion3,
-        opcion4: formularioall.opcion4,
-      },
-      subtitulo: formularioall.subtitulo,
-      imageUrlSubtitulo: formularioall.imageUrlSubtitulo,
-      respuesta: formularioall.respuesta,
-      respondido: false,
-      // correcto: 0,
-      // incorrecto: 0,
+      idUsuario: 'idUsuario',
+      puntuacion: puntuacion,
     };
     return new Promise<any>((resolve, reject) => {
       this.db
-        .collection('retos')
-        .add(formularioall)
+        .collection('puntaje')
+        .add(puntua)
         .then(
           (response) => resolve(response),
           (error) => reject(error)
@@ -69,39 +56,14 @@ export class RetoService {
 
   getById(id) {
     return this.db
-      .collection('retos', (ref) => ref.where('id', '==', id))
+      .collection('puntaje', (ref) => ref.where('id', '==', id))
       .valueChanges();
   }
 
-  getRetos(): Observable<any> {
+  getPuntaje(): Observable<any> {
     return this.db
-      .collection('retos', (ref) => ref.orderBy('id', 'asc'))
+      .collection('puntaje', (ref) => ref.orderBy('id', 'asc'))
       .snapshotChanges();
-  }
-
-  getRetosByCategoria(): Observable<any> {
-    return this.db
-      .collection('retos', (ref) => ref.orderBy('categoria', 'asc'))
-      .snapshotChanges();
-  }
-
-  getByCategoria(categoria: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.db
-        .collection('retos', (ref) =>
-          ref
-            .where('categoria', '==', categoria)
-            .where('respondido', '==', false)
-        )
-        .valueChanges({ idField: 'id' })
-        .subscribe((rp) => {
-          if (rp[0]?.id) {
-            resolve(rp);
-          } else {
-            resolve(rp);
-          }
-        });
-    });
   }
 
   // -----------------------------------------------------------------------------------
@@ -112,42 +74,15 @@ export class RetoService {
   // Update
   // -----------------------------------------------------------------------------------
 
-  updateRetos(reto: Retos) {
+  updatePuntuacion(punt: Puntaje) {
     return this.db
-      .collection('retos', (ref) => ref.where('id', '==', reto.id))
+      .collection('puntaje', (ref) => ref.where('id', '==', punt.id))
       .get()
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          doc.ref.update(reto);
+          doc.ref.update(punt);
         });
       });
-  }
-
-  updateRetosForImagen(reto: Retos) {
-    return this.db
-      .collection('retos', (ref) => ref.where('id', '==', reto.id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update(reto);
-        });
-      });
-  }
-
-  updateOpcionesCorrecto(id: string) {
-    return this.db.doc(`retos/${id}`).update({
-      respondido: true,
-      correcto: 1,
-      incorrecto: 0,
-    });
-  }
-
-  updateOpcionesIncorrecto(id: string) {
-    return this.db.doc(`retos/${id}`).update({
-      respondido: true,
-      correcto: 0,
-      incorrecto: 1,
-    });
   }
 
   // -----------------------------------------------------------------------------------
@@ -158,24 +93,24 @@ export class RetoService {
   // Delete
   // -----------------------------------------------------------------------------------
 
-  async deleteUsuario(id: string): Promise<any> {
+  async deletePuntaje(id: string): Promise<any> {
     this.db
-      .collection('retos', (ref) => ref.where('id', '==', id))
+      .collection('puntaje', (ref) => ref.where('id', '==', id))
       .get()
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           doc.ref
             .delete()
             .then(() => {
-              console.log('Usuario eliminado con exito');
+              console.log('El puntaje fue eliminado con exito');
             })
             .catch(function () {
-              console.error('Error al eliminar el usuario');
+              console.error('Error al eliminar una puntuacion');
             });
         });
       })
       .catch(function () {
-        console.log('Error al eliminar el usuario');
+        console.log('Error al eliminar el puntaje');
       });
   }
 

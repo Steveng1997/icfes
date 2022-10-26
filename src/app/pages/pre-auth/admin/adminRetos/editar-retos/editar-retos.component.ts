@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Retos } from 'src/app/core/models/retos';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-retos',
@@ -50,5 +51,6 @@ export class EditarRetosComponent implements OnInit {
     const id = this.activeRoute.snapshot.paramMap.get('id');
     this.serviceRetos.updateRetos(reto);
     this.router.navigate(['admin/retos']);
+    Swal.fire('Good job!', 'Reto editato!', 'success');
   }
 }

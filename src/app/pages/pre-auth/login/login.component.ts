@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
               this.serviceLogin
                 .loginEmailUser(this.email, this.password)
                 .then((res) => {
-                  // this.onLoginRedirect();
                   this.router.navigate(['admin/usuarios']);
                 })
                 .catch((err) => console.log('err', err.message));

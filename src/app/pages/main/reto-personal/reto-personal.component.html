@@ -49,39 +49,37 @@
               *ngIf="datosReto"
             >
               <div>
-                <p
-                  style="justify-content: center; text-align: justify"
-                >
-                  {{ cat.pregunta }}
+                <p style="justify-content: center; text-align: justify">
+                  {{ cat.texto1 }}
                 </p>
               </div>
 
               <img src="{{ cat.imageUrl }}" width="60%" />
 
               <div class="card-title mt-5" style="font-size: 1.5rem">
-                <p style="text-align: start">
-                  <b>A.</b>
-                  <b (click)="opcionA($event)">
-                    {{ cat["opciones"]["opcion1"] }}</b
-                  >
+                <p style="cursor: pointer; text-align: start">
+                  <b>A. </b>
+                  <label style="cursor: pointer" (click)="opcionA($event)">
+                    {{ cat["opciones"]["opcion1"] }}
+                  </label>
                 </p>
-                <p style="text-align: start">
-                  <b>B.</b>
-                  <b (click)="opcionA($event)">
-                    {{ cat["opciones"]["opcion2"] }}</b
-                  >
+                <p style="cursor: pointer; text-align: start">
+                  <b>B. </b>
+                  <label style="cursor: pointer" (click)="opcionA($event)">
+                    {{ cat["opciones"]["opcion2"] }}
+                  </label>
                 </p>
-                <p style="text-align: start">
-                  <b>C.</b>
-                  <b (click)="opcionA($event)">
-                    {{ cat["opciones"]["opcion3"] }}</b
-                  >
+                <p style="cursor: pointer; text-align: start">
+                  <b>C. </b>
+                  <label style="cursor: pointer" (click)="opcionA($event)">
+                    {{ cat["opciones"]["opcion3"] }}
+                  </label>
                 </p>
-                <p style="text-align: start">
-                  <b>D.</b>
-                  <b (click)="opcionA($event)">
-                    {{ cat["opciones"]["opcion4"] }}</b
-                  >
+                <p style="cursor: pointer; text-align: start">
+                  <b>D. </b>
+                  <label style="cursor: pointer" (click)="opcionA($event)">
+                    {{ cat["opciones"]["opcion4"] }}
+                  </label>
                 </p>
               </div>
             </div>
