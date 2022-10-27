@@ -10,7 +10,7 @@ import { Puntaje } from '../models/Puntaje';
 
 @Injectable()
 export class PuntuacionService {
-  constructor(public router: Router, private db: AngularFirestore) {}
+  constructor(public router: Router, private db: AngularFirestore) { }
 
   puntaje: Puntaje[] = [];
   cursoDoc: AngularFirestoreDocument<Puntaje>;
@@ -29,11 +29,44 @@ export class PuntuacionService {
     return result;
   }
 
-  registerPuntaje(puntuacion: number) {
+  registerPuntacion(puntuacion: number) {
     let puntua = {
       id: `uid${this.makeid(10)}`,
       idUsuario: 'idUsuario',
       puntuacion: puntuacion,
+    };
+    return new Promise<any>((resolve, reject) => {
+      this.db
+        .collection('puntaje')
+        .add(puntua)
+        .then(
+          (response) => resolve(response),
+          (error) => reject(error)
+        );
+    });
+  }
+
+  registerByIdUsuario(id) {
+    let puntua = {
+      id: `uid${this.makeid(10)}`,
+      idUsuario: id,
+      puntuacion: 0,
+    };
+    return new Promise<any>((resolve, reject) => {
+      this.db
+        .collection('puntaje')
+        .add(puntua)
+        .then(
+          (response) => resolve(response),
+          (error) => reject(error)
+        );
+    });
+  }
+
+  registerByIdUsuarioAll(id) {
+    let puntua = {
+      id: `uid${this.makeid(10)}`,
+      idUsuario: id,
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -60,6 +93,12 @@ export class PuntuacionService {
       .valueChanges();
   }
 
+  getByIdUsuario(id) {
+    return this.db
+      .collection('puntaje', (ref) => ref.where('idUsuario', '==', id))
+      .valueChanges();
+  }
+
   getPuntaje(): Observable<any> {
     return this.db
       .collection('puntaje', (ref) => ref.orderBy('id', 'asc'))
@@ -81,6 +120,19 @@ export class PuntuacionService {
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           doc.ref.update(punt);
+        });
+      });
+  }
+
+  updatePuntaje(id: string, puntuacion: number) {
+    return this.db
+      .collection('puntaje', (ref) => ref.where('idUsuario', '==', id))
+      .get()
+      .forEach((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({
+            puntuacion: puntuacion,
+          });
         });
       });
   }

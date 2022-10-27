@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Usuario } from 'src/app/core/models/login';
 import { EstudianteService } from 'src/app/core/services/estudiantes.service';
+import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
   selector: 'app-reto-amigo',
@@ -8,22 +10,27 @@ import { EstudianteService } from 'src/app/core/services/estudiantes.service';
   styleUrls: ['reto-amigo.component.scss']
 })
 export class RetoAmigoComponent implements OnInit {
-
   estudiantes: any[] = [];
-
+  user: Usuario[];
   opcionSeleccionado: string = '0';
 
   constructor(public router: Router,
-    public serviceEstudiante: EstudianteService
+    public serviceEstudiante: EstudianteService,
+    public serviceLogin: LoginService,
+    private activeRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.getEstudiante();
+    const id = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(id).subscribe((res) => {
+      this.user = res;
+      this.getEstudiante();
+    });
   }
 
   Retar() {
     if (this.opcionSeleccionado != '0') {
-      this.router.navigate(['areas']);
+      this.router.navigate([`areas/${this.user[0]['id']}`]);
     } else {
       alert("Selecciona a quien quieres retar");
     }

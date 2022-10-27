@@ -1,93 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-      crossorigin="anonymous"
-    ></script>
-    <style href="reto-personal.component.scss"></style>
-  </head>
 
-  <body>
-    <div class="container" style="justify-content: center; text-align: center">
-      <div class="row">
-        <div class="card border-0 rounded-3 my-5">
-          <!-- <div
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
+  <style href="reto-personal.component.scss"></style>
+</head>
+
+<body>
+  <div class="container" style="justify-content: center; text-align: center">
+    <div class="row">
+      <div class="card border-0 rounded-3 my-5">
+        <!-- <div
             class="card-body p-4 p-sm-5"
            *ngFor="let cat of datosReto; let i = index | paginate: { itemsPerPage: 1, currentPage: page}"
           > -->
-          <div
-            class="card-body p-4 p-sm-5"
-            *ngFor="
+        <div class="card-body p-4 p-sm-5" *ngFor="
               let cat of datosReto
                 | paginate: { itemsPerPage: 1, currentPage: page }
-            "
-          >
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card-title text-center mb-4 fw-bolder display-3">
-                  <label style="color: rgb(6, 20, 202)"
-                    >Reto {{ categoria }}</label
-                  >
-                </div>
+            ">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card-title text-center mb-4 fw-bolder display-3">
+                <label style="color: rgb(6, 20, 202)">Reto {{ categoria }}</label>
               </div>
             </div>
+          </div>
 
-            <div
-              class="card-title mb-4"
-              style="font-size: 1.5rem"
-              *ngIf="datosReto"
-            >
-              <div>
-                <p style="justify-content: center; text-align: justify">
-                  {{ cat.texto1 }}
-                </p>
-              </div>
+          <div class="card-title mb-4" style="font-size: 1.5rem" *ngIf="datosReto">
+            <div>
+              <p style="justify-content: center; text-align: justify">
+                {{ cat.texto1 }}
+              </p>
+            </div>
 
-              <img src="{{ cat.imageUrl }}" width="60%" />
+            <img src="{{ cat.imageUrl }}" width="60%" />
 
-              <div class="card-title mt-5" style="font-size: 1.5rem">
-                <p style="cursor: pointer; text-align: start">
-                  <b>A. </b>
-                  <label style="cursor: pointer" (click)="opcionA($event)">
-                    {{ cat["opciones"]["opcion1"] }}
-                  </label>
-                </p>
-                <p style="cursor: pointer; text-align: start">
-                  <b>B. </b>
-                  <label style="cursor: pointer" (click)="opcionA($event)">
-                    {{ cat["opciones"]["opcion2"] }}
-                  </label>
-                </p>
-                <p style="cursor: pointer; text-align: start">
-                  <b>C. </b>
-                  <label style="cursor: pointer" (click)="opcionA($event)">
-                    {{ cat["opciones"]["opcion3"] }}
-                  </label>
-                </p>
-                <p style="cursor: pointer; text-align: start">
-                  <b>D. </b>
-                  <label style="cursor: pointer" (click)="opcionA($event)">
-                    {{ cat["opciones"]["opcion4"] }}
-                  </label>
-                </p>
-              </div>
+            <div class="card-title mt-5" style="font-size: 1.5rem">
+              <p style="cursor: pointer; text-align: start">
+                <b>A. </b>
+                <label style="cursor: pointer" (click)="opcionA($event)">
+                  {{ cat["opciones"]["opcion1"] }}
+                </label>
+              </p>
+              <p style="cursor: pointer; text-align: start">
+                <b>B. </b>
+                <label style="cursor: pointer" (click)="opcionA($event)">
+                  {{ cat["opciones"]["opcion2"] }}
+                </label>
+              </p>
+              <p style="cursor: pointer; text-align: start">
+                <b>C. </b>
+                <label style="cursor: pointer" (click)="opcionA($event)">
+                  {{ cat["opciones"]["opcion3"] }}
+                </label>
+              </p>
+              <p style="cursor: pointer; text-align: start">
+                <b>D. </b>
+                <label style="cursor: pointer" (click)="opcionA($event)">
+                  {{ cat["opciones"]["opcion4"] }}
+                </label>
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
 
 <!-- <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls> -->

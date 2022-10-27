@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Usuario } from 'src/app/core/models/login';
 import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
@@ -9,39 +10,36 @@ import { LoginService } from 'src/app/core/services/login.service';
 })
 export class MenuComponent implements OnInit {
   public estudiante = null;
+  user: Usuario[];
 
-  constructor(private router: Router, public serviceLogin: LoginService) {}
+
+  constructor(
+    private router: Router,
+    private activeRoute: ActivatedRoute,
+    public serviceLogin: LoginService
+  ) { }
 
   ngOnInit(): void {
-    this.getLoggedUser();
+    const id = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(id).subscribe((res) => {
+      this.user = res;
+    });
   }
 
   retoAmigo() {
-    this.router.navigate(['ret-amigo']);
+    this.router.navigate([`ret-amigo/${this.user[0]['id']}`]);
   }
 
   retoPersonal() {
-    this.router.navigate(['menuArea-personal']);
+    this.router.navigate([`menuArea-personal/${this.user[0]['id']}`]);
   }
 
   mirarAvance() {
-    this.router.navigate(['mirarAvance']);
+    this.router.navigate([`mirarAvance/${this.user[0]['id']}`]);
   }
 
   salir() {
+
     this.router.navigate(['login']);
-  }
-
-  // estaLogueado(){
-  //   return this.serviceLogin.estaLogueado();
-  // }
-
-  // logout(){
-  //   this.serviceLogin.logout();
-  // }
-
-  getLoggedUser() {
-    this.estudiante = this.serviceLogin.rolAdministrador();
-    console.log(this.estudiante);
   }
 }

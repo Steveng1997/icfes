@@ -21,7 +21,7 @@ export class InsertarUsuario implements OnInit {
 
   onAddUser() {
     if (this.email != '' && this.password != '') {
-      this.serviceLogin.emailExist(this.email).then((emailexist) => {
+      this.serviceLogin.emailExistAndPassword(this.email, this.password).then((emailexist) => {
         if (emailexist == false) {
           this.serviceLogin
             .registerUser(

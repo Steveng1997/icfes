@@ -13,14 +13,14 @@ export class InsertarpuntajeComponent implements OnInit {
   constructor(
     public router: Router,
     public servicePuntuacion: PuntuacionService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   addPuntuacion() {
     if (this.puntuacion != 0) {
       this.servicePuntuacion
-        .registerPuntaje(this.puntuacion)
+        .registerPuntacion(this.puntuacion)
         .then((res) => {
           alert('Puntaje insertado');
           this.router.navigate(['admin/puntaje']);

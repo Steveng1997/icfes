@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { RetoService } from 'src/app/core/services/retos.service';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Usuario } from 'src/app/core/models/login';
+import { LoginService } from 'src/app/core/services/login.service';
+ 
 
 @Component({
   selector: 'app-menu-area-personal',
@@ -8,9 +10,20 @@ import { RetoService } from 'src/app/core/services/retos.service';
   styleUrls: ['./menu-area-personal.component.scss'],
 })
 export class MenuAreaPersonalComponent implements OnInit {
-  constructor(private router: Router) {}
+  user: Usuario[];
+  constructor(
+    private router: Router,
+    private activeRoute: ActivatedRoute,
+    private serviceLogin: LoginService
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const id = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(id).subscribe((res) => {
+      this.user = res;
+    });
+  }
+
 
   salir() {
     this.router.navigate(['login']);

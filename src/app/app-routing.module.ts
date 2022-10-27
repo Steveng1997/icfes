@@ -29,29 +29,37 @@ import { InsertarpuntajeComponent } from './pages/pre-auth/admin/puntaje/inserta
 import { EditarPuntuacionComponent } from './pages/pre-auth/admin/puntaje/editar-puntuacion/editar-puntuacion.component';
 
 const routes: Routes = [
-  { path: 'menu', component: MenuComponent, canActivate: [LoginGuardian] },
+
+  { path: 'menu/:id', component: MenuComponent, canActivate: [LoginGuardian] },
 
   {
-    path: 'ret-amigo',
+    path: 'ret-amigo/:id',
     component: RetoAmigoComponent,
     canActivate: [LoginGuardian],
   },
 
   {
-    path: 'ret-personal',
+    path: 'ret-personal/:id',
     component: RetoPersonalComponent,
     canActivate: [LoginGuardian],
   },
 
   {
-    path: 'mir-avanc',
+    path: 'mir-avanc/:id',
     component: MirarAvanceComponent,
     canActivate: [LoginGuardian],
   },
 
-  { path: 'areas', component: MenuareaComponent, canActivate: [LoginGuardian] },
+  {
+    path: 'areas/:id',
+    component: MenuareaComponent,
+    canActivate: [LoginGuardian]
+  },
 
-  { path: '', component: LoginComponent, pathMatch: 'full' },
+  {
+    path: '', component: LoginComponent,
+    pathMatch: 'full'
+  },
 
   {
     path: 'admin',
@@ -122,32 +130,32 @@ const routes: Routes = [
   },
 
   {
-    path: 'retos/:categoria',
+    path: 'retos/:id/:categoria',
     component: RetosComponent,
     canActivate: [LoginGuardian],
   },
   {
-    path: 'menuPersonal',
+    path: 'menuPersonal/:id',
     component: MenuPersonalesComponent,
     canActivate: [LoginGuardian],
   },
   {
-    path: 'mirarAvance',
+    path: 'mirarAvance/:id',
     component: MirarAvanceComponent,
     canActivate: [LoginGuardian],
   },
   {
-    path: 'incorrecto',
+    path: 'incorrecto/:id',
     component: IncorrectoComponent,
     canActivate: [LoginGuardian],
   },
   {
-    path: 'correcto',
+    path: 'correcto/:id',
     component: CorrectoComponent,
     canActivate: [LoginGuardian],
   },
   {
-    path: 'menuArea-personal',
+    path: 'menuArea-personal/:id',
     component: MenuAreaPersonalComponent,
     canActivate: [LoginGuardian],
   },
@@ -157,12 +165,12 @@ const routes: Routes = [
     canActivate: [LoginGuardian],
   },
   {
-    path: 'correctoPersonal',
+    path: 'correctoPersonal/:id',
     component: CorrectoPersonalComponent,
     canActivate: [LoginGuardian],
   },
   {
-    path: 'incorrectoPersonal',
+    path: 'incorrectoPersonal/:id',
     component: IncorrectoPersonalComponent,
     canActivate: [LoginGuardian],
   },
@@ -175,4 +183,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

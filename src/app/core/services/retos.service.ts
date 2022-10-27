@@ -73,12 +73,6 @@ export class RetoService {
       .valueChanges();
   }
 
-  getRetos(): Observable<any> {
-    return this.db
-      .collection('retos', (ref) => ref.orderBy('id', 'asc'))
-      .snapshotChanges();
-  }
-
   getRetosByCategoria(): Observable<any> {
     return this.db
       .collection('retos', (ref) => ref.orderBy('categoria', 'asc'))
@@ -102,6 +96,13 @@ export class RetoService {
           }
         });
     });
+  }
+
+
+  getByCorrecto(): Observable<any> {
+    return this.db
+      .collection('retos', (ref) => ref.where('correcto', '==', 1))
+      .snapshotChanges();
   }
 
   // -----------------------------------------------------------------------------------

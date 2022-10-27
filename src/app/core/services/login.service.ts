@@ -15,7 +15,7 @@ export class LoginService {
     public router: Router,
     private db: AngularFirestore,
     private authFire: AngularFireAuth
-  ) {}
+  ) { }
 
   usuarios: Usuario[] = [];
 
@@ -23,12 +23,23 @@ export class LoginService {
   // Register
   // -----------------------------------------------------------------------------------
 
+  makeid(length) {
+    var result = '';
+    var characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
   registerUser(email: string, nombre: string, password: string, rol: string) {
     let user = {
+      id: `uid${this.makeid(10)}`,
       email: email,
       nombre: nombre,
       password: password,
-      id: `uid${btoa(email)}`,
       rol: rol,
     };
     return new Promise<any>((resolve, reject) => {
@@ -51,65 +62,32 @@ export class LoginService {
   // Get
   // -----------------------------------------------------------------------------------
 
-  loginEmailUser(email: string, password: string) {
-    return new Promise((resolve, reject) => {
-      this.authFire
-        .signInWithEmailAndPassword(email, password)
-        .then((userData) => resolve(userData));
-      // err => alert("usuario incorrecto"));
-    });
-  }
-
   getById(id) {
     return this.db
       .collection('usuarios', (ref) => ref.where('id', '==', id))
       .valueChanges();
   }
-
-  emailExist(email: string): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this.db
-        .collection('usuarios', (ref) => ref.where('email', '==', email))
-        .valueChanges({ idField: 'id' })
-        .subscribe((rp) => {
-          if (rp[0]?.id) {
-            resolve(true);
-          } else {
-            resolve(false);
-          }
-        });
-    });
+  
+  getByName(email) {
+    return this.db
+      .collection('usuarios', (ref) => ref.where('email', '==', email))
+      .valueChanges();
   }
 
-  rolAdministradorByEmail(email: string): Promise<boolean> {
+  emailExistAndPassword(email: string, password: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
         .collection('usuarios', (ref) =>
-          ref.where('email', '==', email).where('rol', '==', 'administrador')
+          ref
+            .where('email', '==', email)
+            .where('password', '==', password)
         )
-        .valueChanges({ idField: 'id' })
+        .valueChanges()
         .subscribe((rp) => {
-          if (rp[0]?.id) {
-            resolve(true);
-            // this.router.navigate(['admin/usuarios'])
+          if (rp[0]) {
+            resolve(rp);
           } else {
-            resolve(false);
-            // this.router.navigate(['menu'])
-          }
-        });
-    });
-  }
-
-  rolAdministrador(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this.db
-        .collection('usuarios', (ref) => ref.where('rol', '==', 'estudiante'))
-        .valueChanges({ idField: 'id' })
-        .subscribe((rp) => {
-          if (rp[0]?.id) {
-            resolve(true);
-          } else {
-            resolve(false);
+            resolve(rp);
           }
         });
     });

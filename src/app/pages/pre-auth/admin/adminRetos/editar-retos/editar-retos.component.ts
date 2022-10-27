@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 //importamos el servicio
 import { RetoService } from 'src/app/core/services/retos.service';
 //importamos los modulos para formularios
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 //importamos el enrutador
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -49,8 +49,8 @@ export class EditarRetosComponent implements OnInit {
 
   editarReto(reto: Retos) {
     const id = this.activeRoute.snapshot.paramMap.get('id');
-    this.serviceRetos.updateRetos(reto);
-    this.router.navigate(['admin/retos']);
+    this.serviceRetos.updateRetos(reto);    
     Swal.fire('Good job!', 'Reto editato!', 'success');
+    this.router.navigate(['admin/adminRetos']);
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Usuario } from 'src/app/core/models/login';
 import { LoginService } from 'src/app/core/services/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -10,36 +12,46 @@ import { LoginService } from 'src/app/core/services/login.service';
 export class LoginComponent implements OnInit {
   public email: string = '';
   public password: string = '';
-  public userUid: string = null;
 
-  constructor(public router: Router, public serviceLogin: LoginService) {}
+  usuarios: Usuario[];
 
-  ngOnInit(): void {}
+  constructor(public router: Router, public serviceLogin: LoginService) { }
+
+  ngOnInit(): void { }
 
   onLogin(): void {
-    this.serviceLogin.emailExist(this.email).then((emailexist) => {
-      if (emailexist) {
+    if (this.email != '') {
+      if (this.password != '') {
         this.serviceLogin
-          .rolAdministradorByEmail(this.email)
-          .then((userAdmin) => {
-            if (userAdmin) {
-              this.serviceLogin
-                .loginEmailUser(this.email, this.password)
-                .then((res) => {
-                  this.router.navigate(['admin/usuarios']);
-                })
-                .catch((err) => console.log('err', err.message));
+          .emailExistAndPassword(this.email, this.password)
+          .then((dataCategoria) => {
+            this.usuarios = dataCategoria;
+            if (this.usuarios[0]['rol'] == 'administrador') {
+              this.router.navigate(['admin/usuarios']);
             } else {
-              this.router.navigate(['menu']);
+              this.router.navigate([`menu/${this.usuarios[0]['id']}`]);
             }
-          });
+          })
+          .catch(() => Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'El correo o la contraseña esta incorrecta',
+          }));
       } else {
-        alert('Usuario no registrado');
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'El campo de la contraseña se encuentra vacío',
+        });
       }
-    });
-  }
 
-  onLogout() {
-    this.serviceLogin.logoutUser();
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El campo del correo se encuentra vacío',
+      });
+    }
+
   }
 }

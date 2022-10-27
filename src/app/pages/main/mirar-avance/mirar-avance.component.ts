@@ -24,7 +24,6 @@ export class MirarAvanceComponent implements OnInit {
 
 
   getLoggedUser() {
-    this.estudiante = this.serviceLogin.rolAdministrador();
-    console.log(this.estudiante)
+
   }
 }
