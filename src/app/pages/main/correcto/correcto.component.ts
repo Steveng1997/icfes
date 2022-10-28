@@ -10,6 +10,7 @@ import { LoginService } from 'src/app/core/services/login.service';
 })
 export class CorrectoComponent implements OnInit {
   user: Usuario[];
+  id: string;
   constructor(
     private rutaActiva: ActivatedRoute,
     private router: Router,
@@ -17,11 +18,8 @@ export class CorrectoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.rutaActiva.snapshot.paramMap.get('id');
-    console.log(id)
-    this.serviceLogin.getById(id).subscribe((res) => {
-      this.user = res;
-    });
+    this.id = this.rutaActiva.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.id)
   }
 
   salir() {
@@ -29,10 +27,10 @@ export class CorrectoComponent implements OnInit {
   }
 
   volverAretar() {
-    this.router.navigate([`ret-amigo/${this.user[0]['id']}`]);
+    this.router.navigate([`ret-amigo/${this.id}`]);
   }
 
   menuPrincipal() {
-    this.router.navigate([`menu/${this.user[0]['id']}`]);
+    this.router.navigate([`menu/${this.id}`]);
   }
 }

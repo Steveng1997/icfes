@@ -81,7 +81,7 @@ export class RetoPersonalComponent implements OnInit {
         if (respu) {
           let puntajeActual = respu[0]['puntuacion'] + puntaje;
 
-          this.servicePuntaje.updatePuntaje(this.user[0]['id'], puntajeActual);
+          // this.servicePuntaje.updatePuntaje(this.user[0]['id'], puntajeActual);
         } else {
           // crea
           this.servicePuntaje.registerByIdUsuario(this.user[0]['id']);

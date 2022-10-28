@@ -15,12 +15,10 @@ export class RetosComponent implements OnInit {
   categoria: string;
   datosReto: Retos[];
   user: Usuario[];
-
-  datosRetoByCorrecto: Retos[];
-
-  @ViewChild('pregunta') pregunta: ElementRef;
-
+  idUser: string;
   public page!: number;
+
+  puntajeObtenido: any = [];
 
   constructor(
     private rutaActiva: ActivatedRoute,
@@ -31,10 +29,9 @@ export class RetosComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const id = this.rutaActiva.snapshot.paramMap.get('id');
-    this.serviceLogin.getById(id).subscribe((res) => {
-      this.user = res;
-    });
+    this.idUser = this.rutaActiva.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.idUser);
+
     this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
     this.getByCategoria(this.categoria);
   }
@@ -43,10 +40,18 @@ export class RetosComponent implements OnInit {
     this.retoService
       .getByCategoria(categoria)
       .then((dataCategoria) => {
-        this.datosReto = dataCategoria;
+
+        this.datosReto = dataCategoria.filter(_reto => {
+          if (_reto['idsUsuarios'].includes(this.idUser)) {
+            return
+          }
+          return _reto
+        })
+
         setTimeout(() => {
           this.convertToHtml();
         }, 1000);
+
       })
       .catch((err) => console.log('err', err.message));
   }
@@ -70,34 +75,54 @@ export class RetosComponent implements OnInit {
     }
   }
 
-  opcionA(event) {
-    let puntaje: Number;
-
-    if (this.datosReto[0]['respuesta'] == event.target.innerHTML.trim()) {
-      puntaje = 2;
-    } else {
-      puntaje = 1;
-    }
+  obtenerPuntaje(idUser) {
+    console.log(idUser);
 
     this.servicePuntaje
-      .getPuntajeByIdUsuario(this.user[0]['id'])
+      .getPuntajeByIdUsuario(idUser)
       .subscribe((respu) => {
-        if (respu) {
-          let puntajeActual = respu[0]['puntuacion'] + puntaje;
+        this.puntajeObtenido = respu[0]
+        return this.puntajeObtenido
+      });
+  }
 
-          this.servicePuntaje.updatePuntaje(this.user[0]['id'], puntajeActual);
-        } else {
+  opcionA(event, idDocumentReto, idReto, idsUsuarios, respuesta) {
+    this.obtenerPuntaje(this.idUser)
+
+    if (!idsUsuarios) {
+      idsUsuarios = []
+    }
+
+    idsUsuarios.push(this.idUser)
+    this.retoService.updateIdsUsuarios(idDocumentReto, idReto, idsUsuarios).then(resp => {
+      setTimeout(() => {
+        let puntaje: Number;
+        if (this.puntajeObtenido) {
+
+          if (respuesta == event.target.innerHTML.trim()) {
+            puntaje = 2;
+          } else {
+            puntaje = 1;
+          }
+
+          this.servicePuntaje.updatePuntaje(this.puntajeObtenido['idDocument'], this.idUser, this.puntajeObtenido['puntuacion'] + puntaje).then(rp => {
+            console.log(rp);
+          })
+        }
+        else {
           // crea
-          this.servicePuntaje.registerByIdUsuario(this.user[0]['id']);
+          this.servicePuntaje.registerByIdUsuario(this.idUser);
         }
 
         if (puntaje == 2) {
-          this.router.navigate([`correcto/${this.user[0]['id']}`]);
+          this.router.navigate([`correcto/${this.idUser}`]);
         }
 
         if (puntaje == 1) {
-          this.router.navigate([`incorrecto/${this.user[0]['id']}`]);
+          this.router.navigate([`incorrecto/${this.idUser}`]);
         }
-      });
+
+      }, 1000);
+    });
   }
 }

@@ -27,7 +27,7 @@ export class MirarAvanceComponent implements OnInit {
     const id = this.activeRoute.snapshot.paramMap.get('id');
     this.servicePuntaje.getPuntajeByIdUsuario(id).subscribe((res) => {
       console.log(res);
-      this.puntajes = res;
+      // this.puntajes = res;
     });
   }
 

@@ -31,9 +31,9 @@ export class EditarPuntuacionComponent implements OnInit {
     });
   }
 
-  editarEstudiante(puntu: Puntaje) {
-    const id = this.activeRoute.snapshot.paramMap.get('id');
-    this.servicePuntuacion.updatePuntuacion(puntu);
-    this.router.navigate(['admin/puntaje']);
+   editarEstudiante(puntu: Puntaje) {
+  //   const id = this.activeRoute.snapshot.paramMap.get('id');
+  //   this.servicePuntuacion.updatePuntuacion(puntu);
+  //   this.router.navigate(['admin/puntaje']);
   }
 }

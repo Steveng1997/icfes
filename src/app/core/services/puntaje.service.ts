@@ -96,7 +96,7 @@ export class PuntuacionService {
   getPuntajeByIdUsuario(id) {
     return this.db
       .collection('puntaje', (ref) => ref.where('idUsuario', '==', id))
-      .valueChanges();
+      .valueChanges({ idField: 'idDocument' });
   }
 
   getPuntaje(): Observable<any> {
@@ -113,28 +113,24 @@ export class PuntuacionService {
   // Update
   // -----------------------------------------------------------------------------------
 
-  updatePuntuacion(punt: Puntaje) {
-    return this.db
-      .collection('puntaje', (ref) => ref.where('id', '==', punt.id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update(punt);
-        });
-      });
-  }
+  // updatePuntuacion(punt: Puntaje) {
+  //   return this.db
+  //     .collection('puntaje', (ref) => ref.where('id', '==', punt.id))
+  //     .get()
+  //     .forEach((querySnapshot) => {
+  //       querySnapshot.forEach((doc) => {
+  //         doc.ref.update(punt);
+  //       });
+  //     });
+  // }
 
-  updatePuntaje(id: string, puntuacion) {
+  updatePuntaje(idDocumentPuntaje, idUser, puntaje) {
     return this.db
-      .collection('puntaje', (ref) => ref.where('idUsuario', '==', id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            puntuacion: puntuacion + puntuacion,
-          });
-        });
-      });
+      .collection('puntaje', (ref) => ref.where('idUsuario', '==', idUser))
+      .doc(idDocumentPuntaje)
+      .update({
+        puntuacion: puntaje,
+      })
   }
 
   // -----------------------------------------------------------------------------------

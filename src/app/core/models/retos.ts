@@ -11,4 +11,6 @@ export class Retos {
   subtitulo?: string;
   imageUrlSubtitulo?: string;
   respuesta?: string;
+  idDocument?: string;
+  idsUsuarios?: string;
 }
