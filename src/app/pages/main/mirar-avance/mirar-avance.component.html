@@ -19,8 +19,8 @@
   </head>
 
   <body>
-    <div *ngIf="estudiante" class="btn-salir" style="text-align: right">
-      <button class="btn btn-success btnSalir">Salir</button>
+    <div class="btn-salir" style="text-align: right">
+      <button class="btn btn-success btnSalir" (click)="salir()">Salir</button>
     </div>
 
     <div class="col-md-12">
@@ -29,12 +29,13 @@
       </div>
     </div>
 
-    <div class="grid-container">
+    <div class="grid-container text-center" *ngFor="let punt of puntajes">
       <div>Matemáticas</div>
       <div>Lenguaje</div>
       <div>C.Naturales</div>
       <div>C.Sociales</div>
       <div
+        *ngIf="punt.puntuacion == 1"
         class="grid-item"
         style="
           background-image: url('https://picsum.photos/id/733/900/900.jpg');

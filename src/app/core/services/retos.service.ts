@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class RetoService {
-  constructor(public router: Router, private db: AngularFirestore) {}
+  constructor(public router: Router, private db: AngularFirestore) { }
 
   retos: Retos[] = [];
   cursoDoc: AngularFirestoreDocument<Retos>;
@@ -41,12 +41,11 @@ export class RetoService {
         opcion3: formularioall.opcion3,
         opcion4: formularioall.opcion4,
       },
+      idUsuario: {},
       subtitulo: formularioall.subtitulo,
       imageUrlSubtitulo: formularioall.imageUrlSubtitulo,
       respuesta: formularioall.respuesta,
-      respondido: false,
-      // correcto: 0,
-      // incorrecto: 0,
+      // respondido: false,
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -85,7 +84,6 @@ export class RetoService {
         .collection('retos', (ref) =>
           ref
             .where('categoria', '==', categoria)
-            .where('respondido', '==', false)
         )
         .valueChanges({ idField: 'id' })
         .subscribe((rp) => {
@@ -98,11 +96,22 @@ export class RetoService {
     });
   }
 
-
-  getByCorrecto(): Observable<any> {
-    return this.db
-      .collection('retos', (ref) => ref.where('correcto', '==', 1))
-      .snapshotChanges();
+  getByIdUsuario(idUsu: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('retos', (ref) =>
+          ref
+            .where('idUsuario', '==', {idUsu})
+        )
+        .valueChanges()
+        .subscribe((rp) => {
+          if (rp) {
+            resolve(rp);
+          } else {
+            resolve(rp);
+          }
+        });
+    });
   }
 
   // -----------------------------------------------------------------------------------
@@ -133,22 +142,6 @@ export class RetoService {
           doc.ref.update(reto);
         });
       });
-  }
-
-  updateOpcionesCorrecto(id: string) {
-    return this.db.doc(`retos/${id}`).update({
-      respondido: true,
-      correcto: 1,
-      incorrecto: 0,
-    });
-  }
-
-  updateOpcionesIncorrecto(id: string) {
-    return this.db.doc(`retos/${id}`).update({
-      respondido: true,
-      correcto: 0,
-      incorrecto: 1,
-    });
   }
 
   // -----------------------------------------------------------------------------------

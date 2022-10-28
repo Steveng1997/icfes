@@ -2,6 +2,9 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Retos } from 'src/app/core/models/retos';
 import { RetoService } from 'src/app/core/services/retos.service';
+import { PuntuacionService } from 'src/app/core/services/puntaje.service';
+import { LoginService } from 'src/app/core/services/login.service';
+import { Usuario } from 'src/app/core/models/login';
 
 @Component({
   selector: 'app-reto-personal',
@@ -11,18 +14,23 @@ import { RetoService } from 'src/app/core/services/retos.service';
 export class RetoPersonalComponent implements OnInit {
   categoria: string;
   datosReto: Retos[];
-
-  @ViewChild('pregunta') pregunta: ElementRef;
+  user: Usuario[];
 
   public page!: number;
 
   constructor(
     private rutaActiva: ActivatedRoute,
     private router: Router,
-    private retoService: RetoService
-  ) {}
+    private retoService: RetoService,
+    private serviceLogin: LoginService,
+    private servicePuntaje: PuntuacionService
+  ) { }
 
   ngOnInit() {
+    const id = this.rutaActiva.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(id).subscribe((res) => {
+      this.user = res;
+    });
     this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
     this.getByCategoria(this.categoria);
   }
@@ -40,31 +48,52 @@ export class RetoPersonalComponent implements OnInit {
   }
 
   convertToHtml() {
-    var texto = document.querySelectorAll("[id='texto1']");
+    var texto1 = document.querySelectorAll("[id='texto1']");
 
     for (let i = 0; i < this.datosReto.length; i++) {
-      this.datosReto[i]['pregunta'] = this.datosReto[i]['texto1'].replace(
+      this.datosReto[i]['texto1'] = this.datosReto[i]['texto1'].replace(
         /\n/g,
         '<br/>'
       );
-      for (let j = 0; j < texto.length; j++) {
+      for (let j = 0; j < texto1.length; j++) {
         let parser = new DOMParser();
         let doc = parser.parseFromString(
-          this.datosReto[i]['pregunta'],
+          this.datosReto[j]['texto1'],
           'text/html'
         );
-        texto[j]['innerHTML'] = doc.body.innerHTML;
+        texto1[j]['innerHTML'] = doc.body.innerHTML;
       }
     }
   }
 
   opcionA(event) {
+    let puntaje: Number;
+
     if (this.datosReto[0]['respuesta'] == event.target.innerHTML.trim()) {
-      this.retoService.updateOpcionesCorrecto(this.datosReto[0]['id']);
-      this.router.navigate(['correctoPersonal']);
+      puntaje = 2;
     } else {
-      this.retoService.updateOpcionesIncorrecto(this.datosReto[0]['id']);
-      this.router.navigate(['incorrectoPersonal']);
+      puntaje = 1;
     }
+
+    this.servicePuntaje
+      .getPuntajeByIdUsuario(this.user[0]['id'])
+      .subscribe((respu) => {
+        if (respu) {
+          let puntajeActual = respu[0]['puntuacion'] + puntaje;
+
+          this.servicePuntaje.updatePuntaje(this.user[0]['id'], puntajeActual);
+        } else {
+          // crea
+          this.servicePuntaje.registerByIdUsuario(this.user[0]['id']);
+        }
+
+        if (puntaje == 2) {
+          this.router.navigate([`correcto/${this.user[0]['id']}`]);
+        }
+
+        if (puntaje == 1) {
+          this.router.navigate([`incorrecto/${this.user[0]['id']}`]);
+        }
+      });
   }
 }

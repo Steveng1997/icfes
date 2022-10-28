@@ -16,6 +16,8 @@ export class RetosComponent implements OnInit {
   datosReto: Retos[];
   user: Usuario[];
 
+  datosRetoByCorrecto: Retos[];
+
   @ViewChild('pregunta') pregunta: ElementRef;
 
   public page!: number;
@@ -60,7 +62,7 @@ export class RetosComponent implements OnInit {
       for (let j = 0; j < texto1.length; j++) {
         let parser = new DOMParser();
         let doc = parser.parseFromString(
-          this.datosReto[i]['texto1'],
+          this.datosReto[j]['texto1'],
           'text/html'
         );
         texto1[j]['innerHTML'] = doc.body.innerHTML;
@@ -69,35 +71,33 @@ export class RetosComponent implements OnInit {
   }
 
   opcionA(event) {
+    let puntaje: Number;
+
     if (this.datosReto[0]['respuesta'] == event.target.innerHTML.trim()) {
-      // Actualiza colocando correcto en 1 si la respuesta es igual a la opcion      
-      this.retoService.updateOpcionesCorrecto(this.datosReto[0]['id']);
-      // Consulta cuantas correctas existen
-      this.retoService.getByCorrecto().subscribe((resaa) => {
-        this.datosReto = resaa
-
-        this.servicePuntaje.getByIdUsuario(this.user[0]['id']).subscribe(() => {
-          if (this.user[0]['id'] != '') {
-            this.servicePuntaje.updatePuntaje(this.user[0]['id'], resaa);
-            this.router.navigate([`correcto/${this.user[0]['id']}`]);
-          } else {
-            this.servicePuntaje.registerByIdUsuario(this.user[0]['id']);
-            this.router.navigate([`correcto/${this.user[0]['id']}`]);
-          }
-        });
-      });
-     
-
+      puntaje = 2;
     } else {
-      this.retoService.updateOpcionesIncorrecto(this.datosReto[0]['id']);
-      this.servicePuntaje.getByIdUsuario(this.user[0]['id']).subscribe((res) => {
-        if (res.length > 0) {
-          this.router.navigate([`incorrecto/${this.user[0]['id']}`]);
+      puntaje = 1;
+    }
+
+    this.servicePuntaje
+      .getPuntajeByIdUsuario(this.user[0]['id'])
+      .subscribe((respu) => {
+        if (respu) {
+          let puntajeActual = respu[0]['puntuacion'] + puntaje;
+
+          this.servicePuntaje.updatePuntaje(this.user[0]['id'], puntajeActual);
         } else {
-          this.servicePuntaje.registerByIdUsuarioAll(this.datosReto[0]['id']);
+          // crea
+          this.servicePuntaje.registerByIdUsuario(this.user[0]['id']);
+        }
+
+        if (puntaje == 2) {
+          this.router.navigate([`correcto/${this.user[0]['id']}`]);
+        }
+
+        if (puntaje == 1) {
           this.router.navigate([`incorrecto/${this.user[0]['id']}`]);
         }
       });
-    }
   }
 }

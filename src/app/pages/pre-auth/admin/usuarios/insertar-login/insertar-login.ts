@@ -15,9 +15,9 @@ export class InsertarUsuario implements OnInit {
   opcionSeleccionado: string = '0';
   verSeleccion: string = '';
 
-  constructor(public router: Router, public serviceLogin: LoginService) {}
+  constructor(public router: Router, public serviceLogin: LoginService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onAddUser() {
     if (this.email != '' && this.password != '') {
@@ -30,28 +30,10 @@ export class InsertarUsuario implements OnInit {
               this.password,
               this.opcionSeleccionado
             )
-            .then((res) => {
-              this.serviceLogin.isAuth().subscribe((user) => {
-                if (user) {
-                  user
-                    .updateProfile({
-                      displayName: '',
-                      // photoURL: this.inputImageUser.nativeElement.value
-                    })
-                    .then(() => {
-                      alert('Registro completo');
-                      this.router.navigate(['admin/usuarios']);
-                    })
-                    .catch((error) => alert('error' + error));
-                }
-              });
-            })
             .catch((err) => console.log('err', err.message));
         } else {
-          // console.log(emailexist)
           alert('El correo ya existe');
           console.log('existe correo');
-          // return
         }
       });
     } else {

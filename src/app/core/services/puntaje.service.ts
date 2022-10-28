@@ -50,7 +50,7 @@ export class PuntuacionService {
     let puntua = {
       id: `uid${this.makeid(10)}`,
       idUsuario: id,
-      puntuacion: 0,
+      puntuacion: 1,
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -93,7 +93,7 @@ export class PuntuacionService {
       .valueChanges();
   }
 
-  getByIdUsuario(id) {
+  getPuntajeByIdUsuario(id) {
     return this.db
       .collection('puntaje', (ref) => ref.where('idUsuario', '==', id))
       .valueChanges();
@@ -124,14 +124,14 @@ export class PuntuacionService {
       });
   }
 
-  updatePuntaje(id: string, puntuacion: number) {
+  updatePuntaje(id: string, puntuacion) {
     return this.db
       .collection('puntaje', (ref) => ref.where('idUsuario', '==', id))
       .get()
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           doc.ref.update({
-            puntuacion: puntuacion,
+            puntuacion: puntuacion + puntuacion,
           });
         });
       });

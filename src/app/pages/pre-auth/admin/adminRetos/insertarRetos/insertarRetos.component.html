@@ -105,6 +105,19 @@
                 <label for="opcion1">Opcion 1</label>
               </div>
 
+              <div
+                class="form-floating mb-3"
+                *ngIf="selectcat == 'Matematicas'"
+              >
+                <input
+                  class="form-control"
+                  type="file"
+                  accept=".png, .jpeg, .jpg"
+                  formControlName="imageUrl"
+                  (change)="uploadImage($event)"
+                />
+              </div>
+
               <div class="form-floating mb-3">
                 <input
                   class="form-control"
