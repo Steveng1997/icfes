@@ -10,7 +10,7 @@ import { Puntaje } from '../models/Puntaje';
 
 @Injectable()
 export class PuntuacionService {
-  constructor(public router: Router, private db: AngularFirestore) { }
+  constructor(public router: Router, private db: AngularFirestore) {}
 
   puntaje: Puntaje[] = [];
   cursoDoc: AngularFirestoreDocument<Puntaje>;
@@ -29,11 +29,14 @@ export class PuntuacionService {
     return result;
   }
 
-  registerPuntacion(puntuacion: number) {
+  registerByIdUsuarioLenguaje(id, puntaje) {
     let puntua = {
       id: `uid${this.makeid(10)}`,
-      idUsuario: 'idUsuario',
-      puntuacion: puntuacion,
+      idUsuario: id,
+      puntuacionLenguaje: puntaje,
+      puntuacionMatematicas: 0,
+      puntuacionSociales: 0,
+      puntuacionNaturales: 0,
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -46,11 +49,54 @@ export class PuntuacionService {
     });
   }
 
-  registerByIdUsuario(id) {
+  registerByIdUsuarioMatematicas(id, puntaje) {
     let puntua = {
       id: `uid${this.makeid(10)}`,
       idUsuario: id,
-      puntuacion: 1,
+      puntuacionLenguaje: 0,
+      puntuacionMatematicas: puntaje,
+      puntuacionSociales: 0,
+      puntuacionNaturales: 0,
+    };
+    return new Promise<any>((resolve, reject) => {
+      this.db
+        .collection('puntaje')
+        .add(puntua)
+        .then(
+          (response) => resolve(response),
+          (error) => reject(error)
+        );
+    });
+  }
+
+  registerByIdUsuarioSociales(id, puntaje) {
+    let puntua = {
+      id: `uid${this.makeid(10)}`,
+      idUsuario: id,
+      puntuacionLenguaje: 0,
+      puntuacionMatematicas: 0,
+      puntuacionSociales: puntaje,
+      puntuacionNaturales: 0,
+    };
+    return new Promise<any>((resolve, reject) => {
+      this.db
+        .collection('puntaje')
+        .add(puntua)
+        .then(
+          (response) => resolve(response),
+          (error) => reject(error)
+        );
+    });
+  }
+
+  registerByIdUsuarioNaturales(id, puntaje) {
+    let puntua = {
+      id: `uid${this.makeid(10)}`,
+      idUsuario: id,
+      puntuacionLenguaje: 0,
+      puntuacionMatematicas: 0,
+      puntuacionSociales: 0,
+      puntuacionNaturales: puntaje,
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -87,22 +133,55 @@ export class PuntuacionService {
   // Get
   // -----------------------------------------------------------------------------------
 
-  getById(id) {
-    return this.db
-      .collection('puntaje', (ref) => ref.where('id', '==', id))
-      .valueChanges();
+  getById(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('puntaje', (ref) => ref.where('id', '==', id))
+        .valueChanges({ idField: 'idDocument' })
+        .subscribe((rp) => {
+          if (rp[0]?.idDocument) {
+            resolve(rp);
+          } else {
+            resolve(rp);
+          }
+        });
+    });
   }
 
-  getPuntajeByIdUsuario(id) {
-    return this.db
-      .collection('puntaje', (ref) => ref.where('idUsuario', '==', id))
-      .valueChanges({ idField: 'idDocument' });
+  // getPuntajeByIdUsuario(id) {
+  //   return this.db
+  //     .collection('puntaje', (ref) => ref.where('idUsuario', '==', id))
+  //     .valueChanges({ idField: 'idDocument' });
+  // }
+
+  getPuntajeByIdUsuario(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('puntaje', (ref) => ref.where('idUsuario', '==', id))
+        .valueChanges({ idField: 'idDocument' })
+        .subscribe((rp) => {
+          if (rp[0]?.idDocument) {
+            resolve(rp);
+          } else {
+            resolve(rp);
+          }
+        });
+    });
   }
 
-  getPuntaje(): Observable<any> {
-    return this.db
-      .collection('puntaje', (ref) => ref.orderBy('id', 'asc'))
-      .snapshotChanges();
+  getPuntaje(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('puntaje', (ref) => ref.orderBy('id', 'asc'))
+        .valueChanges({ idField: 'idDocument' })
+        .subscribe((rp) => {
+          if (rp[0]?.idDocument) {
+            resolve(rp);
+          } else {
+            resolve(rp);
+          }
+        });
+    });
   }
 
   // -----------------------------------------------------------------------------------
@@ -113,24 +192,47 @@ export class PuntuacionService {
   // Update
   // -----------------------------------------------------------------------------------
 
-  // updatePuntuacion(punt: Puntaje) {
-  //   return this.db
-  //     .collection('puntaje', (ref) => ref.where('id', '==', punt.id))
-  //     .get()
-  //     .forEach((querySnapshot) => {
-  //       querySnapshot.forEach((doc) => {
-  //         doc.ref.update(punt);
-  //       });
-  //     });
-  // }
+  updatePuntaje(idDocumentReto, idPuntaje, puntaje: Puntaje) {
+    return this.db
+      .collection('puntaje', (ref) => ref.where('id', '==', idPuntaje))
+      .doc(idDocumentReto)
+      .update(puntaje);
+  }
 
-  updatePuntaje(idDocumentPuntaje, idUser, puntaje) {
+  updatePuntajeLenguaje(idDocumentPuntaje, idUser, puntaje) {
     return this.db
       .collection('puntaje', (ref) => ref.where('idUsuario', '==', idUser))
       .doc(idDocumentPuntaje)
       .update({
-        puntuacion: puntaje,
-      })
+        puntuacionLenguaje: puntaje,
+      });
+  }
+
+  updatePuntajeMatematicas(idDocumentPuntaje, idUser, puntaje) {
+    return this.db
+      .collection('puntaje', (ref) => ref.where('idUsuario', '==', idUser))
+      .doc(idDocumentPuntaje)
+      .update({
+        puntuacionMatematicas: puntaje,
+      });
+  }
+
+  updatePuntajeSociales(idDocumentPuntaje, idUser, puntaje) {
+    return this.db
+      .collection('puntaje', (ref) => ref.where('idUsuario', '==', idUser))
+      .doc(idDocumentPuntaje)
+      .update({
+        puntuacionSociales: puntaje,
+      });
+  }
+
+  updatePuntajeNaturales(idDocumentPuntaje, idUser, puntaje) {
+    return this.db
+      .collection('puntaje', (ref) => ref.where('idUsuario', '==', idUser))
+      .doc(idDocumentPuntaje)
+      .update({
+        puntuacionNaturales: puntaje,
+      });
   }
 
   // -----------------------------------------------------------------------------------
@@ -141,25 +243,11 @@ export class PuntuacionService {
   // Delete
   // -----------------------------------------------------------------------------------
 
-  async deletePuntaje(id: string): Promise<any> {
+  async deletePuntaje(idDocument, id): Promise<any> {
     this.db
       .collection('puntaje', (ref) => ref.where('id', '==', id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref
-            .delete()
-            .then(() => {
-              console.log('El puntaje fue eliminado con exito');
-            })
-            .catch(function () {
-              console.error('Error al eliminar una puntuacion');
-            });
-        });
-      })
-      .catch(function () {
-        console.log('Error al eliminar el puntaje');
-      });
+      .doc(idDocument)
+      .delete();
   }
 
   // -----------------------------------------------------------------------------------

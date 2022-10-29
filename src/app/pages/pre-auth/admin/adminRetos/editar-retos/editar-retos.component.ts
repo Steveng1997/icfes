@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 //importamos el servicio
 import { RetoService } from 'src/app/core/services/retos.service';
 //importamos los modulos para formularios
@@ -20,6 +19,7 @@ export class EditarRetosComponent implements OnInit {
   selectedImage: any = null;
   imgSrc: string;
   reto: Retos[];
+  idUser: string;
 
   constructor(
     public router: Router,
@@ -29,9 +29,9 @@ export class EditarRetosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.activeRoute.snapshot.paramMap.get('id');
-    this.serviceRetos.getById(id).subscribe((res) => {
-      this.reto = res;
+    this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceRetos.getById(this.idUser).then((datoRetos) => {
+      return (this.reto = datoRetos);
     });
   }
 
@@ -42,15 +42,20 @@ export class EditarRetosComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImage = event.target.files[0];
     } else {
-      // this.imgSrc = '/assets/img/image_placeholder.jpg';
       this.selectedImage = null;
     }
   }
 
-  editarReto(reto: Retos) {
+  editarReto(idDocument, idReto, reto: Retos) {
     const id = this.activeRoute.snapshot.paramMap.get('id');
-    this.serviceRetos.updateRetos(reto);    
-    Swal.fire('Good job!', 'Reto editato!', 'success');
+    this.serviceRetos.updateRetos(idDocument, idReto, reto);
     this.router.navigate(['admin/adminRetos']);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: '¡Editado correctamente!',
+      showConfirmButton: false,
+      timer: 2500,
+    });
   }
 }

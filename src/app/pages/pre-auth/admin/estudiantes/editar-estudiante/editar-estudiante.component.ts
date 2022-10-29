@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 //importamos el modelo
 import { Estudiante } from 'src/app/core/models/estudiante';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-estudiante',
@@ -16,6 +17,7 @@ import { Estudiante } from 'src/app/core/models/estudiante';
 })
 export class EditarEstudianteComponent implements OnInit {
   estud: Estudiante[];
+  idUser: string;
 
   constructor(
     public router: Router,
@@ -25,15 +27,22 @@ export class EditarEstudianteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.activeRoute.snapshot.paramMap.get('id');
-    this.serviceEstudiante.getById(id).subscribe((res) => {
-      this.estud = res;
+    this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceEstudiante.getById(this.idUser).then((datosEstudiante) => {
+      return (this.estud = datosEstudiante);
     });
   }
 
-  editarEstudiante(estud: Estudiante) {
+  editarEstudiante(idDocument, idEstudiante, estud: Estudiante) {
     const id = this.activeRoute.snapshot.paramMap.get('id');
-    this.serviceEstudiante.updateEstudiante(estud);
+    this.serviceEstudiante.updateEstudiante(idDocument, idEstudiante, estud);
     this.router.navigate(['admin/estudiantes']);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: '¡Editado Correctamente!',
+      showConfirmButton: false,
+      timer: 2500,
+    });
   }
 }

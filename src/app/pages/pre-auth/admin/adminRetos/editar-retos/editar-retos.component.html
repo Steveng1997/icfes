@@ -40,7 +40,7 @@
               <label>Editar Retos</label>
             </div>
 
-            <form (ngSubmit)="editarReto(ret)">
+            <form (ngSubmit)="editarReto(ret.idDocument, ret.id, ret)">
               <div class="btn-group">
                 <mat-form-field>
                   <select

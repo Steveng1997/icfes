@@ -7,44 +7,38 @@ import { LoginService } from 'src/app/core/services/login.service';
 @Component({
   selector: 'app-reto-amigo',
   templateUrl: 'reto-amigo.component.html',
-  styleUrls: ['reto-amigo.component.scss']
+  styleUrls: ['reto-amigo.component.scss'],
 })
 export class RetoAmigoComponent implements OnInit {
   estudiantes: any[] = [];
   user: Usuario[];
   opcionSeleccionado: string = '0';
+  idUser: string;
 
-  constructor(public router: Router,
+  constructor(
+    public router: Router,
     public serviceEstudiante: EstudianteService,
     public serviceLogin: LoginService,
     private activeRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    const id = this.activeRoute.snapshot.paramMap.get('id');
-    this.serviceLogin.getById(id).subscribe((res) => {
-      this.user = res;
-      this.getEstudiante();
-    });
+    this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.idUser);
+    this.getEstudiante();
   }
 
   Retar() {
     if (this.opcionSeleccionado != '0') {
-      this.router.navigate([`areas/${this.user[0]['id']}`]);
+      this.router.navigate([`areas/${this.idUser}`]);
     } else {
-      alert("Selecciona a quien quieres retar");
+      alert('Selecciona a quien quieres retar');
     }
   }
 
   getEstudiante() {
-    this.serviceEstudiante.getEstudiantes().subscribe(data => {
-      this.estudiantes = [];
-      data.forEach((element: any) => {
-        this.estudiantes.push({
-          id: element.payload.doc.id,
-          ...element.payload.doc.data()
-        })
-      });
+    this.serviceEstudiante.getEstudiantes().then((datosEstudiantes) => {
+      return (this.estudiantes = datosEstudiantes);
     });
   }
 }

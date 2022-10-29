@@ -45,20 +45,38 @@ export class EstudianteService {
   // Get
   // -----------------------------------------------------------------------------------
 
-  getById(id) {
-    return this.db
-      .collection('estudiantes', (ref) => ref.where('id', '==', id))
-      .valueChanges();
+  getById(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('estudiantes', (ref) => ref.where('id', '==', id))
+        .valueChanges({ idField: 'idDocument' })
+        .subscribe((rp) => {
+          if (rp[0]?.idDocument) {
+            resolve(rp);
+          } else {
+            resolve(rp);
+          }
+        });
+    });
   }
 
   getByIdUser(id: string): Observable<any> {
     return this.db.collection('estudiantes').doc(id).snapshotChanges();
   }
 
-  getEstudiantes(): Observable<any> {
-    return this.db
-      .collection('estudiantes', (ref) => ref.orderBy('id', 'asc'))
-      .snapshotChanges();
+  getEstudiantes(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('estudiantes', (ref) => ref.orderBy('id', 'asc'))
+        .valueChanges({ idField: 'idDocument' })
+        .subscribe((rp) => {
+          if (rp[0]?.idDocument) {
+            resolve(rp);
+          } else {
+            resolve(rp);
+          }
+        });
+    });
   }
 
   // -----------------------------------------------------------------------------------
@@ -68,16 +86,12 @@ export class EstudianteService {
   // -----------------------------------------------------------------------------------
   // Update
   // -----------------------------------------------------------------------------------
-
-  updateEstudiante(estudi: Estudiante) {
+  
+  updateEstudiante(idDocument, idReto, estudi: Estudiante) {
     return this.db
-      .collection('estudiantes', (ref) => ref.where('id', '==', estudi.id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update(estudi);
-        });
-      });
+      .collection('estudiantes', (ref) => ref.where('id', '==', idReto))
+      .doc(idDocument)
+      .update(estudi);
   }
 
   // -----------------------------------------------------------------------------------
@@ -88,25 +102,11 @@ export class EstudianteService {
   // Delete
   // -----------------------------------------------------------------------------------
 
-  async deleteUsuario(id: string): Promise<any> {
+  async deleteEstudiante(idDocument, id): Promise<any> {
     this.db
       .collection('estudiantes', (ref) => ref.where('id', '==', id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref
-            .delete()
-            .then(() => {
-              console.log('Usuario eliminado con exito');
-            })
-            .catch(function () {
-              console.error('Error al eliminar el usuario');
-            });
-        });
-      })
-      .catch(function () {
-        console.log('Error al eliminar el usuario');
-      });
+      .doc(idDocument)
+      .delete();
   }
 
   // -----------------------------------------------------------------------------------

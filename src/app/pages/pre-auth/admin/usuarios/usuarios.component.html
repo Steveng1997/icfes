@@ -27,6 +27,7 @@
       integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
       crossorigin="anonymous"
     />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style href="usuarios.component.scss"></style>
   </head>
 
@@ -71,7 +72,7 @@
                     routerLink="/admin/editar-usuario/{{ usu.id }}"
                   ></i>
                   <i
-                    (click)="DeleteUser(usu.id)"
+                    (click)="DeleteUser(usu.idDocument, usu.id)"
                     class="fas fa-trash-alt fa-lg text-danger"
                   ></i>
                   <td></td>

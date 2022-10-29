@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Puntaje } from 'src/app/core/models/Puntaje';
 import { PuntuacionService } from 'src/app/core/services/puntaje.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-puntaje',
@@ -9,6 +11,7 @@ import { PuntuacionService } from 'src/app/core/services/puntaje.service';
 })
 export class PuntajeComponent implements OnInit {
   puntaje: any[] = [];
+  datosPuntaje: Puntaje[];
   public page!: number;
   constructor(
     public router: Router,
@@ -24,21 +27,32 @@ export class PuntajeComponent implements OnInit {
   }
 
   getPuntaje() {
-    this.servicePuntuacion.getPuntaje().subscribe((data) => {
-      this.puntaje = [];
-      data.forEach((element: any) => {
-        this.puntaje.push({
-          id: element.payload.doc.id,
-          ...element.payload.doc.data(),
-        });
-      });
+    this.servicePuntuacion.getPuntaje().then((datosPuntaje) => {
+      return (this.puntaje = datosPuntaje);
     });
   }
 
-  DeletePuntaje(id: string) {
-    const confirmation = confirm('Deseas eliminar el registro');
-    if (confirmation) {
-      this.servicePuntuacion.deletePuntaje(id);
-    }
+  DeletePuntaje(idDocumentReto, id) {
+    Swal.fire({
+      title: '¿Deseas eliminar el registro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Deseo eliminar!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: '¡Eliminado Correctamente!',
+          showConfirmButton: false,
+          timer: 2500,
+        });
+
+        this.servicePuntuacion.deletePuntaje(idDocumentReto, id);
+        this.getPuntaje();
+      }
+    });
   }
 }

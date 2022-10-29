@@ -41,7 +41,6 @@ import { EstudiantesComponent } from './pages/pre-auth/admin/estudiantes/estudia
 import { InsertarEstudiantesComponent } from './pages/pre-auth/admin/estudiantes/insertar-estudiantes/insertar-estudiantes.component';
 import { EditarEstudianteComponent } from './pages/pre-auth/admin/estudiantes/editar-estudiante/editar-estudiante.component';
 import { PuntajeComponent } from './pages/pre-auth/admin/puntaje/puntaje.component';
-import { InsertarpuntajeComponent } from './pages/pre-auth/admin/puntaje/insertarpuntaje/insertarpuntaje.component';
 import { EditarPuntuacionComponent } from './pages/pre-auth/admin/puntaje/editar-puntuacion/editar-puntuacion.component';
 
 // Pages-Main
@@ -104,7 +103,6 @@ firebase.initializeApp({
     IncorrectoPersonalComponent,
     EditarEstudianteComponent,
     PuntajeComponent,
-    InsertarpuntajeComponent,
     EditarPuntuacionComponent,
   ],
   imports: [

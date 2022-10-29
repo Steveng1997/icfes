@@ -21,12 +21,13 @@
       integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
       crossorigin="anonymous"
     />
-    <link
+    <link 
       rel="stylesheet"
       href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
       integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
       crossorigin="anonymous"
     />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style href="adminRetos.component.scss"></style>
   </head>
 
@@ -78,7 +79,7 @@
                       routerLink="/admin/editar-retos/{{ ret.id }}"
                     ></i>
                     <i
-                      (click)="DeleteUser(ret.id)"
+                      (click)="DeleteRet(ret.idDocument, ret.id)"
                       class="fas fa-trash-alt fa-lg text-danger"
                     ></i>
                   </td>

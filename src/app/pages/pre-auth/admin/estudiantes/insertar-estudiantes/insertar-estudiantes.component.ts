@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EstudianteService } from 'src/app/core/services/estudiantes.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-insertar-estudiantes',
@@ -22,12 +23,22 @@ export class InsertarEstudiantesComponent implements OnInit {
       this.serviceEstudiante
         .registerAreas(this.nombre)
         .then((res) => {
-          alert('Estudiante insertado');
           this.router.navigate(['admin/estudiantes']);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: '¡Insertado Correctamente!',
+            showConfirmButton: false,
+            timer: 2500,
+          });
         })
         .catch((err) => console.log('err', err.message));
     } else {
-      alert('Campo vacio');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El campo del nombre se encuentra vacìo',
+      });
     }
   }
 }

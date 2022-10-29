@@ -15,9 +15,9 @@ export class LoginComponent implements OnInit {
 
   usuarios: Usuario[];
 
-  constructor(public router: Router, public serviceLogin: LoginService) { }
+  constructor(public router: Router, public serviceLogin: LoginService) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   onLogin(): void {
     if (this.email != '') {
@@ -32,11 +32,13 @@ export class LoginComponent implements OnInit {
               this.router.navigate([`menu/${this.usuarios[0]['id']}`]);
             }
           })
-          .catch(() => Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'El correo o la contraseña esta incorrecta',
-          }));
+          .catch(() =>
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'El correo o la contraseña esta incorrecta',
+            })
+          );
       } else {
         Swal.fire({
           icon: 'error',
@@ -44,7 +46,6 @@ export class LoginComponent implements OnInit {
           text: 'El campo de la contraseña se encuentra vacío',
         });
       }
-
     } else {
       Swal.fire({
         icon: 'error',
@@ -52,6 +53,5 @@ export class LoginComponent implements OnInit {
         text: 'El campo del correo se encuentra vacío',
       });
     }
-
   }
 }

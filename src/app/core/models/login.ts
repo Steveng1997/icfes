@@ -4,4 +4,5 @@ export class Usuario {
   email?: string;
   password?: string;
   rol?: string;
+  idDocument?: string;
 }

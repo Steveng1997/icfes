@@ -11,17 +11,17 @@ import { LoginService } from 'src/app/core/services/login.service';
 export class MenuComponent implements OnInit {
   public estudiante = null;
   user: Usuario[];
-
+  idUser: string;
 
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
     public serviceLogin: LoginService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    const id = this.activeRoute.snapshot.paramMap.get('id');
-    this.serviceLogin.getById(id).subscribe((res) => {
+    this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.idUser).then((res) => {
       this.user = res;
     });
   }
@@ -39,7 +39,6 @@ export class MenuComponent implements OnInit {
   }
 
   salir() {
-
     this.router.navigate(['login']);
   }
 }

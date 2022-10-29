@@ -46,16 +46,22 @@
             >
               <div class="btn-group">
                 <mat-form-field>
-                  <select
-                    matNativeControl
-                    (change)="selectCategoria($event)"
-                    formControlName="categoria"
-                  >
+                  <select matNativeControl formControlName="categoria">
                     <option value="" selected>Seleccione una area...</option>
                     <option value="Lenguaje">Lenguaje</option>
                     <option value="Matematicas">Matematicas</option>
                     <option value="CienciaSociales">Ciencia Sociales</option>
                     <option value="CienciaNaturales">Ciencia Naturales</option>
+                  </select>
+                </mat-form-field>
+              </div>
+
+              <div class="btn-group siNo">
+                <mat-form-field>
+                  <select matNativeControl (change)="SiNo($event)">
+                    <option value="" selected>Opcion con imagen...</option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
                   </select>
                 </mat-form-field>
               </div>
@@ -78,7 +84,7 @@
                   type="file"
                   accept=".png, .jpeg, .jpg"
                   formControlName="imageUrl"
-                  (change)="uploadImage($event)"
+                  (change)="ImageTexto($event)"
                 />
               </div>
 
@@ -94,7 +100,7 @@
                 ></textarea>
               </div>
 
-              <div class="form-floating mb-3">
+              <div class="form-floating mb-3" *ngIf="selectSiNo == 'No'">
                 <input
                   class="form-control"
                   type="text"
@@ -105,20 +111,17 @@
                 <label for="opcion1">Opcion 1</label>
               </div>
 
-              <!-- <div
-                class="form-floating mb-3"
-                *ngIf="selectcat == 'Matematicas'"
-              >
+              <div class="form-floating mb-3" *ngIf="selectSiNo == 'Si'">
                 <input
                   class="form-control"
                   type="file"
                   accept=".png, .jpeg, .jpg"
-                  formControlName="imageUrl"
-                  (change)="uploadImage($event)"
+                  formControlName="imageOpcion1"
+                  (change)="UrlOpcion1($event)"
                 />
-              </div> -->
+              </div>
 
-              <div class="form-floating mb-3">
+              <div class="form-floating mb-3" *ngIf="selectSiNo == 'No'">
                 <input
                   class="form-control"
                   type="text"
@@ -129,7 +132,17 @@
                 <label for="opcion2">Opcion 2</label>
               </div>
 
-              <div class="form-floating mb-3">
+              <div class="form-floating mb-3" *ngIf="selectSiNo == 'Si'">
+                <input
+                  class="form-control"
+                  type="file"
+                  accept=".png, .jpeg, .jpg"
+                  formControlName="imageOpcion2"
+                  (change)="UrlOpcion2($event)"
+                />
+              </div>
+
+              <div class="form-floating mb-3" *ngIf="selectSiNo == 'No'">
                 <input
                   class="form-control"
                   type="text"
@@ -140,7 +153,17 @@
                 <label for="opcion3">Opcion 3</label>
               </div>
 
-              <div class="form-floating mb-3">
+              <div class="form-floating mb-3" *ngIf="selectSiNo == 'Si'">
+                <input
+                  class="form-control"
+                  type="file"
+                  accept=".png, .jpeg, .jpg"
+                  formControlName="imageOpcion3"
+                  (change)="UrlOpcion3($event)"
+                />
+              </div>
+
+              <div class="form-floating mb-3" *ngIf="selectSiNo == 'No'">
                 <input
                   class="form-control"
                   type="text"
@@ -149,6 +172,27 @@
                   placeholder="Opcion 4"
                 />
                 <label for="opcion4">Opcion 4</label>
+              </div>
+
+              <div class="form-floating mb-3" *ngIf="selectSiNo == 'Si'">
+                <input
+                  class="form-control"
+                  type="file"
+                  accept=".png, .jpeg, .jpg"
+                  formControlName="imageOpcion4"
+                  (change)="UrlOpcion4($event)"
+                />
+              </div>
+
+              <div class="form-floating mb-3">
+                <input
+                  class="form-control"
+                  type="file"
+                  accept=".png, .jpeg, .jpg"
+                  formControlName="image2"
+                  (change)="imageUrl2($event)"
+                />
+                <label for="image2">Imagen 2</label>
               </div>
 
               <div class="form-floating mb-3">
@@ -160,16 +204,6 @@
                   placeholder="Subtitulo"
                 />
                 <label for="subtitutlo">Subtitulo</label>
-              </div>
-
-              <div class="form-floating mb-3">
-                <input
-                  class="form-control"
-                  type="file"
-                  accept=".png, .jpeg, .jpg"
-                  formControlName="imageUrlSubtitulo"
-                  (change)="uploadImageSubtitulo($event)"
-                />
               </div>
 
               <div class="form-floating mb-3">

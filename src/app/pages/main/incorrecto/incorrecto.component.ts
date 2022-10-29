@@ -10,16 +10,16 @@ import { LoginService } from 'src/app/core/services/login.service';
 })
 export class IncorrectoComponent implements OnInit {
   user: Usuario[];
+  idUser: string;
   constructor(
     private rutaActiva: ActivatedRoute,
     private router: Router,
     private serviceLogin: LoginService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    const id = this.rutaActiva.snapshot.paramMap.get('id');
-    console.log(id)
-    this.serviceLogin.getById(id).subscribe((res) => {
+    this.idUser = this.rutaActiva.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.idUser).then((res) => {
       this.user = res;
     });
   }

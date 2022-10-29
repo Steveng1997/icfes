@@ -11,6 +11,7 @@ import { LoginService } from 'src/app/core/services/login.service';
 })
 export class MenuAreaPersonalComponent implements OnInit {
   user: Usuario[];
+  idUser: string;
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -18,8 +19,8 @@ export class MenuAreaPersonalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const id = this.activeRoute.snapshot.paramMap.get('id');
-    this.serviceLogin.getById(id).subscribe((res) => {
+    this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.idUser).then((res) => {
       this.user = res;
     });
   }

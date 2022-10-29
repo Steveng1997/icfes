@@ -25,11 +25,9 @@ import { CorrectoPersonalComponent } from './pages/main/correcto-personal/correc
 import { IncorrectoPersonalComponent } from './pages/main/incorrecto-personal/incorrecto-personal.component';
 import { EditarEstudianteComponent } from './pages/pre-auth/admin/estudiantes/editar-estudiante/editar-estudiante.component';
 import { PuntajeComponent } from './pages/pre-auth/admin/puntaje/puntaje.component';
-import { InsertarpuntajeComponent } from './pages/pre-auth/admin/puntaje/insertarpuntaje/insertarpuntaje.component';
 import { EditarPuntuacionComponent } from './pages/pre-auth/admin/puntaje/editar-puntuacion/editar-puntuacion.component';
 
 const routes: Routes = [
-
   { path: 'menu/:id', component: MenuComponent, canActivate: [LoginGuardian] },
 
   {
@@ -53,12 +51,13 @@ const routes: Routes = [
   {
     path: 'areas/:id',
     component: MenuareaComponent,
-    canActivate: [LoginGuardian]
+    canActivate: [LoginGuardian],
   },
 
   {
-    path: '', component: LoginComponent,
-    pathMatch: 'full'
+    path: '',
+    component: LoginComponent,
+    pathMatch: 'full',
   },
 
   {
@@ -114,11 +113,6 @@ const routes: Routes = [
       {
         path: 'puntaje',
         component: PuntajeComponent,
-        canActivate: [LoginGuardian],
-      },
-      {
-        path: 'insertar-puntaje',
-        component: InsertarpuntajeComponent,
         canActivate: [LoginGuardian],
       },
       {
@@ -183,4 +177,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

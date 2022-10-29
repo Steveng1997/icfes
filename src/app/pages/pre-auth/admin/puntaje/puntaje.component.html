@@ -27,6 +27,7 @@
       integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
       crossorigin="anonymous"
     />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style href="puntaje.component.scss"></style>
   </head>
 
@@ -67,7 +68,9 @@
                     routerLink="/admin/editar-puntaje/{{ puntuacion.id }}"
                   ></i>
                   <i
-                    (click)="DeletePuntaje(puntuacion.id)"
+                    (click)="
+                      DeletePuntaje(puntuacion.idDocument, puntuacion.id)
+                    "
                     class="fas fa-trash-alt fa-lg text-danger"
                   ></i>
                   <td></td>

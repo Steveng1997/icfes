@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/core/services/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-insertar-login',
@@ -15,34 +16,65 @@ export class InsertarUsuario implements OnInit {
   opcionSeleccionado: string = '0';
   verSeleccion: string = '';
 
-  constructor(public router: Router, public serviceLogin: LoginService) { }
+  constructor(public router: Router, public serviceLogin: LoginService) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   onAddUser() {
-    if (this.email != '' && this.password != '') {
-      this.serviceLogin.emailExistAndPassword(this.email, this.password).then((emailexist) => {
-        if (emailexist == false) {
-          this.serviceLogin
-            .registerUser(
-              this.email,
-              this.nombre,
-              this.password,
-              this.opcionSeleccionado
-            )
-            .catch((err) => console.log('err', err.message));
+    if (this.email != '') {
+      if (this.nombre != '') {
+        if (this.password != '') {
+          if (this.verSeleccion != '' || this.opcionSeleccionado != '0') {
+            this.serviceLogin.getByEmail(this.email).then((emailexist) => {
+              if (emailexist.length != 0) {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'El usuario existe en la base de datos.',
+                });
+              } else {
+                this.serviceLogin.registerUser(
+                  this.email,
+                  this.nombre,
+                  this.password,
+                  this.opcionSeleccionado
+                );
+                this.router.navigate(['admin/usuarios']);
+                Swal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: '¡Insertado Correctamente!',
+                  showConfirmButton: false,
+                  timer: 2500,
+                });
+              }
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'El campo seleccionado se encuentra vacío.',
+            });
+          }
         } else {
-          alert('El correo ya existe');
-          console.log('existe correo');
+          Swal.fire({
+            icon: 'error',
+            title: 'El campo password se encuentra vacío.',
+          });
         }
-      });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'El campo nombre se encuentra vacío.',
+        });
+      }
     } else {
-      alert('Campos vacios');
+      Swal.fire({
+        icon: 'error',
+        title: 'El campo email se encuentra vacío.',
+      });
     }
   }
 
   capturar() {
     this.verSeleccion = this.opcionSeleccionado;
-    console.log(this.verSeleccion);
   }
 }

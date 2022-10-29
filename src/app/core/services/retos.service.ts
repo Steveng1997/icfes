@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class RetoService {
-  constructor(public router: Router, private db: AngularFirestore) { }
+  constructor(public router: Router, private db: AngularFirestore) {}
 
   retos: Retos[] = [];
   cursoDoc: AngularFirestoreDocument<Retos>;
@@ -28,12 +28,12 @@ export class RetoService {
     }
     return result;
   }
-  registerRetos(formularioall) {
+  registerRetos(formularioall, image1) {
     formularioall = {
       id: `uid${this.makeid(10)}`,
       categoria: formularioall.categoria,
       texto1: formularioall.texto1,
-      imageUrl: formularioall.imageUrl,
+      imageUrl: image1,
       texto2: formularioall.texto2,
       opciones: {
         opcion1: formularioall.opcion1,
@@ -41,9 +41,15 @@ export class RetoService {
         opcion3: formularioall.opcion3,
         opcion4: formularioall.opcion4,
       },
+      imageOpciones: {
+        imageOpcion1: formularioall.imageOpcion1,
+        // imageOpcion2: formularioall.imageOpcion2,
+        // imageOpcion3: formularioall.imageOpcion3,
+        // imageOpcion4: formularioall.imageOpcion4,
+      },
       idsUsuarios: [],
+      image2: formularioall.image2,
       subtitulo: formularioall.subtitulo,
-      imageUrlSubtitulo: formularioall.imageUrlSubtitulo,
       respuesta: formularioall.respuesta,
     };
     return new Promise<any>((resolve, reject) => {
@@ -56,7 +62,6 @@ export class RetoService {
         );
     });
   }
-
 
   registerIdUsuario(formularioall, id) {
     formularioall = {
@@ -81,25 +86,40 @@ export class RetoService {
   // Get
   // -----------------------------------------------------------------------------------
 
-  getById(id) {
-    return this.db
-      .collection('retos', (ref) => ref.where('id', '==', id))
-      .valueChanges();
+  getById(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('retos', (ref) => ref.where('id', '==', id))
+        .valueChanges({ idField: 'idDocument' })
+        .subscribe((rp) => {
+          if (rp[0]?.idDocument) {
+            resolve(rp);
+          } else {
+            resolve(rp);
+          }
+        });
+    });
   }
 
-  getRetosByCategoria(): Observable<any> {
-    return this.db
-      .collection('retos', (ref) => ref.orderBy('categoria', 'asc'))
-      .snapshotChanges();
+  getRetosByCategoria(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('retos', (ref) => ref.orderBy('categoria', 'asc'))
+        .valueChanges({ idField: 'idDocument' })
+        .subscribe((rp) => {
+          if (rp[0]?.idDocument) {
+            resolve(rp);
+          } else {
+            resolve(rp);
+          }
+        });
+    });
   }
 
   getByCategoria(categoria: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('retos', (ref) =>
-          ref
-            .where('categoria', '==', categoria)
-        )
+        .collection('retos', (ref) => ref.where('categoria', '==', categoria))
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
           if (rp[0]?.idDocument) {
@@ -119,15 +139,11 @@ export class RetoService {
   // Update
   // -----------------------------------------------------------------------------------
 
-  updateRetos(reto: Retos) {
+  updateRetos(idDocumentReto, idReto, reto: Retos) {
     return this.db
-      .collection('retos', (ref) => ref.where('id', '==', reto.id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update(reto);
-        });
-      });
+      .collection('retos', (ref) => ref.where('id', '==', idReto))
+      .doc(idDocumentReto)
+      .update(reto);
   }
 
   updateIdsUsuarios(idDocumentReto, idReto, idsUsuarios) {
@@ -135,17 +151,30 @@ export class RetoService {
       .collection('retos', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        "idsUsuarios": idsUsuarios,
-      })
+        idsUsuarios: idsUsuarios,
+      });
   }
 
-  updateRetosForImagen(reto: Retos) {
+  updateImageSubtitules(image2, reto: Retos) {
     return this.db
       .collection('retos', (ref) => ref.where('id', '==', reto.id))
       .get()
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          doc.ref.update(reto);
+          doc.ref.update({ image2: image2 });
+        });
+      });
+  }
+
+  updateImageOpcion1(reto: Retos, imageOpcion1) {
+    return this.db
+      .collection('retos', (ref) => ref.where('id', '==', reto.id))
+      .get()
+      .forEach((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({
+            imageOpcion1: imageOpcion1,
+          });
         });
       });
   }
@@ -158,25 +187,11 @@ export class RetoService {
   // Delete
   // -----------------------------------------------------------------------------------
 
-  async deleteUsuario(id: string): Promise<any> {
+  async deleteRetos(idDocument, id): Promise<any> {
     this.db
       .collection('retos', (ref) => ref.where('id', '==', id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref
-            .delete()
-            .then(() => {
-              console.log('Usuario eliminado con exito');
-            })
-            .catch(function () {
-              console.error('Error al eliminar el usuario');
-            });
-        });
-      })
-      .catch(function () {
-        console.log('Error al eliminar el usuario');
-      });
+      .doc(idDocument)
+      .delete();
   }
 
   // -----------------------------------------------------------------------------------

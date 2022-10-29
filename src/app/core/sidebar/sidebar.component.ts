@@ -17,16 +17,17 @@ import Swal from 'sweetalert2';
 })
 export class SidebarComponent implements OnInit {
   user: Usuario[];
+  email: string;
   constructor(
     public router: Router,
     public serviceUser: LoginService,
     public formBuilder: FormBuilder,
     private activeRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    const email = this.activeRoute.snapshot.paramMap.get('email');
-    this.serviceUser.getByName(email).subscribe((res) => {      
+    this.email = this.activeRoute.snapshot.paramMap.get('email');
+    this.serviceUser.getByEmail(this.email).then((res) => {
       this.user = res;
     });
   }

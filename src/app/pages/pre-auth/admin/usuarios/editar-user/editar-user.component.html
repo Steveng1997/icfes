@@ -27,6 +27,7 @@
       integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
       crossorigin="anonymous"
     />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style href="editar-user.component.scss"></style>
   </head>
 
@@ -40,7 +41,7 @@
             </div>
 
             <div class="centrar-form">
-              <form (ngSubmit)="editarReto(us)">
+              <form (ngSubmit)="editarReto(us.idDocument, us.id, us)">
                 <div class="form-floating mb-3">
                   <input
                     name="email"

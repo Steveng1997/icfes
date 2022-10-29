@@ -26,7 +26,7 @@ export class RetosComponent implements OnInit {
     private retoService: RetoService,
     private serviceLogin: LoginService,
     private servicePuntaje: PuntuacionService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.idUser = this.rutaActiva.snapshot.paramMap.get('id');
@@ -40,18 +40,16 @@ export class RetosComponent implements OnInit {
     this.retoService
       .getByCategoria(categoria)
       .then((dataCategoria) => {
-
-        this.datosReto = dataCategoria.filter(_reto => {
+        this.datosReto = dataCategoria.filter((_reto) => {
           if (_reto['idsUsuarios'].includes(this.idUser)) {
-            return
+            return;
           }
-          return _reto
-        })
+          return _reto;
+        });
 
         setTimeout(() => {
           this.convertToHtml();
         }, 1000);
-
       })
       .catch((err) => console.log('err', err.message));
   }
@@ -76,53 +74,124 @@ export class RetosComponent implements OnInit {
   }
 
   obtenerPuntaje(idUser) {
-    console.log(idUser);
-
-    this.servicePuntaje
-      .getPuntajeByIdUsuario(idUser)
-      .subscribe((respu) => {
-        this.puntajeObtenido = respu[0]
-        return this.puntajeObtenido
-      });
+    this.servicePuntaje.getPuntajeByIdUsuario(idUser).then((respu) => {
+      this.puntajeObtenido = respu[0];
+      return this.puntajeObtenido;
+    });
   }
 
   opcionA(event, idDocumentReto, idReto, idsUsuarios, respuesta) {
-    this.obtenerPuntaje(this.idUser)
+    this.obtenerPuntaje(this.idUser);
 
     if (!idsUsuarios) {
-      idsUsuarios = []
+      idsUsuarios = [];
     }
 
-    idsUsuarios.push(this.idUser)
-    this.retoService.updateIdsUsuarios(idDocumentReto, idReto, idsUsuarios).then(resp => {
-      setTimeout(() => {
-        let puntaje: Number;
-        if (this.puntajeObtenido) {
+    idsUsuarios.push(this.idUser);
+    this.retoService
+      .updateIdsUsuarios(idDocumentReto, idReto, idsUsuarios)
+      .then((resp) => {
+        setTimeout(() => {
+          let puntaje: Number;
+          if (this.puntajeObtenido) {
+            if (respuesta == event.target.innerHTML.trim()) {
+              puntaje = 3;
+            } else {
+              puntaje = 1;
+            }
 
-          if (respuesta == event.target.innerHTML.trim()) {
-            puntaje = 2;
+            if (this.categoria == 'Lenguaje') {
+              this.servicePuntaje
+                .updatePuntajeLenguaje(
+                  this.puntajeObtenido['idDocument'],
+                  this.idUser,
+                  this.puntajeObtenido['puntuacion'] + puntaje
+                )
+                .then((rp) => {
+                  console.log(rp);
+                });
+            }
+
+            if (this.categoria == 'Matematicas') {
+              this.servicePuntaje
+                .updatePuntajeMatematicas(
+                  this.puntajeObtenido['idDocument'],
+                  this.idUser,
+                  this.puntajeObtenido['puntuacion'] + puntaje
+                )
+                .then((rp) => {
+                  console.log(rp);
+                });
+            }
+
+            if (this.categoria == 'CienciaSociales') {
+              this.servicePuntaje
+                .updatePuntajeSociales(
+                  this.puntajeObtenido['idDocument'],
+                  this.idUser,
+                  this.puntajeObtenido['puntuacion'] + puntaje
+                )
+                .then((rp) => {
+                  console.log(rp);
+                });
+            }
+
+            if (this.categoria == 'CienciaNaturales') {
+              this.servicePuntaje
+                .updatePuntajeNaturales(
+                  this.puntajeObtenido['idDocument'],
+                  this.idUser,
+                  this.puntajeObtenido['puntuacion'] + puntaje
+                )
+                .then((rp) => {
+                  console.log(rp);
+                });
+            }
           } else {
-            puntaje = 1;
+            if (respuesta == event.target.innerHTML.trim()) {
+              puntaje = 3;
+            } else {
+              puntaje = 1;
+            }
+
+            if (this.categoria == 'Lenguaje') {
+              this.servicePuntaje.registerByIdUsuarioLenguaje(
+                this.idUser,
+                puntaje
+              );
+            }
+
+            if (this.categoria == 'Matematicas') {
+              this.servicePuntaje.registerByIdUsuarioMatematicas(
+                this.idUser,
+                puntaje
+              );
+            }
+
+            if (this.categoria == 'CienciaSociales') {
+              this.servicePuntaje.registerByIdUsuarioSociales(
+                this.idUser,
+                puntaje
+              );
+            }
+
+            if (this.categoria == 'CienciaNaturales') {
+              this.servicePuntaje.registerByIdUsuarioNaturales(
+                this.idUser,
+                puntaje
+              );
+            }
+            // crea
           }
 
-          this.servicePuntaje.updatePuntaje(this.puntajeObtenido['idDocument'], this.idUser, this.puntajeObtenido['puntuacion'] + puntaje).then(rp => {
-            console.log(rp);
-          })
-        }
-        else {
-          // crea
-          this.servicePuntaje.registerByIdUsuario(this.idUser);
-        }
+          if (puntaje == 2) {
+            this.router.navigate([`correcto/${this.idUser}`]);
+          }
 
-        if (puntaje == 2) {
-          this.router.navigate([`correcto/${this.idUser}`]);
-        }
-
-        if (puntaje == 1) {
-          this.router.navigate([`incorrecto/${this.idUser}`]);
-        }
-
-      }, 1000);
-    });
+          if (puntaje == 1) {
+            this.router.navigate([`incorrecto/${this.idUser}`]);
+          }
+        }, 1000);
+      });
   }
 }

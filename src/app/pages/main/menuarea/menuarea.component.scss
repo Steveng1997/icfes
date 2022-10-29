@@ -63,6 +63,15 @@
   .imgall {
     margin-left: -30%;
   }
+
+  .btn-salir {
+    margin-right: 3%;
+    margin-top: 1.9px;
+  }
+
+  .btnSalir {
+    width: 10%;
+  }
 }
 
 @media only screen and (max-width: 750px) {
@@ -70,11 +79,29 @@
     grid-template-columns: 100%;
     width: 0;
   }
+
+  .btn-salir {
+    margin-right: 1%;
+    margin-top: 1%;
+  }
+
+  .btnSalir {
+    width: 23%;
+  }
 }
 
 @media only screen and (max-width: 380px) {
   .cards {
     grid-template-columns: 100%;
     width: 0;
+  }
+
+  .btn-salir {
+    margin-right: 1%;
+    margin-top: 1%;
+  }
+
+  .btnSalir {
+    width: 23%;
   }
 }

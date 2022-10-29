@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 //importamos el enrutador
 import { Router, ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/core/models/login';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-user',
@@ -14,8 +15,8 @@ import { Usuario } from 'src/app/core/models/login';
   styleUrls: ['./editar-user.component.scss'],
 })
 export class EditarUserComponent implements OnInit {
-
   usua: Usuario[];
+  idUser: string;
 
   constructor(
     public postService: LoginService,
@@ -25,16 +26,22 @@ export class EditarUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.activeRoute.snapshot.paramMap.get('id');
-
-    this.postService.getById(id).subscribe((res) => {
-      this.usua = res;
+    this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.postService.getById(this.idUser).then((datosEstudiante) => {
+      return (this.usua = datosEstudiante);
     });
   }
 
-  editarReto(usu: Usuario) {
+  editarReto(idDocument, idEstudiante, usu: Usuario) {
     const id = this.activeRoute.snapshot.paramMap.get('id');
-    this.postService.updateUsuarios(usu);
+    this.postService.updateUsuarios(idDocument, idEstudiante, usu);
     this.router.navigate(['admin/usuarios']);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: '¡Editado Correctamente!',
+      showConfirmButton: false,
+      timer: 2500,
+    });
   }
 }

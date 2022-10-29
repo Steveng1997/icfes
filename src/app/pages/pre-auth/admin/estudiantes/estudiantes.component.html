@@ -65,7 +65,7 @@
                     routerLink="/admin/editar-estudiante/{{ estud.id }}"
                   ></i>
                   <i
-                    (click)="DeleteUser(estud.id)"
+                    (click)="DeleteUser(estud.idDocument, estud.id)"
                     class="fas fa-trash-alt fa-lg text-danger"
                   ></i>
                   <td></td>

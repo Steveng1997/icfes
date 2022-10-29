@@ -15,7 +15,7 @@ export class LoginService {
     public router: Router,
     private db: AngularFirestore,
     private authFire: AngularFireAuth
-  ) { }
+  ) {}
 
   usuarios: Usuario[] = [];
 
@@ -61,29 +61,13 @@ export class LoginService {
   // Get
   // -----------------------------------------------------------------------------------
 
-  getById(id) {
-    return this.db
-      .collection('usuarios', (ref) => ref.where('id', '==', id))
-      .valueChanges();
-  }
-  
-  getByName(email) {
-    return this.db
-      .collection('usuarios', (ref) => ref.where('email', '==', email))
-      .valueChanges();
-  }
-
-  emailExistAndPassword(email: string, password: string): Promise<any> {
+  getById(id): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('usuarios', (ref) =>
-          ref
-            .where('email', '==', email)
-            .where('password', '==', password)
-        )
-        .valueChanges()
+        .collection('usuarios', (ref) => ref.where('id', '==', id))
+        .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
-          if (rp[0]) {
+          if (rp[0]?.idDocument) {
             resolve(rp);
           } else {
             resolve(rp);
@@ -92,14 +76,51 @@ export class LoginService {
     });
   }
 
-  getUsuarios(): Observable<any> {
-    return this.db
-      .collection('usuarios', (ref) => ref.orderBy('id', 'asc'))
-      .snapshotChanges();
+  getByEmail(email): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('usuarios', (ref) => ref.where('email', '==', email))
+        .valueChanges({ idField: 'idDocument' })
+        .subscribe((rp) => {
+          if (rp[0]?.idDocument) {
+            resolve(rp);
+          } else {
+            resolve(rp);
+          }
+        });
+    });
   }
 
-  getAll() {
-    return this.db.collection('usuarios').snapshotChanges();
+  emailExistAndPassword(email: string, password: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('usuarios', (ref) =>
+          ref.where('email', '==', email).where('password', '==', password)
+        )
+        .valueChanges({ idField: 'idDocument' })
+        .subscribe((rp) => {
+          if (rp[0]?.idDocument) {
+            resolve(rp);
+          } else {
+            resolve(rp);
+          }
+        });
+    });
+  }
+
+  getUsuarios(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('usuarios', (ref) => ref.orderBy('id', 'asc'))
+        .valueChanges({ idField: 'idDocument' })
+        .subscribe((rp) => {
+          if (rp[0]?.idDocument) {
+            resolve(rp);
+          } else {
+            resolve(rp);
+          }
+        });
+    });
   }
 
   // -----------------------------------------------------------------------------------
@@ -110,15 +131,11 @@ export class LoginService {
   // Update
   // -----------------------------------------------------------------------------------
 
-  updateUsuarios(user: Usuario) {
+  updateUsuarios(idDocument, idUser, user: Usuario) {
     return this.db
-      .collection('usuarios', (ref) => ref.where('id', '==', user.id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update(user);
-        });
-      });
+      .collection('usuarios', (ref) => ref.where('id', '==', idUser))
+      .doc(idDocument)
+      .update(user);
   }
 
   // -----------------------------------------------------------------------------------
@@ -129,25 +146,11 @@ export class LoginService {
   // Delete
   // -----------------------------------------------------------------------------------
 
-  async deleteUsuario(id: string): Promise<any> {
+  async deleteUsuario(idDocument, id): Promise<any> {
     this.db
       .collection('usuarios', (ref) => ref.where('id', '==', id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref
-            .delete()
-            .then(() => {
-              console.log('Usuario eliminado con exito');
-            })
-            .catch(function () {
-              console.error('Error al eliminar el usuario');
-            });
-        });
-      })
-      .catch(function () {
-        console.log('Error al eliminar el usuario');
-      });
+      .doc(idDocument)
+      .delete();
   }
 
   // -----------------------------------------------------------------------------------

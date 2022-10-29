@@ -16,6 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class MirarAvanceComponent implements OnInit {
   puntajes: Puntaje[];
+  idUser: string;
   constructor(
     public router: Router,
     public servicePuntaje: PuntuacionService,
@@ -24,11 +25,12 @@ export class MirarAvanceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.activeRoute.snapshot.paramMap.get('id');
-    this.servicePuntaje.getPuntajeByIdUsuario(id).subscribe((res) => {
-      console.log(res);
-      // this.puntajes = res;
-    });
+    this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.servicePuntaje
+      .getPuntajeByIdUsuario(this.idUser)
+      .then((respuestaPuntaje) => {
+        this.puntajes = respuestaPuntaje;
+      });
   }
 
   salir() {
