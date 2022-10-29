@@ -40,6 +40,7 @@ export class RetosComponent implements OnInit {
     this.retoService
       .getByCategoria(categoria)
       .then((dataCategoria) => {
+        console.log(dataCategoria)
         this.datosReto = dataCategoria.filter((_reto) => {
           if (_reto['idsUsuarios'].includes(this.idUser)) {
             return;
@@ -80,6 +81,11 @@ export class RetosComponent implements OnInit {
     });
   }
 
+
+  opcionImage(event, idDocumentReto, idReto, idsUsuarios, respuesta){
+
+  }
+
   opcionA(event, idDocumentReto, idReto, idsUsuarios, respuesta) {
     this.obtenerPuntaje(this.idUser);
 
@@ -105,7 +111,7 @@ export class RetosComponent implements OnInit {
                 .updatePuntajeLenguaje(
                   this.puntajeObtenido['idDocument'],
                   this.idUser,
-                  this.puntajeObtenido['puntuacion'] + puntaje
+                  this.puntajeObtenido['puntuacionLenguaje'] + puntaje
                 )
                 .then((rp) => {
                   console.log(rp);
@@ -117,7 +123,7 @@ export class RetosComponent implements OnInit {
                 .updatePuntajeMatematicas(
                   this.puntajeObtenido['idDocument'],
                   this.idUser,
-                  this.puntajeObtenido['puntuacion'] + puntaje
+                  this.puntajeObtenido['puntuacionMatematicas'] + puntaje
                 )
                 .then((rp) => {
                   console.log(rp);
@@ -129,7 +135,7 @@ export class RetosComponent implements OnInit {
                 .updatePuntajeSociales(
                   this.puntajeObtenido['idDocument'],
                   this.idUser,
-                  this.puntajeObtenido['puntuacion'] + puntaje
+                  this.puntajeObtenido['puntuacionSociales'] + puntaje
                 )
                 .then((rp) => {
                   console.log(rp);
@@ -141,7 +147,7 @@ export class RetosComponent implements OnInit {
                 .updatePuntajeNaturales(
                   this.puntajeObtenido['idDocument'],
                   this.idUser,
-                  this.puntajeObtenido['puntuacion'] + puntaje
+                  this.puntajeObtenido['puntuacionNaturales'] + puntaje
                 )
                 .then((rp) => {
                   console.log(rp);
@@ -184,7 +190,7 @@ export class RetosComponent implements OnInit {
             // crea
           }
 
-          if (puntaje == 2) {
+          if (puntaje == 3) {
             this.router.navigate([`correcto/${this.idUser}`]);
           }
 

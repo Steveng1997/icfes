@@ -159,7 +159,7 @@ export class InsertarRetosComponent implements OnInit {
           // Fin imagen 1
 
           // Imagen2
-          if (this.formTemplate.value.image2 != '') {
+          if (this.formTemplate.value.image2 != '' && this.formTemplate.value.imageOpcion1 != '') {
             var filePath2 = `${'imagenes'}/${this.selectedImage2.name
               .split('.')
               .slice(0, -1)
@@ -176,10 +176,28 @@ export class InsertarRetosComponent implements OnInit {
                       this.serviceRetos.updateImage2(formValue, formValue['image2']);
                     }, 2000);
 
+                    this.router.navigate(['admin/adminRetos']);
+                    Swal.fire({
+                      position: 'top-end',
+                      icon: 'success',
+                      title: '¡Insertado Correctamente!',
+                      showConfirmButton: false,
+                      timer: 2500,
+                    });
+
                   });
                 })
               )
               .subscribe();
+          } else {
+            this.router.navigate(['admin/adminRetos']);
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: '¡Insertado Correctamente!',
+              showConfirmButton: false,
+              timer: 2500,
+            });
           }
           // Fin Imagen2
 
@@ -272,6 +290,15 @@ export class InsertarRetosComponent implements OnInit {
                     setTimeout(() => {
                       this.serviceRetos.updateImageOpcion4(formValue, formValue['imageOpcion4']);
                     }, 6000);
+
+                    this.router.navigate(['admin/adminRetos']);
+                    Swal.fire({
+                      position: 'top-end',
+                      icon: 'success',
+                      title: '¡Insertado Correctamente!',
+                      showConfirmButton: false,
+                      timer: 2500,
+                    });
                   });
                 })
               )

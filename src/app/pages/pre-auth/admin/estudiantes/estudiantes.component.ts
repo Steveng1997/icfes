@@ -15,7 +15,7 @@ export class EstudiantesComponent implements OnInit {
   constructor(
     public router: Router,
     public serviceEstudiante: EstudianteService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getEmpleados();
@@ -27,7 +27,9 @@ export class EstudiantesComponent implements OnInit {
 
   getEmpleados() {
     this.serviceEstudiante.getEstudiantes().then((datosEstudiantes) => {
-      return (this.estudiantes = datosEstudiantes);
+      setTimeout(() => {
+        this.estudiantes = datosEstudiantes;
+      }, 1000);
     });
   }
 

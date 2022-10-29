@@ -12,7 +12,7 @@ export class AdminRetosComponent implements OnInit {
   retos: any[] = [];
   public page!: number;
 
-  constructor(public router: Router, public serviceRetos: RetoService) {}
+  constructor(public router: Router, public serviceRetos: RetoService) { }
 
   ngOnInit(): void {
     this.getRetos();
@@ -24,7 +24,9 @@ export class AdminRetosComponent implements OnInit {
 
   getRetos() {
     this.serviceRetos.getRetosByCategoria().then((datosRetos) => {
-      return (this.retos = datosRetos);
+      setTimeout(() => {
+        this.retos = datosRetos;
+      }, 1000);
     });
   }
 

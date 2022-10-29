@@ -1,6 +1,9 @@
 export class Puntaje {
   id?: string;
   idUsuario?: string;
-  puntuacion?: number;
+  puntuacionLenguaje?: number;
+  puntuacionMatematicas?: number;
+  puntuacionNaturales?: number;
+  puntuacionSociales?: number;
   idDocument?: string;
 }

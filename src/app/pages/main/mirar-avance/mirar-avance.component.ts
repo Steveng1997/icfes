@@ -22,14 +22,14 @@ export class MirarAvanceComponent implements OnInit {
     public servicePuntaje: PuntuacionService,
     public formBuilder: FormBuilder,
     private activeRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.idUser = this.activeRoute.snapshot.paramMap.get('id');
-    this.servicePuntaje
-      .getPuntajeByIdUsuario(this.idUser)
+    this.servicePuntaje.getPuntajeByIdUsuario(this.idUser)
       .then((respuestaPuntaje) => {
         this.puntajes = respuestaPuntaje;
+        console.log(this.puntajes)
       });
   }
 
