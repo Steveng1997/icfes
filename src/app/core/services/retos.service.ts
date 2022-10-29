@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class RetoService {
-  constructor(public router: Router, private db: AngularFirestore) { }
+  constructor(public router: Router, private db: AngularFirestore) {}
 
   retos: Retos[] = [];
   cursoDoc: AngularFirestoreDocument<Retos>;
@@ -51,6 +51,7 @@ export class RetoService {
       image2: formularioall.image2,
       subtitulo: formularioall.subtitulo,
       respuesta: formularioall.respuesta,
+      imageResp: formularioall.imageResp,
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -131,12 +132,10 @@ export class RetoService {
     });
   }
 
-
   getByInsert(urlImg): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('retos', (ref) => ref
-          .where('imageUrl', '==', urlImg))
+        .collection('retos', (ref) => ref.where('imageUrl', '==', urlImg))
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
           if (rp[0]?.idDocument) {
@@ -179,7 +178,7 @@ export class RetoService {
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           doc.ref.update({
-            image2: image2
+            image2: image2,
           });
         });
       });
@@ -194,7 +193,7 @@ export class RetoService {
           doc.ref.update({
             imageOpciones: {
               imageOpcion1: imageOpcion1,
-            }
+            },
           });
         });
       });
@@ -209,7 +208,7 @@ export class RetoService {
           doc.ref.update({
             imageOpciones: {
               imageOpcion2: imageOpcion2,
-            }
+            },
           });
         });
       });
@@ -224,7 +223,7 @@ export class RetoService {
           doc.ref.update({
             imageOpciones: {
               imageOpcion3: imageOpcion3,
-            }
+            },
           });
         });
       });
@@ -239,7 +238,22 @@ export class RetoService {
           doc.ref.update({
             imageOpciones: {
               imageOpcion4: imageOpcion4,
-            }
+            },
+          });
+        });
+      });
+  }
+
+  updateImageResp(reto: Retos, imageResp) {
+    return this.db
+      .collection('retos', (ref) => ref.where('id', '==', reto.id))
+      .get()
+      .forEach((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({
+            imageOpciones: {
+              imageResp: imageResp,
+            },
           });
         });
       });

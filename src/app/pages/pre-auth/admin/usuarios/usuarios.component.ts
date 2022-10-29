@@ -24,10 +24,7 @@ export class UsuariosComponent implements OnInit {
 
   getEmpleadosByDocument() {
     this.serviceLogin.getUsuarios().then((datosUsers) => {
-      setTimeout(() => {
-        this.usuarios = datosUsers;
-      }, 1000);
-      
+      this.usuarios = datosUsers;
     });
   }
 

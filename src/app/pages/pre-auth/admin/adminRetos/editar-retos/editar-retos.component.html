@@ -71,7 +71,65 @@
                 ></textarea>
               </div>
 
+              <div
+                *ngIf="ret['imageOpciones']['imageUrl'] != ''"
+                class="row form-floating mb-3"
+                style="cursor: pointer; text-align: center"
+              >
+                <div class="col-md-4">
+                  <label class="text-justify font-weight-bold">Imagen 1.</label>
+                </div>
+                <div class="col-md-4">
+                  <img src="{{ ret['imageUrl'] }}" width="100%" />
+                </div>
+                <div class="col-md-4">
+                  <input
+                    style="color: transparent"
+                    type="file"
+                    accept=".png, .jpeg, .jpg"
+                    [(ngModel)]="ret.imageUrl"
+                    #imageUrl="ngModel"
+                    name="imageUrl"
+                  />
+                </div>
+              </div>
+
+              <div
+                *ngIf="ret['imageOpciones']['image2'] != ''"
+                class="row form-floating mb-3"
+                style="cursor: pointer; text-align: center"
+              >
+                <div class="col-md-4">
+                  <label class="text-justify font-weight-bold">Imagen 2.</label>
+                </div>
+                <div class="col-md-4">
+                  <img src="{{ ret['image2'] }}" width="100%" />
+                </div>
+                <div class="col-md-4">
+                  <input
+                    style="color: transparent"
+                    type="file"
+                    accept=".png, .jpeg, .jpg"
+                    [(ngModel)]="ret.image2"
+                    #image2="ngModel"
+                    name="image2"
+                  />
+                </div>
+              </div>
+
               <div class="form-floating mb-3">
+                <input
+                  class="form-control"
+                  type="text"
+                  name="subtitulo"
+                  [(ngModel)]="ret.subtitulo"
+                  #subtitulo="ngModel"
+                  placeholder="Subtitulo"
+                />
+                <label for="subtitulo">Opcion 1</label>
+              </div>
+
+              <!-- <div class="form-floating mb-3">
                 <input
                   class="form-control"
                   type="file"
@@ -80,65 +138,193 @@
                   #imageUrl="ngModel"
                   (change)="uploadImage($event)"
                 />
+              </div> -->
+
+              <div *ngIf="ret['opciones']['opcion1'] != ''">
+                <div class="form-floating mb-3">
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="opcion1"
+                    [(ngModel)]="ret['opciones']['opcion1']"
+                    #opcion1="ngModel"
+                    placeholder="Opcion 1"
+                  />
+                  <label for="opcion1">Opcion 1</label>
+                </div>
+
+                <div
+                  class="form-floating mb-3"
+                  *ngIf="ret['opciones']['opcion2'] != ''"
+                >
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="opcion2"
+                    [(ngModel)]="ret['opciones']['opcion2']"
+                    #opcion2="ngModel"
+                    placeholder="Opcion 2"
+                  />
+                  <label for="opcion2">Opcion 2</label>
+                </div>
+
+                <div
+                  class="form-floating mb-3"
+                  *ngIf="ret['opciones']['opcion3'] != ''"
+                >
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="opcion3"
+                    [(ngModel)]="ret['opciones']['opcion3']"
+                    #opcion3="ngModel"
+                    placeholder="Opcion 3"
+                  />
+                  <label for="opcion3">Opcion 3</label>
+                </div>
+
+                <div
+                  class="form-floating mb-3"
+                  *ngIf="ret['opciones']['opcion4'] != ''"
+                >
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="opcion4"
+                    [(ngModel)]="ret['opciones']['opcion4']"
+                    placeholder="Opcion 4"
+                  />
+                  <label for="opcion4">Opcion 4</label>
+                </div>
+
+                <div
+                  class="form-floating mb-3"
+                  *ngIf="ret['opciones']['respuesta'] != ''"
+                >
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="respuesta"
+                    [(ngModel)]="ret.respuesta"
+                    #respuesta="ngModel"
+                    placeholder="Respuesta"
+                  />
+                  <label for="respuesta">Respuesta</label>
+                </div>
               </div>
 
-              <div class="form-floating mb-3">
-                <input
-                  class="form-control"
-                  type="text"
-                  name="opcion1"
-                  [(ngModel)]="ret['opciones']['opcion1']"
-                  #opcion1="ngModel"
-                  placeholder="Opcion 1"
-                />
-                <label for="opcion1">Opcion 1</label>
+              <div
+                *ngIf="ret['imageOpciones']['imageOpcion1'] != ''"
+                class="row form-floating mb-3"
+                style="cursor: pointer; text-align: center"
+              >
+                <div class="col-md-4">
+                  <label class="text-justify font-weight-bold">Opcion A.</label>
+                </div>
+                <div class="col-md-4">
+                  <img
+                    src="{{ ret['imageOpciones']['imageOpcion1'] }}"
+                    width="100%"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <input
+                    style="color: transparent"
+                    type="file"
+                    accept=".png, .jpeg, .jpg"
+                  />
+                </div>
               </div>
 
-              <div class="form-floating mb-3">
-                <input
-                  class="form-control"
-                  type="text"
-                  name="opcion2"
-                  [(ngModel)]="ret['opciones']['opcion2']"
-                  #opcion2="ngModel"
-                  placeholder="Opcion 2"
-                />
-                <label for="opcion2">Opcion 2</label>
+              <div
+                *ngIf="ret['imageOpciones']['imageOpcion2'] != ''"
+                class="row form-floating mb-3"
+                style="cursor: pointer; text-align: center"
+              >
+                <div class="col-md-4">
+                  <label class="text-justify font-weight-bold">Opcion B.</label>
+                </div>
+                <div class="col-md-4">
+                  <img
+                    src="{{ ret['imageOpciones']['imageOpcion2'] }}"
+                    width="100%"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <input
+                    style="color: transparent"
+                    type="file"
+                    accept=".png, .jpeg, .jpg"
+                  />
+                </div>
               </div>
 
-              <div class="form-floating mb-3">
-                <input
-                  class="form-control"
-                  type="text"
-                  name="opcion3"
-                  [(ngModel)]="ret['opciones']['opcion3']"
-                  #opcion3="ngModel"
-                  placeholder="Opcion 3"
-                />
-                <label for="opcion3">Opcion 3</label>
+              <div
+                *ngIf="ret['imageOpciones']['imageOpcion3'] != ''"
+                class="row form-floating mb-3"
+                style="cursor: pointer; text-align: center"
+              >
+                <div class="col-md-4">
+                  <label class="text-justify font-weight-bold">Opcion C.</label>
+                </div>
+                <div class="col-md-4">
+                  <img
+                    src="{{ ret['imageOpciones']['imageOpcion3'] }}"
+                    width="100%"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <input
+                    style="color: transparent"
+                    type="file"
+                    accept=".png, .jpeg, .jpg"
+                  />
+                </div>
               </div>
 
-              <div class="form-floating mb-3">
-                <input
-                  class="form-control"
-                  type="text"
-                  name="opcion4"
-                  [(ngModel)]="ret['opciones']['opcion4']"
-                  placeholder="Opcion 4"
-                />
-                <label for="opcion4">Opcion 4</label>
+              <div
+                *ngIf="ret['imageOpciones']['imageOpcion4'] != ''"
+                class="row form-floating mb-3"
+                style="cursor: pointer; text-align: center"
+              >
+                <div class="col-md-4">
+                  <label class="text-justify font-weight-bold">Opcion D.</label>
+                </div>
+                <div class="col-md-4">
+                  <img
+                    src="{{ ret['imageOpciones']['imageOpcion4'] }}"
+                    width="100%"
+                  />
+                </div>
+                <div class="col-md-4">
+                  <input
+                    style="color: transparent"
+                    type="file"
+                    accept=".png, .jpeg, .jpg"
+                  />
+                </div>
               </div>
 
-              <div class="form-floating mb-3">
-                <input
-                  class="form-control"
-                  type="text"
-                  name="respuesta"
-                  [(ngModel)]="ret.respuesta"
-                  #respuesta="ngModel"
-                  placeholder="Respuesta"
-                />
-                <label for="respuesta">Respuesta</label>
+              <div
+                *ngIf="ret['imageOpciones']['imageResp'] != ''"
+                class="row form-floating mb-3"
+                style="cursor: pointer; text-align: center"
+              >
+                <div class="col-md-4">
+                  <label class="text-justify font-weight-bold"
+                    >Respuesta.</label
+                  >
+                </div>
+                <div class="col-md-4">
+                  <img src="{{ ret['imageResp'] }}" width="100%" />
+                </div>
+                <div class="col-md-4">
+                  <input
+                    style="color: transparent"
+                    type="file"
+                    accept=".png, .jpeg, .jpg"
+                  />
+                </div>
               </div>
 
               <div class="d-grid">

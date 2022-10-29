@@ -16,7 +16,7 @@ export class PuntajeComponent implements OnInit {
   constructor(
     public router: Router,
     public servicePuntuacion: PuntuacionService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getPuntaje();
@@ -28,9 +28,7 @@ export class PuntajeComponent implements OnInit {
 
   getPuntaje() {
     this.servicePuntuacion.getPuntaje().then((datosPuntaje) => {
-      setTimeout(() => {
-        this.puntaje = datosPuntaje;
-      }, 1000);
+      this.puntaje = datosPuntaje;
     });
   }
 

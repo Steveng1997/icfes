@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Usuario } from 'src/app/core/models/login';
 import { Retos } from 'src/app/core/models/retos';
@@ -40,7 +40,7 @@ export class RetosComponent implements OnInit {
     this.retoService
       .getByCategoria(categoria)
       .then((dataCategoria) => {
-        console.log(dataCategoria)
+        console.log(dataCategoria);
         this.datosReto = dataCategoria.filter((_reto) => {
           if (_reto['idsUsuarios'].includes(this.idUser)) {
             return;
@@ -81,10 +81,7 @@ export class RetosComponent implements OnInit {
     });
   }
 
-
-  opcionImage(event, idDocumentReto, idReto, idsUsuarios, respuesta){
-
-  }
+  opcionImage(event, idDocumentReto, idReto, idsUsuarios, respuesta) {}
 
   opcionA(event, idDocumentReto, idReto, idsUsuarios, respuesta) {
     this.obtenerPuntaje(this.idUser);

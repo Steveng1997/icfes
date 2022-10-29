@@ -206,7 +206,7 @@
                 <label for="subtitutlo">Subtitulo</label>
               </div>
 
-              <div class="form-floating mb-3">
+              <div class="form-floating mb-3" *ngIf="selectSiNo == 'No'">
                 <input
                   class="form-control"
                   type="text"
@@ -215,6 +215,17 @@
                   placeholder="Respuesta"
                 />
                 <label for="respuesta">Respuesta</label>
+              </div>
+
+              <div class="form-floating mb-3" *ngIf="selectSiNo == 'Si'">
+                <input
+                  class="form-control"
+                  type="file"
+                  accept=".png, .jpeg, .jpg"
+                  formControlName="imageResp"
+                  (change)="imageRespuesta($event)"
+                />
+                <label for="imageResp">Imagen 2</label>
               </div>
 
               <div class="d-grid">

@@ -148,12 +148,6 @@ export class PuntuacionService {
     });
   }
 
-  // getPuntajeByIdUsuario(id) {
-  //   return this.db
-  //     .collection('puntaje', (ref) => ref.where('idUsuario', '==', id))
-  //     .valueChanges({ idField: 'idDocument' });
-  // }
-
   getPuntajeByIdUsuario(id): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
