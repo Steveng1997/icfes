@@ -35,9 +35,6 @@ export class InsertarRetosComponent implements OnInit {
   // Si or Not
   selectSiNo: any;
 
-  img1: string;
-  img2: string;
-
   formTemplate = new FormGroup({
     categoria: new FormControl(''),
     texto1: new FormControl(''),
@@ -64,9 +61,9 @@ export class InsertarRetosComponent implements OnInit {
     public router: Router,
     public serviceRetos: RetoService,
     public storage: AngularFireStorage
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ImageTexto(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -82,7 +79,7 @@ export class InsertarRetosComponent implements OnInit {
   imageUrl2(event2: any) {
     if (event2.target.files && event2.target.files[0]) {
       const reader = new FileReader();
-      reader.onload = (es: any) => (this.imgSrc2 = es.target.result);
+      reader.onload = (e: any) => (this.imgSrc2 = e.target.result);
       reader.readAsDataURL(event2.target.files[0]);
       this.selectedImage2 = event2.target.files[0];
     } else {
@@ -138,6 +135,8 @@ export class InsertarRetosComponent implements OnInit {
     if (this.formTemplate.value.categoria != '') {
       if (this.formTemplate.value.respuesta != '') {
         if (this.formTemplate.value.imageUrl != '') {
+
+          // Imagen1
           var filePath = `${'imagenes'}/${this.selectedImage.name
             .split('.')
             .slice(0, -1)
@@ -149,14 +148,138 @@ export class InsertarRetosComponent implements OnInit {
             .pipe(
               finalize(() => {
                 fileRef.getDownloadURL().subscribe((url) => {
-                  this.img1 = url;
-                  this.serviceRetos.registerRetos(formValue, this.img1);
+                  formValue['imageUrl'] = url;
+                  setTimeout(() => {
+                    this.serviceRetos.registerRetos(formValue);
+                  }, 1000);
                 });
               })
             )
             .subscribe();
+          // Fin imagen 1
+
+          // Imagen2
+          if (this.formTemplate.value.image2 != '') {
+            var filePath2 = `${'imagenes'}/${this.selectedImage2.name
+              .split('.')
+              .slice(0, -1)
+              .join('.')}_${new Date().getTime()}`;
+            const fileRef2 = this.storage.ref(filePath2);
+            this.storage
+              .upload(filePath2, this.selectedImage2)
+              .snapshotChanges()
+              .pipe(
+                finalize(() => {
+                  fileRef2.getDownloadURL().subscribe((url2) => {
+                    formValue['image2'] = url2;
+                    setTimeout(() => {
+                      this.serviceRetos.updateImage2(formValue, formValue['image2']);
+                    }, 2000);
+
+                  });
+                })
+              )
+              .subscribe();
+          }
+          // Fin Imagen2
+
+          // ImagenOpcion1
+          if (this.formTemplate.value.imageOpcion1 != '') {
+            var filePathOpcion1 = `${'imagenes'}/${this.SelectImgOpcion1.name
+              .split('.')
+              .slice(0, -1)
+              .join('.')}_${new Date().getTime()}`;
+            const fileRefOpcion1 = this.storage.ref(filePathOpcion1);
+            this.storage
+              .upload(filePathOpcion1, this.SelectImgOpcion1)
+              .snapshotChanges()
+              .pipe(
+                finalize(() => {
+                  fileRefOpcion1.getDownloadURL().subscribe((urlImgOpcion1) => {
+                    formValue['imageOpcion1'] = urlImgOpcion1;
+                    setTimeout(() => {
+                      this.serviceRetos.updateImageOpcion1(formValue, formValue['imageOpcion1']);
+                    }, 3000);
+                  });
+                })
+              )
+              .subscribe();
+          }
+          // Fin ImageOption1
+
+          // ImageOption2
+          if (this.formTemplate.value.imageOpcion2 != '') {
+            var filePathOpcion2 = `${'imagenes'}/${this.SelectImgOpcion2.name
+              .split('.')
+              .slice(0, -1)
+              .join('.')}_${new Date().getTime()}`;
+            const fileRefOpcion2 = this.storage.ref(filePathOpcion2);
+            this.storage
+              .upload(filePathOpcion2, this.SelectImgOpcion2)
+              .snapshotChanges()
+              .pipe(
+                finalize(() => {
+                  fileRefOpcion2.getDownloadURL().subscribe((urlImgOpcion2) => {
+                    formValue['imageOpcion2'] = urlImgOpcion2;
+                    setTimeout(() => {
+                      this.serviceRetos.updateImageOpcion2(formValue, formValue['imageOpcion2']);
+                    }, 4000);
+                  });
+                })
+              )
+              .subscribe();
+          }
+          // Fin ImageOption2
+
+          // ImageOption3
+          if (this.formTemplate.value.imageOpcion3 != '') {
+            var filePathOpcion3 = `${'imagenes'}/${this.SelectImgOpcion3.name
+              .split('.')
+              .slice(0, -1)
+              .join('.')}_${new Date().getTime()}`;
+            const fileRefOpcion3 = this.storage.ref(filePathOpcion3);
+            this.storage
+              .upload(filePathOpcion3, this.SelectImgOpcion3)
+              .snapshotChanges()
+              .pipe(
+                finalize(() => {
+                  fileRefOpcion3.getDownloadURL().subscribe((urlImgOpcion3) => {
+                    formValue['imageOpcion3'] = urlImgOpcion3;
+                    setTimeout(() => {
+                      this.serviceRetos.updateImageOpcion3(formValue, formValue['imageOpcion3']);
+                    }, 5000);
+                  });
+                })
+              )
+              .subscribe();
+          }
+          // Fin ImageOption3
+
+          // ImageOption4
+          if (this.formTemplate.value.imageOpcion4 != '') {
+            var filePathOpcion4 = `${'imagenes'}/${this.SelectImgOpcion4.name
+              .split('.')
+              .slice(0, -1)
+              .join('.')}_${new Date().getTime()}`;
+            const fileRefOpcion4 = this.storage.ref(filePathOpcion4);
+            this.storage
+              .upload(filePathOpcion4, this.SelectImgOpcion4)
+              .snapshotChanges()
+              .pipe(
+                finalize(() => {
+                  fileRefOpcion4.getDownloadURL().subscribe((urlImgOpcion4) => {
+                    formValue['imageOpcion4'] = urlImgOpcion4;
+                    setTimeout(() => {
+                      this.serviceRetos.updateImageOpcion4(formValue, formValue['imageOpcion4']);
+                    }, 6000);
+                  });
+                })
+              )
+              .subscribe();
+          }
+          // Fin ImageOption4
         } else {
-          this.serviceRetos.registerRetos(formValue, this.img1);
+          this.serviceRetos.registerRetos(formValue);
           this.router.navigate(['admin/adminRetos']);
           Swal.fire({
             position: 'top-end',
@@ -180,25 +303,5 @@ export class InsertarRetosComponent implements OnInit {
         text: 'El campo de la categoria esta vacia',
       });
     }
-
-    // if (this.formTemplate.value.image2 != '') {
-    //   var filePath2 = `${'imagenes'}/${this.selectedImage2.name
-    //     .split('.')
-    //     .slice(0, -1)
-    //     .join('.')}_${new Date().getTime()}`;
-    //   const fileRef2 = this.storage.ref(filePath2);
-    //   this.storage
-    //     .upload(filePath2, this.selectedImage2)
-    //     .snapshotChanges()
-    //     .pipe(
-    //       finalize(() => {
-    //         fileRef2.getDownloadURL().subscribe((url2) => {
-    //           this.img2 = url2;
-    //           this.serviceRetos.updateImageSubtitules(this.img2, formValue);
-    //         });
-    //       })
-    //     )
-    //     .subscribe();
-    // }
   }
 }

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class RetoService {
-  constructor(public router: Router, private db: AngularFirestore) {}
+  constructor(public router: Router, private db: AngularFirestore) { }
 
   retos: Retos[] = [];
   cursoDoc: AngularFirestoreDocument<Retos>;
@@ -28,12 +28,12 @@ export class RetoService {
     }
     return result;
   }
-  registerRetos(formularioall, image1) {
+  registerRetos(formularioall) {
     formularioall = {
       id: `uid${this.makeid(10)}`,
       categoria: formularioall.categoria,
       texto1: formularioall.texto1,
-      imageUrl: image1,
+      imageUrl: formularioall.imageUrl,
       texto2: formularioall.texto2,
       opciones: {
         opcion1: formularioall.opcion1,
@@ -43,9 +43,9 @@ export class RetoService {
       },
       imageOpciones: {
         imageOpcion1: formularioall.imageOpcion1,
-        // imageOpcion2: formularioall.imageOpcion2,
-        // imageOpcion3: formularioall.imageOpcion3,
-        // imageOpcion4: formularioall.imageOpcion4,
+        imageOpcion2: formularioall.imageOpcion2,
+        imageOpcion3: formularioall.imageOpcion3,
+        imageOpcion4: formularioall.imageOpcion4,
       },
       idsUsuarios: [],
       image2: formularioall.image2,
@@ -131,6 +131,23 @@ export class RetoService {
     });
   }
 
+
+  getByInsert(urlImg): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('retos', (ref) => ref
+          .where('imageUrl', '==', urlImg))
+        .valueChanges({ idField: 'idDocument' })
+        .subscribe((rp) => {
+          if (rp[0]?.idDocument) {
+            resolve(rp);
+          } else {
+            resolve(rp);
+          }
+        });
+    });
+  }
+
   // -----------------------------------------------------------------------------------
   // Get
   // -----------------------------------------------------------------------------------
@@ -155,13 +172,15 @@ export class RetoService {
       });
   }
 
-  updateImageSubtitules(image2, reto: Retos) {
+  updateImage2(reto: Retos, image2) {
     return this.db
       .collection('retos', (ref) => ref.where('id', '==', reto.id))
       .get()
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          doc.ref.update({ image2: image2 });
+          doc.ref.update({
+            image2: image2
+          });
         });
       });
   }
@@ -173,7 +192,54 @@ export class RetoService {
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           doc.ref.update({
-            imageOpcion1: imageOpcion1,
+            imageOpciones: {
+              imageOpcion1: imageOpcion1,
+            }
+          });
+        });
+      });
+  }
+
+  updateImageOpcion2(reto: Retos, imageOpcion2) {
+    return this.db
+      .collection('retos', (ref) => ref.where('id', '==', reto.id))
+      .get()
+      .forEach((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({
+            imageOpciones: {
+              imageOpcion2: imageOpcion2,
+            }
+          });
+        });
+      });
+  }
+
+  updateImageOpcion3(reto: Retos, imageOpcion3) {
+    return this.db
+      .collection('retos', (ref) => ref.where('id', '==', reto.id))
+      .get()
+      .forEach((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({
+            imageOpciones: {
+              imageOpcion3: imageOpcion3,
+            }
+          });
+        });
+      });
+  }
+
+  updateImageOpcion4(reto: Retos, imageOpcion4) {
+    return this.db
+      .collection('retos', (ref) => ref.where('id', '==', reto.id))
+      .get()
+      .forEach((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.update({
+            imageOpciones: {
+              imageOpcion4: imageOpcion4,
+            }
           });
         });
       });
