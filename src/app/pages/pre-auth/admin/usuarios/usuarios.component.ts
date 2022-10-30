@@ -12,7 +12,7 @@ export class UsuariosComponent implements OnInit {
   usuarios: any[] = [];
   public page!: number;
 
-  constructor(public router: Router, public serviceLogin: LoginService) {}
+  constructor(public router: Router, public serviceLogin: LoginService) { }
 
   ngOnInit(): void {
     this.getEmpleadosByDocument();

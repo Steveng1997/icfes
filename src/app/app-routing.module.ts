@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/pre-auth/login/login.component';
 import { MenuComponent } from './pages/main/menu/menu.component';
 import { RetoAmigoComponent } from './pages/main/reto-amigo/reto-amigo.component';
-import { RetoPersonalComponent } from './pages/main/reto-personal/reto-personal.component';
 import { MirarAvanceComponent } from './pages/main/mirar-avance/mirar-avance.component';
 import { MenuareaComponent } from './pages/main/menuarea/menuarea.component';
 import { LoginGuardian } from './pages/pre-auth/login/login-guardian';
@@ -26,6 +25,8 @@ import { IncorrectoPersonalComponent } from './pages/main/incorrecto-personal/in
 import { EditarEstudianteComponent } from './pages/pre-auth/admin/estudiantes/editar-estudiante/editar-estudiante.component';
 import { PuntajeComponent } from './pages/pre-auth/admin/puntaje/puntaje.component';
 import { EditarPuntuacionComponent } from './pages/pre-auth/admin/puntaje/editar-puntuacion/editar-puntuacion.component';
+import { PreguntaPersonalComponent } from './pages/main/pregunta-personal/pregunta-personal.component';
+import { RespuestaPersonalComponent } from './pages/main/respuesta-personal/respuesta-personal.component';
 
 const routes: Routes = [
   { path: 'menu/:id', component: MenuComponent, canActivate: [LoginGuardian] },
@@ -33,12 +34,6 @@ const routes: Routes = [
   {
     path: 'ret-amigo/:id',
     component: RetoAmigoComponent,
-    canActivate: [LoginGuardian],
-  },
-
-  {
-    path: 'ret-personal/:id',
-    component: RetoPersonalComponent,
     canActivate: [LoginGuardian],
   },
 
@@ -129,6 +124,16 @@ const routes: Routes = [
     canActivate: [LoginGuardian],
   },
   {
+    path: 'pregPerson/:id/:categoria',
+    component: PreguntaPersonalComponent,
+    canActivate: [LoginGuardian],
+  },
+  {
+    path: 'resPerson/:id/:categoria',
+    component: RespuestaPersonalComponent,
+    canActivate: [LoginGuardian],
+  },
+  {
     path: 'menuPersonal/:id',
     component: MenuPersonalesComponent,
     canActivate: [LoginGuardian],
@@ -154,11 +159,6 @@ const routes: Routes = [
     canActivate: [LoginGuardian],
   },
   {
-    path: 'reto-personal/:categoria',
-    component: RetoPersonalComponent,
-    canActivate: [LoginGuardian],
-  },
-  {
     path: 'correctoPersonal/:id',
     component: CorrectoPersonalComponent,
     canActivate: [LoginGuardian],
@@ -177,4 +177,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

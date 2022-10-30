@@ -65,9 +65,9 @@ export class InsertarRetosComponent implements OnInit {
     public router: Router,
     public serviceRetos: RetoService,
     public storage: AngularFireStorage
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ImageTexto(event: any) {
     if (event.target.files && event.target.files[0]) {

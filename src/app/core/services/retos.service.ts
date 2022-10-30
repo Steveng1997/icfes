@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class RetoService {
-  constructor(public router: Router, private db: AngularFirestore) {}
+  constructor(public router: Router, private db: AngularFirestore) { }
 
   retos: Retos[] = [];
   cursoDoc: AngularFirestoreDocument<Retos>;

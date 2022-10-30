@@ -47,7 +47,6 @@ import { EditarPuntuacionComponent } from './pages/pre-auth/admin/puntaje/editar
 import { MenuComponent } from './pages/main/menu/menu.component';
 import { MenuareaComponent } from './pages/main/menuarea/menuarea.component';
 import { RetoAmigoComponent } from './pages/main/reto-amigo/reto-amigo.component';
-import { RetoPersonalComponent } from './pages/main/reto-personal/reto-personal.component';
 import { MenuPersonalesComponent } from './pages/main/menu-personales/menu-personales.component';
 import { MirarAvanceComponent } from './pages/main/mirar-avance/mirar-avance.component';
 import { RetosComponent } from './pages/main/retos/retos.component';
@@ -56,6 +55,8 @@ import { CorrectoComponent } from './pages/main/correcto/correcto.component';
 import { IncorrectoPersonalComponent } from './pages/main/incorrecto-personal/incorrecto-personal.component';
 import { CorrectoPersonalComponent } from './pages/main/correcto-personal/correcto-personal.component';
 import { MenuAreaPersonalComponent } from './pages/main/menu-area-personal/menu-area-personal.component';
+import { PreguntaPersonalComponent } from './pages/main/pregunta-personal/pregunta-personal.component';
+import { RespuestaPersonalComponent } from './pages/main/respuesta-personal/respuesta-personal.component';
 
 // Cookies
 import { CookieService } from 'ngx-cookie-service';
@@ -80,7 +81,6 @@ firebase.initializeApp({
     LoginComponent,
     MenuComponent,
     RetoAmigoComponent,
-    RetoPersonalComponent,
     MirarAvanceComponent,
     MenuareaComponent,
     InsertarUsuario,
@@ -104,6 +104,8 @@ firebase.initializeApp({
     EditarEstudianteComponent,
     PuntajeComponent,
     EditarPuntuacionComponent,
+    PreguntaPersonalComponent,
+    RespuestaPersonalComponent,
   ],
   imports: [
     BrowserModule,
@@ -135,4 +137,4 @@ firebase.initializeApp({
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule {}
+export class AppModule { }
