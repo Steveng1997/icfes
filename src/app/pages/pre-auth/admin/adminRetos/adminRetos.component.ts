@@ -15,9 +15,7 @@ export class AdminRetosComponent implements OnInit {
   constructor(public router: Router, public serviceRetos: RetoService) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.getRetos();
-    }, 1000);
+    this.getRetos();
   }
 
   Agregar() {

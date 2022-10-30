@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 //importamos el servicio
 import { RetoService } from 'src/app/core/services/retos.service';
-//importamos los modulos para formularios
-import { FormBuilder } from '@angular/forms';
 //importamos el enrutador
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -24,7 +22,6 @@ export class EditarRetosComponent implements OnInit {
   constructor(
     public router: Router,
     public serviceRetos: RetoService,
-    public formBuilder: FormBuilder,
     private activeRoute: ActivatedRoute
   ) {}
 
@@ -33,17 +30,6 @@ export class EditarRetosComponent implements OnInit {
     this.serviceRetos.getById(this.idUser).then((datoRetos) => {
       return (this.reto = datoRetos);
     });
-  }
-
-  uploadImage(event: any) {
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => (this.imgSrc = e.target.result);
-      reader.readAsDataURL(event.target.files[0]);
-      this.selectedImage = event.target.files[0];
-    } else {
-      this.selectedImage = null;
-    }
   }
 
   editarReto(idDocument, idReto, reto: Retos) {
