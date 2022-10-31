@@ -6,8 +6,7 @@ import { finalize } from 'rxjs';
 import Swal from 'sweetalert2';
 
 import { LoginService } from 'src/app/core/services/login.service';
-import { PuntuacionService } from 'src/app/core/services/puntaje.service';
-import { RetoService } from 'src/app/core/services/retos.service';
+import { RetoPersonalService } from 'src/app/core/services/retoPersonal.service';
 
 @Component({
   selector: 'app-pregunta-personal',
@@ -15,8 +14,10 @@ import { RetoService } from 'src/app/core/services/retos.service';
   styleUrls: ['./pregunta-personal.component.scss']
 })
 export class PreguntaPersonalComponent implements OnInit {
+
   idUser: string;
   categoria: string;
+
   // Valores para imagenes
   selectedImage: any = null;
   imgSrc: string;
@@ -69,11 +70,10 @@ export class PreguntaPersonalComponent implements OnInit {
 
   constructor(
     public router: Router,
-    public serviceRetos: RetoService,
+    public serviceRetos: RetoPersonalService,
     public storage: AngularFireStorage,
     private rutaActiva: ActivatedRoute,
-    private serviceLogin: LoginService,
-    private servicePuntaje: PuntuacionService
+    private serviceLogin: LoginService
   ) { }
 
   ngOnInit(): void {
@@ -177,8 +177,8 @@ export class PreguntaPersonalComponent implements OnInit {
               fileRef.getDownloadURL().subscribe((url) => {
                 formValue['imageUrl'] = url;
                 setTimeout(() => {
-                  this.serviceRetos.registerRetos(formValue);
-                }, 1000);
+                  this.serviceRetos.registerRetos(this.idUser, this.categoria, formValue);
+                }, 2000);
               });
             })
           )
@@ -187,8 +187,7 @@ export class PreguntaPersonalComponent implements OnInit {
 
         // Imagen2
         if (
-          this.formTemplate.value.image2 != '' &&
-          this.formTemplate.value.imageOpcion1 != ''
+          this.formTemplate.value.image2 != ''
         ) {
           var filePath2 = `${'imagenes'}/${this.selectedImage2.name
             .split('.')
@@ -207,9 +206,9 @@ export class PreguntaPersonalComponent implements OnInit {
                       formValue,
                       formValue['image2']
                     );
-                  }, 2000);
+                  }, 3000);
 
-                  this.router.navigate(['admin/adminRetos']);
+                  this.router.navigate([`resPerson/${this.idUser}/${this.categoria}`]);
                   Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -222,7 +221,7 @@ export class PreguntaPersonalComponent implements OnInit {
             )
             .subscribe();
         } else {
-          this.router.navigate(['admin/adminRetos']);
+          this.router.navigate([`resPerson/${this.idUser[0]['id']}/${this.categoria[0]['categoria']}`]);
           Swal.fire({
             position: 'top-end',
             icon: 'success',
@@ -252,7 +251,7 @@ export class PreguntaPersonalComponent implements OnInit {
                       formValue,
                       formValue['imageOpcion1']
                     );
-                  }, 3000);
+                  }, 4000);
                 });
               })
             )
@@ -279,7 +278,7 @@ export class PreguntaPersonalComponent implements OnInit {
                       formValue,
                       formValue['imageOpcion2']
                     );
-                  }, 4000);
+                  }, 5000);
                 });
               })
             )
@@ -306,7 +305,7 @@ export class PreguntaPersonalComponent implements OnInit {
                       formValue,
                       formValue['imageOpcion3']
                     );
-                  }, 5000);
+                  }, 6000);
                 });
               })
             )
@@ -333,7 +332,7 @@ export class PreguntaPersonalComponent implements OnInit {
                       formValue,
                       formValue['imageOpcion4']
                     );
-                  }, 6000);
+                  }, 7000);
                 });
               })
             )
@@ -360,9 +359,9 @@ export class PreguntaPersonalComponent implements OnInit {
                       formValue,
                       formValue['imageResp']
                     );
-                  }, 7000);
+                  }, 8000);
 
-                  this.router.navigate(['admin/adminRetos']);
+                  this.router.navigate([`resPerson/${this.idUser[0]['id']}/${this.categoria[0]['categoria']}`]);
                   Swal.fire({
                     position: 'top-end',
                     icon: 'success',
@@ -377,8 +376,8 @@ export class PreguntaPersonalComponent implements OnInit {
         }
         // Fin ImageOption4
       } else {
-        this.serviceRetos.registerRetos(formValue);
-        this.router.navigate(['admin/adminRetos']);
+        this.serviceRetos.registerRetos(this.idUser, this.categoria, formValue);
+        this.router.navigate([`resPerson/${this.idUser[0]['id']}/${this.categoria[0]['categoria']}`]);
         Swal.fire({
           position: 'top-end',
           icon: 'success',

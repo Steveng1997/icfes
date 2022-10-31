@@ -17,20 +17,20 @@ export class RetoPersonalService {
   // -----------------------------------------------------------------------------------
   // Register
   // -----------------------------------------------------------------------------------
-  makeid(length) {
-    var result = '';
-    var characters =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
-  registerRetos(formularioall) {
+  // makeid(length) {
+  //   var result = '';
+  //   var characters =
+  //     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  //   var charactersLength = characters.length;
+  //   for (var i = 0; i < length; i++) {
+  //     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  //   }
+  //   return result;
+  // }
+  registerRetos(id, categoria, formularioall) {
     formularioall = {
-      id: `uid${this.makeid(10)}`,
-      categoria: formularioall.categoria,
+      id: id,
+      categoria: categoria,
       texto1: formularioall.texto1,
       imageUrl: formularioall.imageUrl,
       texto2: formularioall.texto2,
@@ -40,12 +40,12 @@ export class RetoPersonalService {
         opcion3: formularioall.opcion3,
         opcion4: formularioall.opcion4,
       },
-      imageOpciones: {
-        imageOpcion1: formularioall.imageOpcion1,
-        imageOpcion2: formularioall.imageOpcion2,
-        imageOpcion3: formularioall.imageOpcion3,
-        imageOpcion4: formularioall.imageOpcion4,
-      },
+
+      imageOpcion1: formularioall.imageOpcion1,
+      imageOpcion2: formularioall.imageOpcion2,
+      imageOpcion3: formularioall.imageOpcion3,
+      imageOpcion4: formularioall.imageOpcion4,
+
       idsUsuarios: [],
       image2: formularioall.image2,
       subtitulo: formularioall.subtitulo,
@@ -116,10 +116,12 @@ export class RetoPersonalService {
     });
   }
 
-  getByCategoria(categoria: string): Promise<any> {
+  getByCategoria(id: string, categoria: string): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('retoPersonal', (ref) => ref.where('categoria', '==', categoria))
+        .collection('retoPersonal', (ref) => ref
+          .where('id', '==', id)
+          .where('categoria', '==', categoria))
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
           if (rp[0]?.idDocument) {
@@ -189,9 +191,7 @@ export class RetoPersonalService {
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpciones: {
-          imageOpcion1: imageOpcion1,
-        },
+        imageOpcion1: imageOpcion1,
       })
   }
 
@@ -200,9 +200,7 @@ export class RetoPersonalService {
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpciones: {
-          imageOpcion2: imageOpcion2,
-        },
+        imageOpcion2: imageOpcion2,
       })
   }
 
@@ -211,9 +209,7 @@ export class RetoPersonalService {
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpciones: {
-          imageOpcion3: imageOpcion3,
-        },
+        imageOpcion3: imageOpcion3,
       })
   }
 
@@ -222,9 +218,7 @@ export class RetoPersonalService {
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpciones: {
-          imageOpcion4: imageOpcion4,
-        },
+        imageOpcion4: imageOpcion4,
       })
   }
 
@@ -257,9 +251,7 @@ export class RetoPersonalService {
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           doc.ref.update({
-            imageOpciones: {
-              imageOpcion1: imageOpcion1,
-            },
+            imageOpcion1: imageOpcion1,
           });
         });
       });
@@ -272,9 +264,7 @@ export class RetoPersonalService {
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           doc.ref.update({
-            imageOpciones: {
-              imageOpcion2: imageOpcion2,
-            },
+            imageOpcion2: imageOpcion2,
           });
         });
       });
@@ -287,9 +277,7 @@ export class RetoPersonalService {
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           doc.ref.update({
-            imageOpciones: {
-              imageOpcion3: imageOpcion3,
-            },
+            imageOpcion3: imageOpcion3,
           });
         });
       });
@@ -302,9 +290,7 @@ export class RetoPersonalService {
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           doc.ref.update({
-            imageOpciones: {
-              imageOpcion4: imageOpcion4,
-            },
+            imageOpcion4: imageOpcion4,
           });
         });
       });

@@ -167,7 +167,7 @@ export class InsertarRetosComponent implements OnInit {
                 formValue['imageUrl'] = url;
                 setTimeout(() => {
                   this.serviceRetos.registerRetos(formValue);
-                }, 1000);
+                }, 2000);
               });
             })
           )
@@ -176,8 +176,7 @@ export class InsertarRetosComponent implements OnInit {
 
         // Imagen2
         if (
-          this.formTemplate.value.image2 != '' &&
-          this.formTemplate.value.imageOpcion1 != ''
+          this.formTemplate.value.image2 != ''
         ) {
           var filePath2 = `${'imagenes'}/${this.selectedImage2.name
             .split('.')
@@ -196,7 +195,7 @@ export class InsertarRetosComponent implements OnInit {
                       formValue,
                       formValue['image2']
                     );
-                  }, 2000);
+                  }, 3000);
 
                   this.router.navigate(['admin/adminRetos']);
                   Swal.fire({
@@ -241,7 +240,7 @@ export class InsertarRetosComponent implements OnInit {
                       formValue,
                       formValue['imageOpcion1']
                     );
-                  }, 3000);
+                  }, 4000);
                 });
               })
             )
@@ -268,7 +267,7 @@ export class InsertarRetosComponent implements OnInit {
                       formValue,
                       formValue['imageOpcion2']
                     );
-                  }, 4000);
+                  }, 5000);
                 });
               })
             )
@@ -295,7 +294,7 @@ export class InsertarRetosComponent implements OnInit {
                       formValue,
                       formValue['imageOpcion3']
                     );
-                  }, 5000);
+                  }, 6000);
                 });
               })
             )
@@ -322,7 +321,7 @@ export class InsertarRetosComponent implements OnInit {
                       formValue,
                       formValue['imageOpcion4']
                     );
-                  }, 6000);
+                  }, 7000);
                 });
               })
             )
@@ -349,7 +348,7 @@ export class InsertarRetosComponent implements OnInit {
                       formValue,
                       formValue['imageResp']
                     );
-                  }, 7000);
+                  }, 8000);
 
                   this.router.navigate(['admin/adminRetos']);
                   Swal.fire({
