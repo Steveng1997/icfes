@@ -20,4 +20,5 @@ export class Retos {
   imageOpcion2?: string;
   imageOpcion3?: string;
   imageOpcion4?: string;
+  imageResp?: string;
 }

@@ -27,6 +27,7 @@ import { LoginService } from './core/services/login.service';
 import { RetoService } from './core/services/retos.service';
 import { EstudianteService } from './core/services/estudiantes.service';
 import { PuntuacionService } from './core/services/puntaje.service';
+import { RetoPersonalService } from './core/services/retoPersonal.service';
 
 // Pages-Auth
 import { AdminComponent } from './pages/pre-auth/admin/admin.component';
@@ -63,7 +64,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { LoginGuardian } from './pages/pre-auth/login/login-guardian';
 import { MatDividerModule } from '@angular/material/divider';
 import { SidebarComponent } from './core/sidebar/sidebar.component';
-import { RetoPersonalService } from './core/services/retoPersonal';
 
 firebase.initializeApp({
   apiKey: 'AIzaSyAWFfFTC8gSoctKKst4X1uxVwaFbEB1pXM',

@@ -46,13 +46,13 @@
                 #pregunta="ngModel" placeholder="Texto 1"></textarea>
             </div>
 
-            <div *ngIf="ret['imageOpciones']['imageUrl'] != ''" class="row form-floating mb-3"
+            <div *ngIf="ret.imageUrl != ''" class="row form-floating mb-3"
               style="cursor: pointer; text-align: center">
               <div class="col-md-4">
                 <label class="text-justify font-weight-bold">Imagen 1.</label>
               </div>
               <div class="col-md-4">
-                <img src="{{ ret['imageUrl'] }}" width="100%" />
+                <img src="{{ ret.imageUrl }}" width="100%" />
               </div>
               <div class="col-md-4">
                 <input style="color: transparent" type="file" accept=".png, .jpeg, .jpg" (change)="ImageTexto($event)"
@@ -60,13 +60,13 @@
               </div>
             </div>
 
-            <div *ngIf="ret['imageOpciones']['image2'] != ''" class="row form-floating mb-3"
+            <div *ngIf="ret.image2 != ''" class="row form-floating mb-3"
               style="cursor: pointer; text-align: center">
               <div class="col-md-4">
                 <label class="text-justify font-weight-bold">Imagen 2.</label>
               </div>
               <div class="col-md-4">
-                <img src="{{ ret['image2'] }}" width="100%" />
+                <img src="{{ ret.image2 }}" width="100%" />
               </div>
               <div class="col-md-4">
                 <input style="color: transparent" type="file" accept=".png, .jpeg, .jpg" (change)="imageUrl2($event)"
@@ -112,13 +112,13 @@
               </div>
             </div>
 
-            <div *ngIf="ret['imageOpciones']['imageOpcion1'] != ''" class="row form-floating mb-3"
+            <div *ngIf="ret.imageOpcion1 != ''" class="row form-floating mb-3"
               style="cursor: pointer; text-align: center">
               <div class="col-md-4">
                 <label class="text-justify font-weight-bold">Opcion A.</label>
               </div>
               <div class="col-md-4">
-                <img src="{{ ret['imageOpciones']['imageOpcion1'] }}" width="100%" />
+                <img src="{{ ret.imageOpcion1 }}" width="100%" />
               </div>
               <div class="col-md-4">
                 <input style="color: transparent" type="file" accept=".png, .jpeg, .jpg" (change)="UrlOpcion1($event)"
@@ -126,13 +126,13 @@
               </div>
             </div>
 
-            <div *ngIf="ret['imageOpciones']['imageOpcion2'] != ''" class="row form-floating mb-3"
+            <div *ngIf="ret.imageOpcion2 != ''" class="row form-floating mb-3"
               style="cursor: pointer; text-align: center">
               <div class="col-md-4">
                 <label class="text-justify font-weight-bold">Opcion B.</label>
               </div>
               <div class="col-md-4">
-                <img src="{{ ret['imageOpciones']['imageOpcion2'] }}" width="100%" />
+                <img src="{{ ret.imageOpcion2 }}" width="100%" />
               </div>
               <div class="col-md-4">
                 <input style="color: transparent" type="file" accept=".png, .jpeg, .jpg" (change)="UrlOpcion2($event)"
@@ -140,13 +140,13 @@
               </div>
             </div>
 
-            <div *ngIf="ret['imageOpciones']['imageOpcion3'] != ''" class="row form-floating mb-3"
+            <div *ngIf="ret.imageOpcion3 != ''" class="row form-floating mb-3"
               style="cursor: pointer; text-align: center">
               <div class="col-md-4">
                 <label class="text-justify font-weight-bold">Opcion C.</label>
               </div>
               <div class="col-md-4">
-                <img src="{{ ret['imageOpciones']['imageOpcion3'] }}" width="100%" />
+                <img src="{{ ret.imageOpcion3 }}" width="100%" />
               </div>
               <div class="col-md-4">
                 <input style="color: transparent" type="file" accept=".png, .jpeg, .jpg" (change)="UrlOpcion3($event)"
@@ -154,13 +154,13 @@
               </div>
             </div>
 
-            <div *ngIf="ret['imageOpciones']['imageOpcion4'] != ''" class="row form-floating mb-3"
+            <div *ngIf="ret.imageOpcion4 != ''" class="row form-floating mb-3"
               style="cursor: pointer; text-align: center">
               <div class="col-md-4">
                 <label class="text-justify font-weight-bold">Opcion D.</label>
               </div>
               <div class="col-md-4">
-                <img src="{{ ret['imageOpciones']['imageOpcion4'] }}" width="100%" />
+                <img src="{{ ret.imageOpcion4 }}" width="100%" />
               </div>
               <div class="col-md-4">
                 <input style="color: transparent" type="file" accept=".png, .jpeg, .jpg" (change)="UrlOpcion4($event)"
@@ -168,17 +168,16 @@
               </div>
             </div>
 
-            <div *ngIf="ret['imageOpciones']['imageResp'] != ''" class="row form-floating mb-3"
-              style="cursor: pointer; text-align: center">
+            <div *ngIf="ret.imageResp != ''" class="row form-floating mb-3" style="cursor: pointer; text-align: center">
               <div class="col-md-4">
                 <label class="text-justify font-weight-bold">Respuesta.</label>
               </div>
               <div class="col-md-4">
-                <img src="{{ ret['imageResp'] }}" width="100%" />
+                <img src="{{ ret.imageResp }}" width="100%" />
               </div>
               <div class="col-md-4">
-                <input style="color: transparent" type="file" accept=".png, .jpeg, .jpg" (change)="imageRespuesta($event)"
-                  [(ngModel)]="selectResp" name="selectResp" />
+                <input style="color: transparent" type="file" accept=".png, .jpeg, .jpg"
+                  (change)="imageRespuesta($event)" [(ngModel)]="selectResp" name="selectResp" />
               </div>
             </div>
 

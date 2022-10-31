@@ -41,12 +41,12 @@ export class RetoService {
         opcion3: formularioall.opcion3,
         opcion4: formularioall.opcion4,
       },
-      imageOpciones: {
-        imageOpcion1: formularioall.imageOpcion1,
-        imageOpcion2: formularioall.imageOpcion2,
-        imageOpcion3: formularioall.imageOpcion3,
-        imageOpcion4: formularioall.imageOpcion4,
-      },
+
+      imageOpcion1: formularioall.imageOpcion1,
+      imageOpcion2: formularioall.imageOpcion2,
+      imageOpcion3: formularioall.imageOpcion3,
+      imageOpcion4: formularioall.imageOpcion4,
+
       idsUsuarios: [],
       image2: formularioall.image2,
       subtitulo: formularioall.subtitulo,
@@ -190,9 +190,7 @@ export class RetoService {
       .collection('retos', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpciones: {
           imageOpcion1: imageOpcion1,
-        },
       })
   }
 
@@ -201,9 +199,7 @@ export class RetoService {
       .collection('retos', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpciones: {
           imageOpcion2: imageOpcion2,
-        },
       })
   }
 
@@ -212,9 +208,7 @@ export class RetoService {
       .collection('retos', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpciones: {
           imageOpcion3: imageOpcion3,
-        },
       })
   }
 
@@ -223,9 +217,7 @@ export class RetoService {
       .collection('retos', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpciones: {
           imageOpcion4: imageOpcion4,
-        },
       })
   }
 
@@ -258,9 +250,7 @@ export class RetoService {
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           doc.ref.update({
-            imageOpciones: {
               imageOpcion1: imageOpcion1,
-            },
           });
         });
       });
@@ -273,9 +263,7 @@ export class RetoService {
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           doc.ref.update({
-            imageOpciones: {
               imageOpcion2: imageOpcion2,
-            },
           });
         });
       });
@@ -288,9 +276,7 @@ export class RetoService {
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           doc.ref.update({
-            imageOpciones: {
               imageOpcion3: imageOpcion3,
-            },
           });
         });
       });
@@ -303,9 +289,7 @@ export class RetoService {
       .forEach((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           doc.ref.update({
-            imageOpciones: {
               imageOpcion4: imageOpcion4,
-            },
           });
         });
       });
