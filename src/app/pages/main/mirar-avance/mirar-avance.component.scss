@@ -9,45 +9,36 @@ body {
   font-size: 3rem;
 }
 
-.grid-item {
-  background-color: #03afff;
-  border-radius: 4px;
-  transition: transform 0.3s ease-in-out;
-
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.grid-item:hover {
-  filter: opacity(0.9);
-  transform: scale(1.04);
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-auto-rows: minmax(200px, auto);
-  gap: 20px;
-  padding: 20px;
-  grid-auto-flow: dense;
-}
-
-@media (min-width: 600px) {
-  .wide {
-    grid-column: span 2;
-  }
-
-  .tall {
-    grid-row: span 2;
-  }
-}
-
 // ---------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------
-// Query para celular
+// Query para celular muy baja gama
 
-@media only screen and (max-width: 480px) {
+@media only screen and (min-device-width: 279px) and (max-device-width: 282px) {
+  .grid-item {
+    background-color: #03afff;
+    border-radius: 4px;
+    transition: transform 0.3s ease-in-out;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 10%;
+  }
+
+  .grid-item:hover {
+    filter: opacity(0.9);
+    transform: scale(1.04);
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: minmax(200px, auto);
+    gap: 20px;
+    padding: 20px;
+    grid-auto-flow: dense;
+  }
+
   .btn-salir {
     margin-right: 1%;
     margin-top: 1%;
@@ -56,13 +47,240 @@ body {
   .btnSalir {
     width: 23%;
   }
+
+  .txtMatematica {
+    font-size: 30pt;
+  }
+
+  .txtLenguaje {
+    font-size: 30pt;
+    margin-top: 10%;
+  }
+
+  .txtNaturales {
+    font-size: 30pt;
+    margin-top: 10%;
+  }
+
+  .txtSociales {
+    font-size: 30pt;
+    margin-top: 10%;
+  }
+
+  .btn-salir {
+    margin-top: 1.9px;
+  }
+
+  .btnSalir {
+    margin-right: 3%;
+    width: 20%;
+  }
+
+  .colorMatematica {
+    background-color: #fe5c26;
+  }
+
+  .colorLenguaje {
+    background-color: #5902b0;
+  }
+
+  .colorNaturales {
+    background-color: #029287;
+  }
+
+  .colorSociales {
+    background-color: #46a6c7;
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// Query para celular baja gama
+
+@media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
+  .grid-item {
+    background-color: #03afff;
+    border-radius: 4px;
+    transition: transform 0.3s ease-in-out;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 10%;
+  }
+
+  .grid-item:hover {
+    filter: opacity(0.9);
+    transform: scale(1.04);
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: minmax(200px, auto);
+    gap: 20px;
+    padding: 20px;
+    grid-auto-flow: dense;
+  }
+
+  .btn-salir {
+    margin-right: 1%;
+    margin-top: 1%;
+  }
+
+  .btnSalir {
+    width: 23%;
+  }
+
+  .txtLenguaje {
+    margin-top: 10%;
+  }
+
+  .txtNaturales {
+    margin-top: 10%;
+  }
+
+  .txtSociales {
+    margin-top: 10%;
+  }
+
+  .btn-salir {
+    margin-top: 1.9px;
+  }
+
+  .btnSalir {
+    margin-right: 2%;
+    width: 17%;
+  }
+
+  .colorMatematica {
+    background-color: #fe5c26;
+  }
+
+  .colorLenguaje {
+    background-color: #5902b0;
+  }
+
+  .colorNaturales {
+    background-color: #029287;
+  }
+
+  .colorSociales {
+    background-color: #46a6c7;
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// Query para celular media gama
+
+@media only screen and (min-device-width: 411px) and (max-device-width: 450px) {
+  .grid-item {
+    background-color: #03afff;
+    border-radius: 4px;
+    transition: transform 0.3s ease-in-out;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 10%;
+  }
+
+  .grid-item:hover {
+    filter: opacity(0.9);
+    transform: scale(1.04);
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: minmax(200px, auto);
+    gap: 20px;
+    padding: 20px;
+    grid-auto-flow: dense;
+  }
+
+  .btn-salir {
+    margin-right: 1%;
+    margin-top: 1%;
+  }
+
+  .btnSalir {
+    width: 23%;
+  }
+
+  .txtLenguaje {
+    margin-top: 10%;
+  }
+
+  .txtNaturales {
+    margin-top: 10%;
+  }
+
+  .txtSociales {
+    margin-top: 10%;
+  }
+
+  .btn-salir {
+    margin-top: 1.9px;
+  }
+
+  .btnSalir {
+    margin-right: 2%;
+    width: 17%;
+  }
+
+  .txtTitulo {
+    margin-right: 5%;
+  }
+
+  .colorMatematica {
+    background-color: #fe5c26;
+  }
+
+  .colorLenguaje {
+    background-color: #5902b0;
+  }
+
+  .colorNaturales {
+    background-color: #029287;
+  }
+
+  .colorSociales {
+    background-color: #46a6c7;
+  }
 }
 
 // ---------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------
 // Query para pantalla grande como laptop o monitor
 
-@media only screen and (min-device-width: 1200px) and (max-device-width: 1900px) {
+@media only screen and (min-device-width: 1200px) and (max-device-width: 1600px) {
+  .grid-item {
+    background-color: #03afff;
+    border-radius: 4px;
+    transition: transform 0.3s ease-in-out;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 10%;
+  }
+
+  .grid-item:hover {
+    filter: opacity(0.9);
+    transform: scale(1.04);
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: minmax(200px, auto);
+    gap: 20px;
+    padding: 20px;
+    grid-auto-flow: dense;
+  }
+
   .btn-salir {
     margin-right: 3%;
     margin-top: 1.9px;
@@ -70,5 +288,21 @@ body {
 
   .btnSalir {
     width: 10%;
+  }
+
+  .colorMatematica {
+    background-color: #fe5c26;
+  }
+
+  .colorLenguaje {
+    background-color: #5902b0;
+  }
+
+  .colorNaturales {
+    background-color: #029287;
+  }
+
+  .colorSociales {
+    background-color: #46a6c7;
   }
 }

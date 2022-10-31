@@ -74,10 +74,7 @@
 
               <!------------------------------------------ Opciones preguntas imagenes ------------------------------------------>
 
-              <div
-                class="card-title mt-5"
-                *ngIf="cat.imageOpcion1 != ''"
-              >
+              <div class="card-title mt-5" *ngIf="cat.imageOpcion1 != ''">
                 <p style="cursor: pointer; text-align: center">
                   <b>A. </b>
                   <img
@@ -87,9 +84,10 @@
                         cat.idDocument,
                         cat.id,
                         cat.idsUsuarios,
-                        cat.respuesta
+                        cat.urlImgResp
                       )
                     "
+                    id="{{ cat.urlImg1 }}"
                     src="{{ cat.imageOpcion1 }}"
                     width="40%"
                   />
@@ -103,9 +101,10 @@
                         cat.idDocument,
                         cat.id,
                         cat.idsUsuarios,
-                        cat.respuesta
+                        cat.urlImgResp
                       )
                     "
+                    id="{{ cat.urlImg2 }}"
                     src="{{ cat.imageOpcion2 }}"
                     width="40%"
                   />
@@ -119,9 +118,10 @@
                         cat.idDocument,
                         cat.id,
                         cat.idsUsuarios,
-                        cat.respuesta
+                        cat.urlImgResp
                       )
                     "
+                    id="{{ cat.urlImg3 }}"
                     src="{{ cat.imageOpcion3 }}"
                     width="40%"
                   />
@@ -135,9 +135,10 @@
                         cat.idDocument,
                         cat.id,
                         cat.idsUsuarios,
-                        cat.respuesta
+                        cat.urlImgResp
                       )
                     "
+                    id="{{ cat.urlImg4 }}"
                     src="{{ cat.imageOpcion4 }}"
                     width="40%"
                   />

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
   selector: 'app-correcto-personal',
@@ -7,19 +8,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./correcto-personal.component.scss'],
 })
 export class CorrectoPersonalComponent implements OnInit {
-  constructor(private router: Router) {}
-
-  ngOnInit(): void {}
+  constructor(
+    private router: Router,
+    private rutaActiva: ActivatedRoute,
+    private serviceLogin: LoginService
+  ) {}
+  idUser: string;
+  ngOnInit(): void {
+    this.idUser = this.rutaActiva.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.idUser);
+  }
 
   salir() {
-    this.router.navigate(['login']);
+    this.router.navigate(['']);
   }
 
   volverAretar() {
-    this.router.navigate(['ret-amigo']);
+    this.router.navigate([`ret-amigo/${this.idUser}`]);
   }
 
   menuPrincipal() {
-    this.router.navigate(['menu']);
+    this.router.navigate([`menu/${this.idUser}`]);
   }
 }

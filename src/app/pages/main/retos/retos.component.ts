@@ -40,7 +40,6 @@ export class RetosComponent implements OnInit {
     this.retoService
       .getByCategoria(categoria)
       .then((dataCategoria) => {
-        console.log(dataCategoria);
         this.datosReto = dataCategoria.filter((_reto) => {
           if (_reto['idsUsuarios'].includes(this.idUser)) {
             return;
@@ -50,6 +49,7 @@ export class RetosComponent implements OnInit {
 
         setTimeout(() => {
           this.convertToHtml();
+          this.convertToHtml2();
         }, 1000);
       })
       .catch((err) => console.log('err', err.message));
@@ -74,6 +74,25 @@ export class RetosComponent implements OnInit {
     }
   }
 
+  convertToHtml2() {
+    var texto2 = document.querySelectorAll("[id='texto2']");
+
+    for (let i = 0; i < this.datosReto.length; i++) {
+      this.datosReto[i]['texto2'] = this.datosReto[i]['texto2'].replace(
+        /\n/g,
+        '<br/>'
+      );
+      for (let j = 0; j < texto2.length; j++) {
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(
+          this.datosReto[j]['texto2'],
+          'text/html'
+        );
+        texto2[j]['innerHTML'] = doc.body.innerHTML;
+      }
+    }
+  }
+
   obtenerPuntaje(idUser) {
     this.servicePuntaje.getPuntajeByIdUsuario(idUser).then((respu) => {
       this.puntajeObtenido = respu[0];
@@ -81,7 +100,120 @@ export class RetosComponent implements OnInit {
     });
   }
 
-  opcionImage(event, idDocumentReto, idReto, idsUsuarios, respuesta) {}
+  opcionImage(event, idDocumentReto, idReto, idsUsuarios, urlImgResp) {
+    this.obtenerPuntaje(this.idUser);
+
+    if (!idsUsuarios) {
+      idsUsuarios = [];
+    }
+
+    idsUsuarios.push(this.idUser);
+    this.retoService
+      .updateIdsUsuarios(idDocumentReto, idReto, idsUsuarios)
+      .then((resp) => {
+        setTimeout(() => {
+          let puntaje: Number;
+          if (this.puntajeObtenido) {
+            if (urlImgResp == event.target.id) {
+              puntaje = 3;
+            } else {
+              puntaje = 1;
+            }
+
+            if (this.categoria == 'Lenguaje') {
+              this.servicePuntaje
+                .updatePuntajeLenguaje(
+                  this.puntajeObtenido['idDocument'],
+                  this.idUser,
+                  this.puntajeObtenido['puntuacionLenguaje'] + puntaje
+                )
+                .then((rp) => {
+                  console.log(rp);
+                });
+            }
+
+            if (this.categoria == 'Matematicas') {
+              this.servicePuntaje
+                .updatePuntajeMatematicas(
+                  this.puntajeObtenido['idDocument'],
+                  this.idUser,
+                  this.puntajeObtenido['puntuacionMatematicas'] + puntaje
+                )
+                .then((rp) => {
+                  console.log(rp);
+                });
+            }
+
+            if (this.categoria == 'CienciaSociales') {
+              this.servicePuntaje
+                .updatePuntajeSociales(
+                  this.puntajeObtenido['idDocument'],
+                  this.idUser,
+                  this.puntajeObtenido['puntuacionSociales'] + puntaje
+                )
+                .then((rp) => {
+                  console.log(rp);
+                });
+            }
+
+            if (this.categoria == 'CienciaNaturales') {
+              this.servicePuntaje
+                .updatePuntajeNaturales(
+                  this.puntajeObtenido['idDocument'],
+                  this.idUser,
+                  this.puntajeObtenido['puntuacionNaturales'] + puntaje
+                )
+                .then((rp) => {
+                  console.log(rp);
+                });
+            }
+          } else {
+            if (urlImgResp == event.target.id) {
+              puntaje = 3;
+            } else {
+              puntaje = 1;
+            }
+
+            if (this.categoria == 'Lenguaje') {
+              this.servicePuntaje.registerByIdUsuarioLenguaje(
+                this.idUser,
+                puntaje
+              );
+            }
+
+            if (this.categoria == 'Matematicas') {
+              this.servicePuntaje.registerByIdUsuarioMatematicas(
+                this.idUser,
+                puntaje
+              );
+            }
+
+            if (this.categoria == 'CienciaSociales') {
+              this.servicePuntaje.registerByIdUsuarioSociales(
+                this.idUser,
+                puntaje
+              );
+            }
+
+            if (this.categoria == 'CienciaNaturales') {
+              this.servicePuntaje.registerByIdUsuarioNaturales(
+                this.idUser,
+                puntaje
+              );
+            }
+            // crea
+          }
+
+          if (puntaje == 3) {
+            this.router.navigate([`correcto/${this.idUser}`]);
+          }
+
+          if (puntaje == 1) {
+            this.router.navigate([`incorrecto/${this.idUser}`]);
+          }
+        }, 1000);
+      });
+  }
 
   opcionA(event, idDocumentReto, idReto, idsUsuarios, respuesta) {
     this.obtenerPuntaje(this.idUser);

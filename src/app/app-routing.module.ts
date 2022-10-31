@@ -27,6 +27,7 @@ import { PuntajeComponent } from './pages/pre-auth/admin/puntaje/puntaje.compone
 import { EditarPuntuacionComponent } from './pages/pre-auth/admin/puntaje/editar-puntuacion/editar-puntuacion.component';
 import { PreguntaPersonalComponent } from './pages/main/pregunta-personal/pregunta-personal.component';
 import { RespuestaPersonalComponent } from './pages/main/respuesta-personal/respuesta-personal.component';
+import { RetoPersonalComponent } from './pages/pre-auth/admin/reto-personal/reto-personal.component';
 
 const routes: Routes = [
   { path: 'menu/:id', component: MenuComponent, canActivate: [LoginGuardian] },
@@ -113,6 +114,11 @@ const routes: Routes = [
       {
         path: 'editar-puntaje/:id',
         component: EditarPuntuacionComponent,
+        canActivate: [LoginGuardian],
+      },
+      {
+        path: 'reto-personal',
+        component: RetoPersonalComponent,
         canActivate: [LoginGuardian],
       },
     ],

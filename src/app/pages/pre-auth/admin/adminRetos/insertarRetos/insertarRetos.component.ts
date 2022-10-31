@@ -13,7 +13,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./insertarRetos.component.scss'],
 })
 export class InsertarRetosComponent implements OnInit {
-
   // Valores para imagenes
   selectedImage: any = null;
   imgSrc: string;
@@ -58,6 +57,12 @@ export class InsertarRetosComponent implements OnInit {
     subtitulo: new FormControl(''),
     respuesta: new FormControl(''),
     imageResp: new FormControl(''),
+
+    urlImg1: new FormControl(''),
+    urlImg2: new FormControl(''),
+    urlImg3: new FormControl(''),
+    urlImg4: new FormControl(''),
+    urlImgResp: new FormControl(''),
   });
 
   SiNo(e) {
@@ -68,9 +73,9 @@ export class InsertarRetosComponent implements OnInit {
     public router: Router,
     public serviceRetos: RetoService,
     public storage: AngularFireStorage
-  ) { }
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   ImageTexto(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -151,230 +156,226 @@ export class InsertarRetosComponent implements OnInit {
 
   addReto(formValue) {
     if (this.formTemplate.value.categoria != '') {
-      if (this.formTemplate.value.imageUrl != '') {
-        // Imagen1
-        var filePath = `${'imagenes'}/${this.selectedImage.name
-          .split('.')
-          .slice(0, -1)
-          .join('.')}_${new Date().getTime()}`;
-        const fileRef = this.storage.ref(filePath);
-        this.storage
-          .upload(filePath, this.selectedImage)
-          .snapshotChanges()
-          .pipe(
-            finalize(() => {
-              fileRef.getDownloadURL().subscribe((url) => {
-                formValue['imageUrl'] = url;
-                setTimeout(() => {
-                  this.serviceRetos.registerRetos(formValue);
-                }, 2000);
-              });
-            })
-          )
-          .subscribe();
-        // Fin imagen 1
+      this.serviceRetos.registerRetos(formValue).then((rp) => {
+        if (rp) {
+          this.serviceRetos.getByInsert(rp['id']).then((respuesta) => {
+            if (respuesta) {
+              // Imagen 1
+              if (this.formTemplate.value.imageUrl != '') {
+                var filePath = `${'imagenes'}/${this.selectedImage.name
+                  .split('.')
+                  .slice(0, -1)
+                  .join('.')}_${new Date().getTime()}`;
+                const fileRef = this.storage.ref(filePath);
+                this.storage
+                  .upload(filePath, this.selectedImage)
+                  .snapshotChanges()
+                  .pipe(
+                    finalize(() => {
+                      fileRef.getDownloadURL().subscribe((url) => {
+                        formValue['imageUrl'] = url;
+                        this.serviceRetos.updateImage1(
+                          respuesta['idDocument'],
+                          respuesta['id'],
+                          formValue['imageUrl']
+                        );
+                      });
+                    })
+                  )
+                  .subscribe();
+              }
+              // Fin imagen 1
 
-        // Imagen2
-        if (
-          this.formTemplate.value.image2 != ''
-        ) {
-          var filePath2 = `${'imagenes'}/${this.selectedImage2.name
-            .split('.')
-            .slice(0, -1)
-            .join('.')}_${new Date().getTime()}`;
-          const fileRef2 = this.storage.ref(filePath2);
-          this.storage
-            .upload(filePath2, this.selectedImage2)
-            .snapshotChanges()
-            .pipe(
-              finalize(() => {
-                fileRef2.getDownloadURL().subscribe((url2) => {
-                  formValue['image2'] = url2;
-                  setTimeout(() => {
-                    this.serviceRetos.updateImage2(
-                      formValue,
-                      formValue['image2']
-                    );
-                  }, 3000);
+              // Imagen2
+              if (this.formTemplate.value.image2 != '') {
+                var filePath2 = `${'imagenes'}/${this.selectedImage2.name
+                  .split('.')
+                  .slice(0, -1)
+                  .join('.')}_${new Date().getTime()}`;
+                const fileRef2 = this.storage.ref(filePath2);
+                this.storage
+                  .upload(filePath2, this.selectedImage2)
+                  .snapshotChanges()
+                  .pipe(
+                    finalize(() => {
+                      fileRef2.getDownloadURL().subscribe((url2) => {
+                        formValue['image2'] = url2;
+                        this.serviceRetos.updateImg2(
+                          respuesta['idDocument'],
+                          respuesta['id'],
+                          formValue['image2']
+                        );
 
-                  this.router.navigate(['admin/adminRetos']);
-                  Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: '¡Insertado Correctamente!',
-                    showConfirmButton: false,
-                    timer: 2500,
-                  });
-                });
-              })
-            )
-            .subscribe();
-        } else {
-          this.router.navigate(['admin/adminRetos']);
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: '¡Insertado Correctamente!',
-            showConfirmButton: false,
-            timer: 2500,
+                        this.router.navigate(['admin/adminRetos']);
+                        Swal.fire({
+                          position: 'top-end',
+                          icon: 'success',
+                          title: '¡Insertado Correctamente!',
+                          showConfirmButton: false,
+                          timer: 2500,
+                        });
+                      });
+                    })
+                  )
+                  .subscribe();
+              }
+              // Fin imagen 2
+
+              // ImagenOpcion1
+              if (this.formTemplate.value.imageOpcion1 != '') {
+                var filePathOpcion1 = `${'imagenes'}/${this.SelectImgOpcion1.name
+                  .split('.')
+                  .slice(0, -1)
+                  .join('.')}_${new Date().getTime()}`;
+                const fileRefOpcion1 = this.storage.ref(filePathOpcion1);
+                this.storage
+                  .upload(filePathOpcion1, this.SelectImgOpcion1)
+                  .snapshotChanges()
+                  .pipe(
+                    finalize(() => {
+                      fileRefOpcion1
+                        .getDownloadURL()
+                        .subscribe((urlImgOpcion1) => {
+                          formValue['imageOpcion1'] = urlImgOpcion1;
+                          this.serviceRetos.updateOpcImage1(
+                            respuesta['idDocument'],
+                            respuesta['id'],
+                            formValue['imageOpcion1'],
+                            this.SelectImgOpcion1.name
+                          );
+                        });
+                    })
+                  )
+                  .subscribe();
+              }
+              // Fin ImageOption1
+
+              // ImageOption2
+              if (this.formTemplate.value.imageOpcion2 != '') {
+                var filePathOpcion2 = `${'imagenes'}/${this.SelectImgOpcion2.name
+                  .split('.')
+                  .slice(0, -1)
+                  .join('.')}_${new Date().getTime()}`;
+                const fileRefOpcion2 = this.storage.ref(filePathOpcion2);
+                this.storage
+                  .upload(filePathOpcion2, this.SelectImgOpcion2)
+                  .snapshotChanges()
+                  .pipe(
+                    finalize(() => {
+                      fileRefOpcion2
+                        .getDownloadURL()
+                        .subscribe((urlImgOpcion2) => {
+                          formValue['imageOpcion2'] = urlImgOpcion2;
+                          this.serviceRetos.updateOpcImage2(
+                            respuesta['idDocument'],
+                            respuesta['id'],
+                            formValue['imageOpcion2'],
+                            this.SelectImgOpcion2.name
+                          );
+                        });
+                    })
+                  )
+                  .subscribe();
+              }
+              // Fin ImageOption2
+
+              // ImageOption3
+              if (this.formTemplate.value.imageOpcion3 != '') {
+                var filePathOpcion3 = `${'imagenes'}/${this.SelectImgOpcion3.name
+                  .split('.')
+                  .slice(0, -1)
+                  .join('.')}_${new Date().getTime()}`;
+                const fileRefOpcion3 = this.storage.ref(filePathOpcion3);
+                this.storage
+                  .upload(filePathOpcion3, this.SelectImgOpcion3)
+                  .snapshotChanges()
+                  .pipe(
+                    finalize(() => {
+                      fileRefOpcion3
+                        .getDownloadURL()
+                        .subscribe((urlImgOpcion3) => {
+                          formValue['imageOpcion3'] = urlImgOpcion3;
+                          this.serviceRetos.updateOpcImage3(
+                            respuesta['idDocument'],
+                            respuesta['id'],
+                            formValue['imageOpcion3'],
+                            this.SelectImgOpcion3.name
+                          );
+                        });
+                    })
+                  )
+                  .subscribe();
+              }
+              // Fin ImageOption3
+
+              // ImageOption4
+              if (this.formTemplate.value.imageOpcion4 != '') {
+                var filePathOpcion4 = `${'imagenes'}/${this.SelectImgOpcion4.name
+                  .split('.')
+                  .slice(0, -1)
+                  .join('.')}_${new Date().getTime()}`;
+                const fileRefOpcion4 = this.storage.ref(filePathOpcion4);
+                this.storage
+                  .upload(filePathOpcion4, this.SelectImgOpcion4)
+                  .snapshotChanges()
+                  .pipe(
+                    finalize(() => {
+                      fileRefOpcion4
+                        .getDownloadURL()
+                        .subscribe((urlImgOpcion4) => {
+                          formValue['imageOpcion4'] = urlImgOpcion4;
+                          this.serviceRetos.updateOpcImage4(
+                            respuesta['idDocument'],
+                            respuesta['id'],
+                            formValue['imageOpcion4'],
+                            this.SelectImgOpcion4.name
+                          );
+                        });
+                    })
+                  )
+                  .subscribe();
+              }
+              // Fin ImageOption4
+
+              // Image respuesta
+              if (this.formTemplate.value.imageResp != '') {
+                var filePathRespuesta = `${'imagenes'}/${this.SelectImgRes.name
+                  .split('.')
+                  .slice(0, -1)
+                  .join('.')}_${new Date().getTime()}`;
+                const fileRefResp = this.storage.ref(filePathRespuesta);
+                this.storage
+                  .upload(filePathRespuesta, this.SelectImgRes)
+                  .snapshotChanges()
+                  .pipe(
+                    finalize(() => {
+                      fileRefResp.getDownloadURL().subscribe((urlImgResp) => {
+                        formValue['imageResp'] = urlImgResp;
+                        this.serviceRetos.updateOpcImageResp(
+                          respuesta['idDocument'],
+                          respuesta['id'],
+                          formValue['imageResp'],
+                          this.SelectImgRes.name
+                        );
+
+                        this.router.navigate(['admin/adminRetos']);
+                        Swal.fire({
+                          position: 'top-end',
+                          icon: 'success',
+                          title: '¡Insertado Correctamente!',
+                          showConfirmButton: false,
+                          timer: 2500,
+                        });
+                      });
+                    })
+                  )
+                  .subscribe();
+              }
+              // Fin image respuesta
+            }
           });
         }
-        // Fin Imagen2
-
-        // ImagenOpcion1
-        if (this.formTemplate.value.imageOpcion1 != '') {
-          var filePathOpcion1 = `${'imagenes'}/${this.SelectImgOpcion1.name
-            .split('.')
-            .slice(0, -1)
-            .join('.')}_${new Date().getTime()}`;
-          const fileRefOpcion1 = this.storage.ref(filePathOpcion1);
-          this.storage
-            .upload(filePathOpcion1, this.SelectImgOpcion1)
-            .snapshotChanges()
-            .pipe(
-              finalize(() => {
-                fileRefOpcion1.getDownloadURL().subscribe((urlImgOpcion1) => {
-                  formValue['imageOpcion1'] = urlImgOpcion1;
-                  setTimeout(() => {
-                    this.serviceRetos.updateImageOpcion1(
-                      formValue,
-                      formValue['imageOpcion1']
-                    );
-                  }, 4000);
-                });
-              })
-            )
-            .subscribe();
-        }
-        // Fin ImageOption1
-
-        // ImageOption2
-        if (this.formTemplate.value.imageOpcion2 != '') {
-          var filePathOpcion2 = `${'imagenes'}/${this.SelectImgOpcion2.name
-            .split('.')
-            .slice(0, -1)
-            .join('.')}_${new Date().getTime()}`;
-          const fileRefOpcion2 = this.storage.ref(filePathOpcion2);
-          this.storage
-            .upload(filePathOpcion2, this.SelectImgOpcion2)
-            .snapshotChanges()
-            .pipe(
-              finalize(() => {
-                fileRefOpcion2.getDownloadURL().subscribe((urlImgOpcion2) => {
-                  formValue['imageOpcion2'] = urlImgOpcion2;
-                  setTimeout(() => {
-                    this.serviceRetos.updateImageOpcion2(
-                      formValue,
-                      formValue['imageOpcion2']
-                    );
-                  }, 5000);
-                });
-              })
-            )
-            .subscribe();
-        }
-        // Fin ImageOption2
-
-        // ImageOption3
-        if (this.formTemplate.value.imageOpcion3 != '') {
-          var filePathOpcion3 = `${'imagenes'}/${this.SelectImgOpcion3.name
-            .split('.')
-            .slice(0, -1)
-            .join('.')}_${new Date().getTime()}`;
-          const fileRefOpcion3 = this.storage.ref(filePathOpcion3);
-          this.storage
-            .upload(filePathOpcion3, this.SelectImgOpcion3)
-            .snapshotChanges()
-            .pipe(
-              finalize(() => {
-                fileRefOpcion3.getDownloadURL().subscribe((urlImgOpcion3) => {
-                  formValue['imageOpcion3'] = urlImgOpcion3;
-                  setTimeout(() => {
-                    this.serviceRetos.updateImageOpcion3(
-                      formValue,
-                      formValue['imageOpcion3']
-                    );
-                  }, 6000);
-                });
-              })
-            )
-            .subscribe();
-        }
-        // Fin ImageOption3
-
-        // ImageOption4
-        if (this.formTemplate.value.imageOpcion4 != '') {
-          var filePathOpcion4 = `${'imagenes'}/${this.SelectImgOpcion4.name
-            .split('.')
-            .slice(0, -1)
-            .join('.')}_${new Date().getTime()}`;
-          const fileRefOpcion4 = this.storage.ref(filePathOpcion4);
-          this.storage
-            .upload(filePathOpcion4, this.SelectImgOpcion4)
-            .snapshotChanges()
-            .pipe(
-              finalize(() => {
-                fileRefOpcion4.getDownloadURL().subscribe((urlImgOpcion4) => {
-                  formValue['imageOpcion4'] = urlImgOpcion4;
-                  setTimeout(() => {
-                    this.serviceRetos.updateImageOpcion4(
-                      formValue,
-                      formValue['imageOpcion4']
-                    );
-                  }, 7000);
-                });
-              })
-            )
-            .subscribe();
-        }
-        // Fin ImageOption4
-
-        // ImageOption4
-        if (this.formTemplate.value.imageResp != '') {
-          var filePathRespuesta = `${'imagenes'}/${this.SelectImgRes.name
-            .split('.')
-            .slice(0, -1)
-            .join('.')}_${new Date().getTime()}`;
-          const fileRefResp = this.storage.ref(filePathRespuesta);
-          this.storage
-            .upload(filePathRespuesta, this.SelectImgRes)
-            .snapshotChanges()
-            .pipe(
-              finalize(() => {
-                fileRefResp.getDownloadURL().subscribe((urlImgResp) => {
-                  formValue['imageResp'] = urlImgResp;
-                  setTimeout(() => {
-                    this.serviceRetos.updateImageResp(
-                      formValue,
-                      formValue['imageResp']
-                    );
-                  }, 8000);
-
-                  this.router.navigate(['admin/adminRetos']);
-                  Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: '¡Insertado Correctamente!',
-                    showConfirmButton: false,
-                    timer: 2500,
-                  });
-                });
-              })
-            )
-            .subscribe();
-        }
-        // Fin ImageOption4
-      } else {
-        this.serviceRetos.registerRetos(formValue);
-        this.router.navigate(['admin/adminRetos']);
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: '¡Insertado Correctamente!',
-          showConfirmButton: false,
-          timer: 2500,
-        });
-      }
+      });
     } else {
       Swal.fire({
         icon: 'error',

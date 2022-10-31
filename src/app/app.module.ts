@@ -43,6 +43,7 @@ import { InsertarEstudiantesComponent } from './pages/pre-auth/admin/estudiantes
 import { EditarEstudianteComponent } from './pages/pre-auth/admin/estudiantes/editar-estudiante/editar-estudiante.component';
 import { PuntajeComponent } from './pages/pre-auth/admin/puntaje/puntaje.component';
 import { EditarPuntuacionComponent } from './pages/pre-auth/admin/puntaje/editar-puntuacion/editar-puntuacion.component';
+import { RetoPersonalComponent } from './pages/pre-auth/admin/reto-personal/reto-personal.component';
 
 // Pages-Main
 import { MenuComponent } from './pages/main/menu/menu.component';
@@ -107,6 +108,7 @@ firebase.initializeApp({
     EditarPuntuacionComponent,
     PreguntaPersonalComponent,
     RespuestaPersonalComponent,
+    RetoPersonalComponent,
   ],
   imports: [
     BrowserModule,
@@ -139,4 +141,4 @@ firebase.initializeApp({
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}

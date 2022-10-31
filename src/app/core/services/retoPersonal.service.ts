@@ -9,7 +9,7 @@ import { RetoPesonal } from '../models/retoPersonal';
 
 @Injectable()
 export class RetoPersonalService {
-  constructor(public router: Router, private db: AngularFirestore) { }
+  constructor(public router: Router, private db: AngularFirestore) {}
 
   retos: RetoPesonal[] = [];
   cursoDoc: AngularFirestoreDocument<RetoPesonal>;
@@ -17,16 +17,7 @@ export class RetoPersonalService {
   // -----------------------------------------------------------------------------------
   // Register
   // -----------------------------------------------------------------------------------
-  // makeid(length) {
-  //   var result = '';
-  //   var characters =
-  //     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  //   var charactersLength = characters.length;
-  //   for (var i = 0; i < length; i++) {
-  //     result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  //   }
-  //   return result;
-  // }
+
   registerRetos(id, categoria, formularioall) {
     formularioall = {
       id: id,
@@ -45,6 +36,12 @@ export class RetoPersonalService {
       imageOpcion2: formularioall.imageOpcion2,
       imageOpcion3: formularioall.imageOpcion3,
       imageOpcion4: formularioall.imageOpcion4,
+
+      urlImg1: formularioall.urlImg1,
+      urlImg2: formularioall.urlImg2,
+      urlImg3: formularioall.urlImg3,
+      urlImg4: formularioall.urlImg4,
+      urlImgResp: formularioall.urlImgResp,
 
       idsUsuarios: [],
       image2: formularioall.image2,
@@ -104,7 +101,7 @@ export class RetoPersonalService {
   getRetosByCategoria(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('retoPersonal', (ref) => ref.orderBy('categoria', 'asc'))
+        .collection('retoPersonal', (ref) => ref.orderBy('id', 'asc'))
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
           if (rp[0]?.idDocument) {
@@ -116,12 +113,12 @@ export class RetoPersonalService {
     });
   }
 
-  getByCategoria(id: string, categoria: string): Promise<any> {
+  getByCategoria(id, categoria): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('retoPersonal', (ref) => ref
-          .where('id', '==', id)
-          .where('categoria', '==', categoria))
+        .collection('retoPersonal', (ref) =>
+          ref.where('id', '==', id).where('categoria', '==', categoria)
+        )
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
           if (rp[0]?.idDocument) {
@@ -133,10 +130,11 @@ export class RetoPersonalService {
     });
   }
 
-  getByInsert(urlImg): Promise<any> {
+  getByInsert(id): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('retoPersonal', (ref) => ref.where('imageUrl', '==', urlImg))
+        .collection('retoPersonal')
+        .doc(id)
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
           if (rp[0]?.idDocument) {
@@ -176,136 +174,63 @@ export class RetoPersonalService {
     return this.db
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
-      .update({ imageUrl: imageUrl, })
+      .update({ imageUrl: imageUrl });
   }
 
   updateImg2(idDocumentReto, idReto, image2) {
     return this.db
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
-      .update({ image2: image2, })
+      .update({ image2: image2 });
   }
 
-  updateOpcImage1(idDocumentReto, idReto, imageOpcion1) {
+  updateOpcImage1(idDocumentReto, idReto, imageOpcion1, urlImg1) {
     return this.db
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
         imageOpcion1: imageOpcion1,
-      })
+        urlImg1: urlImg1,
+      });
   }
 
-  updateOpcImage2(idDocumentReto, idReto, imageOpcion2) {
+  updateOpcImage2(idDocumentReto, idReto, imageOpcion2, urlImg2) {
     return this.db
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
         imageOpcion2: imageOpcion2,
-      })
+        urlImg2: urlImg2,
+      });
   }
 
-  updateOpcImage3(idDocumentReto, idReto, imageOpcion3) {
+  updateOpcImage3(idDocumentReto, idReto, imageOpcion3, urlImg3) {
     return this.db
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
         imageOpcion3: imageOpcion3,
-      })
+        urlImg3: urlImg3,
+      });
   }
 
-  updateOpcImage4(idDocumentReto, idReto, imageOpcion4) {
+  updateOpcImage4(idDocumentReto, idReto, imageOpcion4, urlImg4) {
     return this.db
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
         imageOpcion4: imageOpcion4,
-      })
+        urlImg4: urlImg4,
+      });
   }
 
-  updateOpcImageResp(idDocumentReto, idReto, imageResp) {
+  updateOpcImageResp(idDocumentReto, idReto, imageResp, urlImgResp) {
     return this.db
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
         imageResp: imageResp,
-      })
-  }
-
-  updateImage2(reto: RetoPesonal, image2) {
-    return this.db
-      .collection('retoPersonal', (ref) => ref.where('id', '==', reto.id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            image2: image2,
-          });
-        });
-      });
-  }
-
-  updateImageOpcion1(reto: RetoPesonal, imageOpcion1) {
-    return this.db
-      .collection('retoPersonal', (ref) => ref.where('id', '==', reto.id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            imageOpcion1: imageOpcion1,
-          });
-        });
-      });
-  }
-
-  updateImageOpcion2(reto: RetoPesonal, imageOpcion2) {
-    return this.db
-      .collection('retoPersonal', (ref) => ref.where('id', '==', reto.id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            imageOpcion2: imageOpcion2,
-          });
-        });
-      });
-  }
-
-  updateImageOpcion3(reto: RetoPesonal, imageOpcion3) {
-    return this.db
-      .collection('retoPersonal', (ref) => ref.where('id', '==', reto.id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            imageOpcion3: imageOpcion3,
-          });
-        });
-      });
-  }
-
-  updateImageOpcion4(reto: RetoPesonal, imageOpcion4) {
-    return this.db
-      .collection('retoPersonal', (ref) => ref.where('id', '==', reto.id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            imageOpcion4: imageOpcion4,
-          });
-        });
-      });
-  }
-
-  updateImageResp(reto: RetoPesonal, imageResp) {
-    return this.db
-      .collection('retoPersonal', (ref) => ref.where('id', '==', reto.id))
-      .get()
-      .forEach((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.update({
-            imageResp: imageResp,
-          });
-        });
+        urlImgResp: urlImgResp,
       });
   }
 

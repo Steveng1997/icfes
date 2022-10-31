@@ -53,7 +53,7 @@ export class EditarRetosComponent implements OnInit {
     public serviceRetos: RetoService,
     private activeRoute: ActivatedRoute,
     public storage: AngularFireStorage
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.idUser = this.activeRoute.snapshot.paramMap.get('id');
@@ -142,8 +142,8 @@ export class EditarRetosComponent implements OnInit {
   editarReto(idDocument, idReto, reto: Retos) {
     // this.serviceRetos.updateRetos(idDocument, idReto, reto);
 
+    // Imagen1
     if (this.selectImg1 != null) {
-      // Imagen1
       var filePath = `${'imagenes'}/${this.selectedImage.name
         .split('.')
         .slice(0, -1)
@@ -156,7 +156,11 @@ export class EditarRetosComponent implements OnInit {
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
               this.selectImg1 = url;
-              this.serviceRetos.updateImage1(idDocument, idReto, this.selectImg1);
+              this.serviceRetos.updateImage1(
+                idDocument,
+                idReto,
+                this.selectImg1
+              );
               this.router.navigate(['admin/adminRetos']);
               Swal.fire({
                 position: 'top-end',
@@ -168,11 +172,12 @@ export class EditarRetosComponent implements OnInit {
             });
           })
         )
-        .subscribe()
+        .subscribe();
     }
+    // Fin imagen 1
 
+    // Imagen 2
     if (this.selectImg2 != null) {
-      // Imagen1
       var filePath2 = `${'imagenes'}/${this.selectedImage2.name
         .split('.')
         .slice(0, -1)
@@ -197,11 +202,11 @@ export class EditarRetosComponent implements OnInit {
             });
           })
         )
-        .subscribe()
+        .subscribe();
     }
 
+    // Imagen opcion 1
     if (this.selectOpc1 != null) {
-      // Imagen1
       var filePath3 = `${'imagenes'}/${this.SelectImgOpcion1.name
         .split('.')
         .slice(0, -1)
@@ -214,7 +219,12 @@ export class EditarRetosComponent implements OnInit {
           finalize(() => {
             fileRef3.getDownloadURL().subscribe((url3) => {
               this.selectOpc1 = url3;
-              this.serviceRetos.updateOpcImage1(idDocument, idReto, this.selectOpc1);
+              this.serviceRetos.updateOpcImage1(
+                idDocument,
+                idReto,
+                this.selectOpc1,
+                this.SelectImgOpcion1.name
+              );
               this.router.navigate(['admin/adminRetos']);
               Swal.fire({
                 position: 'top-end',
@@ -226,9 +236,11 @@ export class EditarRetosComponent implements OnInit {
             });
           })
         )
-        .subscribe()
+        .subscribe();
     }
+    // Fin imagen opcion 1
 
+    // Imagen opcion 2
     if (this.selectOpc2 != null) {
       // Imagen1
       var filePath4 = `${'imagenes'}/${this.SelectImgOpcion2.name
@@ -243,7 +255,12 @@ export class EditarRetosComponent implements OnInit {
           finalize(() => {
             fileRef4.getDownloadURL().subscribe((url4) => {
               this.selectOpc2 = url4;
-              this.serviceRetos.updateOpcImage2(idDocument, idReto, this.selectOpc2);
+              this.serviceRetos.updateOpcImage2(
+                idDocument,
+                idReto,
+                this.selectOpc2,
+                this.SelectImgOpcion2.name
+              );
               this.router.navigate(['admin/adminRetos']);
               Swal.fire({
                 position: 'top-end',
@@ -255,11 +272,12 @@ export class EditarRetosComponent implements OnInit {
             });
           })
         )
-        .subscribe()
+        .subscribe();
     }
+    // Fin imagen opcion 2
 
+    // Imagen opcion 3
     if (this.selectOpc3 != null) {
-      // Imagen1
       var filePath5 = `${'imagenes'}/${this.SelectImgOpcion3.name
         .split('.')
         .slice(0, -1)
@@ -272,7 +290,12 @@ export class EditarRetosComponent implements OnInit {
           finalize(() => {
             fileRef5.getDownloadURL().subscribe((url5) => {
               this.selectOpc3 = url5;
-              this.serviceRetos.updateOpcImage3(idDocument, idReto, this.selectOpc3);
+              this.serviceRetos.updateOpcImage3(
+                idDocument,
+                idReto,
+                this.selectOpc3,
+                this.SelectImgOpcion3.name
+              );
               this.router.navigate(['admin/adminRetos']);
               Swal.fire({
                 position: 'top-end',
@@ -284,9 +307,11 @@ export class EditarRetosComponent implements OnInit {
             });
           })
         )
-        .subscribe()
+        .subscribe();
     }
+    // Fin imagen opcion 3
 
+    // Imagen opcion 4
     if (this.selectOpc4 != null) {
       // Imagen1
       var filePath6 = `${'imagenes'}/${this.SelectImgOpcion4.name
@@ -301,7 +326,12 @@ export class EditarRetosComponent implements OnInit {
           finalize(() => {
             fileRef6.getDownloadURL().subscribe((url6) => {
               this.selectOpc4 = url6;
-              this.serviceRetos.updateOpcImage4(idDocument, idReto, this.selectOpc4);
+              this.serviceRetos.updateOpcImage4(
+                idDocument,
+                idReto,
+                this.selectOpc4,
+                this.SelectImgOpcion4.name
+              );
               this.router.navigate(['admin/adminRetos']);
               Swal.fire({
                 position: 'top-end',
@@ -313,11 +343,11 @@ export class EditarRetosComponent implements OnInit {
             });
           })
         )
-        .subscribe()
+        .subscribe();
     }
 
+    // Imagen respuesta
     if (this.selectResp != null) {
-      // Imagen1
       var filePath7 = `${'imagenes'}/${this.SelectImgRes.name
         .split('.')
         .slice(0, -1)
@@ -330,7 +360,12 @@ export class EditarRetosComponent implements OnInit {
           finalize(() => {
             fileRef7.getDownloadURL().subscribe((url7) => {
               this.selectResp = url7;
-              this.serviceRetos.updateOpcImageResp(idDocument, idReto, this.selectResp);
+              this.serviceRetos.updateOpcImageResp(
+                idDocument,
+                idReto,
+                this.selectResp,
+                this.SelectImgRes.name
+              );
               this.router.navigate(['admin/adminRetos']);
               Swal.fire({
                 position: 'top-end',
@@ -341,8 +376,9 @@ export class EditarRetosComponent implements OnInit {
               });
             });
           })
-        )       
-        .subscribe() 
+        )
+        .subscribe();
     }
+    // Fin imagen respuesta
   }
 }

@@ -24,13 +24,13 @@
     </div>
 
     <div class="card-title text-center mb-5 fw-bolder display-5">
-      <label class="">Este ha sido tu desempeño este año</label>
+      <label class="txtTitulo">Este ha sido tu desempeño este año</label>
     </div>
 
     <div class="row text-center" *ngFor="let punt of puntajes">
-      <div class="col-md-3 text-center">
+      <div class="col-md-3 text-center txtMatematica">
         <div class="column">
-          <label>Matematicas</label>
+          <label class="colorMatematica">Matematicas</label>
           <img
             class="grid-item"
             *ngIf="punt.puntuacionMatematicas == 0"
@@ -40,9 +40,9 @@
         </div>
       </div>
 
-      <div class="col-md-3 text-center">
+      <div class="col-md-3 text-center txtLenguaje">
         <div class="column">
-          <label>Lenguaje</label>
+          <label class="colorLenguaje">Lenguaje</label>
           <img
             class="grid-item"
             *ngIf="punt.puntuacionLenguaje > 0"
@@ -52,24 +52,24 @@
         </div>
       </div>
 
-      <div class="col-md-3 text-center">
+      <div class="col-md-3 text-center txtNaturales">
         <div class="column">
-          <label>C.Naturales</label>
+          <label class="colorNaturales">C.Naturales</label>
           <img
             class="grid-item"
-            *ngIf="punt.puntuacionNaturales == 0"
+            *ngIf="punt.puntuacionNaturales > 0"
             src="https://picsum.photos/id/844/900/900.jpg"
             width="80%"
           />
         </div>
       </div>
 
-      <div class="col-md-3 text-center">
+      <div class="col-md-3 text-center txtSociales">
         <div class="column">
-          <label>C.Sociales</label>
+          <label class="colorSociales">C.Sociales</label>
           <img
             class="grid-item"
-            *ngIf="punt.puntuacionSociales == 0"
+            *ngIf="punt.puntuacionSociales > 0"
             src="https://picsum.photos/id/160/900/900.jpg"
             width="80%"
           />
