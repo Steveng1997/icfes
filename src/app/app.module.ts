@@ -63,6 +63,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { LoginGuardian } from './pages/pre-auth/login/login-guardian';
 import { MatDividerModule } from '@angular/material/divider';
 import { SidebarComponent } from './core/sidebar/sidebar.component';
+import { RetoPersonalService } from './core/services/retoPersonal';
 
 firebase.initializeApp({
   apiKey: 'AIzaSyAWFfFTC8gSoctKKst4X1uxVwaFbEB1pXM',
@@ -130,6 +131,7 @@ firebase.initializeApp({
     LoginService,
     EstudianteService,
     RetoService,
+    RetoPersonalService,
     PuntuacionService,
     CookieService,
     LoginGuardian,

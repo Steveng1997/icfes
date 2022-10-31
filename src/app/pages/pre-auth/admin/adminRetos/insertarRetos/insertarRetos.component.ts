@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./insertarRetos.component.scss'],
 })
 export class InsertarRetosComponent implements OnInit {
+
+  // Valores para imagenes
   selectedImage: any = null;
   imgSrc: string;
 
@@ -34,6 +36,7 @@ export class InsertarRetosComponent implements OnInit {
 
   imgRes: string;
   SelectImgRes: any = null;
+  // Fin valores de imagenes
 
   // Si or Not
   selectSiNo: any;
