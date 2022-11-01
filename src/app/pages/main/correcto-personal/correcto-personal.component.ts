@@ -8,12 +8,13 @@ import { LoginService } from 'src/app/core/services/login.service';
   styleUrls: ['./correcto-personal.component.scss'],
 })
 export class CorrectoPersonalComponent implements OnInit {
+  idUser: string;
   constructor(
     private router: Router,
     private rutaActiva: ActivatedRoute,
     private serviceLogin: LoginService
-  ) {}
-  idUser: string;
+  ) { }
+
   ngOnInit(): void {
     this.idUser = this.rutaActiva.snapshot.paramMap.get('id');
     this.serviceLogin.getById(this.idUser);
