@@ -15,40 +15,45 @@ export class UsuariosComponent implements OnInit {
   constructor(public router: Router, public serviceLogin: LoginService) { }
 
   ngOnInit(): void {
-    this.getEmpleadosByDocument();
+    this.getEmpleados();
   }
 
   Agregar() {
     this.router.navigate(['admin/insertar-usuario']);
   }
 
-  getEmpleadosByDocument() {
-    this.serviceLogin.getUsuarios().then((datosUsers) => {
+  getEmpleados() {
+    this.serviceLogin.getUsuarios().subscribe((datosUsers) => {
       this.usuarios = datosUsers;
     });
   }
 
-  DeleteUser(idDocumentReto, id) {
-    Swal.fire({
-      title: '¿Deseas eliminar el registro?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Deseo eliminar!',
-    }).then((result) => {
-      if (result.isConfirmed) {
+  DeleteUser(id) {
+    this.serviceLogin.getUsuariosByDocument(id).then((datosUsers) => {
+      if (datosUsers) {
         Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: '¡Eliminado Correctamente!',
-          showConfirmButton: false,
-          timer: 2500,
-        });
+          title: '¿Deseas eliminar el registro?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Deseo eliminar!',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: '¡Eliminado Correctamente!',
+              showConfirmButton: false,
+              timer: 2500,
+            });
 
-        this.serviceLogin.deleteUsuario(idDocumentReto, id);
-        this.getEmpleadosByDocument();
+            this.serviceLogin.deleteUsuario(datosUsers[0]['idDocument'], id);
+            this.getEmpleados();
+          }
+        });
       }
     });
+
   }
 }

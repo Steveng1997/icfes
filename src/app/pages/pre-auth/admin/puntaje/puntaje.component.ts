@@ -16,7 +16,7 @@ export class PuntajeComponent implements OnInit {
   constructor(
     public router: Router,
     public servicePuntuacion: PuntuacionService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getPuntaje();
@@ -27,31 +27,35 @@ export class PuntajeComponent implements OnInit {
   }
 
   getPuntaje() {
-    this.servicePuntuacion.getPuntaje().then((datosPuntaje) => {
+    this.servicePuntuacion.getPuntajes().subscribe((datosPuntaje) => {
       this.puntaje = datosPuntaje;
     });
   }
 
-  DeletePuntaje(idDocumentReto, id) {
-    Swal.fire({
-      title: '¿Deseas eliminar el registro?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Deseo eliminar!',
-    }).then((result) => {
-      if (result.isConfirmed) {
+  DeletePuntaje(id) {
+    this.servicePuntuacion.getPuntajeByDocument(id).then((datoPuntaje) => {
+      if (datoPuntaje) {
         Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: '¡Eliminado Correctamente!',
-          showConfirmButton: false,
-          timer: 2500,
-        });
+          title: '¿Deseas eliminar el registro?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Deseo eliminar!',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: '¡Eliminado Correctamente!',
+              showConfirmButton: false,
+              timer: 2500,
+            });
 
-        this.servicePuntuacion.deletePuntaje(idDocumentReto, id);
-        this.getPuntaje();
+            this.servicePuntuacion.deletePuntaje(datoPuntaje[0]['idDocument'], id);
+            this.getPuntaje();
+          }
+        });
       }
     });
   }

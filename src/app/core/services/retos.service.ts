@@ -92,6 +92,12 @@ export class RetoService {
   // Get
   // -----------------------------------------------------------------------------------
 
+  getRetoPersonalAll(){
+    return this.db
+       .collection('retos', (ref) => ref.orderBy('id', 'asc'))
+       .valueChanges()
+ }
+
   getById(id): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db

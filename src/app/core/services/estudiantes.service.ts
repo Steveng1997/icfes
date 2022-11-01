@@ -15,7 +15,7 @@ export class EstudianteService {
     public router: Router,
     private db: AngularFirestore,
     private authFire: AngularFireAuth
-  ) {}
+  ) { }
 
   estudiantes: Estudiante[] = [];
 
@@ -44,6 +44,13 @@ export class EstudianteService {
   // -----------------------------------------------------------------------------------
   // Get
   // -----------------------------------------------------------------------------------
+
+  getEstudiantesAll() {
+    return this.db
+      .collection('estudiantes', (ref) => ref.orderBy('id', 'asc'))
+      .valueChanges()
+  }
+
 
   getById(id): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -86,7 +93,7 @@ export class EstudianteService {
   // -----------------------------------------------------------------------------------
   // Update
   // -----------------------------------------------------------------------------------
-  
+
   updateEstudiante(idDocument, idReto, estudi: Estudiante) {
     return this.db
       .collection('estudiantes', (ref) => ref.where('id', '==', idReto))

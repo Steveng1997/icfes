@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 //importamos el servicio
 import { PuntuacionService } from 'src/app/core/services/puntaje.service';
 //importamos los modulos para formularios
 import { FormBuilder } from '@angular/forms';
+import { ListadopuntajeComponent } from '../listadopuntaje/listadopuntaje.component';
 //importamos el enrutador
 import { Router, ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Puntaje } from 'src/app/core/models/Puntaje';
-import Swal from 'sweetalert2';
+
+import { MatDialog } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-mirar-avance',
@@ -17,11 +19,13 @@ import Swal from 'sweetalert2';
 export class MirarAvanceComponent implements OnInit {
   puntajes: Puntaje[];
   idUser: string;
+
   constructor(
     public router: Router,
     public servicePuntaje: PuntuacionService,
     public formBuilder: FormBuilder,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -29,11 +33,26 @@ export class MirarAvanceComponent implements OnInit {
     this.servicePuntaje.getPuntajeByIdUsuario(this.idUser)
       .then((respuestaPuntaje) => {
         this.puntajes = respuestaPuntaje;
-        console.log(this.puntajes)
+      });
+      
+  }
+
+  mostrarDialogo(): void {
+    this.dialog.open(ListadopuntajeComponent, {
+        data: `¿Te gusta programar en TypeScript?`
+      })
+      .afterClosed()
+      .subscribe((confirmado: Boolean) => {
+        if (confirmado) {
+          alert("¡A mí también!");
+        } else {
+          alert("Deberías probarlo, a mí me gusta :)");
+        }
       });
   }
 
   salir() {
     this.router.navigate(['']);
   }
+
 }

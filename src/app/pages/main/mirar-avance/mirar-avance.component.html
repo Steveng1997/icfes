@@ -1,80 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-      crossorigin="anonymous"
-    ></script>
-    <style href="mirar-avance.component.html"></style>
-  </head>
 
-  <body>
-    <div class="btn-salir" style="text-align: right">
-      <button class="btn btn-success btnSalir" (click)="salir()">Salir</button>
-    </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
+  <style href="mirar-avance.component.html"></style>
+</head>
 
-    <div class="card-title text-center mb-5 fw-bolder display-5">
-      <label class="txtTitulo">Este ha sido tu desempeño este año</label>
-    </div>
+<body>
+  <div class="btn-salir" style="text-align: right">
+    <button class="btn btn-success btnSalir" (click)="salir()">Salir</button>
+  </div>
 
-    <div class="row text-center" *ngFor="let punt of puntajes">
-      <div class="col-md-3 text-center txtMatematica">
-        <div class="column">
-          <label class="colorMatematica">Matematicas</label>
-          <img
-            class="grid-item"
-            *ngIf="punt.puntuacionMatematicas == 0"
-            src="https://picsum.photos/id/733/900/900.jpg"
-            width="80%"
-          />
+  <div class="card-title text-center mb-5 fw-bolder display-5">
+    <label class="txtTitulo">Este ha sido tu desempeño este año</label>
+  </div>
+
+  <h5 class="text-center display-4 text-danger" *ngIf="puntajes[0]['id'] == ''">
+    Este usuario no ha hecho ningun reto
+  </h5>
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Lanzar demo de modal
+  </button>
+
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Lanzar modal de fondo estático
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Título del modal</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-      </div>
-
-      <div class="col-md-3 text-center txtLenguaje">
-        <div class="column">
-          <label class="colorLenguaje">Lenguaje</label>
-          <img
-            class="grid-item"
-            *ngIf="punt.puntuacionLenguaje > 0"
-            src="https://picsum.photos/id/584/900/900.jpg"
-            width="80%"
-          />
+        <div class="modal-body">
+          ...
         </div>
-      </div>
-
-      <div class="col-md-3 text-center txtNaturales">
-        <div class="column">
-          <label class="colorNaturales">C.Naturales</label>
-          <img
-            class="grid-item"
-            *ngIf="punt.puntuacionNaturales > 0"
-            src="https://picsum.photos/id/844/900/900.jpg"
-            width="80%"
-          />
-        </div>
-      </div>
-
-      <div class="col-md-3 text-center txtSociales">
-        <div class="column">
-          <label class="colorSociales">C.Sociales</label>
-          <img
-            class="grid-item"
-            *ngIf="punt.puntuacionSociales > 0"
-            src="https://picsum.photos/id/160/900/900.jpg"
-            width="80%"
-          />
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Comprendido</button>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+
+
+
+  <!-- <button mat-raised-button mat-button color="warning" (click)="mostrarDialogo()">Mostrar diálogo</button> -->
+
+
+  <div class="row text-center" *ngFor="let punt of puntajes">
+    <div class="col-md-3 text-center txtMatematica">
+      <div class="column">
+        <label class="colorMatematica">Matematicas</label>
+        <img class="grid-item" *ngIf="punt.puntuacionMatematicas  >= 0 && punt.puntuacionMatematicas <= 39"
+          src="./assets/PRINCIPIANTE.fw.png" width="70%" />
+        <img class="grid-item" *ngIf="punt.puntuacionMatematicas  >= 40 && punt.puntuacionMatematicas <= 69"
+          src="./assets/PROFESIONAL.fw.png" width="70%" />
+        <img class="grid-item" *ngIf="punt.puntuacionMatematicas >= 70 && punt.puntuacionMatematicas <= 99"
+          src="./assets/MAESTRO.fw.png" width="70%" />
+        <img class="grid-item" *ngIf="punt.puntuacionMatematicas >= 100" src="./assets/JEFE_MAESTRO.fw.png"
+          width="70%" />
+      </div>
+    </div>
+
+    <div class="col-md-3 text-center txtLenguaje">
+      <div class="column">
+        <label class="colorLenguaje">Lenguaje</label>
+        <img class="grid-item" *ngIf="punt.puntuacionLenguaje  >= 0 && punt.puntuacionLenguaje <= 39"
+          src="./assets/PRINCIPIANTE.fw.png" width="70%" />
+        <img class="grid-item" *ngIf="punt.puntuacionLenguaje  >= 40 && punt.puntuacionLenguaje <= 69"
+          src="./assets/PROFESIONAL.fw.png" width="70%" />
+        <img class="grid-item" *ngIf="punt.puntuacionLenguaje >= 70 && punt.puntuacionLenguaje <= 99"
+          src="./assets/MAESTRO.fw.png" width="70%" />
+        <img class="grid-item" *ngIf="punt.puntuacionLenguaje >= 100" src="./assets/JEFE_MAESTRO.fw.png" width="70%" />
+      </div>
+    </div>
+
+    <div class="col-md-3 text-center txtNaturales">
+      <div class="column">
+        <label class="colorNaturales">C.Naturales</label>
+        <img class="grid-item" *ngIf="punt.puntuacionNaturales  >= 0 && punt.puntuacionNaturales <= 39"
+          src="./assets/PRINCIPIANTE.fw.png" width="70%" />
+        <img class="grid-item" *ngIf="punt.puntuacionNaturales  >= 40 && punt.puntuacionNaturales <= 69"
+          src="./assets/PROFESIONAL.fw.png" width="70%" />
+        <img class="grid-item" *ngIf="punt.puntuacionNaturales >= 70 && punt.puntuacionNaturales <= 99"
+          src="./assets/MAESTRO.fw.png" width="70%" />
+        <img class="grid-item" *ngIf="punt.puntuacionNaturales >= 100" src="./assets/JEFE_MAESTRO.fw.png" width="70%" />
+      </div>
+    </div>
+
+    <div class="col-md-3 text-center txtSociales">
+      <div class="column">
+        <label class="colorSociales">C.Sociales</label>
+        <img class="grid-item" *ngIf="punt.puntuacionSociales  >= 0 && punt.puntuacionSociales <= 39"
+          src="./assets/PRINCIPIANTE.fw.png" width="70%" />
+        <img class="grid-item" *ngIf="punt.puntuacionSociales  >= 40 && punt.puntuacionSociales <= 69"
+          src="./assets/PROFESIONAL.fw.png" width="70%" />
+        <img class="grid-item" *ngIf="punt.puntuacionSociales >= 70 && punt.puntuacionSociales <= 99"
+          src="./assets/MAESTRO.fw.png" width="70%" />
+        <img class="grid-item" *ngIf="punt.puntuacionSociales >= 100" src="./assets/JEFE_MAESTRO.fw.png" width="70%" />
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>

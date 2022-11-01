@@ -36,10 +36,6 @@
       <div class="card">
         <div class="card-header">
           <h3>Puntaje</h3>
-
-          <button (click)="Agregar()">
-            Agregar <span class="las la-arrow-right"></span>
-          </button>
           <h5 style="margin-top: 30px" *ngIf="puntaje.length == 0">
             No hay datos para mostrar
           </h5>
@@ -69,7 +65,7 @@
                   ></i>
                   <i
                     (click)="
-                      DeletePuntaje(puntuacion.idDocument, puntuacion.id)
+                      DeletePuntaje(puntuacion.id)
                     "
                     class="fas fa-trash-alt fa-lg text-danger"
                   ></i>

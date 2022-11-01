@@ -108,10 +108,10 @@ export class LoginService {
     });
   }
 
-  getUsuarios(): Promise<any> {
+  getUsuariosByDocument(id): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('usuarios', (ref) => ref.orderBy('id', 'asc'))
+        .collection('usuarios', (ref) => ref.where('id', '==', id))
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
           if (rp[0]?.idDocument) {
@@ -121,6 +121,12 @@ export class LoginService {
           }
         });
     });
+  }
+
+  getUsuarios(){
+     return this.db
+        .collection('usuarios', (ref) => ref.orderBy('id', 'asc'))
+        .valueChanges()
   }
 
   // -----------------------------------------------------------------------------------

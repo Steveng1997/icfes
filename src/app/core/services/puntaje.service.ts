@@ -163,10 +163,10 @@ export class PuntuacionService {
     });
   }
 
-  getPuntaje(): Promise<any> {
+  getPuntajeByDocument(id): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('puntaje', (ref) => ref.orderBy('id', 'asc'))
+        .collection('puntaje', (ref) => ref.where('id', '==', id))
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
           if (rp[0]?.idDocument) {
@@ -177,6 +177,12 @@ export class PuntuacionService {
         });
     });
   }
+
+  getPuntajes(){
+    return this.db
+       .collection('puntaje', (ref) => ref.orderBy('id', 'asc'))
+       .valueChanges()
+ }
 
   // -----------------------------------------------------------------------------------
   // Get

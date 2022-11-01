@@ -12,6 +12,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+
 // Firebase
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
@@ -59,6 +62,7 @@ import { CorrectoPersonalComponent } from './pages/main/correcto-personal/correc
 import { MenuAreaPersonalComponent } from './pages/main/menu-area-personal/menu-area-personal.component';
 import { PreguntaPersonalComponent } from './pages/main/pregunta-personal/pregunta-personal.component';
 import { RespuestaPersonalComponent } from './pages/main/respuesta-personal/respuesta-personal.component';
+import { ListadopuntajeComponent } from './pages/main/listadopuntaje/listadopuntaje.component';
 
 // Cookies
 import { CookieService } from 'ngx-cookie-service';
@@ -109,7 +113,9 @@ firebase.initializeApp({
     PreguntaPersonalComponent,
     RespuestaPersonalComponent,
     RetoPersonalComponent,
+    ListadopuntajeComponent,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -125,9 +131,12 @@ firebase.initializeApp({
     AngularFirestoreModule,
     MatRadioModule,
     NgxPaginationModule,
+
+    MatDialogModule,
+    MatButtonModule,
+
     AngularFireModule.initializeApp(environment),
   ],
-
   providers: [
     AngularFireAuth,
     LoginService,
@@ -139,6 +148,7 @@ firebase.initializeApp({
     LoginGuardian,
   ],
   bootstrap: [AppComponent],
+  entryComponents: [ListadopuntajeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule {}
+export class AppModule { }

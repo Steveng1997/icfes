@@ -255,7 +255,7 @@ body {
 // ---------------------------------------------------------------------------------------------------
 // Query para pantalla grande como laptop o monitor
 
-@media only screen and (min-device-width: 1200px) and (max-device-width: 1600px) {
+@media only screen and (min-device-width: 1200px) and (max-device-width: 1500px) {
   .grid-item {
     background-color: #03afff;
     border-radius: 4px;
@@ -265,6 +265,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     margin-top: 10%;
+    width: 40%;
   }
 
   .grid-item:hover {

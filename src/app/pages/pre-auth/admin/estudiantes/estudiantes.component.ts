@@ -15,7 +15,7 @@ export class EstudiantesComponent implements OnInit {
   constructor(
     public router: Router,
     public serviceEstudiante: EstudianteService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getEmpleados();
@@ -26,32 +26,36 @@ export class EstudiantesComponent implements OnInit {
   }
 
   getEmpleados() {
-    this.serviceEstudiante.getEstudiantes().then((datosEstudiantes) => {
+    this.serviceEstudiante.getEstudiantesAll().subscribe((datosEstudiantes) => {
       this.estudiantes = datosEstudiantes;
     });
   }
 
-  DeleteUser(idDocumentReto, id) {
-    Swal.fire({
-      title: '¿Deseas eliminar el registro?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, Deseo eliminar!',
-    }).then((result) => {
-      if (result.isConfirmed) {
+  DeleteUser(id) {
+    this.serviceEstudiante.getById(id).then((datoEstudiante) => {
+      if (datoEstudiante) {
         Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: '¡Eliminado Correctamente!',
-          showConfirmButton: false,
-          timer: 2500,
-        });
+          title: '¿Deseas eliminar el registro?',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Deseo eliminar!',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: '¡Eliminado Correctamente!',
+              showConfirmButton: false,
+              timer: 2500,
+            });
 
-        this.serviceEstudiante.deleteEstudiante(idDocumentReto, id);
-        this.getEmpleados();
+            this.serviceEstudiante.deleteEstudiante(datoEstudiante[0]['idDocument'], id);
+            this.getEmpleados();
+          }
+        });
       }
-    });
+    })
   }
 }

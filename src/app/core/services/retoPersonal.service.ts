@@ -129,22 +129,30 @@ export class RetoPersonalService {
         });
     });
   }
+  
+  getRetoPersonalAll(){
+    return this.db
+       .collection('retoPersonal', (ref) => ref.orderBy('id', 'asc'))
+       .valueChanges()
+ }
 
-  getByInsert(id): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.db
-        .collection('retoPersonal')
-        .doc(id)
-        .valueChanges({ idField: 'idDocument' })
-        .subscribe((rp) => {
-          if (rp[0]?.idDocument) {
-            resolve(rp);
-          } else {
-            resolve(rp);
-          }
-        });
-    });
-  }
+ getByInsert(id): Promise<any> {
+  return new Promise((resolve, reject) => {
+    this.db
+      .collection('retoPersonal')
+      .doc(id)
+      .valueChanges({ idField: 'idDocument' })
+      .subscribe((rp) => {
+        if (rp[0]?.idDocument) {
+          resolve(rp);
+        } else {
+          resolve(rp);
+        }
+      });
+  });
+}
+
+
 
   // -----------------------------------------------------------------------------------
   // Get
