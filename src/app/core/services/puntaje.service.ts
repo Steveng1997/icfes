@@ -29,7 +29,7 @@ export class PuntuacionService {
     return result;
   }
 
-  registerByIdUsuarioLenguaje(id, puntaje) {
+  registerByIdUsuarioLenguaje(id, puntaje, nombre) {
     let puntua = {
       id: `uid${this.makeid(10)}`,
       idUsuario: id,
@@ -37,6 +37,7 @@ export class PuntuacionService {
       puntuacionMatematicas: 0,
       puntuacionSociales: 0,
       puntuacionNaturales: 0,
+      nombre: nombre
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -49,7 +50,7 @@ export class PuntuacionService {
     });
   }
 
-  registerByIdUsuarioMatematicas(id, puntaje) {
+  registerByIdUsuarioMatematicas(id, puntaje, nombre) {
     let puntua = {
       id: `uid${this.makeid(10)}`,
       idUsuario: id,
@@ -57,6 +58,7 @@ export class PuntuacionService {
       puntuacionMatematicas: puntaje,
       puntuacionSociales: 0,
       puntuacionNaturales: 0,
+      nombre: nombre
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -69,7 +71,7 @@ export class PuntuacionService {
     });
   }
 
-  registerByIdUsuarioSociales(id, puntaje) {
+  registerByIdUsuarioSociales(id, puntaje, nombre) {
     let puntua = {
       id: `uid${this.makeid(10)}`,
       idUsuario: id,
@@ -77,6 +79,7 @@ export class PuntuacionService {
       puntuacionMatematicas: 0,
       puntuacionSociales: puntaje,
       puntuacionNaturales: 0,
+      nombre: nombre
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -89,7 +92,7 @@ export class PuntuacionService {
     });
   }
 
-  registerByIdUsuarioNaturales(id, puntaje) {
+  registerByIdUsuarioNaturales(id, puntaje, nombre) {
     let puntua = {
       id: `uid${this.makeid(10)}`,
       idUsuario: id,
@@ -97,6 +100,7 @@ export class PuntuacionService {
       puntuacionMatematicas: 0,
       puntuacionSociales: 0,
       puntuacionNaturales: puntaje,
+      nombre: nombre
     };
     return new Promise<any>((resolve, reject) => {
       this.db

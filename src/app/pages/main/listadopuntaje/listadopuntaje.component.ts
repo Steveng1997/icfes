@@ -8,16 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ListadopuntajeComponent implements OnInit {
 
-  constructor(
-    public dialogo: MatDialogRef<ListadopuntajeComponent>,
-    @Inject(MAT_DIALOG_DATA) public mensaje: string) { }
-
-    cerrarDialogo(): void {
-      this.dialogo.close(false);
-    }
-    confirmado(): void {
-      this.dialogo.close(true);
-    }
+  constructor(){}
 
   ngOnInit() {
   }

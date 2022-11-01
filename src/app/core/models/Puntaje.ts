@@ -6,4 +6,5 @@ export class Puntaje {
   puntuacionNaturales?: number;
   puntuacionSociales?: number;
   idDocument?: string;
+  nombre?: string;
 }

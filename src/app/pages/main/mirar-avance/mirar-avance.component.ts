@@ -51,6 +51,14 @@ export class MirarAvanceComponent implements OnInit {
       });
   }
 
+  openDialog() {
+    const dialogRef = this.dialog.open(ListadopuntajeComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
   salir() {
     this.router.navigate(['']);
   }

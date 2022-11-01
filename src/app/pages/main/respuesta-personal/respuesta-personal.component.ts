@@ -26,7 +26,7 @@ export class RespuestaPersonalComponent implements OnInit {
     private retoService: RetoPersonalService,
     private serviceLogin: LoginService,
     private servicePuntaje: PuntuacionService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.idUser = this.rutaActiva.snapshot.paramMap.get('id');
@@ -176,33 +176,40 @@ export class RespuestaPersonalComponent implements OnInit {
               puntaje = 1;
             }
 
-            if (this.categoria == 'Lenguaje') {
-              this.servicePuntaje.registerByIdUsuarioLenguaje(
-                this.idUser,
-                puntaje
-              );
-            }
+            this.serviceLogin.getById(this.idUser).then((rp => {
 
-            if (this.categoria == 'Matematicas') {
-              this.servicePuntaje.registerByIdUsuarioMatematicas(
-                this.idUser,
-                puntaje
-              );
-            }
+              if (this.categoria == 'Lenguaje') {
+                this.servicePuntaje.registerByIdUsuarioLenguaje(
+                  this.idUser,
+                  puntaje,
+                  rp[0]['nombre']
+                );
+              }
 
-            if (this.categoria == 'CienciaSociales') {
-              this.servicePuntaje.registerByIdUsuarioSociales(
-                this.idUser,
-                puntaje
-              );
-            }
+              if (this.categoria == 'Matematicas') {
+                this.servicePuntaje.registerByIdUsuarioMatematicas(
+                  this.idUser,
+                  puntaje,
+                  rp[0]['nombre']
+                );
+              }
 
-            if (this.categoria == 'CienciaNaturales') {
-              this.servicePuntaje.registerByIdUsuarioNaturales(
-                this.idUser,
-                puntaje
-              );
-            }
+              if (this.categoria == 'CienciaSociales') {
+                this.servicePuntaje.registerByIdUsuarioSociales(
+                  this.idUser,
+                  puntaje,
+                  rp[0]['nombre']
+                );
+              }
+
+              if (this.categoria == 'CienciaNaturales') {
+                this.servicePuntaje.registerByIdUsuarioNaturales(
+                  this.idUser,
+                  puntaje,
+                  rp[0]['nombre']
+                );
+              }
+            }))
             // crea
           }
 
@@ -291,33 +298,40 @@ export class RespuestaPersonalComponent implements OnInit {
               puntaje = 1;
             }
 
-            if (this.categoria == 'Lenguaje') {
-              this.servicePuntaje.registerByIdUsuarioLenguaje(
-                this.idUser,
-                puntaje
-              );
-            }
+            this.serviceLogin.getById(this.idUser).then((rp => {
 
-            if (this.categoria == 'Matematicas') {
-              this.servicePuntaje.registerByIdUsuarioMatematicas(
-                this.idUser,
-                puntaje
-              );
-            }
+              if (this.categoria == 'Lenguaje') {
+                this.servicePuntaje.registerByIdUsuarioLenguaje(
+                  this.idUser,
+                  puntaje,
+                  rp[0]['nombre']
+                );
+              }
 
-            if (this.categoria == 'CienciaSociales') {
-              this.servicePuntaje.registerByIdUsuarioSociales(
-                this.idUser,
-                puntaje
-              );
-            }
+              if (this.categoria == 'Matematicas') {
+                this.servicePuntaje.registerByIdUsuarioMatematicas(
+                  this.idUser,
+                  puntaje,
+                  rp[0]['nombre']
+                );
+              }
 
-            if (this.categoria == 'CienciaNaturales') {
-              this.servicePuntaje.registerByIdUsuarioNaturales(
-                this.idUser,
-                puntaje
-              );
-            }
+              if (this.categoria == 'CienciaSociales') {
+                this.servicePuntaje.registerByIdUsuarioSociales(
+                  this.idUser,
+                  puntaje,
+                  rp[0]['nombre']
+                );
+              }
+
+              if (this.categoria == 'CienciaNaturales') {
+                this.servicePuntaje.registerByIdUsuarioNaturales(
+                  this.idUser,
+                  puntaje,
+                  rp[0]['nombre']
+                );
+              }
+            }))
             // crea
           }
 

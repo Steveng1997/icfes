@@ -15,7 +15,7 @@ export class LoginService {
     public router: Router,
     private db: AngularFirestore,
     private authFire: AngularFireAuth
-  ) {}
+  ) { }
 
   usuarios: Usuario[] = [];
 
@@ -76,6 +76,12 @@ export class LoginService {
     });
   }
 
+  getByIdAll(id) {
+    return this.db
+      .collection('usuarios', (ref) => ref.where('id', '==', id))
+      .valueChanges()
+  }
+
   getByEmail(email): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
@@ -123,10 +129,10 @@ export class LoginService {
     });
   }
 
-  getUsuarios(){
-     return this.db
-        .collection('usuarios', (ref) => ref.orderBy('id', 'asc'))
-        .valueChanges()
+  getUsuarios() {
+    return this.db
+      .collection('usuarios', (ref) => ref.orderBy('id', 'asc'))
+      .valueChanges()
   }
 
   // -----------------------------------------------------------------------------------
