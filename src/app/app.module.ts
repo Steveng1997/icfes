@@ -12,8 +12,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 // Firebase
 import { AngularFireModule } from '@angular/fire/compat';
@@ -132,10 +131,9 @@ firebase.initializeApp({
     MatRadioModule,
     NgxPaginationModule,
 
-    MatDialogModule,
-    MatButtonModule,
-
     AngularFireModule.initializeApp(environment),
+
+    ModalModule.forRoot(),
   ],
   providers: [
     AngularFireAuth,
@@ -148,7 +146,6 @@ firebase.initializeApp({
     LoginGuardian,
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ListadopuntajeComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}

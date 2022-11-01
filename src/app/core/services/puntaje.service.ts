@@ -37,7 +37,8 @@ export class PuntuacionService {
       puntuacionMatematicas: 0,
       puntuacionSociales: 0,
       puntuacionNaturales: 0,
-      nombre: nombre
+      nombre: nombre,
+      totalPuntaje: puntaje,
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -58,7 +59,8 @@ export class PuntuacionService {
       puntuacionMatematicas: puntaje,
       puntuacionSociales: 0,
       puntuacionNaturales: 0,
-      nombre: nombre
+      nombre: nombre,
+      totalPuntaje: puntaje,
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -79,7 +81,8 @@ export class PuntuacionService {
       puntuacionMatematicas: 0,
       puntuacionSociales: puntaje,
       puntuacionNaturales: 0,
-      nombre: nombre
+      nombre: nombre,
+      totalPuntaje: puntaje,
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -100,7 +103,8 @@ export class PuntuacionService {
       puntuacionMatematicas: 0,
       puntuacionSociales: 0,
       puntuacionNaturales: puntaje,
-      nombre: nombre
+      nombre: nombre,
+      totalPuntaje: puntaje,
     };
     return new Promise<any>((resolve, reject) => {
       this.db
@@ -182,11 +186,17 @@ export class PuntuacionService {
     });
   }
 
-  getPuntajes(){
+  getPuntajes() {
     return this.db
-       .collection('puntaje', (ref) => ref.orderBy('id', 'asc'))
-       .valueChanges()
- }
+      .collection('puntaje', (ref) => ref.orderBy('id', 'asc'))
+      .valueChanges();
+  }
+
+  getPuntajesOrderByPuntuacion() {
+    return this.db
+      .collection('puntaje', (ref) => ref.orderBy('puntuacion', 'asc'))
+      .valueChanges();
+  }
 
   // -----------------------------------------------------------------------------------
   // Get
@@ -236,6 +246,15 @@ export class PuntuacionService {
       .doc(idDocumentPuntaje)
       .update({
         puntuacionNaturales: puntaje,
+      });
+  }
+
+  updatePuntajeTotal(idDocumentPuntaje, idUser, total) {
+    return this.db
+      .collection('puntaje', (ref) => ref.where('idUsuario', '==', idUser))
+      .doc(idDocumentPuntaje)
+      .update({
+        totalPuntaje: total,
       });
   }
 

@@ -26,7 +26,7 @@ export class RespuestaPersonalComponent implements OnInit {
     private retoService: RetoPersonalService,
     private serviceLogin: LoginService,
     private servicePuntaje: PuntuacionService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.idUser = this.rutaActiva.snapshot.paramMap.get('id');
@@ -176,8 +176,7 @@ export class RespuestaPersonalComponent implements OnInit {
               puntaje = 1;
             }
 
-            this.serviceLogin.getById(this.idUser).then((rp => {
-
+            this.serviceLogin.getById(this.idUser).then((rp) => {
               if (this.categoria == 'Lenguaje') {
                 this.servicePuntaje.registerByIdUsuarioLenguaje(
                   this.idUser,
@@ -209,9 +208,19 @@ export class RespuestaPersonalComponent implements OnInit {
                   rp[0]['nombre']
                 );
               }
-            }))
+            });
             // crea
           }
+
+          this.servicePuntaje.updatePuntajeTotal(
+            this.puntajeObtenido['idDocument'],
+            this.idUser,
+            this.puntajeObtenido['puntuacionLenguaje'] +
+              this.puntajeObtenido['puntuacionMatematicas'] +
+              this.puntajeObtenido['puntuacionSociales'] +
+              this.puntajeObtenido['puntuacionNaturales'] +
+              puntaje
+          );
 
           if (puntaje == 3) {
             this.router.navigate([`correcto/${this.idUser}`]);
@@ -298,8 +307,7 @@ export class RespuestaPersonalComponent implements OnInit {
               puntaje = 1;
             }
 
-            this.serviceLogin.getById(this.idUser).then((rp => {
-
+            this.serviceLogin.getById(this.idUser).then((rp) => {
               if (this.categoria == 'Lenguaje') {
                 this.servicePuntaje.registerByIdUsuarioLenguaje(
                   this.idUser,
@@ -331,9 +339,19 @@ export class RespuestaPersonalComponent implements OnInit {
                   rp[0]['nombre']
                 );
               }
-            }))
+            });
             // crea
           }
+
+          this.servicePuntaje.updatePuntajeTotal(
+            this.puntajeObtenido['idDocument'],
+            this.idUser,
+            this.puntajeObtenido['puntuacionLenguaje'] +
+              this.puntajeObtenido['puntuacionMatematicas'] +
+              this.puntajeObtenido['puntuacionSociales'] +
+              this.puntajeObtenido['puntuacionNaturales'] +
+              puntaje
+          );
 
           if (puntaje == 3) {
             this.router.navigate([`correctoPersonal/${this.idUser}`]);

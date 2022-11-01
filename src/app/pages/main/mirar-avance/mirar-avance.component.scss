@@ -306,4 +306,15 @@ body {
   .colorSociales {
     background-color: #46a6c7;
   }
+
+  mat-dialog-container#listadopuntaje-component {
+    border: 3px solid #262626;
+    border-radius: 11px;
+    background-color: #e4d8d8;
+  }
+  #show-projects-button {
+    color: white;
+    background-color: #d80c0c;
+    border: 1px solid black;
+  }
 }

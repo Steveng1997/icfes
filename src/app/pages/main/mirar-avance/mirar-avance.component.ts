@@ -1,15 +1,13 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 //importamos el servicio
 import { PuntuacionService } from 'src/app/core/services/puntaje.service';
 //importamos los modulos para formularios
 import { FormBuilder } from '@angular/forms';
-import { ListadopuntajeComponent } from '../listadopuntaje/listadopuntaje.component';
 //importamos el enrutador
 import { Router, ActivatedRoute } from '@angular/router';
 import { Puntaje } from 'src/app/core/models/Puntaje';
 
-import { MatDialog } from '@angular/material/dialog';
-
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-mirar-avance',
@@ -20,47 +18,30 @@ export class MirarAvanceComponent implements OnInit {
   puntajes: Puntaje[];
   idUser: string;
 
+  modalRef: BsModalRef;
+
   constructor(
     public router: Router,
     public servicePuntaje: PuntuacionService,
     public formBuilder: FormBuilder,
     private activeRoute: ActivatedRoute,
-    public dialog: MatDialog
-  ) { }
+    private modalService: BsModalService
+  ) {}
 
   ngOnInit(): void {
     this.idUser = this.activeRoute.snapshot.paramMap.get('id');
-    this.servicePuntaje.getPuntajeByIdUsuario(this.idUser)
+    this.servicePuntaje
+      .getPuntajeByIdUsuario(this.idUser)
       .then((respuestaPuntaje) => {
         this.puntajes = respuestaPuntaje;
       });
-      
   }
 
-  mostrarDialogo(): void {
-    this.dialog.open(ListadopuntajeComponent, {
-        data: `¿Te gusta programar en TypeScript?`
-      })
-      .afterClosed()
-      .subscribe((confirmado: Boolean) => {
-        if (confirmado) {
-          alert("¡A mí también!");
-        } else {
-          alert("Deberías probarlo, a mí me gusta :)");
-        }
-      });
-  }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(ListadopuntajeComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  openModel(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
   salir() {
     this.router.navigate(['']);
   }
-
 }
