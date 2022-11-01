@@ -7,4 +7,5 @@ export class Puntaje {
   puntuacionSociales?: number;
   idDocument?: string;
   nombre?: string;
+  totalPuntaje?: number;
 }

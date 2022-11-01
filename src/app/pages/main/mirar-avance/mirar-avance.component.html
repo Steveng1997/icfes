@@ -37,18 +37,60 @@
 
     <!-- Modal -->
 
-    <button type="button" class="btn btn-primary" (click)="openModel(template)">
-      sdad
-    </button>
-
-    <ng-template #template>
+    <div class="container"></div>
+    <div class="btn-Listado" style="text-align: right">
+      <button
+        type="button"
+        class="btn btnListado"
+        (click)="openModal(editProfileModal)"
+      >
+        Listado
+      </button>
+    </div>
+    <ng-template #editProfileModal let-modal>
       <div class="modal-header">
-        <h4 class="modal-title-pull-left">Modal</h4>
-        <button type="button" class="close pull-right" aria-label="close">
+        <h5 class="modal-title" id="editProfileLabel">Listado de puntaje</h5>
+        <button
+          type="button"
+          class="close"
+          (click)="modal.dismiss()"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">dfsfsfsf</div>
+
+      <div class="modal-body">
+        <!-- Aqui se coloca lo adentro -->
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table width="100%">
+              <thead>
+                <tr>
+                  <td data-titulo="idUsuario">Nombre</td>
+                  <td data-titulo="idUsuario">
+                    <Table>Total puntaje</Table>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="
+                    let puntuacion of puntajes
+                      | paginate: { itemsPerPage: 10, currentPage: page }
+                  "
+                >
+                  <td data-titulo="nombre">{{ puntuacion.nombre }}</td>
+                  <td data-titulo="nombre">{{ puntuacion.totalPuntaje }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Afuera -->
+      </div>
     </ng-template>
 
     <!-- Fin Modal -->

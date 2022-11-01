@@ -7,7 +7,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Puntaje } from 'src/app/core/models/Puntaje';
 
-import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-mirar-avance',
@@ -18,14 +18,15 @@ export class MirarAvanceComponent implements OnInit {
   puntajes: Puntaje[];
   idUser: string;
 
-  modalRef: BsModalRef;
+  public page!: number;
 
   constructor(
     public router: Router,
     public servicePuntaje: PuntuacionService,
     public formBuilder: FormBuilder,
     private activeRoute: ActivatedRoute,
-    private modalService: BsModalService
+    public servicePuntuacion: PuntuacionService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -37,8 +38,11 @@ export class MirarAvanceComponent implements OnInit {
       });
   }
 
-  openModel(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+  openModal(targetModal) {
+    this.modalService.open(targetModal, {
+      centered: true,
+      backdrop: 'static',
+    });
   }
 
   salir() {

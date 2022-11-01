@@ -12,7 +12,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
-import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Firebase
 import { AngularFireModule } from '@angular/fire/compat';
@@ -61,7 +61,6 @@ import { CorrectoPersonalComponent } from './pages/main/correcto-personal/correc
 import { MenuAreaPersonalComponent } from './pages/main/menu-area-personal/menu-area-personal.component';
 import { PreguntaPersonalComponent } from './pages/main/pregunta-personal/pregunta-personal.component';
 import { RespuestaPersonalComponent } from './pages/main/respuesta-personal/respuesta-personal.component';
-import { ListadopuntajeComponent } from './pages/main/listadopuntaje/listadopuntaje.component';
 
 // Cookies
 import { CookieService } from 'ngx-cookie-service';
@@ -112,7 +111,6 @@ firebase.initializeApp({
     PreguntaPersonalComponent,
     RespuestaPersonalComponent,
     RetoPersonalComponent,
-    ListadopuntajeComponent,
   ],
 
   imports: [
@@ -130,10 +128,8 @@ firebase.initializeApp({
     AngularFirestoreModule,
     MatRadioModule,
     NgxPaginationModule,
-
+    NgbModule,
     AngularFireModule.initializeApp(environment),
-
-    ModalModule.forRoot(),
   ],
   providers: [
     AngularFireAuth,

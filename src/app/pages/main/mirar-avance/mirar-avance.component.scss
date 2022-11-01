@@ -76,6 +76,17 @@ body {
     width: 20%;
   }
 
+  .btn-Listado {
+    margin-top: 1.9px;
+  }
+
+  .btnListado {
+    margin-right: 4%;
+    width: 27%;
+    background-color: red;
+    color: white;
+  }
+
   .colorMatematica {
     background-color: #fe5c26;
   }
@@ -153,6 +164,17 @@ body {
     width: 17%;
   }
 
+  .btn-Listado {
+    margin-top: 1.9px;
+  }
+
+  .btnListado {
+    margin-right: 2%;
+    width: 17%;
+    background-color: red;
+    color: white;
+  }
+
   .colorMatematica {
     background-color: #fe5c26;
   }
@@ -209,6 +231,17 @@ body {
     width: 23%;
   }
 
+  .btn-Listado {
+    margin-top: 1.9px;
+  }
+
+  .btnListado {
+    margin-right: 3%;
+    width: 27%;
+    background-color: red;
+    color: white;
+  }
+
   .txtLenguaje {
     margin-top: 10%;
   }
@@ -228,6 +261,17 @@ body {
   .btnSalir {
     margin-right: 2%;
     width: 17%;
+  }
+
+  .btn-Listado {
+    margin-top: 1.9px;
+  }
+
+  .btnListado {
+    margin-right: 2%;
+    width: 17%;
+    background-color: red;
+    color: white;
   }
 
   .txtTitulo {
@@ -307,14 +351,14 @@ body {
     background-color: #46a6c7;
   }
 
-  mat-dialog-container#listadopuntaje-component {
-    border: 3px solid #262626;
-    border-radius: 11px;
-    background-color: #e4d8d8;
+  .btn-Listado {
+    margin-right: 3%;
+    margin-top: 1.9px;
   }
-  #show-projects-button {
+
+  .btnListado {
+    width: 10%;
+    background-color: red;
     color: white;
-    background-color: #d80c0c;
-    border: 1px solid black;
   }
 }
