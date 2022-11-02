@@ -69,7 +69,7 @@
                   <td data-titulo="rol">{{ usu.rol }}</td>
                   <i
                     class="fas fa-edit"
-                    routerLink="/admin/editar-usuario/{{ usu.id }}"
+                    routerLink="/admin/{{ usu.id }}/editar-usuario/{{ usu.id }}"
                   ></i>
                   <i
                     (click)="DeleteUser(usu.id)"

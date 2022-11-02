@@ -27,6 +27,7 @@ export class EditarUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.postService.getById(this.idUser);
     this.postService.getById(this.idUser).then((datosEstudiante) => {
       return (this.usua = datosEstudiante);
     });
@@ -35,7 +36,7 @@ export class EditarUserComponent implements OnInit {
   editarReto(idDocument, idEstudiante, usu: Usuario) {
     const id = this.activeRoute.snapshot.paramMap.get('id');
     this.postService.updateUsuarios(idDocument, idEstudiante, usu);
-    this.router.navigate(['admin/usuarios']);
+    this.router.navigate([`admin/${this.idUser}/usuarios/${this.idUser}`]);
     Swal.fire({
       position: 'top-end',
       icon: 'success',

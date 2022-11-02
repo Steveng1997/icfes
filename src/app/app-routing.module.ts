@@ -62,12 +62,12 @@ const routes: Routes = [
     canActivate: [LoginGuardian],
     children: [
       {
-        path: 'usuarios',
+        path: 'usuarios/:id',
         component: UsuariosComponent,
         canActivate: [LoginGuardian],
       },
       {
-        path: 'insertar-usuario',
+        path: 'insertar-usuario/:id',
         component: InsertarUsuario,
         canActivate: [LoginGuardian],
       },
@@ -77,12 +77,12 @@ const routes: Routes = [
         canActivate: [LoginGuardian],
       },
       {
-        path: 'adminRetos',
+        path: 'adminRetos/:id',
         component: AdminRetosComponent,
         canActivate: [LoginGuardian],
       },
       {
-        path: 'insertar-retos',
+        path: 'insertar-retos/:id',
         component: InsertarRetosComponent,
         canActivate: [LoginGuardian],
       },
@@ -92,12 +92,12 @@ const routes: Routes = [
         canActivate: [LoginGuardian],
       },
       {
-        path: 'estudiantes',
+        path: 'estudiantes/:id',
         component: EstudiantesComponent,
         canActivate: [LoginGuardian],
       },
       {
-        path: 'insertar-estudiantes',
+        path: 'insertar-estudiantes/:id',
         component: InsertarEstudiantesComponent,
         canActivate: [LoginGuardian],
       },
@@ -107,7 +107,7 @@ const routes: Routes = [
         canActivate: [LoginGuardian],
       },
       {
-        path: 'puntaje',
+        path: 'puntaje/:id',
         component: PuntajeComponent,
         canActivate: [LoginGuardian],
       },
@@ -117,7 +117,7 @@ const routes: Routes = [
         canActivate: [LoginGuardian],
       },
       {
-        path: 'reto-personal',
+        path: 'reto-personal/:id',
         component: RetoPersonalComponent,
         canActivate: [LoginGuardian],
       },
@@ -177,9 +177,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes),
-  ],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

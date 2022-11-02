@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoginService } from 'src/app/core/services/login.service';
 import { RetoService } from 'src/app/core/services/retos.service';
 import Swal from 'sweetalert2';
 
@@ -10,16 +11,26 @@ import Swal from 'sweetalert2';
 })
 export class AdminRetosComponent implements OnInit {
   retos: any[] = [];
+  idUser: string;
   public page!: number;
 
-  constructor(public router: Router, public serviceRetos: RetoService) { }
+  constructor(
+    public router: Router,
+    public serviceRetos: RetoService,
+    public serviceLogin: LoginService,
+    private activeRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.idUser);
     this.getRetos();
   }
 
   Agregar() {
-    this.router.navigate(['admin/insertar-retos']);
+    this.router.navigate([
+      `admin/${this.idUser}/insertar-retos/${this.idUser}`,
+    ]);
   }
 
   getRetos() {
@@ -52,7 +63,7 @@ export class AdminRetosComponent implements OnInit {
             this.getRetos();
           }
         });
-      };
+      }
     });
-  };
+  }
 }

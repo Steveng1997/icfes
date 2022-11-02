@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EstudianteService } from 'src/app/core/services/estudiantes.service';
+import { LoginService } from 'src/app/core/services/login.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -9,20 +10,27 @@ import Swal from 'sweetalert2';
   styleUrls: ['./estudiantes.component.scss'],
 })
 export class EstudiantesComponent implements OnInit {
+  idUser: string;
   estudiantes: any[] = [];
   public page!: number;
 
   constructor(
     public router: Router,
-    public serviceEstudiante: EstudianteService
-  ) { }
+    public serviceEstudiante: EstudianteService,
+    public serviceLogin: LoginService,
+    private activeRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.idUser);
     this.getEmpleados();
   }
 
   Agregar() {
-    this.router.navigate(['admin/insertar-estudiantes']);
+    this.router.navigate([
+      `admin/${this.idUser}/insertar-estudiantes/${this.idUser}`,
+    ]);
   }
 
   getEmpleados() {
@@ -51,11 +59,14 @@ export class EstudiantesComponent implements OnInit {
               timer: 2500,
             });
 
-            this.serviceEstudiante.deleteEstudiante(datoEstudiante[0]['idDocument'], id);
+            this.serviceEstudiante.deleteEstudiante(
+              datoEstudiante[0]['idDocument'],
+              id
+            );
             this.getEmpleados();
           }
         });
       }
-    })
+    });
   }
 }

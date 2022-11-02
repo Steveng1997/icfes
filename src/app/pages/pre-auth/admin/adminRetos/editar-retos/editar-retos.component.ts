@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 //importamos el servicio
 import { RetoService } from 'src/app/core/services/retos.service';
+import { LoginService } from 'src/app/core/services/login.service';
 //importamos el enrutador
 import { Router, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs';
+//importamos modelos
 import { Retos } from 'src/app/core/models/retos';
 import Swal from 'sweetalert2';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-editar-retos',
@@ -51,12 +53,14 @@ export class EditarRetosComponent implements OnInit {
   constructor(
     public router: Router,
     public serviceRetos: RetoService,
+    public serviceLogin: LoginService,
     private activeRoute: ActivatedRoute,
     public storage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
     this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.idUser);
     this.serviceRetos.getById(this.idUser).then((datoRetos) => {
       return (this.reto = datoRetos);
     });
@@ -161,14 +165,6 @@ export class EditarRetosComponent implements OnInit {
                 idReto,
                 this.selectImg1
               );
-              this.router.navigate(['admin/adminRetos']);
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '¡Editado correctamente!',
-                showConfirmButton: false,
-                timer: 2500,
-              });
             });
           })
         )
@@ -191,14 +187,6 @@ export class EditarRetosComponent implements OnInit {
             fileRef2.getDownloadURL().subscribe((url2) => {
               this.selectImg2 = url2;
               this.serviceRetos.updateImg2(idDocument, idReto, this.selectImg2);
-              this.router.navigate(['admin/adminRetos']);
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '¡Editado correctamente!',
-                showConfirmButton: false,
-                timer: 2500,
-              });
             });
           })
         )
@@ -225,14 +213,6 @@ export class EditarRetosComponent implements OnInit {
                 this.selectOpc1,
                 this.SelectImgOpcion1.name
               );
-              this.router.navigate(['admin/adminRetos']);
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '¡Editado correctamente!',
-                showConfirmButton: false,
-                timer: 2500,
-              });
             });
           })
         )
@@ -261,14 +241,6 @@ export class EditarRetosComponent implements OnInit {
                 this.selectOpc2,
                 this.SelectImgOpcion2.name
               );
-              this.router.navigate(['admin/adminRetos']);
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '¡Editado correctamente!',
-                showConfirmButton: false,
-                timer: 2500,
-              });
             });
           })
         )
@@ -296,14 +268,6 @@ export class EditarRetosComponent implements OnInit {
                 this.selectOpc3,
                 this.SelectImgOpcion3.name
               );
-              this.router.navigate(['admin/adminRetos']);
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '¡Editado correctamente!',
-                showConfirmButton: false,
-                timer: 2500,
-              });
             });
           })
         )
@@ -332,14 +296,6 @@ export class EditarRetosComponent implements OnInit {
                 this.selectOpc4,
                 this.SelectImgOpcion4.name
               );
-              this.router.navigate(['admin/adminRetos']);
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '¡Editado correctamente!',
-                showConfirmButton: false,
-                timer: 2500,
-              });
             });
           })
         )
@@ -366,19 +322,20 @@ export class EditarRetosComponent implements OnInit {
                 this.selectResp,
                 this.SelectImgRes.name
               );
-              this.router.navigate(['admin/adminRetos']);
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '¡Editado correctamente!',
-                showConfirmButton: false,
-                timer: 2500,
-              });
             });
           })
         )
         .subscribe();
     }
     // Fin imagen respuesta
+
+    this.router.navigate([`admin/${this.idUser}/adminRetos/${this.idUser}`]);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: '¡Editado correctamente!',
+      showConfirmButton: false,
+      timer: 2500,
+    });
   }
 }

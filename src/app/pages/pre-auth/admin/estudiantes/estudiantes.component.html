@@ -62,7 +62,9 @@
                   <td data-titulo="nombre">{{ estud.nombre }}</td>
                   <i
                     class="fas fa-edit"
-                    routerLink="/admin/editar-estudiante/{{ estud.id }}"
+                    routerLink="/admin/{{ estud.id }}/editar-estudiante/{{
+                      estud.id
+                    }}"
                   ></i>
                   <i
                     (click)="DeleteUser(estud.id)"

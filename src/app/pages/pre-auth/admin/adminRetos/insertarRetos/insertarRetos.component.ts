@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RetoService } from 'src/app/core/services/retos.service';
-
+import { LoginService } from 'src/app/core/services/login.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./insertarRetos.component.scss'],
 })
 export class InsertarRetosComponent implements OnInit {
+  idUser: string;
   // Valores para imagenes
   selectedImage: any = null;
   imgSrc: string;
@@ -72,10 +73,15 @@ export class InsertarRetosComponent implements OnInit {
   constructor(
     public router: Router,
     public serviceRetos: RetoService,
-    public storage: AngularFireStorage
+    public storage: AngularFireStorage,
+    public serviceLogin: LoginService,
+    private activeRoute: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.idUser);
+  }
 
   ImageTexto(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -205,15 +211,6 @@ export class InsertarRetosComponent implements OnInit {
                           respuesta['id'],
                           formValue['image2']
                         );
-
-                        this.router.navigate(['admin/adminRetos']);
-                        Swal.fire({
-                          position: 'top-end',
-                          icon: 'success',
-                          title: '¡Insertado Correctamente!',
-                          showConfirmButton: false,
-                          timer: 2500,
-                        });
                       });
                     })
                   )
@@ -357,21 +354,23 @@ export class InsertarRetosComponent implements OnInit {
                           formValue['imageResp'],
                           this.SelectImgRes.name
                         );
-
-                        this.router.navigate(['admin/adminRetos']);
-                        Swal.fire({
-                          position: 'top-end',
-                          icon: 'success',
-                          title: '¡Insertado Correctamente!',
-                          showConfirmButton: false,
-                          timer: 2500,
-                        });
                       });
                     })
                   )
                   .subscribe();
               }
               // Fin image respuesta
+
+              this.router.navigate([
+                `admin/${this.idUser}/adminRetos/${this.idUser}`,
+              ]);
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: '¡Insertado Correctamente!',
+                showConfirmButton: false,
+                timer: 2500,
+              });
             }
           });
         }

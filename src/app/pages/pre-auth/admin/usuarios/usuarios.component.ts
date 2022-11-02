@@ -16,9 +16,8 @@ export class UsuariosComponent implements OnInit {
   constructor(
     public router: Router,
     public serviceLogin: LoginService,
-    public serviceUser: LoginService,
     private activeRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.idUser = this.activeRoute.snapshot.paramMap.get('id');
@@ -27,7 +26,9 @@ export class UsuariosComponent implements OnInit {
   }
 
   Agregar() {
-    this.router.navigate([`admin/${this.idUser}/insertar-usuario`]);
+    this.router.navigate([
+      `admin/${this.idUser}/insertar-usuario/${this.idUser}`,
+    ]);
   }
 
   getEmpleados() {
@@ -61,6 +62,5 @@ export class UsuariosComponent implements OnInit {
         });
       }
     });
-
   }
 }

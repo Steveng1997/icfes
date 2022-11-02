@@ -206,11 +206,11 @@ export class PuntuacionService {
   // Update
   // -----------------------------------------------------------------------------------
 
-  updatePuntaje(idDocumentReto, idPuntaje, puntaje: Puntaje) {
+  updatePuntaje(idDocumentReto, idPuntaje, puntaje: number) {
     return this.db
       .collection('puntaje', (ref) => ref.where('id', '==', idPuntaje))
       .doc(idDocumentReto)
-      .update(puntaje);
+      .update({ totalPuntaje: puntaje });
   }
 
   updatePuntajeLenguaje(idDocumentPuntaje, idUser, puntaje) {

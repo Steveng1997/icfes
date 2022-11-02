@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EstudianteService } from 'src/app/core/services/estudiantes.service';
+import { LoginService } from 'src/app/core/services/login.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,20 +11,28 @@ import Swal from 'sweetalert2';
 })
 export class InsertarEstudiantesComponent implements OnInit {
   public nombre: string = '';
+  idUser: string;
 
   constructor(
     public router: Router,
-    public serviceEstudiante: EstudianteService
+    public serviceEstudiante: EstudianteService,
+    public serviceLogin: LoginService,
+    private activeRoute: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.idUser);
+  }
 
   addEstudiante() {
     if (this.nombre != '') {
       this.serviceEstudiante
         .registerAreas(this.nombre)
         .then((res) => {
-          this.router.navigate(['admin/estudiantes']);
+          this.router.navigate([
+            `admin/${this.idUser}/estudiantes/${this.idUser}`,
+          ]);
           Swal.fire({
             position: 'top-end',
             icon: 'success',

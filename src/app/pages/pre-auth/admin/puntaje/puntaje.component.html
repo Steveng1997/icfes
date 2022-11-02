@@ -46,8 +46,8 @@
             <table width="100%">
               <thead>
                 <tr>
-                  <td data-titulo="idUsuario">Id Usuario</td>
-                  <td data-titulo="idUsuario">Puntuacion</td>
+                  <td data-titulo="idUsuario">Nombre</td>
+                  <td data-titulo="idUsuario">Puntuacion Total</td>
                 </tr>
               </thead>
               <tbody>
@@ -57,16 +57,16 @@
                       | paginate: { itemsPerPage: 5, currentPage: page }
                   "
                 >
-                  <td data-titulo="nombre">{{ puntuacion.idUsuario }}</td>
-                  <td data-titulo="nombre">{{ puntuacion.puntuacion }}</td>
+                  <td data-titulo="nombre">{{ puntuacion.nombre }}</td>
+                  <td data-titulo="nombre">{{ puntuacion.totalPuntaje }}</td>
                   <i
                     class="fas fa-edit"
-                    routerLink="/admin/editar-puntaje/{{ puntuacion.id }}"
+                    routerLink="/admin/{{ puntuacion.id }}/editar-puntaje/{{
+                      puntuacion.id
+                    }}"
                   ></i>
                   <i
-                    (click)="
-                      DeletePuntaje(puntuacion.id)
-                    "
+                    (click)="DeletePuntaje(puntuacion.id)"
                     class="fas fa-trash-alt fa-lg text-danger"
                   ></i>
                   <td></td>

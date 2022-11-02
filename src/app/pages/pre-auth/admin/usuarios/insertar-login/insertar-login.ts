@@ -21,10 +21,11 @@ export class InsertarUsuario implements OnInit {
     public router: Router,
     public serviceLogin: LoginService,
     private activeRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.idUser);
   }
 
   onAddUser() {
@@ -45,7 +46,9 @@ export class InsertarUsuario implements OnInit {
                   this.password,
                   this.opcionSeleccionado
                 );
-                this.router.navigate([`admin/${this.idUser}/usuarios`]);
+                this.router.navigate([
+                  `admin/${this.idUser}/usuarios/${this.idUser}`,
+                ]);
                 Swal.fire({
                   position: 'top-end',
                   icon: 'success',

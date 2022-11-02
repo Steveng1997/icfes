@@ -14,7 +14,6 @@ import { Usuario } from 'src/app/core/models/login';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-
   user: Usuario[];
   idUser: string;
 
@@ -23,32 +22,32 @@ export class AdminComponent implements OnInit {
     public serviceUser: LoginService,
     public formBuilder: FormBuilder,
     private activeRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.idUser = this.activeRoute.snapshot.paramMap.get('id');
-    this.serviceUser.getById(this.idUser).then((rp => {
+    this.serviceUser.getById(this.idUser).then((rp) => {
       this.user = rp;
-    }))
+    });
   }
 
-  usuarios(){
-    this.router.navigate([`admin/${this.idUser}/usuarios`]);
+  usuarios() {
+    this.router.navigate([`admin/${this.idUser}/usuarios/${this.idUser}`]);
   }
 
-  retos(){
-    this.router.navigate([`admin/${this.idUser}/adminRetos`]);
+  retos() {
+    this.router.navigate([`admin/${this.idUser}/adminRetos/${this.idUser}`]);
   }
 
-  estudiantes(){
-    this.router.navigate([`admin/${this.idUser}/estudiantes`]);
+  estudiantes() {
+    this.router.navigate([`admin/${this.idUser}/estudiantes/${this.idUser}`]);
   }
 
-  puntaje(){
-    this.router.navigate([`admin/${this.idUser}/puntaje`]);
+  puntaje() {
+    this.router.navigate([`admin/${this.idUser}/puntaje/${this.idUser}`]);
   }
 
-  retoPersonal(){
-    this.router.navigate([`admin/${this.idUser}/reto-personal`]);
+  retoPersonal() {
+    this.router.navigate([`admin/${this.idUser}/reto-personal/${this.idUser}`]);
   }
 }
