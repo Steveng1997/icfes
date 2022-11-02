@@ -11,6 +11,30 @@
   .btnSalir {
     width: 23%;
   }
+
+  .txtOportunidad {
+    color: #77d353;
+    font-size: 45px;
+    text-align: center;
+  }
+
+  .cardOportunidad {
+    margin-bottom: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .txtSi {
+    cursor: pointer;
+    font-size: 50px;
+    color: #00a6ff;
+  }
+
+  .txtNo {
+    cursor: pointer;
+    font-size: 50px;
+    color: #f95f62;
+  }
 }
 
 // ---------------------------------------------------------------------------------------------------
@@ -29,7 +53,7 @@
 
   .txtOportunidad {
     color: #77d353;
-    font-size: 90px;
+    font-size: 70px;
     text-align: center;
   }
 
@@ -40,12 +64,14 @@
   }
 
   .txtSi {
-    font-size: 100px;
+    cursor: pointer;
+    font-size: 60px;
     color: #00a6ff;
   }
 
   .txtNo {
-    font-size: 100px;
+    cursor: pointer;
+    font-size: 60px;
     color: #f95f62;
   }
 }

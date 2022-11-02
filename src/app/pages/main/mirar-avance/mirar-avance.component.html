@@ -28,10 +28,7 @@
       <label class="txtTitulo">Este ha sido tu desempeño este año</label>
     </div>
 
-    <h5
-      class="text-center display-4 text-danger"
-      *ngIf="puntajes[0]['id'] == ''"
-    >
+    <h5 class="text-center display-4 text-danger" *ngIf="puntajes.length == 0">
       Este usuario no ha hecho ningun reto
     </h5>
 
@@ -96,7 +93,10 @@
     <div class="row text-center" *ngFor="let punt of puntajes">
       <div class="col-md-3 text-center txtMatematica">
         <div class="column">
-          <label class="colorMatematica">Matematicas</label>
+          <div class="cardMatematica">
+            <label class="colorMatematica">Matematicas</label>
+          </div>
+
           <img
             class="grid-item"
             *ngIf="
@@ -135,7 +135,10 @@
 
       <div class="col-md-3 text-center txtLenguaje">
         <div class="column">
-          <label class="colorLenguaje">Lenguaje</label>
+          <div class="cardLenguaje">
+            <label class="colorLenguaje">Lenguaje</label>
+          </div>
+
           <img
             class="grid-item"
             *ngIf="
@@ -171,7 +174,9 @@
 
       <div class="col-md-3 text-center txtNaturales">
         <div class="column">
-          <label class="colorNaturales">C.Naturales</label>
+          <div class="cardNaturales">
+            <label class="colorNaturales">C.Naturales</label>
+          </div>
           <img
             class="grid-item"
             *ngIf="
@@ -207,7 +212,9 @@
 
       <div class="col-md-3 text-center txtSociales">
         <div class="column">
-          <label class="colorSociales">C.Sociales</label>
+          <div class="cardSociales">
+            <label class="colorSociales">C.Sociales</label>
+          </div>
           <img
             class="grid-item"
             *ngIf="
