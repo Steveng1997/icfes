@@ -167,6 +167,18 @@ export class RetosComponent implements OnInit {
                   console.log(rp);
                 });
             }
+
+            this.servicePuntaje.getPuntajeByDocument(this.idUser).then((rp) => {
+              this.servicePuntaje.updatePuntajeTotal(
+                this.puntajeObtenido['idDocument'],
+                this.idUser,
+                this.puntajeObtenido['puntuacionLenguaje'] +
+                  this.puntajeObtenido['puntuacionMatematicas'] +
+                  this.puntajeObtenido['puntuacionSociales'] +
+                  this.puntajeObtenido['puntuacionNaturales'] +
+                  puntaje
+              );
+            });
           } else {
             if (urlImgResp == event.target.id) {
               puntaje = 3;
@@ -209,16 +221,6 @@ export class RetosComponent implements OnInit {
               // crea
             });
           }
-
-          this.servicePuntaje.updatePuntajeTotal(
-            this.puntajeObtenido['idDocument'],
-            this.idUser,
-            this.puntajeObtenido['puntuacionLenguaje'] +
-              this.puntajeObtenido['puntuacionMatematicas'] +
-              this.puntajeObtenido['puntuacionSociales'] +
-              this.puntajeObtenido['puntuacionNaturales'] +
-              puntaje
-          );
 
           if (puntaje == 3) {
             this.router.navigate([`correcto/${this.idUser}`]);
@@ -298,6 +300,18 @@ export class RetosComponent implements OnInit {
                   console.log(rp);
                 });
             }
+
+            this.servicePuntaje.getPuntajeByDocument(this.idUser).then((rp) => {
+              this.servicePuntaje.updatePuntajeTotal(
+                this.puntajeObtenido['idDocument'],
+                this.idUser,
+                this.puntajeObtenido['puntuacionLenguaje'] +
+                  this.puntajeObtenido['puntuacionMatematicas'] +
+                  this.puntajeObtenido['puntuacionSociales'] +
+                  this.puntajeObtenido['puntuacionNaturales'] +
+                  puntaje
+              );
+            });
           } else {
             if (respuesta == event.target.innerHTML.trim()) {
               puntaje = 3;
@@ -340,16 +354,6 @@ export class RetosComponent implements OnInit {
             });
             // crea
           }
-
-          this.servicePuntaje.updatePuntajeTotal(
-            this.puntajeObtenido['idDocument'],
-            this.idUser,
-            this.puntajeObtenido['puntuacionLenguaje'] +
-              this.puntajeObtenido['puntuacionMatematicas'] +
-              this.puntajeObtenido['puntuacionSociales'] +
-              this.puntajeObtenido['puntuacionNaturales'] +
-              puntaje
-          );
 
           if (puntaje == 3) {
             this.router.navigate([`correcto/${this.idUser}`]);
