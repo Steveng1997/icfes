@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
           .then((dataCategoria) => {
             this.usuarios = dataCategoria;
             if (this.usuarios[0]['rol'] == 'administrador') {
-              this.router.navigate(['admin/usuarios']);
+              this.router.navigate([`admin/${this.usuarios[0]['id']}`]);
+              // this.router.navigate(['admin/usuarios']);
             } else {
               this.router.navigate([`menu/${this.usuarios[0]['id']}`]);
             }

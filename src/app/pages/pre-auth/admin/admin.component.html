@@ -1,26 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-      crossorigin="anonymous"
-    ></script>
-    <style href="admin.component.scss"></style>
-  </head>
 
-  <body>
-    <router-outlet></router-outlet>
-    <app-sidebar></app-sidebar>
-    <!-- <app-navbar></app-navbar> -->
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+  <link rel="stylesheet"
+    href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+  <link rel="stylesheet" href="admin.component.scss" />
+</head>
+
+<body>
+  <router-outlet></router-outlet>
+  <input type="checkbox" id="nav-toggle" />
+  <div class="sidebar">
+    <div class="sidebar-brand text-center">
+      <!-- <h2> -->
+      <!-- <span> -->
+      <img src="./assets/escudo.jpg" width="50%" />
+      <!-- </span> -->
+      <!-- <span class="lab la-accusoft"> </span> -->
+      <!-- <span>Accusoft</span> -->
+      <!-- </h2> -->
+    </div>
+
+    <div class="sidebar-menu">
+      <ul>
+        <li>
+          <a (click)="usuarios()" class="active"><span class="las la-users">
+            </span><span>Usuarios</span></a>
+        </li>
+
+        <li>
+          <a (click)="retos()">
+            <span class="las la-clipboard-list"></span>
+            <span>Retos</span></a>
+        </li>
+
+        <li>
+          <a (click)="estudiantes()">
+            <span class="las la-user"></span>
+            <span>Estudiante</span></a>
+        </li>
+
+        <li>
+          <a  (click)="puntaje()">
+            <span class="las la-star"></span>
+            <span>Puntaje</span></a>
+        </li>
+
+        <li>
+          <a (click)="retoPersonal()">
+            <span class="las la-clipboard-list"></span>
+            <span>Reto Personal</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Content -->
+
+  <div class="main-content">
+    <header>
+      <h2>
+        <label for="nav-toggle">
+          <span class="las la-bars"></span>
+        </label>
+        Administrador
+      </h2>
+
+      <!-- <div class="search-wrapper">
+        <span class="las la-search"></span>
+        <input type="search" placeholder="Search here" />
+      </div> -->
+
+      <div class="user-wrapper" *ngFor="let usuario of user">
+        <!-- <img src="https://indiehoy.com/wp-content/uploads/2020/02/Dragon-Ball-Goku-1200x900.jpg" width="30px"
+          height="30px" alt="" /> -->
+        <div>
+          <h4>{{ usuario.nombre }}</h4>
+          <small>{{ usuario.rol }}</small>
+        </div>
+      </div>
+    </header>
+  </div>
+</body>
+
 </html>

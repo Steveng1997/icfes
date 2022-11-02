@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/core/services/login.service';
 import Swal from 'sweetalert2';
 
@@ -12,13 +12,20 @@ export class InsertarUsuario implements OnInit {
   public email: string = '';
   public password: string = '';
   public nombre: string = '';
+  idUser: string;
 
   opcionSeleccionado: string = '0';
   verSeleccion: string = '';
 
-  constructor(public router: Router, public serviceLogin: LoginService) {}
+  constructor(
+    public router: Router,
+    public serviceLogin: LoginService,
+    private activeRoute: ActivatedRoute
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+  }
 
   onAddUser() {
     if (this.email != '') {
@@ -38,7 +45,7 @@ export class InsertarUsuario implements OnInit {
                   this.password,
                   this.opcionSeleccionado
                 );
-                this.router.navigate(['admin/usuarios']);
+                this.router.navigate([`admin/${this.idUser}/usuarios`]);
                 Swal.fire({
                   position: 'top-end',
                   icon: 'success',

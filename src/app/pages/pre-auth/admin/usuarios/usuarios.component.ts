@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from 'src/app/core/services/login.service';
 import Swal from 'sweetalert2';
 
@@ -10,16 +10,24 @@ import Swal from 'sweetalert2';
 })
 export class UsuariosComponent implements OnInit {
   usuarios: any[] = [];
+  idUser: string;
   public page!: number;
 
-  constructor(public router: Router, public serviceLogin: LoginService) { }
+  constructor(
+    public router: Router,
+    public serviceLogin: LoginService,
+    public serviceUser: LoginService,
+    private activeRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.idUser);
     this.getEmpleados();
   }
 
   Agregar() {
-    this.router.navigate(['admin/insertar-usuario']);
+    this.router.navigate([`admin/${this.idUser}/insertar-usuario`]);
   }
 
   getEmpleados() {
@@ -47,7 +55,6 @@ export class UsuariosComponent implements OnInit {
               showConfirmButton: false,
               timer: 2500,
             });
-
             this.serviceLogin.deleteUsuario(datosUsers[0]['idDocument'], id);
             this.getEmpleados();
           }

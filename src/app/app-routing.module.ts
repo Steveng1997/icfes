@@ -57,7 +57,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'admin',
+    path: 'admin/:id',
     component: AdminComponent,
     canActivate: [LoginGuardian],
     children: [
