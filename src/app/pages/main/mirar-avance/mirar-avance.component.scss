@@ -450,3 +450,82 @@ body {
     color: white;
   }
 }
+
+// Pantalla mas grande
+@media only screen and (min-device-width: 1700px) and (max-device-width: 2000px) {
+  .grid-item {
+    border-radius: 4px;
+    transition: transform 0.3s ease-in-out;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 10%;
+    width: 40%;
+  }
+  .grid-item:hover {
+    filter: opacity(0.9);
+    transform: scale(1.04);
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: minmax(200px, auto);
+    gap: 20px;
+    padding: 20px;
+    grid-auto-flow: dense;
+  }
+
+  .btn-salir {
+    margin-right: 3%;
+    margin-top: 1.9px;
+  }
+
+  .btnSalir {
+    width: 10%;
+  }
+
+  .cardMatematica {
+    border: 7px solid #fe5c26;
+  }
+
+  .colorMatematica {
+    color: #fe5c26;
+  }
+
+  .cardLenguaje {
+    border: 7px solid #5902b0;
+  }
+
+  .colorLenguaje {
+    color: #5902b0;
+  }
+
+  .cardNaturales {
+    border: 7px solid #029287;
+  }
+
+  .colorNaturales {
+    color: #029287;
+  }
+
+  .cardSociales {
+    border: 7px solid #46a6c7;
+  }
+
+  .colorSociales {
+    color: #46a6c7;
+  }
+
+  .btn-Listado {
+    margin-right: 3%;
+    margin-top: 1.9px;
+  }
+
+  .btnListado {
+    width: 10%;
+    background-color: red;
+    color: white;
+  }
+}

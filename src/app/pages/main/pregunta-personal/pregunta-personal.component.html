@@ -30,7 +30,7 @@
           <form [formGroup]="formTemplate" (ngSubmit)="addReto(formTemplate.value)">
             <div class="btn-group">
               <mat-form-field>
-                <select matNativeControl formControlName="categoria">
+                <select matNativeControl formControlName="categoria" (change)="opcCategoria($event)">
                   <option>{{ categoria }}</option>
                 </select>
               </mat-form-field>
@@ -47,6 +47,11 @@
             </div>
 
             <hr />
+            <div class="form-floating mb-3" *ngIf="categoria == 'Lenguaje'">
+              <input class="form-control" type="text" name="titulo" formControlName="titulo" placeholder="Opcion 1" />
+              <label for="titulo">Titulo</label>
+            </div>
+
             <div class="mb-3">
               <textarea class="form-control" rows="5" cols="70" name="texto1" formControlName="texto1"
                 placeholder="Texto 1"></textarea>

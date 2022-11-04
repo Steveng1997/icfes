@@ -29,6 +29,12 @@
             </div>
           </div>
 
+          <div class="mb-4 mt-4" *ngIf="cat.titulo != ''">
+            <b id="titulo" style="text-align: justify; font-size: 180%;">
+              {{ cat.titulo }}
+            </b>
+          </div>
+
           <div class="card-title mb-4" style="font-size: 1.5rem" *ngIf="datosReto">
             <div>
               <p id="texto1" style="justify-content: center; text-align: justify">

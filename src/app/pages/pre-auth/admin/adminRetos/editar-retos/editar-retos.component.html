@@ -28,16 +28,21 @@
           </div>
 
           <form (ngSubmit)="editarReto(ret.idDocument, ret.id, ret)">
-            <div class="btn-group">
+            <div class="btn-group mb-3">
               <mat-form-field>
-                <select matNativeControl [(ngModel)]="ret.categoria" #categoria="ngModel" name="categoria">
-                  <option value="0" selected>Seleccione una area...</option>
+                <select matNativeControl (change)="opcCategoria($event)" [(ngModel)]="ret.categoria" #categoria="ngModel" name="categoria">
                   <option value="Lenguaje">Lenguaje</option>
                   <option value="Matematicas">Matematicas</option>
                   <option value="CienciaSociales">Ciencia Sociales</option>
                   <option value="CienciaNaturales">Ciencia Naturales</option>
                 </select>
               </mat-form-field>
+            </div>
+
+            <div class="form-floating mb-3" *ngIf="ret.titulo != ''">
+              <input class="form-control" type="text" name="titulo" [(ngModel)]="ret.titulo"
+                #titulo="ngModel" placeholder="Titulo" />
+              <label for="titulo">Opcion 2</label>
             </div>
 
             <hr />

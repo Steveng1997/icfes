@@ -46,7 +46,7 @@
             >
               <div class="btn-group">
                 <mat-form-field>
-                  <select matNativeControl formControlName="categoria">
+                  <select matNativeControl formControlName="categoria" (change)="opcCategoria($event)">
                     <option value="" selected>Seleccione una area...</option>
                     <option value="Lenguaje">Lenguaje</option>
                     <option value="Matematicas">Matematicas</option>
@@ -67,6 +67,18 @@
               </div>
 
               <hr />
+
+              <div class="form-floating mb-3" *ngIf="selectCategoria == 'Lenguaje'">
+                <input
+                  class="form-control"
+                  type="text"
+                  name="titulo"
+                  formControlName="titulo"
+                  placeholder="Opcion 1"
+                />
+                <label for="titulo">Titulo</label>
+              </div>
+
               <div class="mb-3">
                 <textarea
                   class="form-control"

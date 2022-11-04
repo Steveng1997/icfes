@@ -51,6 +51,7 @@ export class RetoService {
       subtitulo: formularioall.subtitulo,
       respuesta: formularioall.respuesta,
       imageResp: formularioall.imageResp,
+      titulo: formularioall.titulo,
     };
     return new Promise<any>((resolve, reject) => {
       this.db

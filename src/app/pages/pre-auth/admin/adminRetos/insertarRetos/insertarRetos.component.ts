@@ -26,6 +26,7 @@ export class InsertarRetosComponent implements OnInit {
 
   // Si or Not
   selectSiNo: any;
+  selectCategoria: any;
 
   formTemplate = new FormGroup({
     categoria: new FormControl(''),
@@ -44,10 +45,15 @@ export class InsertarRetosComponent implements OnInit {
     subtitulo: new FormControl(''),
     respuesta: new FormControl(''),
     imageResp: new FormControl(''),
+    titulo: new FormControl('')
   });
 
   SiNo(e) {
     this.selectSiNo = e.target.value;
+  }
+
+  opcCategoria(e){
+    this.selectCategoria = e.target.value;
   }
 
   constructor(
@@ -181,27 +187,31 @@ export class InsertarRetosComponent implements OnInit {
             if (respuesta) {
 
               // Imagen 1
-              if (this.imagetexto1 != '') {
+              if (this.imagetexto1 != undefined) {
                 this.serviceRetos.updateImage1(
                   respuesta['idDocument'],
                   respuesta['id'],
                   this.imagetexto1
                 );
+              } else {
+                Swal.fire('No has seleccionado ninguna imagen')
               }
               // Fin imagen 1
 
               // Imagen2
-              if (this.imagetexto2 != '') {
+              if (this.imagetexto2 != undefined) {
                 this.serviceRetos.updateImg2(
                   respuesta['idDocument'],
                   respuesta['id'],
                   this.imagetexto2
                 );
+              } else {
+                Swal.fire('No has seleccionado ninguna imagen')
               }
               // Fin imagen 2
 
               // ImagenOpcion1
-              if (this.imageTxtOpc1 != '') {
+              if (this.imageTxtOpc1 != undefined) {
                 this.serviceRetos.updateOpcImage1(
                   respuesta['idDocument'],
                   respuesta['id'],
@@ -211,7 +221,7 @@ export class InsertarRetosComponent implements OnInit {
               // Fin ImageOption1
 
               // ImageOption2
-              if (this.imageTxtOpc2 != '') {
+              if (this.imageTxtOpc2 != undefined) {
                 this.serviceRetos.updateOpcImage2(
                   respuesta['idDocument'],
                   respuesta['id'],
@@ -221,7 +231,7 @@ export class InsertarRetosComponent implements OnInit {
               // Fin ImageOption2
 
               // ImageOption3
-              if (this.imageTxtOpc3 != '') {
+              if (this.imageTxtOpc3 != undefined) {
                 this.serviceRetos.updateOpcImage3(
                   respuesta['idDocument'],
                   respuesta['id'],
@@ -231,7 +241,7 @@ export class InsertarRetosComponent implements OnInit {
               // Fin ImageOption3
 
               // ImageOption4
-              if (this.imageTxtOpc4 != '') {
+              if (this.imageTxtOpc4 != undefined) {
                 this.serviceRetos.updateOpcImage4(
                   respuesta['idDocument'],
                   respuesta['id'],
@@ -241,7 +251,7 @@ export class InsertarRetosComponent implements OnInit {
               // Fin ImageOption4
 
               // Image respuesta
-              if (this.imageTxtResp != '') {
+              if (this.imageTxtResp != undefined) {
                 this.serviceRetos.updateOpcImageResp(
                   respuesta['idDocument'],
                   respuesta['id'],

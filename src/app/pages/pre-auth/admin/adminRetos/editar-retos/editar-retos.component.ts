@@ -36,6 +36,8 @@ export class EditarRetosComponent implements OnInit {
   selectResp: any;
   // Fin valores
 
+  selectCategoria: any;
+
   constructor(
     public router: Router,
     public serviceRetos: RetoService,
@@ -50,6 +52,10 @@ export class EditarRetosComponent implements OnInit {
     this.serviceRetos.getById(this.idUser).then((datoRetos) => {
       return (this.reto = datoRetos);
     });
+  }
+
+  opcCategoria(e){
+    this.selectCategoria = e.target.value;
   }
 
   ImageTexto(fileInput) {
