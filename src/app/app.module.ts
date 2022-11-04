@@ -51,7 +51,6 @@ import { RetoPersonalComponent } from './pages/pre-auth/admin/reto-personal/reto
 import { MenuComponent } from './pages/main/menu/menu.component';
 import { MenuareaComponent } from './pages/main/menuarea/menuarea.component';
 import { RetoAmigoComponent } from './pages/main/reto-amigo/reto-amigo.component';
-import { MenuPersonalesComponent } from './pages/main/menu-personales/menu-personales.component';
 import { MirarAvanceComponent } from './pages/main/mirar-avance/mirar-avance.component';
 import { RetosComponent } from './pages/main/retos/retos.component';
 import { IncorrectoComponent } from './pages/main/incorrecto/incorrecto.component';
@@ -91,7 +90,6 @@ firebase.initializeApp({
     UsuariosComponent,
     EditarUserComponent,
     RetosComponent,
-    MenuPersonalesComponent,
     MirarAvanceComponent,
     AdminRetosComponent,
     InsertarRetosComponent,

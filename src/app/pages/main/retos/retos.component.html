@@ -1,162 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-      crossorigin="anonymous"
-    ></script>
-    <style href="retos.component.scss"></style>
-  </head>
 
-  <body>
-    <div class="container" style="justify-content: center; text-align: center">
-      <div class="row">
-        <div class="card border-0 rounded-3 my-5">
-          <div
-            class="card-body p-4 p-sm-5"
-            *ngFor="
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
+  <style href="retos.component.scss"></style>
+</head>
+
+<body>
+  <div class="container" style="justify-content: center; text-align: center">
+    <div class="row">
+      <div class="card border-0 rounded-3 my-5">
+        <div class="card-body p-4 p-sm-5" *ngFor="
               let cat of datosReto
                 | paginate: { itemsPerPage: 1, currentPage: page }
-            "
-          >
-            <div class="row">
-              <div class="col-md-12">
-                <div class="card-title text-center mb-4 fw-bolder display-3">
-                  <label style="color: rgb(6, 20, 202)"
-                    >Reto {{ categoria }}</label
-                  >
-                </div>
+            ">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card-title text-center mb-4 fw-bolder display-3">
+                <label style="color: rgb(6, 20, 202)">Reto {{ categoria }}</label>
               </div>
             </div>
+          </div>
 
-            <div
-              class="card-title mb-4"
-              style="font-size: 1.5rem"
-              *ngIf="datosReto"
-            >
-              <div>
-                <p
-                  id="texto1"
-                  style="justify-content: center; text-align: justify"
-                >
-                  {{ cat.texto1 }}
-                </p>
-              </div>
+          <div class="card-title mb-4" style="font-size: 1.5rem" *ngIf="datosReto">
+            <div>
+              <p id="texto1" style="justify-content: center; text-align: justify">
+                {{ cat.texto1 }}
+              </p>
+            </div>
 
-              <img src="{{ cat.imageUrl }}" width="40%" />
+            <img src="{{ cat.imageUrl }}" width="40%" />
 
-              <div>
-                <p
-                  id="texto2"
-                  style="justify-content: center; text-align: justify"
-                >
-                  {{ cat.texto2 }}
-                </p>
-              </div>
+            <div>
+              <p id="texto2" style="justify-content: center; text-align: justify">
+                {{ cat.texto2 }}
+              </p>
+            </div>
 
-              <img src="{{ cat.image2 }}" width="40%" />
+            <img src="{{ cat.image2 }}" width="40%" />
 
-              <div class="text-start mt-5">
-                <b id="subtitulo" style="text-align: justify">
-                  {{ cat.subtitulo }}
-                </b>
-              </div>
+            <div class="text-start mt-5">
+              <b id="subtitulo" style="text-align: justify">
+                {{ cat.subtitulo }}
+              </b>
+            </div>
 
-              <!------------------------------------------ Opciones preguntas imagenes ------------------------------------------>
+            <!------------------------------------------ Opciones preguntas imagenes ------------------------------------------>
 
-              <div class="card-title mt-5" *ngIf="cat.imageOpcion1 != ''">
-                <p style="cursor: pointer; text-align: center">
-                  <b>A. </b>
-                  <img
-                    (click)="
+            <div class="card-title mt-5" *ngIf="cat.imageOpcion1 != ''">
+              <p style="cursor: pointer; text-align: center">
+                <b>A. </b>
+                <img (click)="
                       opcionImage(
                         $event,
                         cat.idDocument,
                         cat.id,
                         cat.idsUsuarios,
-                        cat.urlImgResp
+                        cat.imageResp
                       )
-                    "
-                    id="{{ cat.urlImg1 }}"
-                    src="{{ cat.imageOpcion1 }}"
-                    width="40%"
-                  />
-                </p>
-                <p style="cursor: pointer; text-align: center">
-                  <b>B. </b>
-                  <img
-                    (click)="
+                    " src="{{ cat.imageOpcion1 }}" width="40%" />
+              </p>
+              <p style="cursor: pointer; text-align: center">
+                <b>B. </b>
+                <img (click)="
                       opcionImage(
                         $event,
                         cat.idDocument,
                         cat.id,
                         cat.idsUsuarios,
-                        cat.urlImgResp
+                        cat.imageResp
                       )
-                    "
-                    id="{{ cat.urlImg2 }}"
-                    src="{{ cat.imageOpcion2 }}"
-                    width="40%"
-                  />
-                </p>
-                <p style="cursor: pointer; text-align: center">
-                  <b>C. </b>
-                  <img
-                    (click)="
+                    " src="{{ cat.imageOpcion2 }}" width="40%" />
+              </p>
+              <p style="cursor: pointer; text-align: center">
+                <b>C. </b>
+                <img (click)="
                       opcionImage(
                         $event,
                         cat.idDocument,
                         cat.id,
                         cat.idsUsuarios,
-                        cat.urlImgResp
+                        cat.imageResp
                       )
-                    "
-                    id="{{ cat.urlImg3 }}"
-                    src="{{ cat.imageOpcion3 }}"
-                    width="40%"
-                  />
-                </p>
-                <p style="cursor: pointer; text-align: center">
-                  <b>D. </b>
-                  <img
-                    (click)="
+                    " src="{{ cat.imageOpcion3 }}" width="40%" />
+              </p>
+              <p style="cursor: pointer; text-align: center">
+                <b>D. </b>
+                <img (click)="
                       opcionImage(
                         $event,
                         cat.idDocument,
                         cat.id,
                         cat.idsUsuarios,
-                        cat.urlImgResp
+                        cat.imageResp
                       )
-                    "
-                    id="{{ cat.urlImg4 }}"
-                    src="{{ cat.imageOpcion4 }}"
-                    width="40%"
-                  />
-                </p>
-              </div>
+                    " src="{{ cat.imageOpcion4 }}" width="40%" />
+              </p>
+            </div>
 
-              <!------------------------------------------ Opciones preguntas texto ------------------------------------------>
+            <!------------------------------------------ Opciones preguntas texto ------------------------------------------>
 
-              <div
-                class="card-title mt-2"
-                style="font-size: 1.5rem"
-                *ngIf="cat['opciones']['opcion1'] != ''"
-              >
-                <p style="cursor: pointer; text-align: start">
-                  <b>A. </b>
-                  <label
-                    style="cursor: pointer"
-                    (click)="
+            <div class="card-title mt-2" style="font-size: 1.5rem" *ngIf="cat['opciones']['opcion1'] != ''">
+              <p style="cursor: pointer; text-align: start">
+                <b>A. </b>
+                <label style="cursor: pointer" (click)="
                       opcionA(
                         $event,
                         cat.idDocument,
@@ -164,16 +118,13 @@
                         cat.idsUsuarios,
                         cat.respuesta
                       )
-                    "
-                  >
-                    {{ cat["opciones"]["opcion1"] }}
-                  </label>
-                </p>
-                <p style="cursor: pointer; text-align: start">
-                  <b>B. </b>
-                  <label
-                    style="cursor: pointer"
-                    (click)="
+                    ">
+                  {{ cat["opciones"]["opcion1"] }}
+                </label>
+              </p>
+              <p style="cursor: pointer; text-align: start">
+                <b>B. </b>
+                <label style="cursor: pointer" (click)="
                       opcionA(
                         $event,
                         cat.idDocument,
@@ -181,16 +132,13 @@
                         cat.idsUsuarios,
                         cat.respuesta
                       )
-                    "
-                  >
-                    {{ cat["opciones"]["opcion2"] }}
-                  </label>
-                </p>
-                <p style="cursor: pointer; text-align: start">
-                  <b>C. </b>
-                  <label
-                    style="cursor: pointer"
-                    (click)="
+                    ">
+                  {{ cat["opciones"]["opcion2"] }}
+                </label>
+              </p>
+              <p style="cursor: pointer; text-align: start">
+                <b>C. </b>
+                <label style="cursor: pointer" (click)="
                       opcionA(
                         $event,
                         cat.idDocument,
@@ -198,16 +146,13 @@
                         cat.idsUsuarios,
                         cat.respuesta
                       )
-                    "
-                  >
-                    {{ cat["opciones"]["opcion3"] }}
-                  </label>
-                </p>
-                <p style="cursor: pointer; text-align: start">
-                  <b>D. </b>
-                  <label
-                    style="cursor: pointer"
-                    (click)="
+                    ">
+                  {{ cat["opciones"]["opcion3"] }}
+                </label>
+              </p>
+              <p style="cursor: pointer; text-align: start">
+                <b>D. </b>
+                <label style="cursor: pointer" (click)="
                       opcionA(
                         $event,
                         cat.idDocument,
@@ -215,16 +160,16 @@
                         cat.idsUsuarios,
                         cat.respuesta
                       )
-                    "
-                  >
-                    {{ cat["opciones"]["opcion4"] }}
-                  </label>
-                </p>
-              </div>
+                    ">
+                  {{ cat["opciones"]["opcion4"] }}
+                </label>
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

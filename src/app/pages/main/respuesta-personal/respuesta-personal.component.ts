@@ -26,7 +26,7 @@ export class RespuestaPersonalComponent implements OnInit {
     private retoService: RetoPersonalService,
     private serviceLogin: LoginService,
     private servicePuntaje: PuntuacionService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.idUser = this.rutaActiva.snapshot.paramMap.get('id');
@@ -116,7 +116,7 @@ export class RespuestaPersonalComponent implements OnInit {
         setTimeout(() => {
           let puntaje: Number;
           if (this.puntajeObtenido) {
-            if (urlImgResp == event.target.id) {
+            if (urlImgResp == event.target.src) {
               puntaje = 3;
             } else {
               puntaje = 1;
@@ -170,7 +170,7 @@ export class RespuestaPersonalComponent implements OnInit {
                 });
             }
           } else {
-            if (urlImgResp == event.target.id) {
+            if (urlImgResp == event.target.src) {
               puntaje = 3;
             } else {
               puntaje = 1;
@@ -216,18 +216,18 @@ export class RespuestaPersonalComponent implements OnInit {
             this.puntajeObtenido['idDocument'],
             this.idUser,
             this.puntajeObtenido['puntuacionLenguaje'] +
-              this.puntajeObtenido['puntuacionMatematicas'] +
-              this.puntajeObtenido['puntuacionSociales'] +
-              this.puntajeObtenido['puntuacionNaturales'] +
-              puntaje
+            this.puntajeObtenido['puntuacionMatematicas'] +
+            this.puntajeObtenido['puntuacionSociales'] +
+            this.puntajeObtenido['puntuacionNaturales'] +
+            puntaje
           );
 
           if (puntaje == 3) {
-            this.router.navigate([`correcto/${this.idUser}`]);
+            this.router.navigate([`correctoPersonal/${this.idUser}`]);
           }
 
           if (puntaje == 1) {
-            this.router.navigate([`incorrecto/${this.idUser}`]);
+            this.router.navigate([`incorrectoPersonal/${this.idUser}`]);
           }
         }, 1000);
       });
@@ -347,10 +347,10 @@ export class RespuestaPersonalComponent implements OnInit {
             this.puntajeObtenido['idDocument'],
             this.idUser,
             this.puntajeObtenido['puntuacionLenguaje'] +
-              this.puntajeObtenido['puntuacionMatematicas'] +
-              this.puntajeObtenido['puntuacionSociales'] +
-              this.puntajeObtenido['puntuacionNaturales'] +
-              puntaje
+            this.puntajeObtenido['puntuacionMatematicas'] +
+            this.puntajeObtenido['puntuacionSociales'] +
+            this.puntajeObtenido['puntuacionNaturales'] +
+            puntaje
           );
 
           if (puntaje == 3) {

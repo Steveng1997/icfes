@@ -37,12 +37,6 @@ export class RetoPersonalService {
       imageOpcion3: formularioall.imageOpcion3,
       imageOpcion4: formularioall.imageOpcion4,
 
-      urlImg1: formularioall.urlImg1,
-      urlImg2: formularioall.urlImg2,
-      urlImg3: formularioall.urlImg3,
-      urlImg4: formularioall.urlImg4,
-      urlImgResp: formularioall.urlImgResp,
-
       idsUsuarios: [],
       image2: formularioall.image2,
       subtitulo: formularioall.subtitulo,
@@ -192,53 +186,48 @@ export class RetoPersonalService {
       .update({ image2: image2 });
   }
 
-  updateOpcImage1(idDocumentReto, idReto, imageOpcion1, urlImg1) {
+  updateOpcImage1(idDocumentReto, idReto, imageOpcion1) {
     return this.db
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpcion1: imageOpcion1,
-        urlImg1: urlImg1,
+        imageOpcion1: imageOpcion1
       });
   }
 
-  updateOpcImage2(idDocumentReto, idReto, imageOpcion2, urlImg2) {
+  updateOpcImage2(idDocumentReto, idReto, imageOpcion2) {
     return this.db
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpcion2: imageOpcion2,
-        urlImg2: urlImg2,
+        imageOpcion2: imageOpcion2
       });
   }
 
-  updateOpcImage3(idDocumentReto, idReto, imageOpcion3, urlImg3) {
+  updateOpcImage3(idDocumentReto, idReto, imageOpcion3) {
     return this.db
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpcion3: imageOpcion3,
-        urlImg3: urlImg3,
+        imageOpcion3: imageOpcion3
       });
   }
 
-  updateOpcImage4(idDocumentReto, idReto, imageOpcion4, urlImg4) {
+  updateOpcImage4(idDocumentReto, idReto, imageOpcion4) {
     return this.db
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpcion4: imageOpcion4,
-        urlImg4: urlImg4,
+        imageOpcion4: imageOpcion4
       });
   }
 
-  updateOpcImageResp(idDocumentReto, idReto, imageResp, urlImgResp) {
+  updateOpcImageResp(idDocumentReto, idReto, imageResp) {
     return this.db
       .collection('retoPersonal', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageResp: imageResp,
-        urlImgResp: urlImgResp,
+        imageResp: imageResp
       });
   }
 

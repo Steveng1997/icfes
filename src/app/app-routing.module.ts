@@ -11,7 +11,6 @@ import { InsertarUsuario } from './pages/pre-auth/admin/usuarios/insertar-login/
 import { UsuariosComponent } from './pages/pre-auth/admin/usuarios/usuarios.component';
 import { EditarUserComponent } from './pages/pre-auth/admin/usuarios/editar-user/editar-user.component';
 import { RetosComponent } from './pages/main/retos/retos.component';
-import { MenuPersonalesComponent } from './pages/main/menu-personales/menu-personales.component';
 import { EstudiantesComponent } from './pages/pre-auth/admin/estudiantes/estudiantes.component';
 import { InsertarEstudiantesComponent } from './pages/pre-auth/admin/estudiantes/insertar-estudiantes/insertar-estudiantes.component';
 import { AdminRetosComponent } from './pages/pre-auth/admin/adminRetos/adminRetos.component';
@@ -137,11 +136,6 @@ const routes: Routes = [
   {
     path: 'resPerson/:id/:categoria',
     component: RespuestaPersonalComponent,
-    canActivate: [LoginGuardian],
-  },
-  {
-    path: 'menuPersonal/:id',
-    component: MenuPersonalesComponent,
     canActivate: [LoginGuardian],
   },
   {

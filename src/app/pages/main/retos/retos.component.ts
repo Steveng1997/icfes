@@ -114,7 +114,7 @@ export class RetosComponent implements OnInit {
         setTimeout(() => {
           let puntaje: Number;
           if (this.puntajeObtenido) {
-            if (urlImgResp == event.target.id) {
+            if (urlImgResp == event.target.src) {
               puntaje = 3;
             } else {
               puntaje = 1;
@@ -180,7 +180,7 @@ export class RetosComponent implements OnInit {
               );
             });
           } else {
-            if (urlImgResp == event.target.id) {
+            if (urlImgResp == event.target.src) {
               puntaje = 3;
             } else {
               puntaje = 1;
