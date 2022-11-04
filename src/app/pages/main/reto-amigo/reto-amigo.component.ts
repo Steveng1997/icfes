@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/core/models/login';
+import { DesafioService } from 'src/app/core/services/desafio.service';
 import { EstudianteService } from 'src/app/core/services/estudiantes.service';
 import { LoginService } from 'src/app/core/services/login.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-reto-amigo',
@@ -12,15 +14,20 @@ import { LoginService } from 'src/app/core/services/login.service';
 export class RetoAmigoComponent implements OnInit {
   estudiantes: any[] = [];
   user: Usuario[];
-  opcionSeleccionado: string = '0';
+  opcionSeleccionado: any;
   idUser: string;
+
+  onSelect(e) {
+    this.opcionSeleccionado = e.target.value
+  }
 
   constructor(
     public router: Router,
     public serviceEstudiante: EstudianteService,
     public serviceLogin: LoginService,
-    private activeRoute: ActivatedRoute
-  ) {}
+    private activeRoute: ActivatedRoute,
+    private serviceDesafio: DesafioService
+  ) { }
 
   ngOnInit(): void {
     this.idUser = this.activeRoute.snapshot.paramMap.get('id');
@@ -29,11 +36,18 @@ export class RetoAmigoComponent implements OnInit {
   }
 
   Retar() {
-    if (this.opcionSeleccionado != '0') {
+    if (this.opcionSeleccionado) {
+      this.serviceDesafio.registerDesafio(this.opcionSeleccionado)
       this.router.navigate([`areas/${this.idUser}`]);
     } else {
-      alert('Selecciona a quien quieres retar');
+      Swal.fire(
+        '',
+        'Selecciona a quien quieres retar',
+        'question'
+      )
     }
+
+
   }
 
   getEstudiante() {

@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import 'firebase/compat/app';
-import { Estudiante } from '../models/estudiante';
-import { Observable } from 'rxjs';
+import { Desafio } from '../models/desafio';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable()
-export class EstudianteService {
+export class DesafioService {
   myArray: any[] = [];
 
   constructor(
@@ -15,23 +13,22 @@ export class EstudianteService {
     private db: AngularFirestore
   ) { }
 
-  estudiantes: Estudiante[] = [];
+  estudiantes: Desafio[] = [];
 
   // -----------------------------------------------------------------------------------
   // Register
   // -----------------------------------------------------------------------------------
 
-  registerAreas(nombre: string) {
-    let estudiante = { id: `uid${btoa(nombre)}`, nombre: nombre };
+  registerDesafio(nombre: string) {
+    let desafios = { id: `uid${btoa(nombre)}`, nombre: nombre, idReto: '', categoria: '' };
     return new Promise<any>((resolve, reject) => {
       this.db
-        .collection('estudiantes')
-        .add(estudiante)
+        .collection('desafios')
+        .add(desafios)
         .then(
           (response) => resolve(response),
           (error) => reject(error)
         );
-      // this.authFire.createUserWithEmailAndPassword(email, password)
     });
   }
 
@@ -43,17 +40,16 @@ export class EstudianteService {
   // Get
   // -----------------------------------------------------------------------------------
 
-  getEstudiantesAll() {
+  getDesafioAll() {
     return this.db
-      .collection('estudiantes', (ref) => ref.orderBy('id', 'asc'))
+      .collection('desafios', (ref) => ref.orderBy('id', 'asc'))
       .valueChanges()
   }
-
 
   getById(id): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('estudiantes', (ref) => ref.where('id', '==', id))
+        .collection('desafios', (ref) => ref.where('id', '==', id))
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
           if (rp[0]?.idDocument) {
@@ -65,14 +61,10 @@ export class EstudianteService {
     });
   }
 
-  getByIdUser(id: string): Observable<any> {
-    return this.db.collection('estudiantes').doc(id).snapshotChanges();
-  }
-
-  getEstudiantes(): Promise<any> {
+  getDesafios(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('estudiantes', (ref) => ref.orderBy('id', 'asc'))
+        .collection('desafios', (ref) => ref.orderBy('id', 'asc'))
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
           if (rp[0]?.idDocument) {
@@ -92,9 +84,9 @@ export class EstudianteService {
   // Update
   // -----------------------------------------------------------------------------------
 
-  updateEstudiante(idDocument, idReto, estudi: Estudiante) {
+  updateDesafios(idDocument, idReto, estudi: Desafio) {
     return this.db
-      .collection('estudiantes', (ref) => ref.where('id', '==', idReto))
+      .collection('desafios', (ref) => ref.where('id', '==', idReto))
       .doc(idDocument)
       .update(estudi);
   }
@@ -107,9 +99,9 @@ export class EstudianteService {
   // Delete
   // -----------------------------------------------------------------------------------
 
-  async deleteEstudiante(idDocument, id): Promise<any> {
+  async deleteDesafios(idDocument, id): Promise<any> {
     this.db
-      .collection('estudiantes', (ref) => ref.where('id', '==', id))
+      .collection('desafios', (ref) => ref.where('id', '==', id))
       .doc(idDocument)
       .delete();
   }

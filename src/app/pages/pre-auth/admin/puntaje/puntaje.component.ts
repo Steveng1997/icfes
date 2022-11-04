@@ -35,7 +35,7 @@ export class PuntajeComponent implements OnInit {
   }
 
   DeletePuntaje(id) {
-    this.servicePuntuacion.getPuntajeByDocument(id).then((datoPuntaje) => {
+    this.servicePuntuacion.getById(id).then((datoPuntaje) => {
       if (datoPuntaje) {
         Swal.fire({
           title: '¿Deseas eliminar el registro?',

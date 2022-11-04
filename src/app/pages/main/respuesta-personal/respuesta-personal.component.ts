@@ -26,7 +26,7 @@ export class RespuestaPersonalComponent implements OnInit {
     private retoService: RetoPersonalService,
     private serviceLogin: LoginService,
     private servicePuntaje: PuntuacionService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.idUser = this.rutaActiva.snapshot.paramMap.get('id');
@@ -208,19 +208,24 @@ export class RespuestaPersonalComponent implements OnInit {
                   rp[0]['nombre']
                 );
               }
-            });
-            // crea
-          }
 
-          this.servicePuntaje.updatePuntajeTotal(
-            this.puntajeObtenido['idDocument'],
-            this.idUser,
-            this.puntajeObtenido['puntuacionLenguaje'] +
-              this.puntajeObtenido['puntuacionMatematicas'] +
-              this.puntajeObtenido['puntuacionSociales'] +
-              this.puntajeObtenido['puntuacionNaturales'] +
-              puntaje
-          );
+              this.servicePuntaje
+                .getPuntajeByIdUsuario(this.idUser)
+                .then((resp) => {
+                  if (resp) {
+                    this.servicePuntaje.updatePuntajeTotal(
+                      resp[0]['idDocument'],
+                      this.idUser,
+                      this.puntajeObtenido['puntuacionLenguaje'] +
+                      this.puntajeObtenido['puntuacionMatematicas'] +
+                      this.puntajeObtenido['puntuacionSociales'] +
+                      this.puntajeObtenido['puntuacionNaturales'] +
+                      puntaje
+                    );
+                  }
+                });
+            });
+          }
 
           if (puntaje == 3) {
             this.router.navigate([`correctoPersonal/${this.idUser}`]);
@@ -300,6 +305,7 @@ export class RespuestaPersonalComponent implements OnInit {
                   console.log(rp);
                 });
             }
+
           } else {
             if (respuesta == event.target.innerHTML.trim()) {
               puntaje = 3;
@@ -339,26 +345,25 @@ export class RespuestaPersonalComponent implements OnInit {
                   rp[0]['nombre']
                 );
               }
-            });
-            // crea
-          }
 
-          this.servicePuntaje
-            .getPuntajeByIdUsuario(this.idUser)
-            .then((resp) => {
-              console.log(resp)
-              if (resp) {
-                this.servicePuntaje.updatePuntajeTotal(
-                  resp[0]['idDocument'],
-                  this.idUser,
-                  this.puntajeObtenido['puntuacionLenguaje'] +
-                    this.puntajeObtenido['puntuacionMatematicas'] +
-                    this.puntajeObtenido['puntuacionSociales'] +
-                    this.puntajeObtenido['puntuacionNaturales'] +
-                    puntaje
-                );
-              }
+
+              this.servicePuntaje
+                .getPuntajeByIdUsuario(this.idUser)
+                .then((resp) => {
+                  if (resp) {
+                    this.servicePuntaje.updatePuntajeTotal(
+                      resp[0]['idDocument'],
+                      this.idUser,
+                      this.puntajeObtenido['puntuacionLenguaje'] +
+                      this.puntajeObtenido['puntuacionMatematicas'] +
+                      this.puntajeObtenido['puntuacionSociales'] +
+                      this.puntajeObtenido['puntuacionNaturales'] +
+                      puntaje
+                    );
+                  }
+                });
             });
+          }
 
           if (puntaje == 3) {
             this.router.navigate([`correctoPersonal/${this.idUser}`]);

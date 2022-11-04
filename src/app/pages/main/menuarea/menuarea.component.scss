@@ -109,7 +109,7 @@
   .cardSociales {
     border: 7px solid #46a6c7;
     margin-bottom: 10%;
-    width: 95%;
+    width: 100%;
     margin-left: 0%;
   }
 
@@ -159,7 +159,7 @@
 
   .imgLenguaje {
     margin-left: -57%;
-    width: 169%;
+    width: 170%;
     margin-top: 0%;
   }
 
@@ -169,8 +169,8 @@
   }
 
   .imgNaturales {
-    margin-left: -48%;
-    width: 160%;
+    margin-left: -57%;
+    width: 170%;
   }
 }
 
@@ -538,10 +538,10 @@
 @media only screen and (min-device-width: 910px) and (max-device-width: 950px) {
   .contenedorCards {
     display: grid;
-    grid-template-columns: 122% 122%;
+    grid-template-columns: 120% 120%;
     justify-content: center;
     margin-top: -65%;
-    margin-left: auto;
+    margin-left: -16px;
   }
 
   .cardMatematica {

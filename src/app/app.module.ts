@@ -30,6 +30,7 @@ import { RetoService } from './core/services/retos.service';
 import { EstudianteService } from './core/services/estudiantes.service';
 import { PuntuacionService } from './core/services/puntaje.service';
 import { RetoPersonalService } from './core/services/retoPersonal.service';
+import { DesafioService } from './core/services/desafio.service';
 
 // Pages-Auth
 import { AdminComponent } from './pages/pre-auth/admin/admin.component';
@@ -130,6 +131,7 @@ firebase.initializeApp({
   providers: [
     AngularFireAuth,
     LoginService,
+    DesafioService,
     EstudianteService,
     RetoService,
     RetoPersonalService,

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import 'firebase/compat/app';
-import { Observable } from 'rxjs';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
@@ -160,21 +159,6 @@ export class PuntuacionService {
     return new Promise((resolve, reject) => {
       this.db
         .collection('puntaje', (ref) => ref.where('idUsuario', '==', id))
-        .valueChanges({ idField: 'idDocument' })
-        .subscribe((rp) => {
-          if (rp[0]?.idDocument) {
-            resolve(rp);
-          } else {
-            resolve(rp);
-          }
-        });
-    });
-  }
-
-  getPuntajeByDocument(id): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.db
-        .collection('puntaje', (ref) => ref.where('id', '==', id))
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
           if (rp[0]?.idDocument) {

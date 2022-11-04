@@ -26,7 +26,7 @@ export class RetosComponent implements OnInit {
     private retoService: RetoService,
     private serviceLogin: LoginService,
     private servicePuntaje: PuntuacionService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.idUser = this.rutaActiva.snapshot.paramMap.get('id');
@@ -168,17 +168,22 @@ export class RetosComponent implements OnInit {
                 });
             }
 
-            this.servicePuntaje.getPuntajeByDocument(this.idUser).then((rp) => {
-              this.servicePuntaje.updatePuntajeTotal(
-                this.puntajeObtenido['idDocument'],
-                this.idUser,
-                this.puntajeObtenido['puntuacionLenguaje'] +
-                  this.puntajeObtenido['puntuacionMatematicas'] +
-                  this.puntajeObtenido['puntuacionSociales'] +
-                  this.puntajeObtenido['puntuacionNaturales'] +
-                  puntaje
-              );
-            });
+            this.servicePuntaje
+              .getPuntajeByIdUsuario(this.idUser)
+              .then((resp) => {
+                if (resp) {
+                  this.servicePuntaje.updatePuntajeTotal(
+                    resp[0]['idDocument'],
+                    this.idUser,
+                    this.puntajeObtenido['puntuacionLenguaje'] +
+                    this.puntajeObtenido['puntuacionMatematicas'] +
+                    this.puntajeObtenido['puntuacionSociales'] +
+                    this.puntajeObtenido['puntuacionNaturales'] +
+                    puntaje
+                  );
+                }
+              });
+
           } else {
             if (urlImgResp == event.target.src) {
               puntaje = 3;
@@ -218,7 +223,22 @@ export class RetosComponent implements OnInit {
                   rp[0]['nombre']
                 );
               }
-              // crea
+
+              this.servicePuntaje
+                .getPuntajeByIdUsuario(this.idUser)
+                .then((resp) => {
+                  if (resp) {
+                    this.servicePuntaje.updatePuntajeTotal(
+                      resp[0]['idDocument'],
+                      this.idUser,
+                      this.puntajeObtenido['puntuacionLenguaje'] +
+                      this.puntajeObtenido['puntuacionMatematicas'] +
+                      this.puntajeObtenido['puntuacionSociales'] +
+                      this.puntajeObtenido['puntuacionNaturales'] +
+                      puntaje
+                    );
+                  }
+                });
             });
           }
 
@@ -301,15 +321,15 @@ export class RetosComponent implements OnInit {
                 });
             }
 
-            this.servicePuntaje.getPuntajeByDocument(this.idUser).then((rp) => {
+            this.servicePuntaje.getById(this.idUser).then((rp) => {
               this.servicePuntaje.updatePuntajeTotal(
                 this.puntajeObtenido['idDocument'],
                 this.idUser,
                 this.puntajeObtenido['puntuacionLenguaje'] +
-                  this.puntajeObtenido['puntuacionMatematicas'] +
-                  this.puntajeObtenido['puntuacionSociales'] +
-                  this.puntajeObtenido['puntuacionNaturales'] +
-                  puntaje
+                this.puntajeObtenido['puntuacionMatematicas'] +
+                this.puntajeObtenido['puntuacionSociales'] +
+                this.puntajeObtenido['puntuacionNaturales'] +
+                puntaje
               );
             });
           } else {
@@ -349,10 +369,26 @@ export class RetosComponent implements OnInit {
                   this.idUser,
                   puntaje,
                   rp[0]['nombre']
+
                 );
               }
+
+              this.servicePuntaje
+                .getPuntajeByIdUsuario(this.idUser)
+                .then((resp) => {
+                  if (resp) {
+                    this.servicePuntaje.updatePuntajeTotal(
+                      resp[0]['idDocument'],
+                      this.idUser,
+                      this.puntajeObtenido['puntuacionLenguaje'] +
+                      this.puntajeObtenido['puntuacionMatematicas'] +
+                      this.puntajeObtenido['puntuacionSociales'] +
+                      this.puntajeObtenido['puntuacionNaturales'] +
+                      puntaje
+                    );
+                  }
+                });
             });
-            // crea
           }
 
           if (puntaje == 3) {
