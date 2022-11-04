@@ -15,7 +15,7 @@ export class LoginService {
     public router: Router,
     private db: AngularFirestore,
     private authFire: AngularFireAuth
-  ) { }
+  ) {}
 
   usuarios: Usuario[] = [];
 
@@ -53,6 +53,10 @@ export class LoginService {
     });
   }
 
+  registerAutenticacion(email, password) {
+    this.authFire.createUserWithEmailAndPassword(email, password);
+  }
+
   // -----------------------------------------------------------------------------------
   // End register
   // -----------------------------------------------------------------------------------
@@ -79,7 +83,7 @@ export class LoginService {
   getByIdAll(id) {
     return this.db
       .collection('usuarios', (ref) => ref.where('id', '==', id))
-      .valueChanges()
+      .valueChanges();
   }
 
   getByEmail(email): Promise<any> {
@@ -132,7 +136,7 @@ export class LoginService {
   getUsuarios() {
     return this.db
       .collection('usuarios', (ref) => ref.orderBy('id', 'asc'))
-      .valueChanges()
+      .valueChanges();
   }
 
   // -----------------------------------------------------------------------------------

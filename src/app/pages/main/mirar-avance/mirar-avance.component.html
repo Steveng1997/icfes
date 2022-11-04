@@ -28,9 +28,9 @@
       <label class="txtTitulo">Este ha sido tu desempeño este año</label>
     </div>
 
-    <h5 class="text-center display-4 text-danger" *ngIf="puntajes.length == 0">
+    <!-- <h5 class="text-center display-4 text-danger" *ngIf="puntajes.length == 0">
       Este usuario no ha hecho ningun reto
-    </h5>
+    </h5> -->
 
     <!-- Modal -->
 
@@ -41,7 +41,7 @@
         class="btn btnListado"
         (click)="openModal(editProfileModal)"
       >
-        Listado
+        Listado de Puntajes
       </button>
     </div>
     <ng-template #editProfileModal let-modal>
@@ -94,7 +94,7 @@
       <div class="col-md-3 text-center txtMatematica">
         <div class="column">
           <div class="cardMatematica">
-            <label class="colorMatematica">Matematicas</label>
+            <label class="colorMatematica">Matemáticas</label>
           </div>
 
           <img

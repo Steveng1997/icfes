@@ -40,6 +40,7 @@ export class InsertarUsuario implements OnInit {
                   title: 'El usuario existe en la base de datos.',
                 });
               } else {
+                this.serviceLogin.registerAutenticacion(this.email, this.password);
                 this.serviceLogin.registerUser(
                   this.email,
                   this.nombre,
