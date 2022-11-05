@@ -9,11 +9,11 @@ import { PuntuacionService } from 'src/app/core/services/puntaje.service';
 import { RetoService } from 'src/app/core/services/retos.service';
 
 @Component({
-  selector: 'app-retos',
-  templateUrl: './retos.component.html',
-  styleUrls: ['./retos.component.scss'],
+  selector: 'app-reto-desafio',
+  templateUrl: './reto-desafio.component.html',
+  styleUrls: ['./reto-desafio.component.scss']
 })
-export class RetosComponent implements OnInit {
+export class RetoDesafioComponent implements OnInit {
   categoria: string;
   datosReto: Retos[];
   user: Usuario[];
@@ -39,20 +39,20 @@ export class RetosComponent implements OnInit {
       this.user = rp
     }));
 
-    this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
-    this.getByCategoria(this.categoria);
-
     this.idDesafio = this.rutaActiva.snapshot.paramMap.get('idDesafio');
-    this.serviceDesafio.getById(this.idDesafio).then((rp => {
+    this.serviceDesafio.getByIdById(this.idDesafio).subscribe((rp => {
       this.desafio = rp;
     }));
+
+    this.getByIdReto(this.desafio);
   }
 
-  getByCategoria(categoria: string): void {
+  getByIdReto(id): void {
     this.retoService
-      .getByCategoria(categoria)
-      .then((dataCategoria) => {
-        this.datosReto = dataCategoria.filter((_reto) => {
+      .getById(id[0]['id'])
+      .then((datoReto) => {
+
+        this.datosReto = datoReto.filter((_reto) => {
           if (_reto['idsUsuarios'].includes(this.idUser)) {
             return;
           }

@@ -20,7 +20,7 @@ export class DesafioService {
   // -----------------------------------------------------------------------------------
 
   registerDesafio(nombre: string) {
-    let desafios = { id: `uid${btoa(nombre)}`, nombre: nombre, idReto: '', categoria: '' };
+    let desafios = { id: `uid${btoa(nombre)}`, nombre: nombre, idReto: '', categoria: '', idUser: '' };
     return new Promise<any>((resolve, reject) => {
       this.db
         .collection('desafios')
@@ -49,7 +49,8 @@ export class DesafioService {
   getById(id): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('desafios', (ref) => ref.where('id', '==', id))
+        .collection('desafios')
+        .doc(id)
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
           if (rp[0]?.idDocument) {
@@ -59,6 +60,12 @@ export class DesafioService {
           }
         });
     });
+  }
+
+  getByIdById(id) {
+    return this.db
+      .collection('desafios', (ref) => ref.where('id', '==', id))
+      .valueChanges()
   }
 
   getDesafios(): Promise<any> {
@@ -84,11 +91,15 @@ export class DesafioService {
   // Update
   // -----------------------------------------------------------------------------------
 
-  updateDesafios(idDocument, idReto, estudi: Desafio) {
+  updateDesafios(idDocument, idReto, id, categoria, idUs) {
     return this.db
       .collection('desafios', (ref) => ref.where('id', '==', idReto))
       .doc(idDocument)
-      .update(estudi);
+      .update({
+        idReto: id,
+        categoria: categoria,
+        idUser: idUs
+      });
   }
 
   // -----------------------------------------------------------------------------------

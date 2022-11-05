@@ -1,19 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Desafio } from 'src/app/core/models/desafio';
 import { Usuario } from 'src/app/core/models/login';
 import { DesafioService } from 'src/app/core/services/desafio.service';
-import { EstudianteService } from 'src/app/core/services/estudiantes.service';
 import { LoginService } from 'src/app/core/services/login.service';
 import Swal from 'sweetalert2';
 
+
 @Component({
-  selector: 'app-reto-amigo',
-  templateUrl: 'reto-amigo.component.html',
-  styleUrls: ['reto-amigo.component.scss'],
+  selector: 'app-desafio',
+  templateUrl: './desafio.component.html',
+  styleUrls: ['./desafio.component.scss']
 })
-export class RetoAmigoComponent implements OnInit {
+export class DesafioComponent implements OnInit {
   estudiantes: any[] = [];
   user: Usuario[];
+  desafio: Desafio[];
   opcionSeleccionado: any = 0;
   idUser: string;
 
@@ -23,7 +25,7 @@ export class RetoAmigoComponent implements OnInit {
 
   constructor(
     public router: Router,
-    public serviceEstudiante: EstudianteService,
+    public sercieDesafio: DesafioService,
     public serviceLogin: LoginService,
     private activeRoute: ActivatedRoute,
     private serviceDesafio: DesafioService
@@ -31,32 +33,23 @@ export class RetoAmigoComponent implements OnInit {
 
   ngOnInit(): void {
     this.idUser = this.activeRoute.snapshot.paramMap.get('id');
-    this.serviceLogin.getById(this.idUser);
-    this.getEstudiante();
+    this.serviceLogin.getById(this.idUser).then((resp => {
+      this.user = resp
+    }));
+
+    this.serviceDesafio.getDesafios().then((datosEstudiantes) => {
+      this.desafio = datosEstudiantes;
+    });
   }
 
   Retar() {
-    if (this.opcionSeleccionado) {
-      this.serviceDesafio.registerDesafio(this.opcionSeleccionado).then((rp => {
-        if(rp.id)
-        {
-          this.router.navigate([`areas/${this.idUser}/${rp.id}`]);
-        }
-      }))
-     
+    if (this.opcionSeleccionado != 0) {
+      this.router.navigate([`retoDesafio/${this.idUser}/${this.desafio[0]['id']}/${this.desafio[0]['categoria']}`]);
     } else {
       Swal.fire({
         icon: 'error',
-        text: '¡Seleccione a quien quieres retar!',
+        text: '¡Seleccion un reto pendiente!',
       })
     }
-
-
-  }
-
-  getEstudiante() {
-    this.serviceEstudiante.getEstudiantes().then((datosEstudiantes) => {
-      return (this.estudiantes = datosEstudiantes);
-    });
   }
 }

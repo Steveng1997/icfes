@@ -61,11 +61,13 @@ import { CorrectoPersonalComponent } from './pages/main/correcto-personal/correc
 import { MenuAreaPersonalComponent } from './pages/main/menu-area-personal/menu-area-personal.component';
 import { PreguntaPersonalComponent } from './pages/main/pregunta-personal/pregunta-personal.component';
 import { RespuestaPersonalComponent } from './pages/main/respuesta-personal/respuesta-personal.component';
+import { DesafioComponent } from './pages/main/desafio/desafio.component';
 
 // Cookies
 import { CookieService } from 'ngx-cookie-service';
 import { LoginGuardian } from './pages/pre-auth/login/login-guardian';
 import { MatDividerModule } from '@angular/material/divider';
+import { RetoDesafioComponent } from './pages/main/reto-desafio/reto-desafio.component';
 
 firebase.initializeApp({
   apiKey: 'AIzaSyAWFfFTC8gSoctKKst4X1uxVwaFbEB1pXM',
@@ -108,6 +110,8 @@ firebase.initializeApp({
     PreguntaPersonalComponent,
     RespuestaPersonalComponent,
     RetoPersonalComponent,
+    DesafioComponent,
+    RetoDesafioComponent,
   ],
 
   imports: [

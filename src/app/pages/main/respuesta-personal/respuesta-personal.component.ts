@@ -31,7 +31,7 @@ export class RespuestaPersonalComponent implements OnInit {
   ngOnInit() {
     this.idUser = this.rutaActiva.snapshot.paramMap.get('id');
     this.retoService.getById(this.idUser).then((datoRet) => {
-      return (this.datosReto = datoRet);
+      this.datosReto = datoRet;
     });
 
     this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
@@ -169,6 +169,16 @@ export class RespuestaPersonalComponent implements OnInit {
                   console.log(rp);
                 });
             }
+
+            this.servicePuntaje.updatePuntajeTotal(
+              this.puntajeObtenido['idDocument'],
+              this.idUser,
+              this.puntajeObtenido['puntuacionLenguaje'] +
+              this.puntajeObtenido['puntuacionMatematicas'] +
+              this.puntajeObtenido['puntuacionSociales'] +
+              this.puntajeObtenido['puntuacionNaturales'] +
+              puntaje
+            );
           } else {
             if (urlImgResp == event.target.src) {
               puntaje = 3;
@@ -208,22 +218,6 @@ export class RespuestaPersonalComponent implements OnInit {
                   rp[0]['nombre']
                 );
               }
-
-              this.servicePuntaje
-                .getPuntajeByIdUsuario(this.idUser)
-                .then((resp) => {
-                  if (resp) {
-                    this.servicePuntaje.updatePuntajeTotal(
-                      resp[0]['idDocument'],
-                      this.idUser,
-                      this.puntajeObtenido['puntuacionLenguaje'] +
-                      this.puntajeObtenido['puntuacionMatematicas'] +
-                      this.puntajeObtenido['puntuacionSociales'] +
-                      this.puntajeObtenido['puntuacionNaturales'] +
-                      puntaje
-                    );
-                  }
-                });
             });
           }
 
@@ -306,6 +300,16 @@ export class RespuestaPersonalComponent implements OnInit {
                 });
             }
 
+            this.servicePuntaje.updatePuntajeTotal(
+              this.puntajeObtenido['idDocument'],
+              this.idUser,
+              this.puntajeObtenido['puntuacionLenguaje'] +
+              this.puntajeObtenido['puntuacionMatematicas'] +
+              this.puntajeObtenido['puntuacionSociales'] +
+              this.puntajeObtenido['puntuacionNaturales'] +
+              puntaje
+            );
+
           } else {
             if (respuesta == event.target.innerHTML.trim()) {
               puntaje = 3;
@@ -345,23 +349,6 @@ export class RespuestaPersonalComponent implements OnInit {
                   rp[0]['nombre']
                 );
               }
-
-
-              this.servicePuntaje
-                .getPuntajeByIdUsuario(this.idUser)
-                .then((resp) => {
-                  if (resp) {
-                    this.servicePuntaje.updatePuntajeTotal(
-                      resp[0]['idDocument'],
-                      this.idUser,
-                      this.puntajeObtenido['puntuacionLenguaje'] +
-                      this.puntajeObtenido['puntuacionMatematicas'] +
-                      this.puntajeObtenido['puntuacionSociales'] +
-                      this.puntajeObtenido['puntuacionNaturales'] +
-                      puntaje
-                    );
-                  }
-                });
             });
           }
 

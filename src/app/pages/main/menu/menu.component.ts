@@ -38,7 +38,11 @@ export class MenuComponent implements OnInit {
     this.router.navigate([`mirarAvance/${this.user[0]['id']}`]);
   }
 
+  desafio() {
+    this.router.navigate([`desafio/${this.user[0]['id']}`]);
+  }
+
   salir() {
-    this.router.navigate(['login']);
+    this.router.navigate(['']);
   }
 }

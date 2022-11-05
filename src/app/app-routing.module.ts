@@ -27,6 +27,8 @@ import { EditarPuntuacionComponent } from './pages/pre-auth/admin/puntaje/editar
 import { PreguntaPersonalComponent } from './pages/main/pregunta-personal/pregunta-personal.component';
 import { RespuestaPersonalComponent } from './pages/main/respuesta-personal/respuesta-personal.component';
 import { RetoPersonalComponent } from './pages/pre-auth/admin/reto-personal/reto-personal.component';
+import { DesafioComponent } from './pages/main/desafio/desafio.component';
+import { RetoDesafioComponent } from './pages/main/reto-desafio/reto-desafio.component';
 
 const routes: Routes = [
   { path: 'menu/:id', component: MenuComponent, canActivate: [LoginGuardian] },
@@ -44,7 +46,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'areas/:id',
+    path: 'areas/:idUser/:idDesafio',
     component: MenuareaComponent,
     canActivate: [LoginGuardian],
   },
@@ -124,7 +126,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'retos/:id/:categoria',
+    path: 'retos/:idUser/:categoria/:idDesafio',
     component: RetosComponent,
     canActivate: [LoginGuardian],
   },
@@ -166,6 +168,16 @@ const routes: Routes = [
   {
     path: 'incorrectoPersonal/:id',
     component: IncorrectoPersonalComponent,
+    canActivate: [LoginGuardian],
+  },
+  {
+    path: 'desafio/:id',
+    component: DesafioComponent,
+    canActivate: [LoginGuardian],
+  },
+  {
+    path: 'retoDesafio/:idUser/:idDesafio/:categoria',
+    component: RetoDesafioComponent,
     canActivate: [LoginGuardian],
   },
 ];
