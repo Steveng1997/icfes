@@ -44,7 +44,7 @@ export class DesafioComponent implements OnInit {
 
   Retar() {
     if (this.opcionSeleccionado != 0) {
-      this.router.navigate([`retoDesafio/${this.idUser}/${this.desafio[0]['id']}/${this.desafio[0]['categoria']}`]);
+      this.router.navigate([`retoDesafio/${this.idUser}/${this.desafio[0]['idReto']}/${this.desafio[0]['categoria']}`]);
     } else {
       Swal.fire({
         icon: 'error',

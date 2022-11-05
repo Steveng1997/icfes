@@ -17,29 +17,28 @@
 
 <body>
   <div class="container">
-      <div class="card-body p-4 p-sm-5">
-        <div class="card-title text-center mb-4 fw-bolder display-4" style="color: #976DD0;">
-          <label>¿A quién quieres retar?</label>
-        </div>
-
-        <div class="text-center mb-5" style="height: 100px">
-          <mat-form-field appearance="fill">
-            <select matNativeControl [(ngModel)]="opcionSeleccionado" (change)="onSelect($event)"> >
-              <option value="0">Selecciona un reto pendiente</option>
-              <option *ngFor="let item of desafio" value="{{item.nombre}}">
-                {{ item.nombre }} {{'-'}} {{item.categoria}}
-              </option>
-            </select>
-          </mat-form-field>
-        </div>
-
-        <div class="text-center">
-          <button class="btn btn-reto btn-lg btn-login text-uppercase fw-bold display-5" type="submit"
-            (click)="Retar()">
-            TOMAR RETO
-          </button>
-        </div>
+    <div class="card-body p-4 p-sm-5">
+      <div class="card-title text-center mb-4 fw-bolder display-4" style="color: #976DD0;">
+        <label>¿A quién quieres retar?</label>
       </div>
+
+      <div class="text-center mb-5" style="height: 100px" *ngFor="let item of desafio">
+        <mat-form-field appearance="fill">
+          <select matNativeControl [(ngModel)]="opcionSeleccionado" (change)="onSelect($event)">
+            <option value="0">Selecciona un reto pendiente</option>
+            <option value="{{item.nombre}}" *ngIf="item.respondido == false">
+              {{ item.nombre }} {{'-'}} {{item.categoria}}
+            </option>
+          </select>
+        </mat-form-field>
+      </div>
+
+      <div class="text-center">
+        <button class="btn btn-reto btn-lg btn-login text-uppercase fw-bold display-5" type="submit" (click)="Retar()">
+          TOMAR RETO
+        </button>
+      </div>
+    </div>
   </div>
 </body>
 

@@ -39,17 +39,15 @@ export class RetoDesafioComponent implements OnInit {
       this.user = rp
     }));
 
-    this.idDesafio = this.rutaActiva.snapshot.paramMap.get('idDesafio');
-    this.serviceDesafio.getByIdById(this.idDesafio).subscribe((rp => {
-      this.desafio = rp;
-    }));
+    this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
 
-    this.getByIdReto(this.desafio);
+    this.idDesafio = this.rutaActiva.snapshot.paramMap.get('idDesafio');
+    this.getByIdReto();
   }
 
-  getByIdReto(id): void {
+  getByIdReto(): void {
     this.retoService
-      .getById(id[0]['id'])
+      .getById(this.idDesafio)
       .then((datoReto) => {
 
         this.datosReto = datoReto.filter((_reto) => {
@@ -114,9 +112,11 @@ export class RetoDesafioComponent implements OnInit {
 
   opcionImage(event, idDocumentReto, idReto, idsUsuarios, urlImgResp) {
 
-    this.serviceDesafio.updateDesafios(this.desafio['idDocument'], this.desafio['id'], idReto, this.categoria, this.idUser).then((rp) => {
-      console.log(rp);
-    });
+    this.serviceDesafio.getByIdByDocument(this.idDesafio).then((respuesta => {
+      this.serviceDesafio.updateDesafiosRespondido(respuesta['idDocument'], this.desafio['id']).then((rp) => {
+        console.log(rp);
+      });
+    }))    
 
     this.obtenerPuntaje(this.idUser);
 
@@ -256,9 +256,11 @@ export class RetoDesafioComponent implements OnInit {
 
   opcionA(event, idDocumentReto, idReto, idsUsuarios, respuesta) {
 
-    this.serviceDesafio.updateDesafios(this.desafio['idDocument'], this.desafio['id'], idReto, this.categoria, this.idUser).then((rp) => {
-      console.log(rp);
-    });
+    this.serviceDesafio.getByIdByDocument(this.idDesafio).then((respuesta => {
+      this.serviceDesafio.updateDesafiosRespondido(respuesta[0]['idDocument'], respuesta[0]['idReto']).then((rp) => {
+        console.log(rp);
+      });
+    }))
 
 
     this.obtenerPuntaje(this.idUser);

@@ -3,4 +3,5 @@ export class Desafio {
   idReto?: string;
   nombre?: string;
   categoria?: string;
+  respondido?: boolean;
 }
