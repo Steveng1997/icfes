@@ -1,4 +1,136 @@
 .btn-reto {
-    background-color: #20c928 !important;
-    color: white !important;
+  background-color: #20c928 !important;
+  color: white !important;
+}
+
+// Pantalla grande
+@media only screen and (min-device-width: 1700px) and (max-device-width: 2000px) {
+  body {
+    display: flex;
+    place-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  .contenedor {
+    border-radius: 10px;
+    padding: 20px;
+  }
+}
+
+// Laptop
+@media only screen and (min-device-width: 1200px) and (max-device-width: 1600px) {
+    body {
+        display: flex;
+        place-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .contenedor {
+        border-radius: 10px;
+        padding: 20px;
+      }
+}
+
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// Query para celular muy baja gama
+@media only screen and (min-device-width: 279px) and (max-device-width: 282px) {
+    body {
+        display: flex;
+        place-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .contenedor {
+        border-radius: 10px;
+        padding: 20px;
+      }
+}
+
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// Query para celular baja gama
+@media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
+    body {
+        display: flex;
+        place-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .contenedor {
+        border-radius: 10px;
+        padding: 20px;
+      }
+}
+
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// Query para celular media gama
+@media only screen and (min-device-width: 411px) and (max-device-width: 450px) {
+    body {
+        display: flex;
+        place-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .contenedor {
+        border-radius: 10px;
+        padding: 20px;
+      }
+}
+
+// Mediano
+@media only screen and (min-device-width: 760px) and (max-device-width: 850px) {
+    body {
+        display: flex;
+        place-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .contenedor {
+        border-radius: 10px;
+        padding: 20px;
+      }
+}
+
+// Surface Pro 7
+@media only screen and (min-device-width: 910px) and (max-device-width: 950px) {
+    body {
+        display: flex;
+        place-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .contenedor {
+        border-radius: 10px;
+        padding: 20px;
+      }
+}
+
+// Celular Surface Duo
+@media only screen and (min-device-width: 539px) and (max-device-width: 545px) {
+    body {
+        display: flex;
+        place-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .contenedor {
+        border-radius: 10px;
+        padding: 20px;
+      }
+}
+
+// Celular Nest Hub
+@media only screen and (min-device-width: 1023px) and (max-device-width: 1030px) {
+    body {
+        display: flex;
+        place-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .contenedor {
+        border-radius: 10px;
+        padding: 20px;
+      }
 }
