@@ -14,6 +14,7 @@ export class Retos {
   respuesta?: string;
   idDocument?: string;
   idsUsuarios?: string;
+  idsDesafios?: string;
 
   // Opciones de imagenes
   imageOpcion1?: string;

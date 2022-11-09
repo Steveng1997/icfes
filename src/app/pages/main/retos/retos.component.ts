@@ -260,7 +260,6 @@ export class RetosComponent implements OnInit {
       console.log(rp);
     });
 
-
     this.obtenerPuntaje(this.idUser);
 
     if (!idsUsuarios) {

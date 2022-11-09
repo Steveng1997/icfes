@@ -49,8 +49,12 @@ export class RetoDesafioComponent implements OnInit {
     this.retoService
       .getById(this.idDesafio)
       .then((datoReto) => {
-
-        this.datosReto = datoReto;  
+        this.datosReto = datoReto.filter((_reto) => {
+          if (_reto['idsDesafios'].includes(this.idUser)) {
+            return;
+          }
+          return _reto;
+        });
 
         setTimeout(() => {
           this.convertToHtml();
@@ -105,23 +109,23 @@ export class RetoDesafioComponent implements OnInit {
     });
   }
 
-  opcionImage(event, idDocumentReto, idReto, idsUsuarios, urlImgResp) {
+  opcionImage(event, idDocumentReto, idReto, idsDesafios, urlImgResp) {
 
     this.serviceDesafio.getByIdByDocument(this.idDesafio).then((respuesta => {
       this.serviceDesafio.updateDesafiosRespondido(respuesta['idDocument'], this.desafio['id']).then((rp) => {
         console.log(rp);
       });
-    }))    
+    }))
 
     this.obtenerPuntaje(this.idUser);
 
-    if (!idsUsuarios) {
-      idsUsuarios = [];
+    if (!idsDesafios) {
+      idsDesafios = [];
     }
 
-    idsUsuarios.push(this.idUser);
+    idsDesafios.push(this.idUser);
     this.retoService
-      .updateIdsUsuarios(idDocumentReto, idReto, idsUsuarios)
+      .updateIdsDesafios(idDocumentReto, idReto, idsDesafios)
       .then((resp) => {
         setTimeout(() => {
           let puntaje: Number;
@@ -249,7 +253,7 @@ export class RetoDesafioComponent implements OnInit {
       });
   }
 
-  opcionA(event, idDocumentReto, idReto, idsUsuarios, respuesta) {
+  opcionA(event, idDocumentReto, idReto, idsDesafios, respuesta) {
 
     this.serviceDesafio.getByIdByDocument(this.idDesafio).then((respuesta => {
       this.serviceDesafio.updateDesafiosRespondido(respuesta[0]['idDocument'], respuesta[0]['idReto']).then((rp) => {
@@ -257,16 +261,14 @@ export class RetoDesafioComponent implements OnInit {
       });
     }))
 
-
     this.obtenerPuntaje(this.idUser);
 
-    if (!idsUsuarios) {
-      idsUsuarios = [];
+    if (!idsDesafios) {
+      idsDesafios = [];
     }
 
-    idsUsuarios.push(this.idUser);
     this.retoService
-      .updateIdsUsuarios(idDocumentReto, idReto, idsUsuarios)
+      .updateIdsDesafios(idDocumentReto, idReto, idsDesafios)
       .then((resp) => {
         setTimeout(() => {
           let puntaje: Number;

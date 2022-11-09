@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 export class DesafioService {
   myArray: any[] = [];
 
-  constructor(public router: Router, private db: AngularFirestore) {}
+  constructor(public router: Router, private db: AngularFirestore) { }
 
   estudiantes: Desafio[] = [];
 
@@ -76,7 +76,7 @@ export class DesafioService {
     return new Promise((resolve, reject) => {
       this.db
         .collection('desafios', (ref) =>
-          ref.orderBy('id', 'asc').where('respondido', '==', false)
+          ref.where('respondido', '==', false)
         )
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
