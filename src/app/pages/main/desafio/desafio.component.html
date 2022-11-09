@@ -1,45 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+    />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style href="desafio.component.scss"></style>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-    crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <style href="desafio.component.scss"></style>
-</head>
-
-<body>
-  <div class="container">
-    <div class="cuadro">
-      <div class="card-title text-center mb-4 fw-bolder display-4" style="color: #976DD0;">
+  <body>
+    <div class="container mb-5">
+      <div
+        class="card-title text-center mb-4 fw-bolder display-4"
+        style="color: #976dd0"
+      >
         <label>¿A quién quieres retar?</label>
       </div>
 
-      <div class="text-center mb-5" style="height: 100px" *ngFor="let item of desafio">
-        <mat-form-field appearance="fill">
-          <select matNativeControl [(ngModel)]="opcionSeleccionado" (change)="onSelect($event)">
+      <div class="text-center mb-5" style="height: 100px">
+        <mat-form-field appearance="fill" class="cuadro">
+          <select
+            matNativeControl
+            [(ngModel)]="opcionSeleccionado"
+            (change)="onSelect($event)"
+          >
             <option value="0">Selecciona un reto pendiente</option>
-            <option value="{{item.nombre}}" *ngIf="item.respondido == false">
-              {{ item.nombre }} {{'-'}} {{item.categoria}}
+            <option value="{{ item.nombre }}" *ngFor="let item of desafio">
+              {{ item.nombre }} {{ "-" }} {{ item.categoria }}
             </option>
           </select>
         </mat-form-field>
       </div>
 
       <div class="text-center">
-        <button class="btn btn-reto btn-lg btn-login text-uppercase fw-bold display-5" type="submit" (click)="Retar()">
+        <button
+          class="btn btn-reto btn-lg btn-login text-uppercase fw-bold display-5"
+          type="submit"
+          (click)="Retar()"
+        >
           TOMAR RETO
         </button>
       </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>

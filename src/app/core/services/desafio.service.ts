@@ -8,10 +8,7 @@ import { Router } from '@angular/router';
 export class DesafioService {
   myArray: any[] = [];
 
-  constructor(
-    public router: Router,
-    private db: AngularFirestore
-  ) { }
+  constructor(public router: Router, private db: AngularFirestore) {}
 
   estudiantes: Desafio[] = [];
 
@@ -20,7 +17,14 @@ export class DesafioService {
   // -----------------------------------------------------------------------------------
 
   registerDesafio(nombre: string) {
-    let desafios = { id: `uid${btoa(nombre)}`, nombre: nombre, idReto: '', categoria: '', idUser: '', respondido: false};
+    let desafios = {
+      id: `uid${btoa(nombre)}`,
+      nombre: nombre,
+      idReto: '',
+      categoria: '',
+      idUser: '',
+      respondido: false,
+    };
     return new Promise<any>((resolve, reject) => {
       this.db
         .collection('desafios')
@@ -43,7 +47,7 @@ export class DesafioService {
   getDesafioAll() {
     return this.db
       .collection('desafios', (ref) => ref.orderBy('id', 'asc'))
-      .valueChanges()
+      .valueChanges();
   }
 
   getById(id): Promise<any> {
@@ -65,13 +69,15 @@ export class DesafioService {
   getByIdById(id) {
     return this.db
       .collection('desafios', (ref) => ref.where('id', '==', id))
-      .valueChanges()
+      .valueChanges();
   }
 
   getDesafios(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
-        .collection('desafios', (ref) => ref.orderBy('id', 'asc'))
+        .collection('desafios', (ref) =>
+          ref.orderBy('id', 'asc').where('respondido', '==', false)
+        )
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
           if (rp[0]?.idDocument) {
@@ -113,7 +119,7 @@ export class DesafioService {
       .update({
         idReto: id,
         categoria: categoria,
-        idUser: idUs
+        idUser: idUs,
       });
   }
 
@@ -122,7 +128,7 @@ export class DesafioService {
       .collection('desafios', (ref) => ref.where('idReto', '==', idReto))
       .doc(idDocument)
       .update({
-        respondido: true
+        respondido: true,
       });
   }
 
