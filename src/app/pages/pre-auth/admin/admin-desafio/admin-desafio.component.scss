@@ -13,7 +13,6 @@
   list-style-type: none;
   text-decoration: none;
   font-family: "Poppins", sans-serif;
-  padding: 0.5rem 0rem;
 }
 
 .main-content {
@@ -106,26 +105,25 @@ thead tr {
 thead td {
   font-weight: 700;
 }
-table td:first-child {
-  width: 200px;
+
+td {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: #222;
 }
-table td:nth-child(2) {
-  width: 400px;
+
+td .status {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  margin-right: 1rem;
+  // background: red;
 }
-table td:nth-child(3) {
-  width: 400px;
-}
-table td:nth-child(4) {
-  width: 400px;
-}
-table td:nth-child(5) {
-  width: 400px;
-}
-table td:nth-child(6) {
-  width: 400px;
-}
-table td:nth-child(7) {
-  width: 100px;
+
+tr td:last-child {
+  display: flex;
+  align-items: center;
 }
 
 .table-responsive {

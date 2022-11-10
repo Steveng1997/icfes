@@ -24,11 +24,10 @@ import { IncorrectoPersonalComponent } from './pages/main/incorrecto-personal/in
 import { EditarEstudianteComponent } from './pages/pre-auth/admin/estudiantes/editar-estudiante/editar-estudiante.component';
 import { PuntajeComponent } from './pages/pre-auth/admin/puntaje/puntaje.component';
 import { EditarPuntuacionComponent } from './pages/pre-auth/admin/puntaje/editar-puntuacion/editar-puntuacion.component';
-import { PreguntaPersonalComponent } from './pages/main/pregunta-personal/pregunta-personal.component';
-import { RespuestaPersonalComponent } from './pages/main/respuesta-personal/respuesta-personal.component';
-import { RetoPersonalComponent } from './pages/pre-auth/admin/reto-personal/reto-personal.component';
 import { DesafioComponent } from './pages/main/desafio/desafio.component';
 import { RetoDesafioComponent } from './pages/main/reto-desafio/reto-desafio.component';
+import { RetoPersonalComponent } from './pages/main/reto-personal/reto-personal.component';
+import { AdminDesafioComponent } from './pages/pre-auth/admin/admin-desafio/admin-desafio.component';
 
 const routes: Routes = [
   { path: 'menu/:id', component: MenuComponent, canActivate: [LoginGuardian] },
@@ -118,8 +117,8 @@ const routes: Routes = [
         canActivate: [LoginGuardian],
       },
       {
-        path: 'reto-personal/:id',
-        component: RetoPersonalComponent,
+        path: 'desafio/:id',
+        component: AdminDesafioComponent,
         canActivate: [LoginGuardian],
       },
     ],
@@ -131,13 +130,8 @@ const routes: Routes = [
     canActivate: [LoginGuardian],
   },
   {
-    path: 'pregPerson/:id/:categoria',
-    component: PreguntaPersonalComponent,
-    canActivate: [LoginGuardian],
-  },
-  {
-    path: 'resPerson/:id/:categoria',
-    component: RespuestaPersonalComponent,
+    path: 'reto-personal/:idUser/:categoria',
+    component: RetoPersonalComponent,
     canActivate: [LoginGuardian],
   },
   {
@@ -186,4 +180,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
