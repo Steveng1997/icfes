@@ -30,7 +30,11 @@ import { RetoPersonalComponent } from './pages/main/reto-personal/reto-personal.
 import { AdminDesafioComponent } from './pages/pre-auth/admin/admin-desafio/admin-desafio.component';
 
 const routes: Routes = [
-  { path: 'menu/:id', component: MenuComponent, canActivate: [LoginGuardian] },
+  {
+    path: 'menu/:id',
+    component: MenuComponent,
+    canActivate: [LoginGuardian]
+  },
 
   {
     path: 'ret-amigo/:id',

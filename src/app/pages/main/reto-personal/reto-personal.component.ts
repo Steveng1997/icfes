@@ -118,7 +118,7 @@ export class RetoPersonalComponent implements OnInit {
           let puntaje: Number;
           if (this.puntajeObtenido) {
             if (urlImgResp == event.target.src) {
-              puntaje = 3;
+              puntaje = 2;
             } else {
               puntaje = 1;
             }
@@ -189,7 +189,7 @@ export class RetoPersonalComponent implements OnInit {
 
           } else {
             if (urlImgResp == event.target.src) {
-              puntaje = 1;
+              puntaje = 2;
             } else {
               puntaje = 1;
             }
@@ -229,7 +229,7 @@ export class RetoPersonalComponent implements OnInit {
             });
           }
 
-          if (puntaje == 1) {
+          if (puntaje == 2) {
             this.router.navigate([`correctoPersonal/${this.idUser}`]);
           }
 
@@ -247,7 +247,8 @@ export class RetoPersonalComponent implements OnInit {
     if (!idsRetoPersonal) {
       idsRetoPersonal = [];
     }
-
+    
+    idsRetoPersonal.push(this.idUser);
     this.retoService
       .updateIdsRetoPersonal(idDocumentReto, idReto, idsRetoPersonal)
       .then((resp) => {
@@ -255,7 +256,7 @@ export class RetoPersonalComponent implements OnInit {
           let puntaje: Number;
           if (this.puntajeObtenido) {
             if (respuesta == event.target.innerHTML.trim()) {
-              puntaje = 1;
+              puntaje = 2;
             } else {
               puntaje = 1;
             }
@@ -321,7 +322,7 @@ export class RetoPersonalComponent implements OnInit {
             });
           } else {
             if (respuesta == event.target.innerHTML.trim()) {
-              puntaje = 1;
+              puntaje = 2;
             } else {
               puntaje = 1;
             }
@@ -360,7 +361,7 @@ export class RetoPersonalComponent implements OnInit {
             }
           }
 
-          if (puntaje == 1) {
+          if (puntaje == 2) {
             this.router.navigate([`correctoPersonal/${this.idUser}`]);
           }
 

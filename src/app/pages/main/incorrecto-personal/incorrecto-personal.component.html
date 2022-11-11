@@ -1,43 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-      crossorigin="anonymous"
-    />
-    <style href="incorrecto-personal.component.scss"></style>
-  </head>
 
-  <body>
-    <div class="btn-salir mb-5" style="text-align: right">
-      <button class="btn btn-success btnSalir" (click)="salir()">Salir</button>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+  <style href="incorrecto-personal.component.scss"></style>
+</head>
+
+<div class="btn-salir mb-5" style="text-align: right">
+  <button class="btn btn-success btnSalir" (click)="salir()">Salir</button>
+</div>
+
+<body>
+  <div class="text-center justify-content-flex-start justify-self-center">
+    <div class="text-center mb-5 fw-bolder display-3" style="color: #19aeff">
+      <label>Tu respuesta no ha sido Correcta </label>
     </div>
 
-    <div class="text-center justify-content-flex-start justify-self-center">
-      <div class="text-center mb-5 fw-bolder display-3" style="color: #19aeff">
-        <label>Tu respuesta no ha sido Correcta </label>
+    <div class="card-title txtOportunidad">
+      <label>¿Quieres otra oportunidad? </label>
+    </div>
+
+    <div class="row">
+      <div class="col-6 txtSi">
+        <p (click)="volverAretar()">Si</p>
       </div>
 
-      <!-- Aqui otro lado -->
-
-      <div class="card-title txtOportunidad">
-        <label>¿Quieres otra oportunidad? </label>
-      </div>
-
-      <div class="row">
-        <div class="col-6 txtSi">
-          <p>Si</p>
-        </div>
-
-        <div class="col-6 txtNo">
-          <p>No</p>
-        </div>
+      <div class="col-6 txtNo">
+        <p (click)="menuPrincipal()">No</p>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

@@ -14,19 +14,13 @@
   <input type="checkbox" id="nav-toggle" />
   <div class="sidebar">
     <div class="sidebar-brand text-center">
-      <!-- <h2> -->
-      <!-- <span> -->
       <img src="./assets/escudo.jpg" width="50%" />
-      <!-- </span> -->
-      <!-- <span class="lab la-accusoft"> </span> -->
-      <!-- <span>Accusoft</span> -->
-      <!-- </h2> -->
     </div>
 
     <div class="sidebar-menu">
       <ul>
         <li>
-          <a (click)="usuarios()" class="active"><span class="las la-users">
+          <a (click)="usuarios()"><span class="las la-users">
             </span><span>Usuarios</span></a>
         </li>
 
@@ -68,14 +62,7 @@
         Administrador
       </h2>
 
-      <!-- <div class="search-wrapper">
-        <span class="las la-search"></span>
-        <input type="search" placeholder="Search here" />
-      </div> -->
-
       <div class="user-wrapper" *ngFor="let usuario of user">
-        <!-- <img src="https://indiehoy.com/wp-content/uploads/2020/02/Dragon-Ball-Goku-1200x900.jpg" width="30px"
-          height="30px" alt="" /> -->
         <div>
           <h4>{{ usuario.nombre }}</h4>
           <small>{{ usuario.rol }}</small>

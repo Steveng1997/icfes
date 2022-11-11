@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/core/models/login';
 import { LoginService } from 'src/app/core/services/login.service';
- 
+
 
 @Component({
   selector: 'app-menu-area-personal',
@@ -25,8 +25,7 @@ export class MenuAreaPersonalComponent implements OnInit {
     });
   }
 
-
   salir() {
-    this.router.navigate(['login']);
+    this.router.navigate(['']);
   }
 }
