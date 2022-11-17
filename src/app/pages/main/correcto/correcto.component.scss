@@ -15,39 +15,12 @@
 
 // ---------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------
-// Query para celular muy baja gama
-@media only screen and (min-device-width: 279px) and (max-device-width: 282px) {
+// Query para celular
+
+@media only screen and (max-width: 480px) {
   .btn-salir {
     margin-right: 1%;
-    margin-top: 18px;
-  }
-
-  .btnSalir {
-    width: 23%;
-  }
-}
-
-// ---------------------------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------------------------
-// Query para celular baja gama
-@media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
-  .btn-salir {
-    margin-right: 1%;
-    margin-top: 18px;
-  }
-
-  .btnSalir {
-    width: 23%;
-  }
-}
-
-// ---------------------------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------------------------
-// Query para celular media gama
-@media only screen and (min-device-width: 411px) and (max-device-width: 450px) {
-  .btn-salir {
-    margin-right: 1%;
-    margin-top: 18px;
+    margin-top: 1%;
   }
 
   .btnSalir {
@@ -58,22 +31,11 @@
 // ---------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------
 // Query para pantalla grande como laptop o monitor
-@media only screen and (min-device-width: 1200px) and (max-device-width: 1500px) {
+
+@media only screen and (min-device-width: 1200px) and (max-device-width: 1600px) {
   .btn-salir {
     margin-right: 3%;
-    margin-top: 18px;
-  }
-
-  .btnSalir {
-    width: 10%;
-  }
-}
-
-// Pantalla mas grande
-@media only screen and (min-device-width: 1700px) and (max-device-width: 2000px) {
-  .btn-salir {
-    margin-right: 3%;
-    margin-top: 18px;
+    margin-top: 1.9px;
   }
 
   .btnSalir {

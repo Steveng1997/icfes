@@ -1,20 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Desafio } from 'src/app/core/models/desafio';
-import { Usuario } from 'src/app/core/models/login';
-import { Retos } from 'src/app/core/models/retos';
 import { LoginService } from 'src/app/core/services/login.service';
+import { RetoPersonalService } from 'src/app/core/services/retoPersonal.service';
+import { RetoPesonal } from 'src/app/core/models/retoPersonal';
 import { PuntuacionService } from 'src/app/core/services/puntaje.service';
-import { RetoService } from 'src/app/core/services/retos.service';
+import { Usuario } from 'src/app/core/models/login';
 
 @Component({
-  selector: 'app-reto-personal',
-  templateUrl: './reto-personal.component.html',
-  styleUrls: ['./reto-personal.component.scss']
+  selector: 'app-respuesta-personal',
+  templateUrl: './respuesta-personal.component.html',
+  styleUrls: ['./respuesta-personal.component.scss'],
 })
-export class RetoPersonalComponent implements OnInit {
+export class RespuestaPersonalComponent implements OnInit {
   categoria: string;
-  datosReto: Retos[];
+  datosReto: RetoPesonal[];
   user: Usuario[];
   idUser: string;
   public page!: number;
@@ -24,27 +23,27 @@ export class RetoPersonalComponent implements OnInit {
   constructor(
     private rutaActiva: ActivatedRoute,
     private router: Router,
-    private retoService: RetoService,
+    private retoService: RetoPersonalService,
     private serviceLogin: LoginService,
-    private servicePuntaje: PuntuacionService,
+    private servicePuntaje: PuntuacionService
   ) { }
 
   ngOnInit() {
-    this.idUser = this.rutaActiva.snapshot.paramMap.get('idUser');
-    this.serviceLogin.getById(this.idUser).then((rp => {
-      this.user = rp
-    }));
+    this.idUser = this.rutaActiva.snapshot.paramMap.get('id');
+    this.retoService.getById(this.idUser).then((datoRet) => {
+      this.datosReto = datoRet;
+    });
 
     this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
-    this.getByCategoria(this.categoria);
+    this.getByCategoria(this.idUser, this.categoria);
   }
 
-  getByCategoria(categoria: string): void {
+  getByCategoria(id, categoria): void {
     this.retoService
-      .getByCategoria(categoria)
+      .getByCategoria(id, categoria)
       .then((dataCategoria) => {
         this.datosReto = dataCategoria.filter((_reto) => {
-          if (_reto['idsRetoPersonal'].includes(this.idUser)) {
+          if (_reto['idsUsuarios'].includes(this.idUser)) {
             return;
           }
           return _reto;
@@ -103,22 +102,22 @@ export class RetoPersonalComponent implements OnInit {
     });
   }
 
-  opcionImage(event, idDocumentReto, idReto, idsRetoPersonal, urlImgResp) {
-
+  opcionImage(event, idDocumentReto, idReto, idsUsuarios, urlImgResp) {
     this.obtenerPuntaje(this.idUser);
 
-    if (!idsRetoPersonal) {
-      idsRetoPersonal = [];
+    if (!idsUsuarios) {
+      idsUsuarios = [];
     }
 
+    idsUsuarios.push(this.idUser);
     this.retoService
-      .updateIdsRetoPersonal(idDocumentReto, idReto, idsRetoPersonal)
+      .updateIdsUsuarios(idDocumentReto, idReto, idsUsuarios)
       .then((resp) => {
         setTimeout(() => {
           let puntaje: Number;
           if (this.puntajeObtenido) {
             if (urlImgResp == event.target.src) {
-              puntaje = 2;
+              puntaje = 3;
             } else {
               puntaje = 1;
             }
@@ -171,30 +170,23 @@ export class RetoPersonalComponent implements OnInit {
                 });
             }
 
-            this.servicePuntaje
-              .getPuntajeByIdUsuario(this.idUser)
-              .then((resp) => {
-                if (resp) {
-                  this.servicePuntaje.updatePuntajeTotal(
-                    resp[0]['idDocument'],
-                    this.idUser,
-                    this.puntajeObtenido['puntuacionLenguaje'] +
-                    this.puntajeObtenido['puntuacionMatematicas'] +
-                    this.puntajeObtenido['puntuacionSociales'] +
-                    this.puntajeObtenido['puntuacionNaturales'] +
-                    puntaje
-                  );
-                }
-              });
-
+            this.servicePuntaje.updatePuntajeTotal(
+              this.puntajeObtenido['idDocument'],
+              this.idUser,
+              this.puntajeObtenido['puntuacionLenguaje'] +
+              this.puntajeObtenido['puntuacionMatematicas'] +
+              this.puntajeObtenido['puntuacionSociales'] +
+              this.puntajeObtenido['puntuacionNaturales'] +
+              puntaje
+            );
           } else {
             if (urlImgResp == event.target.src) {
-              puntaje = 2;
+              puntaje = 3;
             } else {
               puntaje = 1;
             }
 
-            this.serviceLogin.getByIdAll(this.idUser).subscribe((rp) => {
+            this.serviceLogin.getById(this.idUser).then((rp) => {
               if (this.categoria == 'Lenguaje') {
                 this.servicePuntaje.registerByIdUsuarioLenguaje(
                   this.idUser,
@@ -229,7 +221,7 @@ export class RetoPersonalComponent implements OnInit {
             });
           }
 
-          if (puntaje == 2) {
+          if (puntaje == 3) {
             this.router.navigate([`correctoPersonal/${this.idUser}`]);
           }
 
@@ -240,23 +232,22 @@ export class RetoPersonalComponent implements OnInit {
       });
   }
 
-  opcionA(event, idDocumentReto, idReto, idsRetoPersonal, respuesta) {
-
+  opcionA(event, idDocumentReto, idReto, idsUsuarios, respuesta) {
     this.obtenerPuntaje(this.idUser);
 
-    if (!idsRetoPersonal) {
-      idsRetoPersonal = [];
+    if (!idsUsuarios) {
+      idsUsuarios = [];
     }
-    
-    idsRetoPersonal.push(this.idUser);
+
+    idsUsuarios.push(this.idUser);
     this.retoService
-      .updateIdsRetoPersonal(idDocumentReto, idReto, idsRetoPersonal)
+      .updateIdsUsuarios(idDocumentReto, idReto, idsUsuarios)
       .then((resp) => {
         setTimeout(() => {
           let puntaje: Number;
           if (this.puntajeObtenido) {
             if (respuesta == event.target.innerHTML.trim()) {
-              puntaje = 2;
+              puntaje = 3;
             } else {
               puntaje = 1;
             }
@@ -309,59 +300,59 @@ export class RetoPersonalComponent implements OnInit {
                 });
             }
 
-            this.servicePuntaje.getById(this.idUser).then((rp) => {
-              this.servicePuntaje.updatePuntajeTotal(
-                this.puntajeObtenido['idDocument'],
-                this.idUser,
-                this.puntajeObtenido['puntuacionLenguaje'] +
-                this.puntajeObtenido['puntuacionMatematicas'] +
-                this.puntajeObtenido['puntuacionSociales'] +
-                this.puntajeObtenido['puntuacionNaturales'] +
-                puntaje
-              );
-            });
+            this.servicePuntaje.updatePuntajeTotal(
+              this.puntajeObtenido['idDocument'],
+              this.idUser,
+              this.puntajeObtenido['puntuacionLenguaje'] +
+              this.puntajeObtenido['puntuacionMatematicas'] +
+              this.puntajeObtenido['puntuacionSociales'] +
+              this.puntajeObtenido['puntuacionNaturales'] +
+              puntaje
+            );
+
           } else {
             if (respuesta == event.target.innerHTML.trim()) {
-              puntaje = 2;
+              puntaje = 3;
             } else {
               puntaje = 1;
             }
 
-            if (this.categoria == 'Lenguaje') {
-              this.servicePuntaje.registerByIdUsuarioLenguaje(
-                this.idUser,
-                puntaje,
-                this.user[0]['nombre']
-              );
-            }
+            this.serviceLogin.getById(this.idUser).then((rp) => {
+              if (this.categoria == 'Lenguaje') {
+                this.servicePuntaje.registerByIdUsuarioLenguaje(
+                  this.idUser,
+                  puntaje,
+                  rp[0]['nombre']
+                );
+              }
 
-            if (this.categoria == 'Matematicas') {
-              this.servicePuntaje.registerByIdUsuarioMatematicas(
-                this.idUser,
-                puntaje,
-                this.user[0]['nombre']
-              );
-            }
+              if (this.categoria == 'Matematicas') {
+                this.servicePuntaje.registerByIdUsuarioMatematicas(
+                  this.idUser,
+                  puntaje,
+                  rp[0]['nombre']
+                );
+              }
 
-            if (this.categoria == 'CienciaSociales') {
-              this.servicePuntaje.registerByIdUsuarioSociales(
-                this.idUser,
-                puntaje,
-                this.user[0]['nombre']
-              );
-            }
+              if (this.categoria == 'CienciaSociales') {
+                this.servicePuntaje.registerByIdUsuarioSociales(
+                  this.idUser,
+                  puntaje,
+                  rp[0]['nombre']
+                );
+              }
 
-            if (this.categoria == 'CienciaNaturales') {
-              this.servicePuntaje.registerByIdUsuarioNaturales(
-                this.idUser,
-                puntaje,
-                this.user[0]['nombre']
-
-              );
-            }
+              if (this.categoria == 'CienciaNaturales') {
+                this.servicePuntaje.registerByIdUsuarioNaturales(
+                  this.idUser,
+                  puntaje,
+                  rp[0]['nombre']
+                );
+              }
+            });
           }
 
-          if (puntaje == 2) {
+          if (puntaje == 3) {
             this.router.navigate([`correctoPersonal/${this.idUser}`]);
           }
 

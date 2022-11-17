@@ -49,7 +49,12 @@ export class RetoDesafioComponent implements OnInit {
     this.retoService
       .getById(this.idDesafio)
       .then((datoReto) => {
-        this.datosReto = datoReto;
+        this.datosReto = datoReto.filter((_reto) => {
+          if (_reto['idsDesafios'].includes(this.idUser)) {
+            return;
+          }
+          return _reto;
+        });
 
         setTimeout(() => {
           this.convertToHtml();

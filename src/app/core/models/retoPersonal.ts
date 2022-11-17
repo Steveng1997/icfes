@@ -1,4 +1,4 @@
-export class Retos {
+export class RetoPesonal {
   id?: string;
   categoria?: string;
   texto1?: string;
@@ -14,7 +14,6 @@ export class Retos {
   respuesta?: string;
   idDocument?: string;
   idsUsuarios?: string;
-  idsDesafios?: string;
 
   // Opciones de imagenes
   imageOpcion1?: string;

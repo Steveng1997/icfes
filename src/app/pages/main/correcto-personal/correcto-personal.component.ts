@@ -25,7 +25,7 @@ export class CorrectoPersonalComponent implements OnInit {
   }
 
   volverAretar() {
-    this.router.navigate([`menuArea-personal/${this.idUser}`]);
+    this.router.navigate([`ret-amigo/${this.idUser}`]);
   }
 
   menuPrincipal() {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Usuario } from 'src/app/core/models/login';
 import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
@@ -10,7 +9,6 @@ import { LoginService } from 'src/app/core/services/login.service';
 })
 export class IncorrectoPersonalComponent implements OnInit {
   idUser: string;
-  user: Usuario[];
   constructor(
     private router: Router,
     private rutaActiva: ActivatedRoute,
@@ -18,9 +16,7 @@ export class IncorrectoPersonalComponent implements OnInit {
 
   ngOnInit(): void {
     this.idUser = this.rutaActiva.snapshot.paramMap.get('id');
-    this.serviceLogin.getById(this.idUser).then((rp => {
-      this.user = rp
-    }));
+    this.serviceLogin.getById(this.idUser);
   }
 
   salir() {
@@ -28,7 +24,7 @@ export class IncorrectoPersonalComponent implements OnInit {
   }
 
   volverAretar() {
-    this.router.navigate([`menuArea-personal/${this.idUser}`]);
+    this.router.navigate([`ret-amigo/${this.idUser}`]);
   }
 
   menuPrincipal() {

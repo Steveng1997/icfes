@@ -38,26 +38,25 @@ export class RetoAmigoComponent implements OnInit {
   Retar() {
     if (this.opcionSeleccionado) {
       this.serviceDesafio.registerDesafio(this.opcionSeleccionado).then((rp => {
-        if (rp.id) {
+        if(rp.id)
+        {
           this.router.navigate([`areas/${this.idUser}/${rp.id}`]);
         }
       }))
-
+     
     } else {
       Swal.fire({
         icon: 'error',
         text: '¡Seleccione a quien quieres retar!',
       })
     }
+
+
   }
 
   getEstudiante() {
     this.serviceEstudiante.getEstudiantes().then((datosEstudiantes) => {
       return (this.estudiantes = datosEstudiantes);
     });
-  }
-
-  salir() {
-    this.router.navigate(['']);
   }
 }

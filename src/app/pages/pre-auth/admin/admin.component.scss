@@ -54,6 +54,14 @@
   font-size: 1.1rem;
 }
 
+.sidebar-menu a.active {
+  background: #fff;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: blue;
+  border-radius: 30px 0px 0px 30px;
+}
+
 .sidebar-menu a span:first-child {
   font-size: 1.5rem;
   padding-right: 1rem;
@@ -309,16 +317,22 @@ tr td:last-child {
   }
 }
 
-
 // ---------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------
 // Query para celular muy baja gama
 @media only screen and (min-device-width: 279px) and (max-device-width: 282px) {
-    h2{
-    font-size: 22px;
+  header label span {
+    margin-left: -15px;
   }
-  .user-wrapper{
-    margin-left: 22px;
+
+  .user-wrapper h4 {
+    font-size: 17px;
+    margin-left: -357px;
+  }
+
+  .user-wrapper small {
+    font-size: 15px;
+    margin-left: -344px;
   }
 }
 
@@ -326,11 +340,54 @@ tr td:last-child {
 // ---------------------------------------------------------------------------------------------------
 // Query para celular baja gama
 @media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
-  h2{
-    font-size: 22px;
+  header label span {
+    margin-left: -15px;
   }
-  .user-wrapper{
-    margin-left: 27px
+
+  .user-wrapper h4 {
+    font-size: 20px;
+    margin-left: -378px;
+  }
+
+  .user-wrapper small {
+    font-size: 16px;
+    margin-left: -364px;
+  }
+
+  .sidebar {
+    left: -100% !important;
+  }
+
+  .main-content {
+    width: 100%;
+    margin-left: 0rem;
+  }
+
+  header {
+    width: 100% !important;
+    left: 0 !important;
+  }
+
+  #nav-toggle:checked + .sidebar {
+    left: 0 !important;
+    z-index: 100;
+    width: 205px;
+  }
+
+  #nav-toggle:checked + .sidebar .sidebar-brand,
+  #nav-toggle:checked + .sidebar li {
+    padding-left: 2rem;
+    text-align: left;
+  }
+
+  #nav-toggle:checked + .sidebar .sidebar-brand h2 span:last-child,
+  #nav-toggle:checked + .sidebar li a span:last-child {
+    display: contents;
+  }
+
+  img {
+    width: 123px;
+    margin-top: 60px;
   }
 }
 
@@ -338,10 +395,53 @@ tr td:last-child {
 // ---------------------------------------------------------------------------------------------------
 // Query para celular media gama
 @media only screen and (min-device-width: 411px) and (max-device-width: 450px) {
-  h2{
-    font-size: 22px;
+  header label span {
+    margin-left: -15px;
   }
-  .user-wrapper{
-    margin-left: 22px;
+
+  .user-wrapper h4 {
+    font-size: 20px;
+    margin-left: -395px;
+  }
+
+  .user-wrapper small {
+    font-size: 17px;
+    margin-left: -379px;
+  }
+}
+
+@media only screen and (min-device-width: 760px) and (max-device-width: 780px) {
+  .sidebar {
+    left: -100% !important;
+  }
+
+  .main-content {
+    width: 100%;
+    margin-left: 0rem;
+  }
+
+  header {
+    width: 100% !important;
+    left: 0 !important;
+  }
+
+  #nav-toggle:checked + .sidebar {
+    left: 0 !important;
+    z-index: 100;
+    width: 345px;
+  }
+
+  #nav-toggle:checked + .sidebar .sidebar-brand,
+  #nav-toggle:checked + .sidebar li {
+    padding-left: 2rem;
+    text-align: left;
+  }
+
+  #nav-toggle:checked + .sidebar li a {
+    padding-left: 1rem;
+  }
+
+  #nav-toggle:checked ~ .main-content {
+    margin-left: 0rem !important;
   }
 }

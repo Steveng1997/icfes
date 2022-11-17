@@ -1,25 +1,20 @@
-body {
-  display: flex;
-  place-items: center;
-  justify-content: center;
-  height: 100vh;
-}
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// Query para celular
 
-// ---------------------------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------------------------
-// Query para celular muy baja gama
-@media only screen and (min-device-width: 279px) and (max-device-width: 282px) {
+@media only screen and (max-width: 480px) {
   .btn-salir {
     margin-right: 1%;
-    margin-top: 18px;
+    margin-top: 1%;
   }
 
   .btnSalir {
     width: 23%;
   }
+
   .txtOportunidad {
     color: #77d353;
-    font-size: 50px;
+    font-size: 45px;
     text-align: center;
   }
 
@@ -31,143 +26,25 @@ body {
 
   .txtSi {
     cursor: pointer;
-    font-size: 60px;
-    color: #00a6ff;
-  }
-
-  .txtNo {
-    cursor: pointer;
-    font-size: 60px;
-    color: #f95f62;
-  }
-
-  .txtIncorrecto {
-    color: #976dd0;
-    font-size: 70%;
-  }
-
-  .btn-Volver {
-    background-color: #ff9052 !important;
-    color: white !important;
-  }
-
-  .btn-Menu {
-    background-color: #77d353 !important;
-    color: white !important;
-  }
-}
-
-// ---------------------------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------------------------
-// Query para celular baja gama
-@media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
-  .btn-salir {
-    margin-right: 1%;
-    margin-top: 18px;
-  }
-
-  .btnSalir {
-    width: 23%;
-  }
-  .txtOportunidad {
-    color: #77d353;
     font-size: 50px;
-    text-align: center;
-  }
-
-  .cardOportunidad {
-    margin-bottom: 100%;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .txtSi {
-    cursor: pointer;
-    font-size: 60px;
     color: #00a6ff;
   }
 
   .txtNo {
     cursor: pointer;
-    font-size: 60px;
-    color: #f95f62;
-  }
-
-  .txtIncorrecto {
-    color: #976dd0;
-    font-size: 70%;
-  }
-
-  .btn-Volver {
-    background-color: #ff9052 !important;
-    color: white !important;
-  }
-
-  .btn-Menu {
-    background-color: #77d353 !important;
-    color: white !important;
-  }
-}
-
-// ---------------------------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------------------------
-// Query para celular media gama
-@media only screen and (min-device-width: 411px) and (max-device-width: 450px) {
-  .btn-salir {
-    margin-right: 1%;
-    margin-top: 18px;
-  }
-
-  .btnSalir {
-    width: 23%;
-  }
-  .txtOportunidad {
-    color: #77d353;
     font-size: 50px;
-    text-align: center;
-  }
-
-  .cardOportunidad {
-    margin-bottom: 100%;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .txtSi {
-    cursor: pointer;
-    font-size: 60px;
-    color: #00a6ff;
-  }
-
-  .txtNo {
-    cursor: pointer;
-    font-size: 60px;
     color: #f95f62;
-  }
-
-  .txtIncorrecto {
-    color: #976dd0;
-    font-size: 70%;
-  }
-
-  .btn-Volver {
-    background-color: #ff9052 !important;
-    color: white !important;
-  }
-
-  .btn-Menu {
-    background-color: #77d353 !important;
-    color: white !important;
   }
 }
 
 // ---------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------
 // Query para pantalla grande como laptop o monitor
-@media only screen and (min-device-width: 1200px) and (max-device-width: 1500px) {
+
+@media only screen and (min-device-width: 1200px) and (max-device-width: 1600px) {
   .btn-salir {
     margin-right: 3%;
-    margin-top: 18px;
+    margin-top: 1.9px;
   }
 
   .btnSalir {
@@ -176,7 +53,7 @@ body {
 
   .txtOportunidad {
     color: #77d353;
-    font-size: 50px;
+    font-size: 70px;
     text-align: center;
   }
 
@@ -196,71 +73,5 @@ body {
     cursor: pointer;
     font-size: 60px;
     color: #f95f62;
-  }
-
-  .txtIncorrecto {
-    color: #976dd0;
-    font-size: 70%;
-  }
-
-  .btn-Volver {
-    background-color: #ff9052 !important;
-    color: white !important;
-  }
-
-  .btn-Menu {
-    background-color: #77d353 !important;
-    color: white !important;
-  }
-}
-
-// Pantalla mas grande
-@media only screen and (min-device-width: 1700px) and (max-device-width: 2000px) {
-  .btn-salir {
-    margin-right: 3%;
-    margin-top: 18px;
-  }
-
-  .btnSalir {
-    width: 10%;
-  }
-
-  .txtOportunidad {
-    color: #77d353;
-    font-size: 50px;
-    text-align: center;
-  }
-
-  .cardOportunidad {
-    margin-bottom: 100%;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .txtSi {
-    cursor: pointer;
-    font-size: 60px;
-    color: #00a6ff;
-  }
-
-  .txtNo {
-    cursor: pointer;
-    font-size: 60px;
-    color: #f95f62;
-  }
-
-  .txtIncorrecto {
-    color: #976dd0;
-    font-size: 70%;
-  }
-
-  .btn-Volver {
-    background-color: #ff9052 !important;
-    color: white !important;
-  }
-
-  .btn-Menu {
-    background-color: #77d353 !important;
-    color: white !important;
   }
 }

@@ -29,6 +29,7 @@ import { LoginService } from './core/services/login.service';
 import { RetoService } from './core/services/retos.service';
 import { EstudianteService } from './core/services/estudiantes.service';
 import { PuntuacionService } from './core/services/puntaje.service';
+import { RetoPersonalService } from './core/services/retoPersonal.service';
 import { DesafioService } from './core/services/desafio.service';
 
 // Pages-Auth
@@ -45,6 +46,7 @@ import { InsertarEstudiantesComponent } from './pages/pre-auth/admin/estudiantes
 import { EditarEstudianteComponent } from './pages/pre-auth/admin/estudiantes/editar-estudiante/editar-estudiante.component';
 import { PuntajeComponent } from './pages/pre-auth/admin/puntaje/puntaje.component';
 import { EditarPuntuacionComponent } from './pages/pre-auth/admin/puntaje/editar-puntuacion/editar-puntuacion.component';
+import { RetoPersonalComponent } from './pages/pre-auth/admin/reto-personal/reto-personal.component';
 
 // Pages-Main
 import { MenuComponent } from './pages/main/menu/menu.component';
@@ -57,6 +59,8 @@ import { CorrectoComponent } from './pages/main/correcto/correcto.component';
 import { IncorrectoPersonalComponent } from './pages/main/incorrecto-personal/incorrecto-personal.component';
 import { CorrectoPersonalComponent } from './pages/main/correcto-personal/correcto-personal.component';
 import { MenuAreaPersonalComponent } from './pages/main/menu-area-personal/menu-area-personal.component';
+import { PreguntaPersonalComponent } from './pages/main/pregunta-personal/pregunta-personal.component';
+import { RespuestaPersonalComponent } from './pages/main/respuesta-personal/respuesta-personal.component';
 import { DesafioComponent } from './pages/main/desafio/desafio.component';
 
 // Cookies
@@ -64,8 +68,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { LoginGuardian } from './pages/pre-auth/login/login-guardian';
 import { MatDividerModule } from '@angular/material/divider';
 import { RetoDesafioComponent } from './pages/main/reto-desafio/reto-desafio.component';
-import { RetoPersonalComponent } from './pages/main/reto-personal/reto-personal.component';
-import { AdminDesafioComponent } from './pages/pre-auth/admin/admin-desafio/admin-desafio.component';
 
 firebase.initializeApp({
   apiKey: 'AIzaSyAWFfFTC8gSoctKKst4X1uxVwaFbEB1pXM',
@@ -105,10 +107,11 @@ firebase.initializeApp({
     EditarEstudianteComponent,
     PuntajeComponent,
     EditarPuntuacionComponent,
+    PreguntaPersonalComponent,
+    RespuestaPersonalComponent,
+    RetoPersonalComponent,
     DesafioComponent,
     RetoDesafioComponent,
-    RetoPersonalComponent,
-    AdminDesafioComponent,
   ],
 
   imports: [
@@ -135,6 +138,7 @@ firebase.initializeApp({
     DesafioService,
     EstudianteService,
     RetoService,
+    RetoPersonalService,
     PuntuacionService,
     CookieService,
     LoginGuardian,

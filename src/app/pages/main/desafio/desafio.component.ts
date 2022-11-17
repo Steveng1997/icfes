@@ -52,8 +52,4 @@ export class DesafioComponent implements OnInit {
       })
     }
   }
-
-  salir() {
-    this.router.navigate(['']);
-  }
 }
