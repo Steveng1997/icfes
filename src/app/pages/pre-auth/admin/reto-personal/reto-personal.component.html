@@ -28,16 +28,19 @@
       crossorigin="anonymous"
     />
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style href="reto-personal.component.scss"></style>
+    <style href="areas.component.scss"></style>
   </head>
 
   <body>
     <div class="recent-grid">
       <div class="card">
         <div class="card-header">
-          <h3>Listado de Reto Personal</h3>
+          <h3>Estudiantes</h3>
 
-          <h5 style="margin-top: 30px" *ngIf="retos.length == 0">
+          <button (click)="Agregar()">
+            Agregar <span class="las la-arrow-right"></span>
+          </button>
+          <h5 style="margin-top: 30px" *ngIf="estudiantes.length == 0">
             No hay datos para mostrar
           </h5>
         </div>
@@ -47,62 +50,28 @@
             <table width="100%">
               <thead>
                 <tr>
-                  <td>Categoria</td>
-                  <td>Opcion 1</td>
-                  <td>Opcion 2</td>
-                  <td>Opcion 3</td>
-                  <td>Opcion 4</td>
-                  <td>Respuesta</td>
+                  <td data-titulo="nombre">Nombre</td>
                 </tr>
               </thead>
               <tbody>
                 <tr
                   *ngFor="
-                    let ret of retos
-                      | paginate: { itemsPerPage: 6, currentPage: page }
+                    let estud of estudiantes
+                      | paginate: { itemsPerPage: 5, currentPage: page }
                   "
                 >
-                  <td>{{ ret.categoria }}</td>
-                  <td *ngIf="ret['opciones']['opcion1'] != ''">
-                    {{ ret["opciones"]["opcion1"] }}
-                  </td>
-                  <td *ngIf="ret['opciones']['opcion2'] != ''">
-                    {{ ret["opciones"]["opcion2"] }}
-                  </td>
-                  <td *ngIf="ret['opciones']['opcion3'] != ''">
-                    {{ ret["opciones"]["opcion3"] }}
-                  </td>
-                  <td *ngIf="ret['opciones']['opcion4'] != ''">
-                    {{ ret["opciones"]["opcion4"] }}
-                  </td>
-                  <td *ngIf="ret.respuesta != ''">{{ ret.respuesta }}</td>
-
-                  <td *ngIf="ret.imageOpcion1 != ''">
-                    <img src="{{ ret.imageOpcion1 }}" width="100px" />
-                  </td>
-
-                  <td *ngIf="ret.imageOpcion2 != ''">
-                    <img src="{{ ret.imageOpcion2 }}" width="100px" />
-                  </td>
-
-                  <td *ngIf="ret.imageOpcion3 != ''">
-                    <img src="{{ ret.imageOpcion3 }}" width="100px" />
-                  </td>
-
-                  <td *ngIf="ret.imageOpcion4 != ''">
-                    <img src="{{ ret.imageOpcion4 }}" width="100px" />
-                  </td>
-
-                  <td *ngIf="ret.imageResp != ''">
-                    <img src="{{ ret.imageResp }}" width="100px" />
-                  </td>
-
-                  <td>
-                    <i
-                      (click)="DeleteRet(ret.id)"
-                      class="fas fa-trash-alt fa-lg text-danger"
-                    ></i>
-                  </td>
+                  <td data-titulo="nombre">{{ estud.nombre }}</td>
+                  <i
+                    class="fas fa-edit"
+                    routerLink="/admin/{{ estud.id }}/editar-estudiante/{{
+                      estud.id
+                    }}"
+                  ></i>
+                  <i
+                    (click)="DeleteUser(estud.id)"
+                    class="fas fa-trash-alt fa-lg text-danger"
+                  ></i>
+                  <td></td>
                 </tr>
               </tbody>
             </table>

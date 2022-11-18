@@ -48,6 +48,7 @@ export class RetoService {
 
       idsUsuarios: [],
       idsDesafios: [],
+      idsRetoPersonal: [],
       image2: formularioall.image2,
       subtitulo: formularioall.subtitulo,
       respuesta: formularioall.respuesta,
@@ -179,6 +180,15 @@ export class RetoService {
       });
   }
 
+  updateIdsRetoPersonal(idDocumentReto, idReto, idsRetoPersonal) {
+    return this.db
+      .collection('retos', (ref) => ref.where('id', '==', idReto))
+      .doc(idDocumentReto)
+      .update({
+        idsRetoPersonal: idsRetoPersonal,
+      });
+  }
+  
   updateIdsDesafios(idDocumentReto, idReto, idsDesafios) {
     return this.db
       .collection('retos', (ref) => ref.where('id', '==', idReto))

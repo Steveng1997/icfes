@@ -47,19 +47,19 @@
   padding-left: 1rem;
 }
 
-.sidebar-menu a {
-  padding-left: 1rem;
-  display: block;
-  color: #fff;
-  font-size: 1.1rem;
-}
-
-.sidebar-menu a.active {
+#activado:hover {
   background: #fff;
   padding-top: 1rem;
   padding-bottom: 1rem;
   color: blue;
   border-radius: 30px 0px 0px 30px;
+}
+
+.sidebar-menu a {
+  padding-left: 1rem;
+  display: block;
+  color: #fff;
+  font-size: 1.1rem;
 }
 
 .sidebar-menu a span:first-child {
@@ -69,6 +69,11 @@
 
 #nav-toggle:checked + .sidebar {
   width: 70px;
+
+  img {
+    width: 128%;
+    margin-left: -27%;
+  }
 }
 
 #nav-toggle:checked + .sidebar .sidebar-brand,
@@ -125,28 +130,6 @@ header h2 {
 header label span {
   font-size: 1.7rem;
   padding-right: 1rem;
-}
-
-.search-wrapper {
-  border: 1px solid #ccc;
-  border-radius: 30%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  overflow-x: hidden;
-}
-
-.search-wrapper span {
-  display: inline-block;
-  padding: 0rem 1rem;
-  font-size: 1.5rem;
-}
-
-.search-wrapper input {
-  height: 100%;
-  padding: 0.5rem;
-  border: none;
-  outline: none;
 }
 
 .user-wrapper {
@@ -262,7 +245,6 @@ td .status {
   width: 20px;
   border-radius: 50%;
   margin-right: 1rem;
-  // background: red;
 }
 
 tr td:last-child {
@@ -346,48 +328,31 @@ tr td:last-child {
 
   .user-wrapper h4 {
     font-size: 20px;
-    margin-left: -378px;
+    margin-left: -141px;
   }
 
   .user-wrapper small {
     font-size: 16px;
-    margin-left: -364px;
+    margin-left: -125px;
   }
 
-  .sidebar {
-    left: -100% !important;
+  header label span {
+    margin-left: -15px;
   }
 
-  .main-content {
-    width: 100%;
-    margin-left: 0rem;
+  .user-wrapper h4 {
+    font-size: 20px;
+    margin-left: -141px;
   }
 
-  header {
-    width: 100% !important;
-    left: 0 !important;
-  }
-
-  #nav-toggle:checked + .sidebar {
-    left: 0 !important;
-    z-index: 100;
-    width: 205px;
-  }
-
-  #nav-toggle:checked + .sidebar .sidebar-brand,
-  #nav-toggle:checked + .sidebar li {
-    padding-left: 2rem;
-    text-align: left;
-  }
-
-  #nav-toggle:checked + .sidebar .sidebar-brand h2 span:last-child,
-  #nav-toggle:checked + .sidebar li a span:last-child {
-    display: contents;
+  header label span {
+    margin-left: -15px;
   }
 
   img {
-    width: 123px;
-    margin-top: 60px;
+    width: 71px;
+    margin-left: -17px;
+    margin-top: -6px;
   }
 }
 
@@ -401,12 +366,18 @@ tr td:last-child {
 
   .user-wrapper h4 {
     font-size: 20px;
-    margin-left: -395px;
+    margin-left: -140px;
   }
 
   .user-wrapper small {
     font-size: 17px;
-    margin-left: -379px;
+    margin-left: -127px;
+  }
+
+  img {
+    width: 71px;
+    margin-left: -17px;
+    margin-top: -6px;
   }
 }
 
@@ -423,12 +394,6 @@ tr td:last-child {
   header {
     width: 100% !important;
     left: 0 !important;
-  }
-
-  #nav-toggle:checked + .sidebar {
-    left: 0 !important;
-    z-index: 100;
-    width: 345px;
   }
 
   #nav-toggle:checked + .sidebar .sidebar-brand,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Usuario } from 'src/app/core/models/login';
 import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { LoginService } from 'src/app/core/services/login.service';
   styleUrls: ['./incorrecto-personal.component.scss'],
 })
 export class IncorrectoPersonalComponent implements OnInit {
+  user: Usuario[];
   idUser: string;
   constructor(
     private router: Router,
@@ -24,7 +26,7 @@ export class IncorrectoPersonalComponent implements OnInit {
   }
 
   volverAretar() {
-    this.router.navigate([`ret-amigo/${this.idUser}`]);
+    this.router.navigate([`menuArea-personal/${this.idUser}`]);
   }
 
   menuPrincipal() {

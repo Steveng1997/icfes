@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
               this.router.navigate([
                 `admin/${this.usuarios[0]['id']}/usuarios/${this.usuarios[0]['id']}`,
               ]);
-              // this.router.navigate(['admin/usuarios']);
             } else {
               this.router.navigate([`menu/${this.usuarios[0]['id']}`]);
             }

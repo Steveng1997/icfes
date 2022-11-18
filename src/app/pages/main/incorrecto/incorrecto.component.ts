@@ -25,7 +25,7 @@ export class IncorrectoComponent implements OnInit {
   }
 
   salir() {
-    this.router.navigate(['login']);
+    this.router.navigate(['']);
   }
 
   volverAretar() {

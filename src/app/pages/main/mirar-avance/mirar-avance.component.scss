@@ -16,13 +16,26 @@ body {
     background-color: #03afff;
     border-radius: 4px;
     transition: transform 0.3s ease-in-out;
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     margin-top: 10%;
   }
   .grid-item:hover {
+    filter: opacity(0.9);
+    transform: scale(1.04);
+  }
+
+  .grid-itemTexto {
+    transition: transform 0.3s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 10%;
+    font-size: 40px;
+  }
+
+  .grid-itemTexto:hover {
     filter: opacity(0.9);
     transform: scale(1.04);
   }
@@ -136,13 +149,27 @@ body {
   .grid-item {
     border-radius: 4px;
     transition: transform 0.3s ease-in-out;
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     margin-top: 10%;
   }
+
   .grid-item:hover {
+    filter: opacity(0.9);
+    transform: scale(1.04);
+  }
+
+  .grid-itemTexto {
+    transition: transform 0.3s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 10%;
+    font-size: 40px;
+  }
+
+  .grid-itemTexto:hover {
     filter: opacity(0.9);
     transform: scale(1.04);
   }
@@ -249,13 +276,27 @@ body {
   .grid-item {
     border-radius: 4px;
     transition: transform 0.3s ease-in-out;
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     margin-top: 10%;
   }
+
   .grid-item:hover {
+    filter: opacity(0.9);
+    transform: scale(1.04);
+  }
+
+  .grid-itemTexto {
+    transition: transform 0.3s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 10%;
+    font-size: 40px;
+  }
+
+  .grid-itemTexto:hover {
     filter: opacity(0.9);
     transform: scale(1.04);
   }
@@ -377,14 +418,27 @@ body {
   .grid-item {
     border-radius: 4px;
     transition: transform 0.3s ease-in-out;
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     margin-top: 10%;
     width: 40%;
   }
+
   .grid-item:hover {
+    filter: opacity(0.9);
+    transform: scale(1.04);
+  }
+
+  .grid-itemTexto {
+    transition: transform 0.3s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 10%;
+    font-size: 40px;
+  }
+  .grid-itemTexto:hover {
     filter: opacity(0.9);
     transform: scale(1.04);
   }
@@ -458,14 +512,28 @@ body {
   .grid-item {
     border-radius: 4px;
     transition: transform 0.3s ease-in-out;
-
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     margin-top: 10%;
     width: 40%;
   }
+
   .grid-item:hover {
+    filter: opacity(0.9);
+    transform: scale(1.04);
+  }
+
+  .grid-itemTexto {
+    transition: transform 0.3s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 10%;
+    font-size: 40px;
+  }
+
+  .grid-itemTexto:hover {
     filter: opacity(0.9);
     transform: scale(1.04);
   }

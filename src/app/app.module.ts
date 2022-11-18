@@ -29,7 +29,6 @@ import { LoginService } from './core/services/login.service';
 import { RetoService } from './core/services/retos.service';
 import { EstudianteService } from './core/services/estudiantes.service';
 import { PuntuacionService } from './core/services/puntaje.service';
-import { RetoPersonalService } from './core/services/retoPersonal.service';
 import { DesafioService } from './core/services/desafio.service';
 
 // Pages-Auth
@@ -59,9 +58,8 @@ import { CorrectoComponent } from './pages/main/correcto/correcto.component';
 import { IncorrectoPersonalComponent } from './pages/main/incorrecto-personal/incorrecto-personal.component';
 import { CorrectoPersonalComponent } from './pages/main/correcto-personal/correcto-personal.component';
 import { MenuAreaPersonalComponent } from './pages/main/menu-area-personal/menu-area-personal.component';
-import { PreguntaPersonalComponent } from './pages/main/pregunta-personal/pregunta-personal.component';
-import { RespuestaPersonalComponent } from './pages/main/respuesta-personal/respuesta-personal.component';
 import { DesafioComponent } from './pages/main/desafio/desafio.component';
+import { RetoPersonalsComponent } from './pages/main/reto-personals/reto-personals.component';
 
 // Cookies
 import { CookieService } from 'ngx-cookie-service';
@@ -107,11 +105,10 @@ firebase.initializeApp({
     EditarEstudianteComponent,
     PuntajeComponent,
     EditarPuntuacionComponent,
-    PreguntaPersonalComponent,
-    RespuestaPersonalComponent,
-    RetoPersonalComponent,
     DesafioComponent,
     RetoDesafioComponent,
+    RetoPersonalComponent,
+    RetoPersonalsComponent
   ],
 
   imports: [
@@ -138,7 +135,6 @@ firebase.initializeApp({
     DesafioService,
     EstudianteService,
     RetoService,
-    RetoPersonalService,
     PuntuacionService,
     CookieService,
     LoginGuardian,
@@ -146,4 +142,4 @@ firebase.initializeApp({
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule {}
+export class AppModule { }

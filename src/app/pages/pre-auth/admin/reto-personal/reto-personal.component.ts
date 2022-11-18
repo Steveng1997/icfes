@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { RetoPersonalService } from 'src/app/core/services/retoPersonal.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { EstudianteService } from 'src/app/core/services/estudiantes.service';
+import { LoginService } from 'src/app/core/services/login.service';
 
 @Component({
   selector: 'app-reto-personal',
@@ -9,27 +10,38 @@ import Swal from 'sweetalert2';
   styleUrls: ['./reto-personal.component.scss'],
 })
 export class RetoPersonalComponent implements OnInit {
-  retos: any[] = [];
+  idUser: string;
+  estudiantes: any[] = [];
   public page!: number;
 
   constructor(
     public router: Router,
-    public serviceRetoPersonal: RetoPersonalService
-  ) { }
+    public serviceEstudiante: EstudianteService,
+    public serviceLogin: LoginService,
+    private activeRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.getRetos();
+    this.idUser = this.activeRoute.snapshot.paramMap.get('id');
+    this.serviceLogin.getById(this.idUser);
+    this.getEmpleados();
   }
 
-  getRetos() {
-    this.serviceRetoPersonal.getRetoPersonalAll().subscribe((datosRetos) => {
-      this.retos = datosRetos;
+  Agregar() {
+    this.router.navigate([
+      `admin/${this.idUser}/insertar-estudiantes/${this.idUser}`,
+    ]);
+  }
+
+  getEmpleados() {
+    this.serviceEstudiante.getEstudiantesAll().subscribe((datosEstudiantes) => {
+      this.estudiantes = datosEstudiantes;
     });
   }
 
-  DeleteRet(id) {
-    this.serviceRetoPersonal.getById(id).then((datoPersonal) => {
-      if (datoPersonal) {
+  DeleteUser(id) {
+    this.serviceEstudiante.getById(id).then((datoEstudiante) => {
+      if (datoEstudiante) {
         Swal.fire({
           title: '¿Deseas eliminar el registro?',
           icon: 'warning',
@@ -47,11 +59,14 @@ export class RetoPersonalComponent implements OnInit {
               timer: 2500,
             });
 
-            this.serviceRetoPersonal.deleteRetos(datoPersonal[0]['idDocument'], id);
-            this.getRetos();
+            this.serviceEstudiante.deleteEstudiante(
+              datoEstudiante[0]['idDocument'],
+              id
+            );
+            this.getEmpleados();
           }
         });
       }
-    })
+    });
   }
 }

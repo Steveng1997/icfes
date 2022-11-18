@@ -1,252 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-      crossorigin="anonymous"
-    ></script>
 
-    <style href="mirar-avance.component.html"></style>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
 
-  <body>
-    <div class="btn-salir" style="text-align: right">
-      <button class="btn btn-success btnSalir" (click)="salir()">Salir</button>
-    </div>
+  <style href="mirar-avance.component.html"></style>
+</head>
 
-    <div class="card-title text-center mb-5 fw-bolder display-5">
-      <label class="txtTitulo">Este ha sido tu desempeño este año</label>
-    </div>
+<body>
+  <div class="btn-salir" style="text-align: right">
+    <button class="btn btn-success btnSalir" (click)="salir()">Salir</button>
+  </div>
 
-    <h5 class="text-center display-4 text-danger" *ngIf="puntajes.length == 0">
-      Este usuario no ha hecho ningun reto
-    </h5>
+  <div class="card-title text-center mb-5 fw-bolder display-5">
+    <label class="txtTitulo">Este ha sido tu desempeño este año</label>
+  </div>
 
-    <!-- Modal -->
+  <h5 class="text-center display-4 text-danger" *ngIf="puntajes.length == 0">
+    Este usuario no ha hecho ningun reto
+  </h5>
 
-    <div class="container"></div>
-    <div class="btn-Listado" style="text-align: right">
-      <button
-        type="button"
-        class="btn btnListado"
-        (click)="openModal(editProfileModal)"
-      >
-        Listado de Puntajes
+  <!-- Modal -->
+
+  <div class="container"></div>
+  <div class="btn-Listado" style="text-align: right">
+    <button type="button" class="btn btnListado" (click)="openModal(editProfileModal)">
+      Listado de Puntajes
+    </button>
+  </div>
+  <ng-template #editProfileModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="editProfileLabel">Listado de puntaje</h5>
+      <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <ng-template #editProfileModal let-modal>
-      <div class="modal-header">
-        <h5 class="modal-title" id="editProfileLabel">Listado de puntaje</h5>
-        <button
-          type="button"
-          class="close"
-          (click)="modal.dismiss()"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
 
-      <div class="modal-body">
-        <!-- Aqui se coloca lo adentro -->
+    <div class="modal-body">
+      <!-- Aqui se coloca lo adentro -->
 
-        <div class="card-body text-center">
-          <div class="table-responsive">
-            <table width="100%">
-              <thead>
-                <tr>
-                  <td data-titulo="idUsuario">Nombre</td>
-                  <td data-titulo="idUsuario">Total puntaje</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  *ngFor="
+      <div class="card-body text-center">
+        <div class="table-responsive">
+          <table width="100%">
+            <thead>
+              <tr>
+                <td data-titulo="idUsuario">Nombre</td>
+                <td data-titulo="idUsuario">Total puntaje</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="
                     let puntuacion of puntajes
                       | paginate: { itemsPerPage: 10, currentPage: page }
-                  "
-                >
-                  <td data-titulo="nombre">{{ puntuacion.nombre }}</td>
-                  <td data-titulo="nombre">{{ puntuacion.totalPuntaje }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                  ">
+                <td data-titulo="nombre">{{ puntuacion.nombre }}</td>
+                <td data-titulo="nombre">{{ puntuacion.totalPuntaje }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Afuera -->
+    </div>
+  </ng-template>
+
+  <!-- Fin Modal -->
+
+  <div class="row text-center" *ngFor="let punt of puntajes">
+    <div class="col-md-3 text-center txtMatematica">
+      <div class="column">
+        <div class="cardMatematica">
+          <label class="colorMatematica">Matemáticas</label>
         </div>
 
-        <!-- Afuera -->
-      </div>
-    </ng-template>
-
-    <!-- Fin Modal -->
-
-    <div class="row text-center" *ngFor="let punt of puntajes">
-      <div class="col-md-3 text-center txtMatematica">
-        <div class="column">
-          <div class="cardMatematica">
-            <label class="colorMatematica">Matemáticas</label>
-          </div>
-
-          <img
-            class="grid-item"
-            *ngIf="
+        <img class="grid-item" *ngIf="
               punt.puntuacionMatematicas >= 0 &&
               punt.puntuacionMatematicas <= 39
-            "
-            src="./assets/PRINCIPIANTE.fw.png"
-            width="70%"
-          />
-          <img
-            class="grid-item"
-            *ngIf="
+            " src="./assets/PRINCIPIANTE.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="
+            punt.puntuacionMatematicas >= 0 &&
+            punt.puntuacionMatematicas <= 39
+          "> Principiante
+        </h2>
+        <h2 class="grid-itemTexto" *ngIf="
+            punt.puntuacionMatematicas >= 0 &&
+            punt.puntuacionMatematicas <= 39
+          "> {{punt.puntuacionMatematicas}}
+        </h2>
+        <img class="grid-item" *ngIf="
               punt.puntuacionMatematicas >= 40 &&
               punt.puntuacionMatematicas <= 69
-            "
-            src="./assets/PROFESIONAL.fw.png"
-            width="70%"
-          />
-          <img
-            class="grid-item"
-            *ngIf="
+            " src="./assets/PROFESIONAL.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="
+          punt.puntuacionMatematicas >= 40 &&
+          punt.puntuacionMatematicas <= 69
+          "> Profesional
+        </h2>
+        <h2 class="grid-itemTexto" *ngIf="
+        punt.puntuacionMatematicas >= 40 &&
+        punt.puntuacionMatematicas <= 69
+          "> {{punt.puntuacionMatematicas}}
+        </h2>
+        <img class="grid-item" *ngIf="
               punt.puntuacionMatematicas >= 70 &&
               punt.puntuacionMatematicas <= 99
-            "
-            src="./assets/MAESTRO.fw.png"
-            width="70%"
-          />
-          <img
-            class="grid-item"
-            *ngIf="punt.puntuacionMatematicas >= 100"
-            src="./assets/JEFE_MAESTRO.fw.png"
-            width="70%"
-          />
-        </div>
-      </div>
-
-      <div class="col-md-3 text-center txtLenguaje">
-        <div class="column">
-          <div class="cardLenguaje">
-            <label class="colorLenguaje">Lenguaje</label>
-          </div>
-
-          <img
-            class="grid-item"
-            *ngIf="
-              punt.puntuacionLenguaje >= 0 && punt.puntuacionLenguaje <= 39
-            "
-            src="./assets/PRINCIPIANTE.fw.png"
-            width="70%"
-          />
-          <img
-            class="grid-item"
-            *ngIf="
-              punt.puntuacionLenguaje >= 40 && punt.puntuacionLenguaje <= 69
-            "
-            src="./assets/PROFESIONAL.fw.png"
-            width="70%"
-          />
-          <img
-            class="grid-item"
-            *ngIf="
-              punt.puntuacionLenguaje >= 70 && punt.puntuacionLenguaje <= 99
-            "
-            src="./assets/MAESTRO.fw.png"
-            width="70%"
-          />
-          <img
-            class="grid-item"
-            *ngIf="punt.puntuacionLenguaje >= 100"
-            src="./assets/JEFE_MAESTRO.fw.png"
-            width="70%"
-          />
-        </div>
-      </div>
-
-      <div class="col-md-3 text-center txtNaturales">
-        <div class="column">
-          <div class="cardNaturales">
-            <label class="colorNaturales">C.Naturales</label>
-          </div>
-          <img
-            class="grid-item"
-            *ngIf="
-              punt.puntuacionNaturales >= 0 && punt.puntuacionNaturales <= 39
-            "
-            src="./assets/PRINCIPIANTE.fw.png"
-            width="70%"
-          />
-          <img
-            class="grid-item"
-            *ngIf="
-              punt.puntuacionNaturales >= 40 && punt.puntuacionNaturales <= 69
-            "
-            src="./assets/PROFESIONAL.fw.png"
-            width="70%"
-          />
-          <img
-            class="grid-item"
-            *ngIf="
-              punt.puntuacionNaturales >= 70 && punt.puntuacionNaturales <= 99
-            "
-            src="./assets/MAESTRO.fw.png"
-            width="70%"
-          />
-          <img
-            class="grid-item"
-            *ngIf="punt.puntuacionNaturales >= 100"
-            src="./assets/JEFE_MAESTRO.fw.png"
-            width="70%"
-          />
-        </div>
-      </div>
-
-      <div class="col-md-3 text-center txtSociales">
-        <div class="column">
-          <div class="cardSociales">
-            <label class="colorSociales">C.Sociales</label>
-          </div>
-          <img
-            class="grid-item"
-            *ngIf="
-              punt.puntuacionSociales >= 0 && punt.puntuacionSociales <= 39
-            "
-            src="./assets/PRINCIPIANTE.fw.png"
-            width="70%"
-          />
-          <img
-            class="grid-item"
-            *ngIf="
-              punt.puntuacionSociales >= 40 && punt.puntuacionSociales <= 69
-            "
-            src="./assets/PROFESIONAL.fw.png"
-            width="70%"
-          />
-          <img
-            class="grid-item"
-            *ngIf="
-              punt.puntuacionSociales >= 70 && punt.puntuacionSociales <= 99
-            "
-            src="./assets/MAESTRO.fw.png"
-            width="70%"
-          />
-          <img
-            class="grid-item"
-            *ngIf="punt.puntuacionSociales >= 100"
-            src="./assets/JEFE_MAESTRO.fw.png"
-            width="70%"
-          />
-        </div>
+            " src="./assets/MAESTRO.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="
+          punt.puntuacionMatematicas >= 70 &&
+          punt.puntuacionMatematicas <= 99
+          "> Maestro
+        </h2>
+        <h2 class="grid-itemTexto" *ngIf="
+        punt.puntuacionMatematicas >= 70 &&
+          punt.puntuacionMatematicas <= 99
+          "> {{punt.puntuacionMatematicas}}
+        </h2>
+        <img class="grid-item" *ngIf="punt.puntuacionMatematicas >= 100" src="./assets/JEFE_MAESTRO.fw.png"
+          width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="punt.puntuacionMatematicas >= 100"> Jefe Maestro </h2>
+        <h2 class="grid-itemTexto" *ngIf=" punt.puntuacionMatematicas >= 100"> {{punt.puntuacionMatematicas}}
+        </h2>
       </div>
     </div>
-  </body>
+
+    <div class=" col-md-3 text-center txtLenguaje">
+      <div class="column">
+        <div class="cardLenguaje">
+          <label class="colorLenguaje">Lenguaje</label>
+        </div>
+
+        <img class="grid-item" *ngIf="
+              punt.puntuacionLenguaje >= 0 && punt.puntuacionLenguaje <= 39
+            " src="./assets/PRINCIPIANTE.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="
+            punt.puntuacionLenguaje >= 0 &&
+            punt.puntuacionLenguaje <= 39
+          "> Principiante
+        </h2>
+        <h2 class="grid-itemTexto" *ngIf="
+        punt.puntuacionLenguaje >= 0 &&
+        punt.puntuacionLenguaje <= 39
+          "> {{punt.puntuacionLenguaje}}
+        </h2>
+        <img class="grid-item" *ngIf="
+              punt.puntuacionLenguaje >= 40 && punt.puntuacionLenguaje <= 69
+            " src="./assets/PROFESIONAL.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="
+          punt.puntuacionLenguaje >= 40 &&
+          punt.puntuacionLenguaje <= 69
+          "> Profesional
+        </h2>
+        <h2 class="grid-itemTexto" *ngIf="
+          punt.puntuacionLenguaje >= 40 &&
+          punt.puntuacionLenguaje <= 69
+          "> {{punt.puntuacionLenguaje}}
+        </h2>
+        <img class="grid-item" *ngIf="
+              punt.puntuacionLenguaje >= 70 && punt.puntuacionLenguaje <= 99
+            " src="./assets/MAESTRO.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="
+            punt.puntuacionLenguaje >= 70 &&
+            punt.puntuacionLenguaje <= 99
+            "> Maestro
+        </h2>
+        <h2 class="grid-itemTexto" *ngIf=" punt.puntuacionLenguaje >= 70 &&
+          punt.puntuacionLenguaje <= 99"> {{punt.puntuacionLenguaje}}
+        </h2>
+        <img class="grid-item" *ngIf="punt.puntuacionLenguaje >= 100" src="./assets/JEFE_MAESTRO.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="punt.puntuacionLenguaje >= 100"> Jefe Maestro </h2>
+        <h2 class="grid-itemTexto" *ngIf=" punt.puntuacionLenguaje >= 100"> {{punt.puntuacionLenguaje}}
+        </h2>
+      </div>
+    </div>
+
+    <div class="col-md-3 text-center txtNaturales">
+      <div class="column">
+        <div class="cardNaturales">
+          <label class="colorNaturales">C.Naturales</label>
+        </div>
+        <img class="grid-item" *ngIf="
+              punt.puntuacionNaturales >= 0 && punt.puntuacionNaturales <= 39
+            " src="./assets/PRINCIPIANTE.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="
+            punt.puntuacionNaturales >= 0 &&
+            punt.puntuacionNaturales <= 39
+          "> Principiante
+        </h2>
+        <h2 class="grid-itemTexto" *ngIf=" punt.puntuacionNaturales >= 0 &&
+          punt.puntuacionNaturales <= 39"> {{punt.puntuacionNaturales}}
+        </h2>
+        <img class="grid-item" *ngIf="
+              punt.puntuacionNaturales >= 40 && punt.puntuacionNaturales <= 69
+            " src="./assets/PROFESIONAL.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="
+          punt.puntuacionNaturales >= 40 &&
+          punt.puntuacionNaturales <= 69
+          "> Profesional
+        </h2>
+        <h2 class="grid-itemTexto" *ngIf=" punt.puntuacionNaturales >= 40 &&
+          punt.puntuacionNaturales <= 69"> {{punt.puntuacionNaturales}}
+        </h2>
+        <img class="grid-item" *ngIf="
+              punt.puntuacionNaturales >= 70 && punt.puntuacionNaturales <= 99
+            " src="./assets/MAESTRO.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="
+            punt.puntuacionNaturales >= 70 &&
+            punt.puntuacionNaturales <= 99
+            "> Maestro
+        </h2>
+        <h2 class="grid-itemTexto" *ngIf="
+        punt.puntuacionNaturales >= 70 &&
+            punt.puntuacionNaturales <= 99
+            "> {{punt.puntuacionNaturales}}
+        </h2>
+        <img class="grid-item" *ngIf="punt.puntuacionNaturales >= 100" src="./assets/JEFE_MAESTRO.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="punt.puntuacionNaturales >= 100"> Jefe Maestro </h2>
+        <h2 class="grid-itemTexto" *ngIf="punt.puntuacionNaturales >= 100"> {{punt.puntuacionNaturales}} </h2>
+      </div>
+    </div>
+
+    <div class="col-md-3 text-center txtSociales">
+      <div class="column">
+        <div class="cardSociales">
+          <label class="colorSociales">C.Sociales</label>
+        </div>
+        <img class="grid-item" *ngIf="
+              punt.puntuacionSociales >= 0 && punt.puntuacionSociales <= 39
+            " src="./assets/PRINCIPIANTE.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="
+            punt.puntuacionSociales >= 0 &&
+            punt.puntuacionSociales <= 39
+          "> Principiante
+        </h2>
+        <h2 class="grid-itemTexto" *ngIf="
+            punt.puntuacionSociales >= 0 &&
+            punt.puntuacionSociales <= 39
+          "> {{punt.puntuacionSociales}}
+        </h2>
+        <img class="grid-item" *ngIf="
+              punt.puntuacionSociales >= 40 && punt.puntuacionSociales <= 69
+            " src="./assets/PROFESIONAL.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="
+          punt.puntuacionSociales >= 40 &&
+          punt.puntuacionSociales <= 69
+          "> Profesional
+        </h2>
+        <h2 class="grid-itemTexto" *ngIf="
+          punt.puntuacionSociales >= 40 &&
+          punt.puntuacionSociales <= 69
+          "> {{punt.puntuacionSociales}}
+        </h2>
+
+        <!-- Img -->
+        <img class="grid-item" *ngIf="
+              punt.puntuacionSociales >= 70 && punt.puntuacionSociales <= 99
+            " src="./assets/MAESTRO.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="
+            punt.puntuacionSociales >= 70 &&
+            punt.puntuacionSociales <= 99
+            "> Maestro
+        </h2>
+        <h2 class="grid-itemTexto" *ngIf="
+            punt.puntuacionSociales >= 70 &&
+            punt.puntuacionSociales <= 99
+            "> {{punt.puntuacionSociales}}
+        </h2>
+
+        <!-- Img -->
+        <img class="grid-item" *ngIf="punt.puntuacionSociales >= 100" src="./assets/JEFE_MAESTRO.fw.png" width="70%" />
+        <h2 class="grid-itemTexto" *ngIf="punt.puntuacionSociales >= 100"> Jefe Maestro </h2>
+        <h2 class="grid-itemTexto" *ngIf="punt.puntuacionSociales >= 100"> {{punt.puntuacionSociales}} </h2>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>

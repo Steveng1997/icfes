@@ -136,120 +136,24 @@ tr td:last-child {
 // --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Media
 
-@media only screen and (max-width: 450px) {
+@media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
   .recent-grid {
-    justify-items: end;
-    width: 100%;
+    margin-left: 20px;
+    margin-top: 34%;
   }
 
-  .card-body {
-    width: 100%;
-  }
-
-  .card-header:first-child {
-    width: 60%;
+  .card {
+    width: 120%;
   }
 }
 
-// @media only screen and (max-width: 768px) {
-// 	.cards {
-// 		grid-template-columns: repeat(2, 1fr);
-// 	}
+@media only screen and (min-device-width: 411px) and (max-device-width: 450px) {
+  .recent-grid {
+    margin-left: 14px;
+    margin-top: 34%;
+  }
 
-// 	// .recent-grid {
-// 	// 	grid-template-columns: 100%;
-// 	//
-
-// 	.search-wrapper {
-// 		display: none;
-// 	}
-
-// 	.sidebar {
-// 		left: -100% !important;
-// 	}
-
-// 	header h2 {
-// 		display: flex;
-// 		align-items: center;
-// 	}
-
-// 	header h2 label {
-// 		display: inline-block;
-// 		background: blue;
-// 		padding-right: 0rem;
-// 		margin-right: 1rem;
-// 		height: 40px;
-// 		width: 40px;
-// 		border-radius: 50%;
-// 		color: #fff;
-// 		display: flex;
-// 		align-items: center;
-// 		justify-content: center !important;
-// 	}
-
-// 	header h2 span {
-// 		text-align: center;
-// 		padding-right: 0rem;
-// 	}
-
-// 	header h2 {
-// 		font-size: 1.1rem;
-// 	}
-
-// 	.main-content {
-// 		width: 100%;
-// 		margin-left: 0rem;
-// 	}
-
-// 	header {
-// 		width: 100% !important;
-// 		left: 0 !important;
-// 	}
-// }
-
-// @media only screen and (max-width: 960px) {
-// 	.cards {
-// 		grid-template-columns: repeat(3, 1fr);
-// 	}
-
-// 	.recent-grid {
-// 		grid-template-columns: 60% 40%;
-// 	}
-// }
-
-// @media only screen and (max-width: 1200px) {
-
-// 	table{
-// 		width: 100%;
-// 	}
-
-// 	.sidebar {
-// 		width: 70px;
-// 	}
-
-// 	.sidebar .sidebar-brand,
-// 	.sidebar li {
-// 		padding-left: 1rem;
-// 		text-align: center;
-// 	}
-
-// 	.sidebar li a {
-// 		padding-left: 0rem;
-// 	}
-
-// 	.sidebar .sidebar-brand h2 span:last-child,
-// 	.sidebar li a span:last-child {
-// 		display: none;
-// 	}
-
-// 	.main-content {
-// 		margin-left: 70px;
-// 	}
-
-// 	.main-content header {
-// 		width: calc(100% - 70px);
-// 		left: 70px;
-// 	}
-// }
-
-// }
+  .card {
+    width: 120%;
+  }
+}

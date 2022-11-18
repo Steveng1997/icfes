@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
     crossorigin="anonymous"></script>
-  <style href="respuesta-personal.component.scss"></style>
+  <style href="reto-personals.component.scss"></style>
 </head>
 
 <body>
@@ -29,7 +29,7 @@
             </div>
           </div>
 
-          <div class="mb-4 mt-4" *ngIf="cat.titulo != ''">
+          <div class="mb-4 mt-4">
             <b id="titulo" style="text-align: justify; font-size: 180%;">
               {{ cat.titulo }}
             </b>
@@ -37,7 +37,7 @@
 
           <div class="card-title mb-4" style="font-size: 1.5rem" *ngIf="datosReto">
             <div>
-              <p id="texto1" style="justify-content: center; text-align: justify">
+              <p id="texto1" style="text-align: justify">
                 {{ cat.texto1 }}
               </p>
             </div>
@@ -45,7 +45,7 @@
             <img src="{{ cat.imageUrl }}" width="40%" />
 
             <div>
-              <p id="texto2" style="justify-content: center; text-align: justify">
+              <p id="texto2" style="text-align: justify">
                 {{ cat.texto2 }}
               </p>
             </div>

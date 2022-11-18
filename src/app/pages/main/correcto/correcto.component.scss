@@ -42,3 +42,17 @@
     width: 10%;
   }
 }
+
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// Query para pantalla grande con monitor grande
+@media only screen and (min-device-width: 1700px) and (max-device-width: 2000px) {
+  .btn-salir {
+    margin-right: 3%;
+    margin-top: 1.9px;
+  }
+
+  .btnSalir {
+    width: 10%;
+  }
+}

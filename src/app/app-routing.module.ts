@@ -24,11 +24,10 @@ import { IncorrectoPersonalComponent } from './pages/main/incorrecto-personal/in
 import { EditarEstudianteComponent } from './pages/pre-auth/admin/estudiantes/editar-estudiante/editar-estudiante.component';
 import { PuntajeComponent } from './pages/pre-auth/admin/puntaje/puntaje.component';
 import { EditarPuntuacionComponent } from './pages/pre-auth/admin/puntaje/editar-puntuacion/editar-puntuacion.component';
-import { PreguntaPersonalComponent } from './pages/main/pregunta-personal/pregunta-personal.component';
-import { RespuestaPersonalComponent } from './pages/main/respuesta-personal/respuesta-personal.component';
 import { RetoPersonalComponent } from './pages/pre-auth/admin/reto-personal/reto-personal.component';
 import { DesafioComponent } from './pages/main/desafio/desafio.component';
 import { RetoDesafioComponent } from './pages/main/reto-desafio/reto-desafio.component';
+import { RetoPersonalsComponent } from './pages/main/reto-personals/reto-personals.component';
 
 const routes: Routes = [
   { path: 'menu/:id', component: MenuComponent, canActivate: [LoginGuardian] },
@@ -130,56 +129,61 @@ const routes: Routes = [
     component: RetosComponent,
     canActivate: [LoginGuardian],
   },
-  {
-    path: 'pregPerson/:id/:categoria',
-    component: PreguntaPersonalComponent,
-    canActivate: [LoginGuardian],
-  },
-  {
-    path: 'resPerson/:id/:categoria',
-    component: RespuestaPersonalComponent,
-    canActivate: [LoginGuardian],
-  },
+  
   {
     path: 'mirarAvance/:id',
     component: MirarAvanceComponent,
     canActivate: [LoginGuardian],
   },
+
   {
     path: 'incorrecto/:id',
     component: IncorrectoComponent,
     canActivate: [LoginGuardian],
   },
+
   {
     path: 'correcto/:id',
     component: CorrectoComponent,
     canActivate: [LoginGuardian],
   },
+
   {
     path: 'menuArea-personal/:id',
     component: MenuAreaPersonalComponent,
     canActivate: [LoginGuardian],
   },
+
   {
     path: 'correctoPersonal/:id',
     component: CorrectoPersonalComponent,
     canActivate: [LoginGuardian],
   },
+
   {
     path: 'incorrectoPersonal/:id',
     component: IncorrectoPersonalComponent,
     canActivate: [LoginGuardian],
   },
+
   {
     path: 'desafio/:id',
     component: DesafioComponent,
     canActivate: [LoginGuardian],
   },
+
   {
     path: 'retoDesafio/:idUser/:idDesafio/:categoria',
     component: RetoDesafioComponent,
     canActivate: [LoginGuardian],
   },
+
+  {
+    path: 'retoPersonals/:idUser/:categoria',
+    component: RetoPersonalsComponent,
+    canActivate: [LoginGuardian],
+  },
+
 ];
 
 @NgModule({

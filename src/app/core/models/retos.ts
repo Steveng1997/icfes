@@ -15,6 +15,7 @@ export class Retos {
   idDocument?: string;
   idsUsuarios?: string;
   idsDesafios?: string;
+  idsRetoPersonal?: string;
 
   // Opciones de imagenes
   imageOpcion1?: string;
