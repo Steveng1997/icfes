@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Desafio } from 'src/app/core/models/desafio';
 import { Usuario } from 'src/app/core/models/login';
 import { Retos } from 'src/app/core/models/retos';
-import { DesafioService } from 'src/app/core/services/desafio.service';
 import { LoginService } from 'src/app/core/services/login.service';
 import { PuntuacionService } from 'src/app/core/services/puntaje.service';
 import { RetoService } from 'src/app/core/services/retos.service';
@@ -11,7 +10,7 @@ import { RetoService } from 'src/app/core/services/retos.service';
 @Component({
   selector: 'app-reto-personals',
   templateUrl: './reto-personals.component.html',
-  styleUrls: ['./reto-personals.component.scss']
+  styleUrls: ['./reto-personals.component.scss'],
 })
 export class RetoPersonalsComponent implements OnInit {
   categoria: string;
@@ -29,15 +28,14 @@ export class RetoPersonalsComponent implements OnInit {
     private router: Router,
     private retoService: RetoService,
     private serviceLogin: LoginService,
-    private servicePuntaje: PuntuacionService,
-    private serviceDesafio: DesafioService
-  ) { }
+    private servicePuntaje: PuntuacionService
+  ) {}
 
   ngOnInit() {
     this.idUser = this.rutaActiva.snapshot.paramMap.get('idUser');
-    this.serviceLogin.getById(this.idUser).then((rp => {
-      this.user = rp
-    }));
+    this.serviceLogin.getById(this.idUser).then((rp) => {
+      this.user = rp;
+    });
 
     this.categoria = this.rutaActiva.snapshot.paramMap.get('categoria');
     this.getByCategoria(this.categoria);
@@ -108,13 +106,15 @@ export class RetoPersonalsComponent implements OnInit {
   }
 
   opcionImage(event, idDocumentReto, idReto, idsUsuarios, urlImgResp) {
+    this.retoService.registerRetoPersonal(idReto, this.idUser, this.categoria);
 
     this.obtenerPuntaje(this.idUser);
 
     if (!idsUsuarios) {
       idsUsuarios = [];
     }
-    
+
+    idsUsuarios.push(this.idUser);
     this.retoService
       .updateIdsRetoPersonal(idDocumentReto, idReto, idsUsuarios)
       .then((resp) => {
@@ -183,14 +183,13 @@ export class RetoPersonalsComponent implements OnInit {
                     resp[0]['idDocument'],
                     this.idUser,
                     this.puntajeObtenido['puntuacionLenguaje'] +
-                    this.puntajeObtenido['puntuacionMatematicas'] +
-                    this.puntajeObtenido['puntuacionSociales'] +
-                    this.puntajeObtenido['puntuacionNaturales'] +
-                    puntaje
+                      this.puntajeObtenido['puntuacionMatematicas'] +
+                      this.puntajeObtenido['puntuacionSociales'] +
+                      this.puntajeObtenido['puntuacionNaturales'] +
+                      puntaje
                   );
                 }
               });
-
           } else {
             if (urlImgResp == event.target.src) {
               puntaje = 2;
@@ -245,6 +244,7 @@ export class RetoPersonalsComponent implements OnInit {
   }
 
   opcionA(event, idDocumentReto, idReto, idsUsuarios, respuesta) {
+    this.retoService.registerRetoPersonal(idReto, this.idUser, this.categoria);
 
     this.obtenerPuntaje(this.idUser);
 
@@ -252,6 +252,7 @@ export class RetoPersonalsComponent implements OnInit {
       idsUsuarios = [];
     }
 
+    idsUsuarios.push(this.idUser);
     this.retoService
       .updateIdsRetoPersonal(idDocumentReto, idReto, idsUsuarios)
       .then((resp) => {
@@ -317,10 +318,10 @@ export class RetoPersonalsComponent implements OnInit {
                 this.puntajeObtenido['idDocument'],
                 this.idUser,
                 this.puntajeObtenido['puntuacionLenguaje'] +
-                this.puntajeObtenido['puntuacionMatematicas'] +
-                this.puntajeObtenido['puntuacionSociales'] +
-                this.puntajeObtenido['puntuacionNaturales'] +
-                puntaje
+                  this.puntajeObtenido['puntuacionMatematicas'] +
+                  this.puntajeObtenido['puntuacionSociales'] +
+                  this.puntajeObtenido['puntuacionNaturales'] +
+                  puntaje
               );
             });
           } else {
@@ -359,7 +360,6 @@ export class RetoPersonalsComponent implements OnInit {
                 this.idUser,
                 puntaje,
                 this.user[0]['nombre']
-
               );
             }
           }

@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class RetoService {
-  constructor(public router: Router, private db: AngularFirestore) { }
+  constructor(public router: Router, private db: AngularFirestore) {}
 
   retos: Retos[] = [];
   cursoDoc: AngularFirestoreDocument<Retos>;
@@ -81,6 +81,24 @@ export class RetoService {
     });
   }
 
+  registerRetoPersonal(idReto, idUser, categoria) {
+    let RetPersonal = {
+      id: `uid${this.makeid(10)}`,
+      idReto: idReto,
+      idUser: idUser,
+      categoria: categoria,
+    };
+    return new Promise<any>((resolve, reject) => {
+      this.db
+        .collection('retoPersonal')
+        .add(RetPersonal)
+        .then(
+          (response) => resolve(response),
+          (error) => reject(error)
+        );
+    });
+  }
+
   // -----------------------------------------------------------------------------------
   // End register
   // -----------------------------------------------------------------------------------
@@ -92,13 +110,34 @@ export class RetoService {
   getRetoPersonalAll() {
     return this.db
       .collection('retos', (ref) => ref.orderBy('id', 'asc'))
-      .valueChanges()
+      .valueChanges();
+  }
+
+  getRetoPersonal() {
+    return this.db
+      .collection('retoPersonal', (ref) => ref.orderBy('id', 'asc'))
+      .valueChanges();
   }
 
   getById(id): Promise<any> {
     return new Promise((resolve, reject) => {
       this.db
         .collection('retos', (ref) => ref.where('id', '==', id))
+        .valueChanges({ idField: 'idDocument' })
+        .subscribe((rp) => {
+          if (rp[0]?.idDocument) {
+            resolve(rp);
+          } else {
+            resolve(rp);
+          }
+        });
+    });
+  }
+
+  getByIdRetoPersonal(id): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.db
+        .collection('retoPersonal', (ref) => ref.where('id', '==', id))
         .valueChanges({ idField: 'idDocument' })
         .subscribe((rp) => {
           if (rp[0]?.idDocument) {
@@ -188,7 +227,7 @@ export class RetoService {
         idsRetoPersonal: idsRetoPersonal,
       });
   }
-  
+
   updateIdsDesafios(idDocumentReto, idReto, idsDesafios) {
     return this.db
       .collection('retos', (ref) => ref.where('id', '==', idReto))
@@ -217,7 +256,7 @@ export class RetoService {
       .collection('retos', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpcion1: imageOpcion1
+        imageOpcion1: imageOpcion1,
       });
   }
 
@@ -226,7 +265,7 @@ export class RetoService {
       .collection('retos', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpcion2: imageOpcion2
+        imageOpcion2: imageOpcion2,
       });
   }
 
@@ -235,7 +274,7 @@ export class RetoService {
       .collection('retos', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpcion3: imageOpcion3
+        imageOpcion3: imageOpcion3,
       });
   }
 
@@ -244,7 +283,7 @@ export class RetoService {
       .collection('retos', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageOpcion4: imageOpcion4
+        imageOpcion4: imageOpcion4,
       });
   }
 
@@ -253,7 +292,7 @@ export class RetoService {
       .collection('retos', (ref) => ref.where('id', '==', idReto))
       .doc(idDocumentReto)
       .update({
-        imageResp: imageResp
+        imageResp: imageResp,
       });
   }
 
@@ -268,6 +307,13 @@ export class RetoService {
   async deleteRetos(idDocument, id): Promise<any> {
     this.db
       .collection('retos', (ref) => ref.where('id', '==', id))
+      .doc(idDocument)
+      .delete();
+  }
+
+  async deleteRetoPersonal(idDocument, id): Promise<any> {
+    this.db
+      .collection('retoPersonal', (ref) => ref.where('id', '==', id))
       .doc(idDocument)
       .delete();
   }
