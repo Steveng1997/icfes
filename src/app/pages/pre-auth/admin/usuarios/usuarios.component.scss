@@ -157,6 +157,10 @@ tr td:last-child {
 }
 
 @media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
+  .noHayDatos {
+    margin-top: 30px;
+    width: 260%;
+  }
   .recent-grid {
     margin-left: 20px;
     margin-top: 34%;
@@ -233,7 +237,7 @@ tr td:last-child {
 @media only screen and (min-device-width: 1023px) and (max-device-width: 1030px) {
   .recent-grid {
     margin-left: -84px;
-    margin-top: 17%;
+    margin-top: 199px;
   }
 
   .card {
@@ -249,5 +253,13 @@ tr td:last-child {
 
   .card {
     width: 121%;
+  }
+}
+
+@media only screen and (min-device-width: 1700px) and (max-device-width: 2000px) {
+  .noHayDatos {
+    margin-top: 30px;
+    width: 683px;
+    font-size: 50px;
   }
 }

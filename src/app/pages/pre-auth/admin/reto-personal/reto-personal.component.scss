@@ -139,8 +139,78 @@ table td:nth-child(7) {
 // Media
 
 @media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
+  .noHayDatos {
+    margin-top: 30px;
+    width: 260%;
+  }
+
   .recent-grid {
     margin-left: 20px;
+    margin-top: 28%;
+  }
+
+  .card {
+    width: 120%;
+  }
+
+  thead td {
+    font-weight: 700;
+    border: 1px solid #000;
+  }
+
+  table td:first-child {
+    border: 1px solid #000;
+    width: 200px;
+  }
+
+  table td:nth-child(2) {
+    border: 1px solid #000;
+    width: 400px;
+    text-align: center;
+  }
+
+  table td:nth-child(3) {
+    border: 1px solid #000;
+    width: 400px;
+    text-align: center;
+  }
+
+  table td:nth-child(4) {
+    border: 1px solid #000;
+    width: 400px;
+    text-align: center;
+  }
+
+  table td:nth-child(5) {
+    border: 1px solid #000;
+    width: 400px;
+    text-align: center;
+  }
+
+  table td:nth-child(6) {
+    border: 1px solid #000;
+    width: 400px;
+    text-align: center;
+  }
+
+  table td:nth-child(7) {
+    width: 200px;
+    text-align: center;
+  }
+
+  .listadoReto {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-device-width: 411px) and (max-device-width: 450px) {
+  .noHayDatos {
+    margin-top: 30px;
+    width: 260%;
+  }
+
+  .recent-grid {
+    margin-left: 14px;
     margin-top: 34%;
   }
 
@@ -194,21 +264,7 @@ table td:nth-child(7) {
   }
 }
 
-@media only screen and (min-device-width: 411px) and (max-device-width: 450px) {
-  .recent-grid {
-    margin-left: 14px;
-    margin-top: 34%;
-  }
-
-  .card {
-    width: 120%;
-  }
-
-  thead td {
-    font-weight: 700;
-    border: 1px solid #000;
-  }
-
+@media only screen and (min-device-width: 539px) and (max-device-width: 550px) {
   table td:first-child {
     border: 1px solid #000;
     width: 200px;
@@ -243,9 +299,59 @@ table td:nth-child(7) {
     width: 400px;
     text-align: center;
   }
-  
+
   table td:nth-child(7) {
     width: 200px;
     text-align: center;
+  }
+
+  .recent-grid {
+    margin-left: -7px;
+    margin-top: 26%;
+  }
+
+  .card {
+    width: 120%;
+  }
+}
+
+@media only screen and (min-device-width: 910px) and (max-device-width: 930px) {
+  .recent-grid {
+    margin-left: -47px;
+    margin-top: 17%;
+  }
+
+  .card {
+    width: 120%;
+  }
+}
+
+@media only screen and (min-device-width: 1023px) and (max-device-width: 1030px) {
+  .recent-grid {
+    margin-left: -84px;
+    margin-top: 17%;
+  }
+
+  .card {
+    width: 120%;
+  }
+}
+
+@media only screen and (min-device-width: 1279px) and (max-device-width: 1282px) {
+  .recent-grid {
+    margin-left: 20px;
+    margin-top: 15%;
+  }
+
+  .card {
+    width: 121%;
+  }
+}
+
+@media only screen and (min-device-width: 1700px) and (max-device-width: 2000px) {
+  .noHayDatos {
+    margin-top: 30px;
+    width: 683px;
+    font-size: 50px;
   }
 }

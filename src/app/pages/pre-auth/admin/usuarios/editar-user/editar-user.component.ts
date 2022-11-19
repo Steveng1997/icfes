@@ -35,6 +35,7 @@ export class EditarUserComponent implements OnInit {
 
   editarReto(idDocument, idEstudiante, usu: Usuario) {
     const id = this.activeRoute.snapshot.paramMap.get('id');
+    this.postService.registerAutenticacion(usu.email, usu.password);
     this.postService.updateUsuarios(idDocument, idEstudiante, usu);
     this.router.navigate([`admin/${this.idUser}/usuarios/${this.idUser}`]);
     Swal.fire({

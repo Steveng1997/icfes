@@ -137,6 +137,10 @@ tr td:last-child {
 // Media
 
 @media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
+  .noHayDatos {
+    margin-top: 30px;
+    width: 260%;
+  }
   .recent-grid {
     margin-left: 20px;
     margin-top: 34%;
@@ -144,6 +148,14 @@ tr td:last-child {
 
   .card {
     width: 120%;
+  }
+
+  .agregar {
+    width: 35%;
+  }
+
+  .listadoEstu {
+    font-size: 20px;
   }
 }
 
@@ -155,5 +167,57 @@ tr td:last-child {
 
   .card {
     width: 120%;
+  }
+}
+
+@media only screen and (min-device-width: 539px) and (max-device-width: 550px) {
+  .recent-grid {
+    margin-left: -7px;
+    margin-top: 30%;
+  }
+
+  .card {
+    width: 120%;
+  }
+}
+
+@media only screen and (min-device-width: 910px) and (max-device-width: 930px) {
+  .recent-grid {
+    margin-left: -47px;
+    margin-top: 20%;
+  }
+
+  .card {
+    width: 120%;
+  }
+}
+
+@media only screen and (min-device-width: 1023px) and (max-device-width: 1030px) {
+  .recent-grid {
+    margin-left: -84px;
+    margin-top: 199px;
+  }
+
+  .card {
+    width: 120%;
+  }
+}
+
+@media only screen and (min-device-width: 1279px) and (max-device-width: 1282px) {
+  .recent-grid {
+    margin-left: 20px;
+    margin-top: 17%;
+  }
+
+  .card {
+    width: 121%;
+  }
+}
+
+@media only screen and (min-device-width: 1700px) and (max-device-width: 2000px) {
+  .noHayDatos {
+    margin-top: 30px;
+    width: 683px;
+    font-size: 50px;
   }
 }

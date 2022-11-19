@@ -22,14 +22,11 @@
   <div class="recent-grid">
     <div class="card">
       <div class="card-header">
-        <h3>Listado de Retos</h3>
+        <h3 class="listadoReto">Listado de Retos</h3>
 
-        <button (click)="Agregar()">
-          Agregar <span class="las la-arrow-right"></span>
+        <button class="agregar" (click)="Agregar()">
+          Agregar
         </button>
-        <h5 style="margin-top: 30px" *ngIf="retos.length == 0">
-          No hay datos para mostrar
-        </h5>
       </div>
 
       <div class="card-body">
@@ -46,6 +43,9 @@
               </tr>
             </thead>
             <tbody>
+              <h5 class="noHayDatos" *ngIf="retos.length == 0">
+                No hay datos para mostrar
+              </h5>
               <tr *ngFor="
                     let ret of retos
                       | paginate: { itemsPerPage: 3, currentPage: page }
