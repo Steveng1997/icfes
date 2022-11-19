@@ -14,3 +14,171 @@
     justify-self: center;
   }
 }
+
+
+@media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
+  .card-body {
+    margin-left: 30%;
+    margin-top: 15%;
+    width: 60%;
+  }
+
+  input{
+    width: 100%;
+  }
+
+  .centrar-form {
+    margin-left: -20px;
+  }
+
+  .d-grid{
+    margin-top: -50px;
+    margin-left: -15%;
+  }
+
+  .card-title{
+    margin-left: -40px;
+  }
+
+  .selectionLogin{
+    margin-left: -6px;
+  }
+}
+
+@media only screen and (min-device-width: 279px) and (max-device-width: 282px) {
+  .card-body {
+    margin-left: 34%;
+    margin-top: 15%;
+    width: 60%;
+  }
+
+  input{
+    width: 75%;
+  }
+
+  .centrar-form {
+    margin-left: 50px;
+  }
+
+  .d-grid{
+    margin-top: -50px;
+    margin-left: -15%;
+  }
+}
+
+@media only screen and (min-device-width: 411px) and (max-device-width: 480px) {
+  .card-body {
+    margin-left: 30%;
+    margin-top: 15%;
+    width: 60%;
+  }
+
+  input{
+    width: 100%;
+  }
+
+  .centrar-form {
+    margin-left: -20px;
+  }
+
+  .d-grid{
+    margin-top: -50px;
+    margin-left: -15%;
+  }
+
+  .card-title{
+    margin-left: -40px;
+  }
+
+  .selectionLogin{
+    margin-left: -6px;
+  }
+}
+
+@media only screen and (min-device-width: 819px) and (max-device-width: 850px) {
+  .card-body {
+    margin-left: 25%;
+    width: 60%;
+  }
+
+  input {
+    width: 120%;
+  }
+
+  .centrar-form {
+    margin-left: -40px;
+  }
+
+  .d-grid{
+    margin-top: -50px;
+    margin-left: 15%;
+    width: 70%;
+  }
+}
+
+@media only screen and (min-device-width: 539px) and (max-device-width: 560px) {
+  .card-body {
+    margin-left: 25%;
+    margin-top: 10%;
+    width: 60%;
+  }
+
+  input {
+    width: 120%;
+  }
+
+  .centrar-form {
+    margin-left: -40px;
+  }
+
+  .d-grid{
+    margin-top: -50px;
+    margin-left: 15%;
+    width: 70%;
+  }
+}
+
+
+@media only screen and (min-device-width: 1020px) and (max-device-width: 1030px) {
+  .card-body {
+    margin-left: 25%;
+    margin-top: 10px;
+    width: 60%;
+  }
+
+  input {
+    width: 120%;
+  }
+
+  .centrar-form {
+    margin-left: -40px;
+  }
+
+  .d-grid{
+    margin-top: -50px;
+    margin-left: 15%;
+    width: 70%;
+  }
+}
+
+@media only screen and (min-device-width: 1279px) and (max-device-width: 1290px) {
+  .card-body {
+    margin-left: 25%;
+    margin-top: 10px;
+    width: 60%;
+  }
+
+  input {
+    width: 120%;
+  }
+
+  .centrar-form {
+    margin-left: -40px;
+  }
+
+  .d-grid{
+    margin-top: -50px;
+    margin-left: 30%;
+    width: 40%;
+  }
+}

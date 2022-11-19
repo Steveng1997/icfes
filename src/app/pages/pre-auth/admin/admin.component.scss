@@ -145,6 +145,8 @@ header label span {
 .user-wrapper small {
   display: inline-block;
   color: var(--text-grey);
+  font-size: 17px;
+  margin-left: 17px;
 }
 
 main {
@@ -308,25 +310,6 @@ tr td:last-child {
   }
 
   .user-wrapper h4 {
-    font-size: 17px;
-    margin-left: -357px;
-  }
-
-  .user-wrapper small {
-    font-size: 15px;
-    margin-left: -344px;
-  }
-}
-
-// ---------------------------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------------------------
-// Query para celular baja gama
-@media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
-  header label span {
-    margin-left: -15px;
-  }
-
-  .user-wrapper h4 {
     font-size: 20px;
     margin-left: -141px;
   }
@@ -347,6 +330,31 @@ tr td:last-child {
 
   header label span {
     margin-left: -15px;
+  }
+
+  img {
+    width: 71px;
+    margin-left: -17px;
+    margin-top: -6px;
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------------
+// Query para celular baja gama
+@media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
+  header label span {
+    margin-left: -15px;
+  }
+
+  .user-wrapper h4 {
+    font-size: 20px;
+    margin-left: -140px;
+  }
+
+  .user-wrapper small {
+    font-size: 16px;
+    margin-left: -123px;
   }
 
   img {
@@ -382,31 +390,115 @@ tr td:last-child {
 }
 
 @media only screen and (min-device-width: 760px) and (max-device-width: 780px) {
-  .sidebar {
-    left: -100% !important;
+  header label span {
+    margin-left: -15px;
   }
 
-  .main-content {
-    width: 100%;
-    margin-left: 0rem;
+  .user-wrapper h4 {
+    font-size: 20px;
+    margin-left: -140px;
+  }
+
+  .user-wrapper small {
+    font-size: 17px;
+    margin-left: -127px;
+  }
+
+  img {
+    width: 71px;
+    margin-left: -17px;
+    margin-top: -6px;
+  }
+}
+
+@media only screen and (min-device-width: 910px) and (max-device-width: 930px) {
+  header label span {
+    margin-left: -15px;
+  }
+
+  .user-wrapper h4 {
+    font-size: 20px;
+    margin-left: -140px;
+  }
+
+  .user-wrapper small {
+    font-size: 17px;
+    margin-left: -127px;
+  }
+
+  img {
+    width: 71px;
+    margin-left: -17px;
+    margin-top: -6px;
+  }
+}
+
+@media only screen and (min-device-width: 1023px) and (max-device-width: 1030px) {
+  header label span {
+    margin-left: -15px;
+  }
+
+  .user-wrapper h4 {
+    font-size: 20px;
+    margin-left: -140px;
+  }
+
+  .user-wrapper small {
+    font-size: 17px;
+    margin-left: -127px;
+  }
+
+  img {
+    width: 71px;
+    margin-left: -17px;
+    margin-top: -6px;
+  }
+}
+
+@media only screen and (min-device-width: 1279px) and (max-device-width: 1282px) {
+  .sidebar {
+    width: 205px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: rgb(86, 131, 214);
+    z-index: 100;
+    transition: width 300ms;
   }
 
   header {
-    width: 100% !important;
-    left: 0 !important;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    left: 345px;
+    width: calc(100% - 206px);
+    top: 0;
+    z-index: 100;
+    transition: left 300ms;
+    margin-left: -10.9%;
   }
 
-  #nav-toggle:checked + .sidebar .sidebar-brand,
-  #nav-toggle:checked + .sidebar li {
-    padding-left: 2rem;
-    text-align: left;
+  header label span {
+    margin-left: -15px;
   }
 
-  #nav-toggle:checked + .sidebar li a {
-    padding-left: 1rem;
+  .user-wrapper h4 {
+    font-size: 20px;
+    margin-left: -140px;
   }
 
-  #nav-toggle:checked ~ .main-content {
-    margin-left: 0rem !important;
+  .user-wrapper small {
+    font-size: 17px;
+    margin-left: -127px;
+  }
+
+  img {
+    width: 71px;
+    margin-left: -17px;
+    margin-top: -6px;
   }
 }

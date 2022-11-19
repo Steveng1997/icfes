@@ -35,10 +35,10 @@
     <div class="recent-grid">
       <div class="card">
         <div class="card-header">
-          <h3>Listado de Profesores</h3>
+          <h3 class="listadoProf">Listado de Profesores</h3>
 
-          <button (click)="Agregar()">
-            Agregar <span class="las la-arrow-right"></span>
+          <button class="agregar" (click)="Agregar()">
+            Agregar
           </button>
           <h5 style="margin-top: 30px" *ngIf="usuarios.length == 0">
             No hay datos para mostrar

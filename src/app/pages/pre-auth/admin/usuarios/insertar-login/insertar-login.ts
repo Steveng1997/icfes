@@ -87,5 +87,12 @@ export class InsertarUsuario implements OnInit {
 
   capturar() {
     this.verSeleccion = this.opcionSeleccionado;
+    if(this.opcionSeleccionado == '0')
+    {
+      Swal.fire({
+        icon: 'error',
+        title: 'Selecciona un rol.',
+      });
+    }
   }
 }

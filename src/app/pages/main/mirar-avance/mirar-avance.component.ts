@@ -17,7 +17,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class MirarAvanceComponent implements OnInit {
   puntajes: Puntaje[];
   idUser: string;
-
   public page!: number;
 
   constructor(
@@ -27,7 +26,7 @@ export class MirarAvanceComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     public servicePuntuacion: PuntuacionService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.idUser = this.activeRoute.snapshot.paramMap.get('id');

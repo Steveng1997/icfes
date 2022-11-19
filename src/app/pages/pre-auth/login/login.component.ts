@@ -12,12 +12,11 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
   public email: string = '';
   public password: string = '';
-
   usuarios: Usuario[];
 
-  constructor(public router: Router, public serviceLogin: LoginService) {}
+  constructor(public router: Router, public serviceLogin: LoginService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onLogin(): void {
     if (this.email != '') {

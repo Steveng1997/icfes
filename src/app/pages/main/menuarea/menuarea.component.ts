@@ -15,6 +15,7 @@ export class MenuareaComponent implements OnInit {
   idUser: string;
   idDesafio: string;
   desafio: Desafio[];
+
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -33,7 +34,6 @@ export class MenuareaComponent implements OnInit {
       this.desafio = des;
     })
   }
-
 
   Matematica() {
     this.router.navigate([`retos/${this.idUser}/Matematicas/${this.idDesafio}`]);
