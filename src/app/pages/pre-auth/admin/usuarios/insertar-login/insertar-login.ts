@@ -21,7 +21,7 @@ export class InsertarUsuario implements OnInit {
     public router: Router,
     public serviceLogin: LoginService,
     private activeRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.idUser = this.activeRoute.snapshot.paramMap.get('id');
@@ -40,23 +40,33 @@ export class InsertarUsuario implements OnInit {
                   title: 'El usuario existe en la base de datos.',
                 });
               } else {
-                this.serviceLogin.registerAutenticacion(this.email, this.password);
-                this.serviceLogin.registerUser(
-                  this.email,
-                  this.nombre,
-                  this.password,
-                  this.opcionSeleccionado
-                );
-                this.router.navigate([
-                  `admin/${this.idUser}/usuarios/${this.idUser}`,
-                ]);
-                Swal.fire({
-                  position: 'top-end',
-                  icon: 'success',
-                  title: '¡Insertado Correctamente!',
-                  showConfirmButton: false,
-                  timer: 2500,
-                });
+                if (this.password.length >= 7) {
+                  this.serviceLogin.registerUser(
+                    this.email,
+                    this.nombre,
+                    this.password,
+                    this.opcionSeleccionado
+                  ).then((respuesta => {
+                    if (respuesta) {
+                      this.serviceLogin.registerAutenticacion(this.email, this.password);
+                      this.router.navigate([
+                        `admin/${this.idUser}/usuarios/${this.idUser}`,
+                      ]);
+                      Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '¡Insertado Correctamente!',
+                        showConfirmButton: false,
+                        timer: 2500,
+                      });
+                    }
+                  }))
+                } else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'La contraseña debe tener mas de 6 letras.',
+                  });
+                }
               }
             });
           } else {
@@ -87,8 +97,7 @@ export class InsertarUsuario implements OnInit {
 
   capturar() {
     this.verSeleccion = this.opcionSeleccionado;
-    if(this.opcionSeleccionado == '0')
-    {
+    if (this.opcionSeleccionado == '0') {
       Swal.fire({
         icon: 'error',
         title: 'Selecciona un rol.',

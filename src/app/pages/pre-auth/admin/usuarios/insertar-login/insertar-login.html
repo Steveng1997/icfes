@@ -30,19 +30,17 @@
           <div class="centrar-form">
             <form #formRegister="ngForm" (ngSubmit)="onAddUser()" class="text-center">
               <div class="form-floating mb-3">
-                <input class="form-control" type="text" name="email" [(ngModel)]="email" minlength="8"
-                  placeholder="Usuario" />
+                <input class="form-control" type="text" name="email" [(ngModel)]="email" placeholder="Usuario" />
                 <label for="usuario">Correo electronico</label>
               </div>
 
               <div class="form-floating mb-3">
-                <input class="form-control" type="text" name="nombre" [(ngModel)]="nombre" minlength="8"
-                  placeholder="nombre" />
+                <input class="form-control" type="text" name="nombre" [(ngModel)]="nombre" placeholder="nombre" />
                 <label for="nombre">Nombre</label>
               </div>
 
               <div class="form-floating mb-3">
-                <input class="form-control" type="password" name="password" [(ngModel)]="password" minlength="5"
+                <input class="form-control" type="password" name="password" [(ngModel)]="password"
                   placeholder="Contraseña" />
                 <label for="contrasena">Contraseña</label>
               </div>

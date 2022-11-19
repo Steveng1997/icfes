@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     if (this.email != '') {
       if (this.password != '') {
+        this.serviceLogin.getEmailYPassword(this.email, this.password);
         this.serviceLogin
           .emailExistAndPassword(this.email, this.password)
           .then((dataCategoria) => {

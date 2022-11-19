@@ -15,7 +15,7 @@ export class LoginService {
     public router: Router,
     private db: AngularFirestore,
     private authFire: AngularFireAuth
-  ) {}
+  ) { }
 
   usuarios: Usuario[] = [];
 
@@ -139,6 +139,11 @@ export class LoginService {
       .valueChanges();
   }
 
+  getEmailYPassword(email, password) {
+    this.authFire.signInWithEmailAndPassword(email, password);
+  }
+
+
   // -----------------------------------------------------------------------------------
   // End Get
   // -----------------------------------------------------------------------------------
@@ -148,10 +153,16 @@ export class LoginService {
   // -----------------------------------------------------------------------------------
 
   updateUsuarios(idDocument, idUser, user: Usuario) {
-    return this.db
-      .collection('usuarios', (ref) => ref.where('id', '==', idUser))
-      .doc(idDocument)
-      .update(user);
+    return new Promise<any>((resolve, reject) => {
+      this.db
+        .collection('usuarios', (ref) => ref.where('id', '==', idUser))
+        .doc(idDocument)
+        .update(user)
+        .then(
+          (response) => resolve(response),
+          (error) => reject(error)
+        );;
+    })
   }
 
   // -----------------------------------------------------------------------------------
