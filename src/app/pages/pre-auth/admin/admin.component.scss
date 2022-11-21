@@ -502,3 +502,21 @@ tr td:last-child {
     margin-top: -6px;
   }
 }
+
+@media only screen and (min-device-width: 1350px) and (max-device-width: 1380px) {
+  .user-wrapper h4 {
+    font-size: 20px;
+    margin-left: -140px;
+  }
+
+  .user-wrapper small {
+    font-size: 17px;
+    margin-left: -157px;
+  }
+
+  img {
+    width: 140px;
+    margin-left: -17px;
+    margin-top: -6px;
+  }
+}

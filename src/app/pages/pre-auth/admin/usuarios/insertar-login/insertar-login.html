@@ -29,23 +29,23 @@
 
           <div class="centrar-form">
             <form #formRegister="ngForm" (ngSubmit)="onAddUser()" class="text-center">
-              <div class="form-floating mb-3">
+              <div class="insert form-floating mb-3">
                 <input class="form-control" type="text" name="email" [(ngModel)]="email" placeholder="Usuario" />
                 <label for="usuario">Correo electronico</label>
               </div>
 
-              <div class="form-floating mb-3">
+              <div class="insert form-floating mb-3">
                 <input class="form-control" type="text" name="nombre" [(ngModel)]="nombre" placeholder="nombre" />
                 <label for="nombre">Nombre</label>
               </div>
 
-              <div class="form-floating mb-3">
+              <div class="insert form-floating mb-3">
                 <input class="form-control" type="password" name="password" [(ngModel)]="password"
                   placeholder="Contraseña" />
                 <label for="contrasena">Contraseña</label>
               </div>
 
-              <div class="btn-group selectionLogin">
+              <div class="selection btn-group selectionLogin">
                 <mat-form-field appearance="fill">
                   <select matNativeControl name="opcionSeleccionado" id="opcionSeleccionado"
                     [(ngModel)]="opcionSeleccionado" (change)="capturar()">

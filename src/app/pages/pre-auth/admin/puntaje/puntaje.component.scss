@@ -218,6 +218,17 @@ tr td:last-child {
   }
 }
 
+@media only screen and (min-device-width: 1350px) and (max-device-width: 1380px) {
+  .recent-grid {
+    margin-left: 160px;
+    margin-top: 129px;
+  }
+
+  .card {
+    width: 120%;
+  }
+}
+
 @media only screen and (min-device-width: 1700px) and (max-device-width: 2000px) {
   .noHayDatos {
     margin-top: 30px;

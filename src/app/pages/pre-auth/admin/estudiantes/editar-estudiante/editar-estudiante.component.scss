@@ -15,37 +15,6 @@
   }
 }
 
-
-@media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
-  .card-body {
-    margin-left: 30%;
-    margin-top: 15%;
-    width: 60%;
-  }
-
-  input{
-    width: 100%;
-  }
-
-  .centrar-form {
-    margin-top: -15%;
-    margin-left: -20px;
-  }
-
-  .d-grid{
-    margin-top: 30px;
-    margin-left: 2%;
-  }
-
-  .card-title{
-    margin-left: -25px;
-  }
-
-  .selectionLogin{
-    margin-left: -6px;
-  }
-}
-
 @media only screen and (min-device-width: 279px) and (max-device-width: 282px) {
   .card-body {
     margin-left: 34%;
@@ -53,11 +22,11 @@
     width: 60%;
   }
 
-  .card-title{
+  .card-title {
     margin-left: -13px;
   }
 
-  input{
+  input {
     width: 120%;
     margin-top: -15%;
   }
@@ -66,9 +35,39 @@
     margin-left: -30px;
   }
 
-  .d-grid{
+  .d-grid {
     margin-top: 35px;
     margin-left: 15%;
+  }
+}
+
+@media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
+  .card-body {
+    margin-left: 30%;
+    margin-top: 15%;
+    width: 60%;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  .centrar-form {
+    margin-top: -15%;
+    margin-left: -20px;
+  }
+
+  .d-grid {
+    margin-top: 30px;
+    margin-left: 2%;
+  }
+
+  .card-title {
+    margin-left: -25px;
+  }
+
+  .selectionLogin {
+    margin-left: -6px;
   }
 }
 
@@ -79,7 +78,7 @@
     width: 60%;
   }
 
-  input{
+  input {
     width: 100%;
   }
 
@@ -88,12 +87,12 @@
     margin-left: -20px;
   }
 
-  .d-grid{
+  .d-grid {
     margin-top: 30px;
     margin-left: 2%;
   }
 
-  .card-title{
+  .card-title {
     margin-left: -25px;
   }
 }
@@ -112,7 +111,7 @@
     margin-left: -40px;
   }
 
-  .d-grid{
+  .d-grid {
     margin-top: 35px;
     margin-left: 10%;
   }
@@ -133,13 +132,12 @@
     margin-left: -40px;
   }
 
-  .d-grid{
+  .d-grid {
     margin-top: 40px;
     margin-left: 25%;
     width: 70%;
   }
 }
-
 
 @media only screen and (min-device-width: 1020px) and (max-device-width: 1030px) {
   .card-body {
@@ -157,7 +155,7 @@
     margin-left: -40px;
   }
 
-  .d-grid{
+  .d-grid {
     margin-top: 30px;
     margin-left: 24%;
     width: 70%;
@@ -180,9 +178,34 @@
     margin-left: -40px;
   }
 
-  .d-grid{
+  .d-grid {
     margin-top: 30px;
     margin-left: 24%;
     width: 70%;
+  }
+}
+
+@media only screen and (min-device-width: 1350px) and (max-device-width: 1380px) {
+  .card-body {
+    margin-left: 25%;
+    margin-top: 10px;
+    width: 60%;
+  }
+
+  .editar {
+    top: 35px;
+    margin-left: 36%;
+    width: 35%;
+  }
+
+  .centrar-form {
+    margin-top: -5%;
+    margin-left: -40px;
+  }
+
+  .d-grid {
+    margin-top: 80px;
+    margin-left: 33%;
+    width: 40%;
   }
 }

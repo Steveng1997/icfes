@@ -29,25 +29,25 @@
 
           <div class="centrar-form">
             <form (ngSubmit)="editarReto(us.idDocument, us.id, us)">
-              <div class="form-floating mb-3">
+              <div class="editar form-floating mb-3">
                 <input name="email" [(ngModel)]="us.email" #email="ngModel" type="text" class="form-control"
                   placeholder="Email" />
                 <label for="usuario">Correo electronico</label>
               </div>
 
-              <div class="form-floating mb-3">
+              <div class="editar form-floating mb-3">
                 <input class="form-control" type="text" name="nombre" [(ngModel)]="us.nombre" #nombre="ngModel"
                   placeholder="nombre" />
                 <label for="nombre">Nombre</label>
               </div>
 
-              <div class="form-floating mb-3">
+              <div class="editar form-floating mb-3">
                 <input class="form-control" type="password" name="password" [(ngModel)]="us.password"
                   #password="ngModel" placeholder="Contraseña" />
                 <label for="contrasena">Contraseña</label>
               </div>
 
-              <div class="btn-group">
+              <div class="selection btn-group">
                 <mat-form-field appearance="fill">
                   <select matNativeControl [(ngModel)]="us.rol" #rol="ngModel" name="rol">
                     <option value="0" selected>Selecciona un rol...</option>

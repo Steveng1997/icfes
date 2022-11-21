@@ -149,6 +149,7 @@ table td:nth-child(7) {
     margin-top: 30px;
     width: 260%;
   }
+
   .recent-grid {
     margin-left: 20px;
     margin-top: 28%;
@@ -389,6 +390,57 @@ table td:nth-child(7) {
 
   .card {
     width: 121%;
+  }
+}
+
+@media only screen and (min-device-width: 1350px) and (max-device-width: 1380px) {
+  table td:first-child {
+    border: 1px solid #000;
+    width: 200px;
+  }
+
+  table td:nth-child(2) {
+    border: 1px solid #000;
+    width: 400px;
+    text-align: center;
+  }
+
+  table td:nth-child(3) {
+    border: 1px solid #000;
+    width: 400px;
+    text-align: center;
+  }
+
+  table td:nth-child(4) {
+    border: 1px solid #000;
+    width: 400px;
+    text-align: center;
+  }
+
+  table td:nth-child(5) {
+    border: 1px solid #000;
+    width: 400px;
+    text-align: center;
+  }
+
+  table td:nth-child(6) {
+    border: 1px solid #000;
+    width: 400px;
+    text-align: center;
+  }
+
+  table td:nth-child(7) {
+    width: 200px;
+    text-align: center;
+  }
+  
+  .recent-grid {
+    margin-left: 160px;
+    margin-top: 7%;
+  }
+
+  .card {
+    width: 120%;
   }
 }
 

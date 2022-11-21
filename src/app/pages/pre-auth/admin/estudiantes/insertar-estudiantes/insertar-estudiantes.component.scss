@@ -15,6 +15,31 @@
   }
 }
 
+@media only screen and (min-device-width: 279px) and (max-device-width: 282px) {
+  .card-body {
+    margin-left: 34%;
+    margin-top: 15%;
+    width: 60%;
+  }
+
+  .card-title{
+    margin-left: -13px;
+  }
+
+  input{
+    width: 120%;
+    margin-top: -15%;
+  }
+
+  .centrar-form {
+    margin-left: -30px;
+  }
+
+  .d-grid{
+    margin-top: 35px;
+    margin-left: 15%;
+  }
+}
 
 @media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
   .card-body {
@@ -43,32 +68,6 @@
 
   .selectionLogin{
     margin-left: -6px;
-  }
-}
-
-@media only screen and (min-device-width: 279px) and (max-device-width: 282px) {
-  .card-body {
-    margin-left: 34%;
-    margin-top: 15%;
-    width: 60%;
-  }
-
-  .card-title{
-    margin-left: -13px;
-  }
-
-  input{
-    width: 120%;
-    margin-top: -15%;
-  }
-
-  .centrar-form {
-    margin-left: -30px;
-  }
-
-  .d-grid{
-    margin-top: 35px;
-    margin-left: 15%;
   }
 }
 
@@ -184,5 +183,30 @@
     margin-top: 30px;
     margin-left: 24%;
     width: 70%;
+  }
+}
+
+@media only screen and (min-device-width: 1350px) and (max-device-width: 1380px) {
+  .card-body {
+    margin-left: 25%;
+    margin-top: 10px;
+    width: 60%;
+  }
+
+  .insert {
+    top: 35px;
+    margin-left: 36%;
+    width: 35%;
+  }
+
+  .centrar-form {
+    margin-top: -5%;
+    margin-left: -40px;
+  }
+
+  .d-grid{
+    margin-top: 80px;
+    margin-left: 33%;
+    width: 40%;
   }
 }
