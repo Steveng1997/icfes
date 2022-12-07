@@ -39,6 +39,17 @@
               </mat-form-field>
             </div>
 
+            <div class="form-floating mb-3" *ngIf="selectCategoria == 'Lenguaje'">
+              <input
+                class="form-control"
+                type="text"
+                name="titulo"
+                formControlName="titulo"
+                placeholder="Titulo"
+              />
+              <label for="titulo">Titulo</label>
+            </div>
+
             <div class="form-floating mb-3" *ngIf="ret.titulo != ''">
               <input class="form-control" type="text" name="titulo" [(ngModel)]="ret.titulo"
                 #titulo="ngModel" placeholder="Titulo" />
@@ -47,8 +58,8 @@
 
             <hr />
             <div class="mb-3">
-              <textarea rows="5" cols="70" class="form-control" name="pregunta" [(ngModel)]="ret.texto1"
-                #pregunta="ngModel" placeholder="Texto 1"></textarea>
+              <textarea rows="5" cols="70" class="form-control" name="texto1" [(ngModel)]="ret.texto1"
+                #texto1="ngModel" placeholder="Texto 1"></textarea>
             </div>
 
             <div *ngIf="ret.imageUrl != ''" class="row form-floating mb-3"
@@ -82,7 +93,7 @@
             <div class="form-floating mb-3">
               <input class="form-control" type="text" name="subtitulo" [(ngModel)]="ret.subtitulo" #subtitulo="ngModel"
                 placeholder="Subtitulo" />
-              <label for="subtitulo">Opcion 1</label>
+              <label for="subtitulo">Subtitulo</label>
             </div>
 
             <div *ngIf="ret['opciones']['opcion1'] != ''">

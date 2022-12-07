@@ -171,7 +171,7 @@ export class EditarRetosComponent implements OnInit {
   }
 
   editarReto(idDocument, idReto, reto: Retos) {
-    // this.serviceRetos.updateRetos(idDocument, idReto, reto);
+    this.serviceRetos.updateRetos(idDocument, idReto, reto);
 
     // Imagen1
     if (this.selectImg1 != null) {
