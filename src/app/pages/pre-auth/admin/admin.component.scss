@@ -456,6 +456,11 @@ tr td:last-child {
 }
 
 @media only screen and (min-device-width: 1279px) and (max-device-width: 1282px) {
+  #nav-toggle:checked ~ .main-content header {
+    width: calc(100% - 70px);
+    left: 210px;
+  }
+
   .sidebar {
     width: 205px;
     position: fixed;
@@ -493,7 +498,7 @@ tr td:last-child {
 
   .user-wrapper small {
     font-size: 17px;
-    margin-left: -127px;
+    margin-left: -160px;
   }
 
   img {
