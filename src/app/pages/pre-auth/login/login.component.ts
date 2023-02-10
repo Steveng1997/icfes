@@ -21,27 +21,24 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     if (this.email != '') {
       if (this.password != '') {
-        this.serviceLogin.getEmailYPassword(this.email, this.password);
-        this.serviceLogin
-          .emailExistAndPassword(this.email, this.password)
-          .then((dataCategoria) => {
-            this.usuarios = dataCategoria;
-            if (this.usuarios[0]['rol'] == 'administrador') {
-              this.router.navigate([
-                `admin/${this.usuarios[0]['id']}/usuarios/${this.usuarios[0]['id']}`,
-              ]);
-            } else {
-              this.router.navigate([`menu/${this.usuarios[0]['id']}`]);
-            }
-          })
-          .catch(() =>
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'El correo o la contraseña esta incorrecta',
-            })
-          );
-      } else {
+        this.serviceLogin.getEmailYPassword(this.email, this.password).then((resp => {
+          if (resp = true) {
+            this.serviceLogin
+              .emailExistAndPassword(this.email, this.password)
+              .then((dataCategoria) => {
+                this.usuarios = dataCategoria;
+                if (this.usuarios[0]['rol'] == 'administrador') {
+                  this.router.navigate([
+                    `admin/${this.usuarios[0]['id']}/usuarios/${this.usuarios[0]['id']}`,
+                  ]);
+                } else {
+                  this.router.navigate([`menu/${this.usuarios[0]['id']}`]);
+                }
+              })
+          }
+        }))
+      }
+      else {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',

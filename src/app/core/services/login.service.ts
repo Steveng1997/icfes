@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import 'firebase/compat/app';
 import { Usuario } from '../models/login';
-import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class LoginService {
@@ -139,10 +138,21 @@ export class LoginService {
       .valueChanges();
   }
 
-  getEmailYPassword(email, password) {
-    this.authFire.signInWithEmailAndPassword(email, password);
-  }
 
+  getEmailYPassword(email, password): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.authFire.signInWithEmailAndPassword(email, password)
+        .then((res) => {
+          resolve(true);
+        }).catch((err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'El correo no esta registrado',
+          });
+        });
+    })
+  }
 
   // -----------------------------------------------------------------------------------
   // End Get
@@ -158,10 +168,15 @@ export class LoginService {
         .collection('usuarios', (ref) => ref.where('id', '==', idUser))
         .doc(idDocument)
         .update(user)
-        .then(
-          (response) => resolve(response),
-          (error) => reject(error)
-        );;
+        .then((res) => {
+          resolve(true);
+        }).catch((err) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Error al modificar el Usuario',
+          });
+        });
     })
   }
 

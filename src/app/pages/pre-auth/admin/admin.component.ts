@@ -50,4 +50,8 @@ export class AdminComponent implements OnInit {
   retoPersonal() {
     this.router.navigate([`admin/${this.idUser}/reto-personal/${this.idUser}`]);
   }
+
+  salir() {
+    this.router.navigate(['']);
+  }
 }

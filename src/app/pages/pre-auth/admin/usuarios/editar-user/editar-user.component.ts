@@ -36,19 +36,24 @@ export class EditarUserComponent implements OnInit {
     const id = this.activeRoute.snapshot.paramMap.get('id');
 
     if (usu.password.length >= 7) {
-      this.postService.updateUsuarios(idDocument, idEstudiante, usu).then((respuesta => {
-        if (respuesta) {
-          this.postService.registerAutenticacion(usu.email, usu.password);
-        }
-      }));
-      this.router.navigate([`admin/${this.idUser}/usuarios/${this.idUser}`]);
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: '¡Editado Correctamente!',
-        showConfirmButton: false,
-        timer: 2500,
-      });
+      this.postService.updateUsuarios(idDocument, idEstudiante, usu).then((resp => {
+        if (resp = true) {
+          this.postService.emailExistAndPassword(usu.email, usu.password).then((dataCategoria) => {
+            this.usua = dataCategoria;
+            if (this.usua) {
+              this.postService.registerAutenticacion(usu.email, usu.password);
+              this.router.navigate([`admin/${this.idUser}/usuarios/${this.idUser}`]);
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: '¡Editado Correctamente!',
+                showConfirmButton: false,
+                timer: 2500,
+              });
+            }
+          })
+        };
+      }))
     } else {
       Swal.fire({
         icon: 'error',
