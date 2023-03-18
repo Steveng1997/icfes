@@ -18,11 +18,121 @@
   color: white !important;
 }
 
+
 // ---------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------
 // Query para celular
 
-@media only screen and (max-width: 480px) {
+@media only screen and (min-device-width: 279px) and (max-device-width: 282px) {
+  .img1 {
+    display: none;
+  }
+
+  .contenedorButton {
+    display: grid;
+    grid-template-columns: 83%;
+    justify-content: center;
+  }
+
+  .btn-salir {
+    margin-right: 1%;
+    margin-top: 1%;
+  }
+
+  .btnSalir {
+    width: 23%;
+  }
+}
+
+@media only screen and (min-device-width: 350px) and (max-device-width: 410px) {
+  .img1 {
+    display: none;
+  }
+
+  .contenedorButton {
+    display: grid;
+    grid-template-columns: 83%;
+    justify-content: center;
+  }
+
+  .btn-salir {
+    margin-right: 1%;
+    margin-top: 1%;
+  }
+
+  .btnSalir {
+    width: 23%;
+  }
+}
+
+@media only screen and (min-device-width: 411px) and (max-device-width: 450px) {
+  .img1 {
+    display: none;
+  }
+
+  .contenedorButton {
+    display: grid;
+    grid-template-columns: 83%;
+    justify-content: center;
+  }
+
+  .btn-salir {
+    margin-right: 1%;
+    margin-top: 1%;
+  }
+
+  .btnSalir {
+    width: 23%;
+  }
+}
+
+@media only screen and (min-device-width: 539px) and (max-device-width: 545px) {
+  .img1 {
+    display: none;
+  }
+
+  .contenedorButton {
+    display: grid;
+    grid-template-columns: 83%;
+    justify-content: center;
+  }
+
+  .btn-salir {
+    margin-right: 1%;
+    margin-top: 1%;
+  }
+
+  .btnSalir {
+    width: 23%;
+  }
+}
+
+@media only screen and (min-device-width: 760px) and (max-device-width: 850px) {
+  .contenedorButton {
+    display: grid;
+    grid-template-columns: 67% 102%;
+    justify-content: center;
+    margin-left: 35%;
+  }
+
+  .btn-salir {
+    margin-right: 13%;
+    margin-top: 1%;
+  }
+
+  .btnSalir {
+    width: 23%;
+  }
+}
+
+@media only screen and (min-device-width: 910px) and (max-device-width: 950px) {
+  .contenedorButton {
+    display: grid;
+    grid-template-columns: 67% 102%;
+    justify-content: center;
+    margin-left: 35%;
+  }
+
   .btn-salir {
     margin-right: 1%;
     margin-top: 1%;
@@ -37,7 +147,40 @@
 // ---------------------------------------------------------------------------------------------------
 // Query para pantalla grande como laptop o monitor
 
+@media only screen and (min-device-width: 1023px) and (max-device-width: 1030px) {
+  .img1 {
+    margin-top: -6%;
+  }
+
+  .contenedorButton {
+    display: grid;
+    grid-template-columns: 39% 71%;
+    justify-content: center;
+    margin-left: 23%;
+  }
+
+  .btn-salir {
+    margin-right: 3%;
+    margin-top: 1.9px;
+  }
+
+  .btnSalir {
+    width: 10%;
+  }
+}
+
 @media only screen and (min-device-width: 1200px) and (max-device-width: 1600px) {
+  .img1 {
+    margin-top: -6%;
+  }
+
+  .contenedorButton {
+    display: grid;
+    grid-template-columns: 26% 53%;
+    justify-content: center;
+    margin-left: 22%;
+  }
+
   .btn-salir {
     margin-right: 3%;
     margin-top: 1.9px;
@@ -50,6 +193,14 @@
 
 // Pantalla mas grande
 @media only screen and (min-device-width: 1700px) and (max-device-width: 2000px) {
+  .contenedorButton {
+    display: grid;
+    grid-template-columns: 122% 122%;
+    justify-content: center;
+    margin-top: -65%;
+    margin-left: auto;
+  }
+
   .btn-salir {
     margin-right: 3%;
     margin-top: 1.9px;

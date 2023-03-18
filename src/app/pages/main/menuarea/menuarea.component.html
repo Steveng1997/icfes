@@ -16,7 +16,6 @@
 </head>
 
 <body>
-  <div class="container">
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-8 mx-auto">
         <div class="m-0 vh-100 row justify-content-center align-items-center">
@@ -24,47 +23,47 @@
             <label style="color: #976dd0">Elige un área en el que desees retar a un amigo...</label>
           </div>
 
-          <div class="row contenedorCards" style="cursor: pointer;">
+          <div class="row contenedorCards" *ngFor="let us of user">
             <div class="card cardMatematica">
               <div class="row g-0" (click)="Matematica()">
                 <div class="col-md-8">
                   <h5 class="card-title textMatematica">Matemáticas</h5>
                 </div>
                 <div class="col-md-4">
-                  <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" class="imgMatematica" />
+                  <img src="./assets/Imagen_Retos_Matematicas.jpg" class="imgMatematica"/>
                 </div>
               </div>
             </div>
 
-            <div class="card cardLenguaje" style="cursor: pointer;">
+            <div class="card cardLenguaje">
               <div class="row g-0" (click)="Lenguaje()">
                 <div class="col-md-8">
                   <h5 class="card-title textLenguaje">Lenguaje</h5>
                 </div>
                 <div class="col-md-4">
-                  <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" class="imgLenguaje" />
+                  <img src="./assets/Imagen_Retos_Lenguaje.jpg" class="imgLenguaje" />
                 </div>
               </div>
             </div>
 
-            <div class="card cardSociales" style="cursor: pointer;">
+            <div class="card cardSociales">
               <div class="row g-0" (click)="CienciaSociales()">
                 <div class="col-md-8">
                   <h5 class="card-title textSociales">Ciencias Sociales</h5>
                 </div>
                 <div class="col-md-4">
-                  <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" class="imgSociales" />
+                  <img src="./assets/Imagen_Ciencias_Sociales.jpg" class="imgSociales" />
                 </div>
               </div>
             </div>
 
-            <div class="card cardNaturales" style="cursor: pointer;">
+            <div class="card cardNaturales">
               <div class="row g-0" (click)="CienciaNaturales()">
                 <div class="col-md-8">
                   <h5 class="card-title textNaturales">Ciencias Naturales</h5>
                 </div>
                 <div class="col-md-4">
-                  <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" class="imgNaturales" />
+                  <img src="./assets/Imagen_Ciencias_Naturales.jpg"  class="imgNaturales" />
                 </div>
               </div>
             </div>
@@ -74,7 +73,6 @@
         </div>
       </div>
     </div>
-  </div>
 </body>
 
 </html>

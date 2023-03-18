@@ -109,8 +109,6 @@
   .cardSociales {
     border: 7px solid #46a6c7;
     margin-bottom: 10%;
-    width: 100%;
-    margin-left: 0%;
   }
 
   .cardNaturales {
@@ -123,7 +121,7 @@
   .textMatematica {
     color: #fe5c26;
     font-weight: revert;
-    font-size: 160%;
+    font-size: 190%;
     margin-top: 22%;
     margin-left: -1%;
   }
@@ -131,7 +129,7 @@
   .textLenguaje {
     color: #5902b0;
     font-weight: revert;
-    font-size: 160%;
+    font-size: 190%;
     margin-top: 24%;
     margin-left: 6%;
   }
@@ -139,7 +137,7 @@
   .textSociales {
     color: #46a6c7;
     font-weight: revert;
-    font-size: 170%;
+    font-size: 200%;
     margin-top: 14%;
     margin-left: 10%;
   }
@@ -147,9 +145,9 @@
   .textNaturales {
     color: #029287;
     font-weight: revert;
-    font-size: 150%;
+    font-size: 200%;
     margin-top: 14%;
-    margin-left: 10%;
+    margin-left: 5%;
   }
 
   .imgMatematica {
@@ -159,7 +157,7 @@
 
   .imgLenguaje {
     margin-left: -57%;
-    width: 170%;
+    width: 169%;
     margin-top: 0%;
   }
 
@@ -169,8 +167,8 @@
   }
 
   .imgNaturales {
-    margin-left: -57%;
-    width: 170%;
+    margin-left: -48%;
+    width: 160%;
   }
 }
 
@@ -538,10 +536,10 @@
 @media only screen and (min-device-width: 910px) and (max-device-width: 950px) {
   .contenedorCards {
     display: grid;
-    grid-template-columns: 120% 120%;
+    grid-template-columns: 122% 122%;
     justify-content: center;
     margin-top: -65%;
-    margin-left: -16px;
+    margin-left: auto;
   }
 
   .cardMatematica {

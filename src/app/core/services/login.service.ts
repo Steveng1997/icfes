@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 @Injectable()
 export class LoginService {
   myArray: any[] = [];
+  validacion: any = 0;
 
   constructor(
     public router: Router,
@@ -142,16 +143,11 @@ export class LoginService {
   getEmailYPassword(email, password): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       this.authFire.signInWithEmailAndPassword(email, password)
-        .then((res) => {
-          resolve(true);
-        }).catch((err) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'El correo no esta registrado',
-          });
-        });
-    })
+        .then(
+          (response) => resolve(response),
+          (error) => reject(error)
+        );
+    });
   }
 
   // -----------------------------------------------------------------------------------
@@ -178,6 +174,15 @@ export class LoginService {
           });
         });
     })
+  }
+
+
+  async resetPassword(email: string): Promise<void> {
+    try {
+      return this.authFire.sendPasswordResetEmail(email);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   // -----------------------------------------------------------------------------------

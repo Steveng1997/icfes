@@ -1,81 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-      crossorigin="anonymous"
-    ></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <style href="login.component.scss"></style>
-  </head>
 
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-8 mx-auto">
-          <!-- <div class="card border-0 shadow rounded-3 my-5"> -->
-          <div class="m-0 vh-100 row justify-content-center align-items-center">
-            <div class="card-body p-4 p-sm-7">
-              <div class="card-title text-center mb-3 fw-bolder display-1">
-                <label class="">Reto</label>
-                <label class="text-danger">ICFES</label>
-              </div>
-              <!-- <div class="card-title text-center mb-5 fw-bolder fs-3"> -->
-              <div class="card-title text-center mb-5 fw-bolder display-6">
-                <label>Bienvenido</label>
-              </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style href="login.component.scss"></style>
+</head>
 
-              <form #formLogin="ngForm" (submit)="onLogin()">
-                <div class="row justify-content-center">
-                  <div class="form-floating mb-3 col-6">
-                    <input
-                      class="form-control"
-                      [(ngModel)]="email"
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder="Email"
-                    />
-                    <label for="usuario">Email</label>
-                  </div>
-                </div>
-                <div class="row justify-content-center">
-                  <div class="form-floating mb-3 col-6">
-                    <input
-                      class="form-control"
-                      [(ngModel)]="password"
-                      type="password"
-                      id="password"
-                      name="password"
-                      placeholder="Contraseña"
-                    />
-                    <label for="contrasena">Contraseña</label>
-                  </div>
-                </div>
-
-                <div class="d-grid justify-content-center">
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-lg btn-login text-uppercase fw-bold col-12"
-                  >
-                    Iniciar
-                  </button>
-                </div>
-              </form>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-8 mx-auto">
+        <!-- <div class="card border-0 shadow rounded-3 my-5"> -->
+        <div class="m-0 vh-100 row justify-content-center align-items-center">
+          <div class="card-body p-4 p-sm-7">
+            <div class="card-title text-center mb-3 fw-bolder display-1">
+              <label class="">Reto</label>
+              <label class="text-danger">ICFES</label>
             </div>
+            <!-- <div class="card-title text-center mb-5 fw-bolder fs-3"> -->
+            <div class="card-title text-center mb-5 fw-bolder display-6">
+              <label>Bienvenido</label>
+            </div>
+
+
+            <!-- Modal -->
+            <ng-template let-modal>
+              <div class="modal-header">
+                <h5 class="modal-title" id="editProfileLabel">Resetear Password</h5>
+                <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <!-- Aqui se coloca lo adentro -->
+
+                <form #formLogin="ngForm" (submit)="restorePassword()">
+                  <div class="row justify-content-center">
+                    <div class="form-floating mb-3 col-6">
+                      <input class="form-control" [(ngModel)]="email" type="email" id="email" name="email"
+                        placeholder="Email" />
+                      <label for="usuario">Email</label>
+                    </div>
+                  </div>
+
+                  <div class="d-grid justify-content-center">
+                    <button type="submit" class="btn btn-primary btn-lg btn-login text-uppercase fw-bold col-12">
+                      Resetear
+                    </button>
+                  </div>
+                </form>
+                <!-- Afuera -->
+              </div>
+            </ng-template>
+
+            <!-- Fin Modal -->
+
+            <form #formLogin="ngForm" (submit)="onLogin()">
+              <div class="row justify-content-center">
+                <div class="form-floating mb-3 col-6">
+                  <input class="form-control" [(ngModel)]="email" type="email" id="email" name="email"
+                    placeholder="Email" />
+                  <label for="usuario">Email</label>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="form-floating mb-3 col-6">
+                  <input class="form-control" [(ngModel)]="password" type="password" id="password" name="password"
+                    placeholder="Contraseña" />
+                  <label for="contrasena">Contraseña</label>
+                </div>
+              </div>
+
+              <div class="d-grid justify-content-center">
+                <button type="submit" class="btn btn-primary btn-lg btn-login text-uppercase fw-bold col-12">
+                  Iniciar
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
